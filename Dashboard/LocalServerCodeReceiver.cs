@@ -10,10 +10,18 @@ using System.Threading.Tasks;
 
 namespace Dashboard
 {
+    /// <summary>
+    /// Local server code receiver class implementing ICodeReceiver interface.
+    /// Handles the redirection and reception of OAuth 2.0 authorization codes.
+    /// </summary>
     public class LocalServerCodeReceiver : ICodeReceiver
     {
         private readonly string redirectUri;
 
+        /// <summary>
+        /// Initializes a new instance of the LocalServerCodeReceiver class.
+        /// </summary>
+        /// <param name="redirectUri">The redirect URI for the OAuth 2.0 response.</param>
         public LocalServerCodeReceiver(string redirectUri)
         {
             if (!redirectUri.EndsWith("/"))
@@ -23,8 +31,17 @@ namespace Dashboard
             this.redirectUri = redirectUri;
         }
 
+        /// <summary>
+        /// Gets the redirect URI.
+        /// </summary>
         public string RedirectUri => redirectUri;
 
+        /// <summary>
+        /// Receives the authorization code asynchronously.
+        /// </summary>
+        /// <param name="url">The authorization code request URL.</param>
+        /// <param name="taskCancellationToken">The cancellation token.</param>
+        /// <returns>The authorization code response URL.</returns>
         public async Task<AuthorizationCodeResponseUrl> ReceiveCodeAsync(AuthorizationCodeRequestUrl url, CancellationToken taskCancellationToken)
         {
             string authorizationUrl = url.Build().AbsoluteUri;
@@ -53,10 +70,7 @@ namespace Dashboard
                     var responseParameters = new System.Collections.Generic.Dictionary<string, string>();
                     foreach (string key in queryString.AllKeys)
                     {
-                        if (key != null)
-                        {
-                            responseParameters[key] = queryString[key] ?? string.Empty;
-                        }
+                        responseParameters[key] = queryString[key] ?? string.Empty;
                     }
 
                     // Validate response parameters
@@ -65,8 +79,8 @@ namespace Dashboard
                         throw new InvalidOperationException("No query string received.");
                     }
 
-                    string? code = queryString["code"];
-                    string? error = queryString["error"];
+                    string code = queryString["code"];
+                    string error = queryString["error"];
 
                     if (!string.IsNullOrEmpty(error))
                     {
@@ -113,6 +127,10 @@ namespace Dashboard
             }
         }
 
+        /// <summary>
+        /// Logs the query string parameters.
+        /// </summary>
+        /// <param name="queryString">The query string parameters.</param>
         private void LogQueryString(NameValueCollection queryString)
         {
             if (queryString == null)
@@ -124,12 +142,9 @@ namespace Dashboard
             Console.WriteLine("Full query string: " + queryString.ToString());
 
             Console.WriteLine("Received query string parameters:");
-            foreach (string? key in queryString.AllKeys)
+            foreach (string key in queryString.AllKeys)
             {
-                if (key != null)
-                {
-                    Console.WriteLine($"{key}: {queryString[key]}");
-                }
+                Console.WriteLine($"{key}: {queryString[key]}");
             }
         }
     }

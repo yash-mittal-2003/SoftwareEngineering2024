@@ -11,6 +11,9 @@ using Networking.Communication;
 
 namespace Dashboard
 {
+    /// <summary>
+    /// Enum representing different actions in the Dashboard.
+    /// </summary>
     public enum Action
     {
         ClientUserConnected,
@@ -22,39 +25,85 @@ namespace Dashboard
         StartOfMeeting
     }
 
+    /// <summary>
+    /// Class representing the details of the dashboard.
+    /// </summary>
     [JsonSerializable(typeof(DashboardDetails))]
     public class DashboardDetails
     {
         [JsonInclude]
         public UserDetails? User { get; set; }
+
         [JsonInclude]
         public bool IsConnected { get; set; }
+
         [JsonInclude]
         public Action Action { get; set; }
+
         [JsonInclude]
-        public string? msg { get; set; }
+        public string? Msg { get; set; }
     }
 
-    public class Server_Dashboard : INotificationHandler
+    /// <summary>
+    /// Server dashboard class implementing notification handler.
+    /// </summary>
+    public class ServerDashboard : INotificationHandler
     {
         private ICommunicator _communicator;
+
+        /// <summary>
+        /// Gets or sets the user name.
+        /// </summary>
         private string UserName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user email.
+        /// </summary>
         private string UserEmail { get; set; }
+
+        /// <summary>
+        /// Gets or sets the profile picture URL.
+        /// </summary>
         private string ProfilePictureUrl { get; set; }
-        private string ServerIp {  get; set; }
-        private string ServerPort { get; set; }
 
-        public int total_user_count = 1;  // Start at 1 since server is user 1
-        public int current_user_count = 1;
+        /// <summary>
+        /// Gets or sets the server IP.
+        /// </summary>
+        private string ServerIp { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Gets or sets the server port.
+        /// </summary>
+        private string ServerPort { get; set; } = string.Empty;
+
+        public int TotalUserCount { get; private set; } = 1;  // Start at 1 since server is user 1
+        public int CurrentUserCount { get; private set; } = 1;
+
+        /// <summary>
+        /// Gets the server user list.
+        /// </summary>
         public ObservableCollection<UserDetails> ServerUserList { get; private set; } = new ObservableCollection<UserDetails>();
+
+        /// <summary>
+        /// Gets the total server user list.
+        /// </summary>
         public ObservableCollection<UserDetails> TotalServerUserList { get; private set; } = new ObservableCollection<UserDetails>();
 
+<<<<<<< HEAD
+
+=======
         public FileCloner.Models.NetworkService.Server _fileClonerInstance = FileCloner.Models.NetworkService.Server.GetServerInstance();
+>>>>>>> c4e159194f4b17adc95ddb2f3876ad6269112e64
         public Updater.Server _updaterServerInstance = Updater.Server.GetServerInstance();
 
-
-        public Server_Dashboard(ICommunicator communicator, string username, string useremail, string profilePictureUrl)
+        /// <summary>
+        /// Initializes a new instance of the ServerDashboard class.
+        /// </summary>
+        /// <param name="communicator">Communicator instance.</param>
+        /// <param name="username">User name.</param>
+        /// <param name="useremail">User email.</param>
+        /// <param name="profilePictureUrl">Profile picture URL.</param>
+        public ServerDashboard(ICommunicator communicator, string username, string useremail, string profilePictureUrl)
         {
             _communicator = communicator;
             _communicator.Subscribe("Dashboard", this, true);
@@ -64,28 +113,31 @@ namespace Dashboard
             ServerUserList.CollectionChanged += (s, e) => OnPropertyChanged(nameof(ServerUserList));
         }
 
+        /// <summary>
+        /// Initializes the server dashboard and starts the server.
+        /// </summary>
+        /// <returns>Server credentials.</returns>
         public string Initialize()
         {
-            
-            var server_user = new UserDetails
+            var serverUser = new UserDetails
             {
-                userName = UserName,
-                userEmail = UserEmail,
-                userId = "1",
+                UserName = UserName,
+                UserEmail = UserEmail,
+                UserId = "1",
                 IsHost = true,
                 ProfilePictureUrl = ProfilePictureUrl
             };
-            ServerUserList.Add(server_user);
-            TotalServerUserList.Add(server_user);
+            ServerUserList.Add(serverUser);
+            TotalServerUserList.Add(serverUser);
 
-            string server_credentials = "failure";
-            while (server_credentials == "failure")
+            string serverCredentials = "failure";
+            while (serverCredentials == "failure")
             {
-                server_credentials = _communicator.Start();
+                serverCredentials = _communicator.Start();
             }
-            if (server_credentials != "failure")
+            if (serverCredentials != "failure")
             {
-                string[] parts = server_credentials.Split(':');
+                string[] parts = serverCredentials.Split(':');
                 ServerIp = parts[0];
                 ServerPort = parts[1];
 
@@ -96,17 +148,29 @@ namespace Dashboard
                 OnPropertyChanged(nameof(ServerUserList));
             }
             Trace.WriteLine("[DashboardServer] started server");
-            return server_credentials;
+            return serverCredentials;
         }
 
+        /// <summary>
+        /// Broadcasts a message to all connected users.
+        /// </summary>
+        /// <param name="message">Message to be sent.</param>
         public void BroadcastMessage(string message)
         {
             foreach (UserDetails user in ServerUserList)
             {
-                SendMessage(user.userId, message);
+                if (user.UserId != null)
+                {
+                    SendMessage(user.UserId, message);
+                }
             }
         }
 
+        /// <summary>
+        /// Sends a message to a specific client.
+        /// </summary>
+        /// <param name="clientIP">Client IP address.</param>
+        /// <param name="message">Message to be sent.</param>
         public void SendMessage(string clientIP, string message)
         {
             try
@@ -119,6 +183,10 @@ namespace Dashboard
             }
         }
 
+        /// <summary>
+        /// Handles data received from clients.
+        /// </summary>
+        /// <param name="message">Received message.</param>
         public void OnDataReceived(string message)
         {
             try
@@ -129,7 +197,7 @@ namespace Dashboard
                     Console.WriteLine("Error: Deserialized message is null");
                     return;
                 }
-                Trace.WriteLine("[Dashserver]"+details.Action);
+                Trace.WriteLine("[Dashserver]" + details.Action);
                 switch (details.Action)
                 {
                     case Action.ClientUserConnected:
@@ -149,26 +217,32 @@ namespace Dashboard
             }
         }
 
+        /// <summary>
+        /// Handles a user connecting to the server.
+        /// </summary>
+        /// <param name="details">Details of the connected user.</param>
         private void HandleUserConnected(DashboardDetails details)
         {
             Trace.WriteLine("[DashboardServer] received client info");
             if (details?.User != null)
             {
-                var userToUpdate = ServerUserList.FirstOrDefault(u => u.userId == details.User.userId);
-                var userInTotalList = TotalServerUserList.FirstOrDefault(u => u.userId == details.User.userId);
+                var userToUpdate = ServerUserList.FirstOrDefault(u => u.UserId == details.User.UserId);
+                var userInTotalList = TotalServerUserList.FirstOrDefault(u => u.UserId == details.User.UserId);
 
                 if (userToUpdate == null)
                 {
                     // Update user details
-                    string newuserid = details.User.userId;
+                    string newUserId = details.User.UserId ?? string.Empty;
 
                     // Update the existing user's details
-                    var newUserDetails = new UserDetails();
-                    newUserDetails.userName = details.User.userName;
-                    newUserDetails.userEmail = details.User.userEmail;
-                    newUserDetails.IsHost = false;
-                    newUserDetails.ProfilePictureUrl = details.User.ProfilePictureUrl; // Update profile picture URL
-                    newUserDetails.userId = newuserid;
+                    var newUserDetails = new UserDetails
+                    {
+                        UserName = details.User.UserName,
+                        UserEmail = details.User.UserEmail,
+                        IsHost = false,
+                        ProfilePictureUrl = details.User.ProfilePictureUrl, // Update profile picture URL
+                        UserId = newUserId
+                    };
 
                     ServerUserList.Add(newUserDetails);
 
@@ -179,14 +253,14 @@ namespace Dashboard
 
                     var listUsers = new List<UserDetails>(ServerUserList);
                     var jsonUserList = JsonSerializer.Serialize(listUsers);
-                    SendMessage(newuserid, jsonUserList);
+                    SendMessage(newUserId, jsonUserList);
 
                     // Create message for new user joined
                     DashboardDetails dashboardMessage = new()
                     {
                         User = newUserDetails,
                         Action = Action.ServerUserAdded,
-                        msg = "User " + newUserDetails.userName + " Joined"
+                        Msg = "User " + newUserDetails.UserName + " Joined"
                     };
 
                     // First send individual update
@@ -199,109 +273,136 @@ namespace Dashboard
             }
         }
 
+        /// <summary>
+        /// Handles a user leaving the server.
+        /// </summary>
+        /// <param name="details">Details of the user leaving.</param>
         private void HandleUserLeft(DashboardDetails details)
         {
             if (details?.User != null)
             {
-                var userToRemove = ServerUserList.FirstOrDefault(u => u.userId == details.User.userId);
+                var userToRemove = ServerUserList.FirstOrDefault(u => u.UserId == details.User.UserId);
                 if (userToRemove != null)
                 {
                     DashboardDetails dashboardMessage = new()
                     {
                         User = details.User,
                         Action = Action.ServerUserLeft,
-                        msg = "User with " + userToRemove.userName + " Left"
+                        Msg = "User with " + userToRemove.UserName + " Left"
                     };
 
-                    current_user_count--;
-                    string json_message = JsonSerializer.Serialize(dashboardMessage);
+                    CurrentUserCount--;
+                    string jsonMessage = JsonSerializer.Serialize(dashboardMessage);
                     ServerUserList.Remove(userToRemove);
                     OnPropertyChanged(nameof(ServerUserList));
-                    BroadcastMessage(json_message);
+                    BroadcastMessage(jsonMessage);
+
+                    Trace.WriteLine($"[Dashboard server] {userToRemove.UserName} left");
                 }
-                Trace.WriteLine($"[Dashboard server] {userToRemove.userName} left"); 
             }
         }
 
+        /// <summary>
+        /// Handles the start of the meeting.
+        /// </summary>
         private void HandleStartOfMeeting()
         {
             Trace.WriteLine("[Dash Server] Meeting started");
         }
 
+        /// <summary>
+        /// Stops the server and ends the meeting.
+        /// </summary>
+        /// <returns>True if the server stops successfully.</returns>
         public bool ServerStop()
         {
-
             DashboardDetails dashboardMessage = new()
             {
                 Action = Action.ServerEnd,
-                msg = "Meeting Ended"
+                Msg = "Meeting Ended"
             };
-            string json_message = JsonSerializer.Serialize(dashboardMessage);
-            BroadcastMessage(json_message);
+            string jsonMessage = JsonSerializer.Serialize(dashboardMessage);
+            BroadcastMessage(jsonMessage);
             ServerUserList.Clear();
-            //_communicator.Stop();
             return true;
         }
-            
-            
 
+        /// <summary>
+        /// Handles a new client joining the server.
+        /// </summary>
+        /// <param name="socket">Client socket.</param>
+        /// <param name="ip">Client IP address.</param>
+        /// <param name="port">Client port number.</param>
         public void OnClientJoined(TcpClient socket, string? ip, string? port)
         {
-            total_user_count++;
-            current_user_count++;
+            TotalUserCount++;
+            CurrentUserCount++;
 
-            string newUserId = total_user_count.ToString();
+            string newUserId = TotalUserCount.ToString();
 
             // Create new user with temporary placeholder - don't set a name yet
             UserDetails details = new UserDetails
             {
-                userId = newUserId,
-                userEmail = "",
+                UserId = newUserId,
+                UserEmail = "",
                 IsHost = false
             };
 
             _communicator.AddClient(newUserId, socket);
 
+<<<<<<< HEAD
+=======
             _updaterServerInstance.SetUser(newUserId, socket);
 
             _fileClonerInstance.SetUser(newUserId,socket);
 
+>>>>>>> c4e159194f4b17adc95ddb2f3876ad6269112e64
             // Send only the userId to the new client
             DashboardDetails dashboardMessage = new DashboardDetails
             {
-                User = new UserDetails { userId = newUserId },  // Only send userId
+                User = new UserDetails { UserId = newUserId },  // Only send userId
                 Action = Action.ServerSendUserID,
                 IsConnected = true
             };
 
-            string json_message = JsonSerializer.Serialize(dashboardMessage);
-            _communicator.Send(json_message, "Dashboard", newUserId);
-
+            string jsonMessage = JsonSerializer.Serialize(dashboardMessage);
+            _communicator.Send(jsonMessage, "Dashboard", newUserId);
         }
 
+        /// <summary>
+        /// Handles a client leaving the server.
+        /// </summary>
+        /// <param name="clientId">Client ID.</param>
         public void OnClientLeft(string clientId)
         {
-            var userLeaving = ServerUserList.FirstOrDefault(u => u.userId == clientId);
+            var userLeaving = ServerUserList.FirstOrDefault(u => u.UserId == clientId);
 
             if (userLeaving != null)
             {
                 DashboardDetails dashboardMessage = new()
                 {
                     Action = Action.ServerUserLeft,
-                    msg = "User with " + userLeaving.userName + " left"
+                    Msg = "User with " + userLeaving.UserName + " left"
                 };
-                string json_message = JsonSerializer.Serialize(dashboardMessage);
+                string jsonMessage = JsonSerializer.Serialize(dashboardMessage);
 
                 ServerUserList.Remove(userLeaving);
                 _communicator.RemoveClient(clientId);
 
                 OnPropertyChanged(nameof(ServerUserList));
-                BroadcastMessage(json_message);
+                BroadcastMessage(jsonMessage);
             }
         }
 
-
+        /// <summary>
+        /// Event triggered when a property value changes.
+        /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        /// <summary>
+        /// Notifies listeners that a property value has changed.
+        /// </summary>
+        /// <param name="property">Property name.</param>
         protected void OnPropertyChanged(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));

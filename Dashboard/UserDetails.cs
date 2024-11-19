@@ -8,14 +8,20 @@ using System.Threading.Tasks;
 
 namespace Dashboard
 {
+    /// <summary>
+    /// Class representing user details and implementing property changed notification.
+    /// </summary>
     [JsonSerializable(typeof(UserDetails))]
     public class UserDetails : INotifyPropertyChanged
     {
         private string? _userName;
         private string? _profilePictureUrl;
 
+        /// <summary>
+        /// Gets or sets the user name.
+        /// </summary>
         [JsonInclude]
-        public string? userName
+        public string? UserName
         {
             get { return _userName; }
             set
@@ -23,20 +29,32 @@ namespace Dashboard
                 if (_userName != value)
                 {
                     _userName = value;
-                    OnPropertyChanged(nameof(userName));
+                    OnPropertyChanged(nameof(UserName));
                 }
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the user is a host.
+        /// </summary>
         [JsonInclude]
         public bool IsHost { get; set; }
 
+        /// <summary>
+        /// Gets or sets the user ID.
+        /// </summary>
         [JsonInclude]
-        public string? userId { get; set; }
+        public string? UserId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the user email.
+        /// </summary>
         [JsonInclude]
-        public string? userEmail { get; set; }
+        public string? UserEmail { get; set; }
 
+        /// <summary>
+        /// Gets or sets the profile picture URL.
+        /// </summary>
         [JsonInclude]
         public string? ProfilePictureUrl
         {
@@ -51,8 +69,15 @@ namespace Dashboard
             }
         }
 
+        /// <summary>
+        /// Event triggered when a property value changes.
+        /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        /// <summary>
+        /// Notifies listeners that a property value has changed.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

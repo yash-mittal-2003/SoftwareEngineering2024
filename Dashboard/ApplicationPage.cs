@@ -6,13 +6,29 @@ using System.Threading.Tasks;
 
 namespace Dashboard
 {
+    /// <summary>
+    /// Enum representing different pages in the application.
+    /// </summary>
     public enum ApplicationPage
     {
-        //Login page of the application
+        /// <summary>
+        /// Login page of the application.
+        /// </summary>
         Login = 0,
-        Homepage = 1,
-        ServerHomePage = 2,
-        ClientHomePage = 3
 
+        /// <summary>
+        /// Homepage of the application.
+        /// </summary>
+        Homepage = 1,
+
+        /// <summary>
+        /// Homepage for the server.
+        /// </summary>
+        ServerHomePage = 2,
+
+        /// <summary>
+        /// Homepage for the client.
+        /// </summary>
+        ClientHomePage = 3
     }
 }
