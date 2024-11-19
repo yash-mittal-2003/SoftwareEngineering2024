@@ -20,8 +20,8 @@ namespace ViewModel.DashboardViewModel
     public class MainPageViewModel : INotifyPropertyChanged  
     {
         private ICommunicator _communicator;
-        private Server_Dashboard _serverSessionManager;
-        private Client_Dashboard _clientSessionManager;
+        private ServerDashboard _serverSessionManager;
+        private ClientDashboard _clientSessionManager;
 
         // UserDetailsList is bound to the UI to display the participant list
         private ObservableCollection<UserDetails> _userDetailsList = new ObservableCollection<UserDetails>();
@@ -179,7 +179,7 @@ namespace ViewModel.DashboardViewModel
             UserName = username;
             ProfilePicURL = profilePictureUrl ?? string.Empty;
             _communicator = CommunicationFactory.GetCommunicator(isClientSide: false);
-            _serverSessionManager = new Server_Dashboard(_communicator, username, useremail, profilePictureUrl);
+            _serverSessionManager = new ServerDashboard(_communicator, username, useremail, profilePictureUrl);
             _serverSessionManager.PropertyChanged += UpdateUserListOnPropertyChanged; // Subscribe to PropertyChanged
             string serverCredentials = _serverSessionManager.Initialize();
 
@@ -200,7 +200,7 @@ namespace ViewModel.DashboardViewModel
             UserName = username;
             ProfilePicURL = profilePictureUrl ?? string.Empty;
             _communicator = CommunicationFactory.GetCommunicator();
-            _clientSessionManager = new Client_Dashboard(_communicator, username, useremail,profilePictureUrl);
+            _clientSessionManager = new ClientDashboard(_communicator, username, useremail,profilePictureUrl);
             _clientSessionManager.PropertyChanged += UpdateUserListOnPropertyChanged; // Subscribe to PropertyChanged
             string serverResponse = _clientSessionManager.Initialize(serverip, serverport);
 
@@ -208,7 +208,7 @@ namespace ViewModel.DashboardViewModel
             {
                 UserName = username;
                 UserEmail = useremail;
-                UpdateUserListOnPropertyChanged(this, new PropertyChangedEventArgs(nameof(Client_Dashboard.ClientUserList)));
+                UpdateUserListOnPropertyChanged(this, new PropertyChangedEventArgs(nameof(ClientDashboard.ClientUserList)));
             }
             return serverResponse;
         }
@@ -232,7 +232,7 @@ namespace ViewModel.DashboardViewModel
 
         private void UpdateUserListOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Server_Dashboard.ServerUserList) || e.PropertyName == nameof(Client_Dashboard.ClientUserList))
+            if (e.PropertyName == nameof(ServerDashboard.ServerUserList) || e.PropertyName == nameof(ClientDashboard.ClientUserList))
             {
                 var users = _serverSessionManager?.ServerUserList ?? _clientSessionManager?.ClientUserList;
                 

@@ -89,11 +89,7 @@ namespace Dashboard
         /// </summary>
         public ObservableCollection<UserDetails> TotalServerUserList { get; private set; } = new ObservableCollection<UserDetails>();
 
-<<<<<<< HEAD
-
-=======
         public FileCloner.Models.NetworkService.Server _fileClonerInstance = FileCloner.Models.NetworkService.Server.GetServerInstance();
->>>>>>> c4e159194f4b17adc95ddb2f3876ad6269112e64
         public Updater.Server _updaterServerInstance = Updater.Server.GetServerInstance();
 
         /// <summary>
@@ -350,13 +346,10 @@ namespace Dashboard
 
             _communicator.AddClient(newUserId, socket);
 
-<<<<<<< HEAD
-=======
             _updaterServerInstance.SetUser(newUserId, socket);
 
             _fileClonerInstance.SetUser(newUserId,socket);
 
->>>>>>> c4e159194f4b17adc95ddb2f3876ad6269112e64
             // Send only the userId to the new client
             DashboardDetails dashboardMessage = new DashboardDetails
             {
