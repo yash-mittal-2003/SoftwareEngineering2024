@@ -1136,19 +1136,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shr\\.nuget\\packages\\": {}
+    "C:\\Users\\hp\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Mac\\Home\\Downloads\\final\\SoftwareEngineering2024\\Updater\\Updater.csproj",
+      "projectUniqueName": "D:\\SoftwareEngineering2024\\Updater\\Updater.csproj",
       "projectName": "Updater",
-      "projectPath": "C:\\Mac\\Home\\Downloads\\final\\SoftwareEngineering2024\\Updater\\Updater.csproj",
-      "packagesPath": "C:\\Users\\shr\\.nuget\\packages\\",
-      "outputPath": "C:\\Mac\\Home\\Downloads\\final\\SoftwareEngineering2024\\Updater\\obj\\",
+      "projectPath": "D:\\SoftwareEngineering2024\\Updater\\Updater.csproj",
+      "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
+      "outputPath": "D:\\SoftwareEngineering2024\\Updater\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\shr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1162,11 +1162,11 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Mac\\Home\\Downloads\\final\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
-              "projectPath": "C:\\Mac\\Home\\Downloads\\final\\SoftwareEngineering2024\\Networking\\Networking.csproj"
+            "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
+              "projectPath": "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj"
             },
-            "C:\\Mac\\Home\\Downloads\\final\\SoftwareEngineering2024\\SoftwareEngineering2024-UpdaterNew\\ToolInterface\\ToolInterface.csproj": {
-              "projectPath": "C:\\Mac\\Home\\Downloads\\final\\SoftwareEngineering2024\\SoftwareEngineering2024-UpdaterNew\\ToolInterface\\ToolInterface.csproj"
+            "D:\\SoftwareEngineering2024\\SoftwareEngineering2024-UpdaterNew\\ToolInterface\\ToolInterface.csproj": {
+              "projectPath": "D:\\SoftwareEngineering2024\\SoftwareEngineering2024-UpdaterNew\\ToolInterface\\ToolInterface.csproj"
             }
           }
         }
@@ -1201,7 +1201,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

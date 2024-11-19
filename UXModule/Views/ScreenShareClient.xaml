@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ScreenShareClient">
 
-    <Grid Background="Black">
+    <Grid Background="#2B124C">
 
         <!-- Divide the screen into 2 rows in the ratio 10:1 -->
         <Grid.RowDefinitions >
@@ -24,7 +24,7 @@
 
             <!-- Text shown when the image is being shared -->
             <TextBlock Text="screen share started" Foreground="IndianRed" 
-         FontSize="60" FontFamily="Comic Sans MS" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center"/>
+         FontSize="60" FontFamily="Segoe UI" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center"/>
 
             <!-- Make this panel visible only when the screen is being shared -->
             <StackPanel.Resources>
@@ -48,7 +48,7 @@
 
             <!-- Text shown when the image is not being shared -->
             <TextBlock Name="MainText" Text="You are not sharing your screen" Foreground="IndianRed" 
-         FontSize="40" FontFamily="Comic Sans MS" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center"  Margin="0 150 0 0 "/>
+         FontSize="40" FontFamily="Segoe UI" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center"  Margin="0 150 0 0 "/>
 
             <!-- Make this panel visible only when the screen is not being shared -->
             <StackPanel.Resources>

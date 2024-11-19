@@ -220,10 +220,7 @@
           "System.ServiceModel.Primitives": "8.0.0"
         },
         "runtime": {
-          "Networking.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "Networking.dll": {}
         }
       },
       "ToolInterface/1.0.0": {
@@ -231,10 +228,7 @@
           "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {
-          "ToolInterface.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "ToolInterface.dll": {}
         }
       }
     }

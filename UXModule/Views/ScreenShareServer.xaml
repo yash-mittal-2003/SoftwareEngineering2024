@@ -47,7 +47,7 @@
     <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" PreviewMouseWheel="OnMouseWheelScrolled">
 
         <!-- Create a grid to show everything within it-->
-        <Grid Background = "#202124">
+        <Grid Background = "#2B124C">
 
             <!-- Divide the grid into 2 rows of 16:1 ratio -->
             <Grid.RowDefinitions >
@@ -124,7 +124,7 @@
                 <Popup IsOpen="{Binding IsPopupOpen, Mode=TwoWay}" PlacementTarget="{Binding ElementName=Popupone}" AllowsTransparency="True" 
        PopupAnimation="Fade" VerticalOffset="-46" StaysOpen="False">
                     <TextBox Text="{Binding PopupText, Mode=OneWay}" Background="#212024" TextAlignment="Center" Padding="20,10,20,10" BorderThickness="2.3" 
-             Foreground="GhostWhite" FontFamily="Verdana" FontSize="15" Opacity="0.7">
+             Foreground="GhostWhite" FontFamily="Segoe UI" FontSize="15" Opacity="0.7">
                         <!-- Design the Textbox shape -->
                         <TextBox.Resources>
                             <Style TargetType="Border">
@@ -143,7 +143,7 @@
        HorizontalAlignment="Center" Margin="0,200,0,20"/> -->
 
                 <!-- Create a textblock to write a msg -->
-                <TextBlock Text="No One's Here" Foreground="IndianRed" FontSize="60" FontFamily="Comic Sans MS" 
+                <TextBlock Text="No One's Here" Foreground="IndianRed" FontSize="60" FontFamily="Segoe UI" 
            TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" />
 
                 <!-- Make this stack panel visible only when no client is sharing their screen -->
