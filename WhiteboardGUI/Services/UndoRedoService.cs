@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Shapes;
+﻿/**************************************************************************************************
+ * Filename    = UndoRedoService.cs
+ *
+ * Authors     = Kshitij Ghodake
+ *
+ * Product     = WhiteBoard
+ * 
+ * Project     = Undo redo feature
+ *
+ * Description = Implementation for undo redo feature for the actions performed on the canvas
+ *************************************************************************************************/
+
 using WhiteboardGUI.Models;
 
 namespace WhiteboardGUI.Services

@@ -1,3 +1,22 @@
+<!--
+/**************************************************************************************************
+ * Filename    : MainPage.xaml
+ *
+ * Author      : Rachit Jain and Kshitij Ghodake
+ *
+ * Product     : WhiteBoard
+ * 
+ * Project     : Main Page UI
+ *
+ * Description : Defines the main user interface for the WhiteBoard application. This includes
+ *               the toolbar with various drawing tools, shape rendering on the canvas, color palette,
+ *               upload/download functionalities, and dark mode toggle. Utilizes multiple styles and 
+ *               converters to ensure a consistent and responsive user experience. Implements data 
+ *               bindings to the MainPageViewModel for handling user interactions and application logic.
+ **************************************************************************************************/
+-->
+
+
 <Page
     x:Class="WhiteboardGUI.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
