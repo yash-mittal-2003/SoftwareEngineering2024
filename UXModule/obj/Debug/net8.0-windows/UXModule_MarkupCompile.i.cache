@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\Final-SE\SoftwareEngineering2024\UXModule\obj\Debug\net8.0-windows\
+C:\Mac\Home\Downloads\final\SoftwareEngineering2024\UXModule\obj\Debug\net8.0-windows\
 UXModule
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-F:\Final-SE\SoftwareEngineering2024\UXModule\App.xaml
-17499528936
+C:\Mac\Home\Downloads\final\SoftwareEngineering2024\UXModule\App.xaml
+16-1473168137
 
-24-1593456303
-375-737562981
-SplashScreen.xaml;Views\AnalyserPage.xaml;Views\ChatPage.xaml;Views\ClientHomePage.xaml;Views\DashboardPage.xaml;Views\FileClonerPage.xaml;Views\HomePage.xaml;Views\LoginPage.xaml;Views\MainPage.xaml;Views\MainWindow.xaml;Views\ScreenShareClient.xaml;Views\ScreensharePage.xaml;Views\ScreenShareServer.xaml;Views\ServerHomePage.xaml;Views\UpdaterPage.xaml;Views\UploadPage.xaml;Views\WhiteboardPage.xaml;
+23-336741129
+375-1023317974
+SplashScreen.xaml;Views\AnalyserPage.xaml;Views\ChatPage.xaml;Views\ClientHomePage.xaml;Views\DashboardPage.xaml;Views\HomePage.xaml;Views\LoginPage.xaml;Views\MainPage.xaml;Views\MainWindow.xaml;Views\ScreenShareClient.xaml;Views\ScreensharePage.xaml;Views\ScreenShareServer.xaml;Views\ServerHomePage.xaml;Views\UpdaterPage.xaml;Views\UploadPage.xaml;Views\WhiteboardPage.xaml;
 
 True
 

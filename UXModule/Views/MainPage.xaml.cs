@@ -29,7 +29,7 @@ namespace UXModule.Views
         private static DashboardPage dashboardPage;
         private static WhiteboardPage whiteboardPage;
         private static UpdaterPage updaterPage;
-        private static FileClonerPage fileClonerPage;
+        private static FileCloner.Views.MainPage fileClonerPage;
         private static ScreensharePage screensharePage;
         private static AnalyserPage analyserPage;
         private static ChatPage chatPage;
@@ -58,6 +58,7 @@ namespace UXModule.Views
             updaterPage = new UpdaterPage(sessionType);
             Main.Content = _currentPage;  // Set the initial content
 
+            fileClonerPage = new FileCloner.Views.MainPage(); 
         }
         /// <summary>
         /// Navigate to Dashboard
@@ -82,9 +83,7 @@ namespace UXModule.Views
         /// </summary>
         private void FileClonerClick(object sender, RoutedEventArgs e)
         {
-            fileClonerPage = new FileClonerPage(); // Create new instance of FileClonerPage
             Main.Content = fileClonerPage; // Set FileClonerPage as content
-
         }
 
         /// <summary>

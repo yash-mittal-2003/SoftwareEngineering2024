@@ -8,8 +8,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Networking;
 using Networking.Communication;
-using Updater;
-//using FileCloner.Models.NetworkService;
 
 namespace Dashboard
 {
@@ -52,7 +50,7 @@ namespace Dashboard
         public ObservableCollection<UserDetails> ServerUserList { get; private set; } = new ObservableCollection<UserDetails>();
         public ObservableCollection<UserDetails> TotalServerUserList { get; private set; } = new ObservableCollection<UserDetails>();
 
-        //public Server _fileClonerInstance = Server.GetServerInstance();
+        public FileCloner.Models.NetworkService.Server _fileClonerInstance = FileCloner.Models.NetworkService.Server.GetServerInstance();
         public Updater.Server _updaterServerInstance = Updater.Server.GetServerInstance();
 
 
@@ -90,6 +88,9 @@ namespace Dashboard
                 string[] parts = server_credentials.Split(':');
                 ServerIp = parts[0];
                 ServerPort = parts[1];
+
+                ICommunicator _client = CommunicationFactory.GetCommunicator(isClientSide: true);
+                _client.Start(ServerIp, ServerPort);
 
                 // Notify that server user is ready
                 OnPropertyChanged(nameof(ServerUserList));
@@ -263,7 +264,7 @@ namespace Dashboard
 
             _updaterServerInstance.SetUser(newUserId, socket);
 
-            //_fileClonerInstance.SetUser(newUserId,socket);
+            _fileClonerInstance.SetUser(newUserId,socket);
 
             // Send only the userId to the new client
             DashboardDetails dashboardMessage = new DashboardDetails
