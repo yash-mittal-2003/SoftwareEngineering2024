@@ -1,4 +1,18 @@
-﻿using System.Collections.ObjectModel;
+﻿/**************************************************************************************************
+ * Filename    = MainPageViewModel.cs
+ *
+ * Authors     = Likith Anaparty, Rachit Jain, and Kshitij Ghodake
+ *
+ * Product     = WhiteBoard
+ * 
+ * Project     = WhiteboardGUI
+ *
+ * Description = ViewModel class for the main page of the Whiteboard GUI application.
+ *               Handles user interactions, shape management, networking, and rendering.
+ *               Implements the INotifyPropertyChanged interface for data binding.
+ *************************************************************************************************/
+
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -15,18 +29,49 @@ using System.Windows.Navigation;
 
 namespace WhiteboardGUI.ViewModel
 {
+    /// <summary>
+    /// ViewModel for the Main Page of the Whiteboard GUI application.
+    /// Handles user interactions, shape management, networking, and rendering.
+    /// Implements the INotifyPropertyChanged interface for data binding.
+    /// </summary>
     public class MainPageViewModel : INotifyPropertyChanged
     {
-        // Fields
+        /// <summary>
+        /// Service responsible for handling networking operations.
+        /// </summary>
         private readonly NetworkingService _networkingService;
+
+        /// <summary>
+        /// Service responsible for managing undo and redo operations.
+        /// </summary>
         private readonly UndoRedoService _undoRedoService = new();
+
+        /// <summary>
+        /// Service responsible for rendering shapes on the canvas.
+        /// </summary>
         public readonly RenderingService _renderingService;
+
+        /// <summary>
+        /// Service responsible for handling snapshot operations.
+        /// </summary>
         private readonly SnapShotService _snapShotService;
+
+        // <summary>
+        /// Service responsible for managing the Z-index of shapes.
+        /// </summary>
         private readonly MoveShapeZIndexing _moveShapeZIndexing;
+
+        /// <summary>
+        /// Gets the Client ID from the networking service.
+        /// </summary>
         public double ClientID => _networkingService._clientID;
 
-
+        /// <summary>
+        /// Timer for periodic operations, such as checking dark mode settings.
+        /// </summary>
         private readonly DispatcherTimer _timer;
+
+
         private string _defaultColor;
         private IShape _selectedShape;
         private ShapeType _currentTool = ShapeType.Pencil;
@@ -35,6 +80,7 @@ namespace WhiteboardGUI.ViewModel
         private bool _isSelecting;
         private bool _isDragging;
         private ObservableCollection<IShape> _shapes;
+        private SnapShotDownloadItem _selectedDownloadItem;
 
         //for textbox
         private string _textInput;
@@ -47,6 +93,10 @@ namespace WhiteboardGUI.ViewModel
 
         private IShape _hoveredShape;
         private bool _isShapeHovered;
+
+        /// <summary>
+        /// Gets or sets the current hover adorner.
+        /// </summary>
         public HoverAdorner CurrentHoverAdorner { get; set; }
 
         private byte _red = 0;
@@ -63,7 +113,15 @@ namespace WhiteboardGUI.ViewModel
         private bool _isPopupOpen;
         private string _snapShotFileName;
         private bool _isDarkMode;
+
+        /// <summary>
+        /// Gets or sets the background brush for the page.
+        /// </summary>
         private Brush _pageBackground = new SolidColorBrush(Color.FromRgb(245, 245, 245)); // Light
+
+        /// <summary>
+        /// Gets or sets the background brush for the canvas.
+        /// </summary>
         private Brush _canvasBackground = new SolidColorBrush(Color.FromRgb(245, 245, 245)); // Light
         private static MainPageViewModel _whiteboardInstance;
         private readonly ReceivedDataService _receivedDataService;
@@ -88,9 +146,10 @@ namespace WhiteboardGUI.ViewModel
         }
 
 
-
-
-
+        /// <summary>
+        /// Gets or sets the default color as a string.
+        /// Notifies listeners when the value changes.
+        /// </summary>
         public string DefaultColor
         {
             get => _defaultColor;
@@ -104,30 +163,46 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets or sets the starting point of a shape or selection.
+        /// </summary>
         public Point StartPoint
         {
             get { return _startPoint; }
             set { _startPoint = StartPoint; }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether a selection is in progress.
+        /// </summary>
         public bool IsSelecting
         {
             get { return _isSelecting; }
             set { _isSelecting = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the last known mouse position.
+        /// </summary>
         public Point LastMousePosition
         {
             get { return _lastMousePosition; }
             set { _lastMousePosition = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the current textbox model.
+        /// </summary>
         public TextboxModel CurrentTextboxModel
         {
             get { return _currentTextboxModel; }
             set { _currentTextboxModel = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the red component of the selected color.
+        /// Updates the selected color when changed.
+        /// </summary>
         public byte Red
         {
             get => _red;
@@ -138,6 +213,11 @@ namespace WhiteboardGUI.ViewModel
                 UpdateSelectedColor();
             }
         }
+
+        /// <summary>
+        /// Gets or sets the green component of the selected color.
+        /// Updates the selected color when changed.
+        /// </summary>
         public byte Green
         {
             get => _green;
@@ -148,6 +228,11 @@ namespace WhiteboardGUI.ViewModel
                 UpdateSelectedColor();
             }
         }
+
+        /// <summary>
+        /// Gets or sets the blue component of the selected color.
+        /// Updates the selected color when changed.
+        /// </summary>
         public byte Blue
         {
             get => _blue;
@@ -158,7 +243,10 @@ namespace WhiteboardGUI.ViewModel
                 UpdateSelectedColor();
             }
         }
-  
+
+        /// <summary>
+        /// Gets or sets a value indicating whether an upload is in progress.
+        /// </summary>
         public bool IsUploading
         {
             get => _isUploading;
@@ -169,7 +257,9 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
-
+        /// <summary>
+        /// Gets or sets a value indicating whether a drag operation is in progress.
+        /// </summary>
         public bool IsDragging
         {
             get => _isDragging;
@@ -179,6 +269,10 @@ namespace WhiteboardGUI.ViewModel
                 OnPropertyChanged(nameof(IsDragging));
             }
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether a download is in progress.
+        /// </summary>
         public bool IsDownloading
         {
             get => _isDownloading;
@@ -188,7 +282,11 @@ namespace WhiteboardGUI.ViewModel
                 OnPropertyChanged(nameof(IsDownloading));
             }
         }
-       
+
+        /// <summary>
+        /// Gets or sets the thickness of the selected shape's stroke.
+        /// Updates the shape and notifies the rendering service when changed.
+        /// </summary>
         public double SelectedThickness
         {
             get => _selectedThickness;
@@ -206,7 +304,12 @@ namespace WhiteboardGUI.ViewModel
                     }
                 }
             }
-        } 
+        }
+
+        /// <summary>
+        /// Gets or sets the selected color for drawing.
+        /// Updates the shape and notifies the rendering service when changed.
+        /// </summary>
         public Color SelectedColor
         {
             get => _selectedColor;
@@ -226,6 +329,9 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets or sets the current color being used.
+        /// </summary>
         public Color CurrentColor
         {
             get => _currentColor;
@@ -239,11 +345,21 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Handles changes to the Shapes collection.
+        /// Updates the Z-indices of shapes when the collection changes.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">Event arguments.</param>
         private void Shapes_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             _moveShapeZIndexing.UpdateZIndices();
         }
 
+        /// <summary>
+        /// Gets or sets the text input from the user.
+        /// Writes the input to the debug output when changed.
+        /// </summary>
         public string TextInput
         {
             get => _textInput;
@@ -255,6 +371,10 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the textbox is active.
+        /// Updates the visibility of the textbox when changed.
+        /// </summary>
         public bool IsTextBoxActive
         {
             get => _isTextBoxActive;
@@ -266,7 +386,9 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
-       
+        /// <summary>
+        /// Gets or sets a value indicating whether a popup is open.
+        /// </summary>
         public bool IsPopupOpen
         {
             get => _isPopupOpen;
@@ -280,14 +402,27 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets or sets the bounds of the textbox.
+        /// </summary>
         public Rect TextBoxBounds { get; set; }
+
+        /// <summary>
+        /// Gets or sets the font size of the textbox.
+        /// </summary>
         public double TextBoxFontSize { get; set; } = 16;
 
-        // Visibility property that directly converts IsTextBoxActive to a Visibility value
+        /// <summary>
+        /// Gets the visibility of the textbox based on its active state.
+        /// </summary>
         public Visibility TextBoxVisibility =>
             IsTextBoxActive ? Visibility.Visible : Visibility.Collapsed;
 
-        // Properties
+
+        /// <summary>
+        /// Gets or sets the collection of shapes on the canvas.
+        /// Notifies listeners when the collection changes.
+        /// </summary>
         public ObservableCollection<IShape> Shapes
         {
             get => _shapes;
@@ -297,7 +432,10 @@ namespace WhiteboardGUI.ViewModel
                 OnPropertyChanged(nameof(Shapes));
             }
         }
-        
+
+        /// <summary>
+        /// Gets or sets the filename for snapshots.
+        /// </summary>
         public string SnapShotFileName
         {
             get => _snapShotFileName;
@@ -311,6 +449,10 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets or sets the currently selected shape.
+        /// Manages selection state and notifies listeners when changed.
+        /// </summary>
         public IShape SelectedShape
         {
             get => _selectedShape;
@@ -337,8 +479,14 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether a shape is currently selected.
+        /// </summary>
         public bool IsShapeSelected => SelectedShape != null;
 
+        /// <summary>
+        /// Gets or sets the current tool selected by the user.
+        /// </summary>
         public ShapeType CurrentTool
         {
             get => _currentTool;
@@ -350,19 +498,28 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the user is a host.
+        /// </summary>
         public bool IsHost { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the user is a client.
+        /// </summary>
         public bool IsClient { get; set; }
-
-
-
         private bool _isClearConfirmationOpen;
 
-  
-
-
+        /// <summary>
+        /// Gets or sets the collection view for download items.
+        /// </summary>
         public ListCollectionView DownloadItems { get; set; }
 
-        private SnapShotDownloadItem _selectedDownloadItem;
+
+
+        /// <summary>
+        /// Gets or sets the selected download item.
+        /// Notifies listeners when changed.
+        /// </summary>
         public SnapShotDownloadItem SelectedDownloadItem
         {
             get => _selectedDownloadItem;
@@ -373,10 +530,20 @@ namespace WhiteboardGUI.ViewModel
                 OnPropertyChanged(nameof(CanDownload)); // Notify change for CanDownload
             }
         }
+
+        /// <summary>
+        /// Gets a value indicating whether a download can be performed.
+        /// </summary>
         public bool CanDownload => !(SelectedDownloadItem==null);
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the download popup is open.
+        /// </summary>
         public bool IsDownloadPopupOpen { get; set; }
 
-        // Property to control the visibility of the Clear Confirmation Popup
+        /// <summary>
+        /// Gets or sets a value indicating whether the clear confirmation popup is open.
+        /// </summary>
         public bool IsClearConfirmationOpen
         {
             get => _isClearConfirmationOpen;
@@ -390,51 +557,167 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
-        // Commands for Clear Confirmation
+        /// <summary>
+        /// Command to open the clear confirmation popup.
+        /// </summary>
         public ICommand OpenClearConfirmationCommand { get; }
+
+        /// <summary>
+        /// Command to confirm the clearing of shapes.
+        /// </summary>
         public ICommand ConfirmClearCommand { get; }
+
+        /// <summary>
+        /// Command to cancel the clear action.
+        /// </summary>
         public ICommand CancelClearCommand { get; }
 
-        // Commands
+        /// <summary>
+        /// Command to start hosting the application.
+        /// </summary>
         public ICommand StartHostCommand { get; }
+
+        /// <summary>
+        /// Command to start the client.
+        /// </summary>
         public ICommand StartClientCommand { get; }
+
+        /// <summary>
+        /// Command to stop hosting the application.
+        /// </summary>
         public ICommand StopHostCommand { get; }
+
+        /// <summary>
+        /// Command to stop the client.
+        /// </summary>
         public ICommand StopClientCommand { get; }
+
+        /// <summary>
+        /// Command to select a drawing tool.
+        /// </summary>
         public ICommand SelectToolCommand { get; }
+
+        /// <summary>
+        /// Command to draw a shape on the canvas.
+        /// </summary>
         public ICommand DrawShapeCommand { get; }
+
+        /// <summary>
+        /// Command to select a shape on the canvas.
+        /// </summary>
         public ICommand SelectShapeCommand { get; }
+
+        /// <summary>
+        /// Command to delete the selected shape.
+        /// </summary>
         public ICommand DeleteShapeCommand { get; }
+
+        /// <summary>
+        /// Command triggered when the left mouse button is pressed on the canvas.
+        /// </summary>
         public ICommand CanvasLeftMouseDownCommand { get; }
+
+        /// <summary>
+        /// Command triggered when the mouse moves over the canvas.
+        /// </summary>
         public ICommand CanvasMouseMoveCommand { get; }
+
+        /// <summary>
+        /// Command triggered when the left mouse button is released on the canvas.
+        /// </summary>
         public ICommand CanvasMouseUpCommand { get; }
 
-        //public ICommand FinalizeTextBoxCommand { get; }
-        // Commands for finalizing or canceling the TextBox input
+        /// <summary>
+        /// Command to finalize the textbox input.
+        /// </summary>
         public ICommand FinalizeTextBoxCommand { get; }
+
+        /// <summary>
+        /// Command to cancel the textbox input.
+        /// </summary>
         public ICommand CancelTextBoxCommand { get; }
 
+        /// <summary>
+        /// Command to perform an undo operation.
+        /// </summary>
         public ICommand UndoCommand { get; }
+
+        /// <summary>
+        /// Command to perform a redo operation.
+        /// </summary>
         public ICommand RedoCommand { get; }
 
+        /// <summary>
+        /// Command to select a color.
+        /// </summary>
         public ICommand SelectColorCommand { get; }
+
+        /// <summary>
+        /// Command to submit a file name.
+        /// </summary>
         public ICommand SubmitCommand { get; }
+
+        /// <summary>
+        /// Command to open a popup window.
+        /// </summary>
         public ICommand OpenPopupCommand { get; }
+
+        /// <summary>
+        /// Command to clear all shapes from the canvas.
+        /// </summary>
         public ICommand ClearShapesCommand { get; }
+
+        /// <summary>
+        /// Command to open the download popup.
+        /// </summary>
         public ICommand OpenDownloadPopupCommand { get; }
+
+        /// <summary>
+        /// Command to download the selected item.
+        /// </summary>
         public ICommand DownloadItemCommand { get; }
+
+        /// <summary>
+        /// Command to send a shape backward in the Z-order.
+        /// </summary>
         public ICommand SendBackwardCommand { get; }
+
+        /// <summary>
+        /// Command to send a shape to the back in the Z-order.
+        /// </summary>
         public ICommand SendToBackCommand { get; }
+
+        /// <summary>
+        /// Command to edit the text of a shape.
+        /// </summary>
         public ICommand EditTextCommand { get; }
 
-        // Events
+        /// <summary>
+        /// Event triggered when a property value changes.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Event triggered when a shape is received from the network.
+        /// </summary>
         public event Action<IShape> ShapeReceived;
+
+        /// <summary>
+        /// Event triggered when a shape is deleted.
+        /// </summary>
         public event Action<IShape> ShapeDeleted;
+
+        /// <summary>
+        /// Instance of ServerOrClient class used for networking.
+        /// </summary>
         private ServerOrClient _serverOrClient = ServerOrClient.ServerOrClientInstance;
 
 
 
-        // Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainPageViewModel"/> class.
+        /// Sets up services, commands, event handlers, and initial state.
+        /// </summary>
         public MainPageViewModel()
         {
             Shapes = new ObservableCollection<IShape>();
@@ -474,27 +757,8 @@ namespace WhiteboardGUI.ViewModel
 
             Shapes.CollectionChanged += Shapes_CollectionChanged;
 
-
-
-
-            // Initialize commands
             Debug.WriteLine("ViewModel init start");
-            //StartHostCommand = new RelayCommand(
-            //    async () => await TriggerHostCheckbox(),
-            //    () =>
-            //    {
-            //        return true;
-            //    }
-            //);
-            //StartClientCommand = new RelayCommand(
-            //    async () => await TriggerClientCheckBox(5000),
-            //    () =>
-            //    {
-            //        return true;
-            //    }
-            //);
             SelectToolCommand = new RelayCommand<ShapeType>(SelectTool);
-            //DrawShapeCommand = new RelayCommand<(IShape, string)>(DrawShape);
             DrawShapeCommand = new RelayCommand<object>(parameter =>
             {
                 if (parameter is Tuple<IShape, string> args)
@@ -510,7 +774,6 @@ namespace WhiteboardGUI.ViewModel
             );
             CanvasMouseMoveCommand = new RelayCommand<MouseEventArgs>(OnCanvasMouseMove);
             CanvasMouseUpCommand = new RelayCommand<MouseButtonEventArgs>(OnCanvasMouseUp);
-            // Initialize commands
             FinalizeTextBoxCommand = new RelayCommand(FinalizeTextBox);
             CancelTextBoxCommand = new RelayCommand(CancelTextBox);
             UndoCommand = new RelayCommand(CallUndo);
@@ -554,8 +817,12 @@ namespace WhiteboardGUI.ViewModel
 
 
         }
-
-
+        
+        /// <summary>
+        /// Determines whether dark mode should be active based on the current time.
+        /// Dark mode is active from 7 PM to 6 AM.
+        /// </summary>
+        /// <returns>True if dark mode should be active; otherwise, false.</returns>
         private bool CheckIfDarkMode()
         {
             var now = DateTime.Now.TimeOfDay;
@@ -570,7 +837,12 @@ namespace WhiteboardGUI.ViewModel
             return false;
         }
 
-        // Timer Tick Event Handler
+        /// <summary>
+        /// Event handler for the timer tick.
+        /// Checks and updates dark mode based on the current time.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">Event arguments.</param>
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (!_isDarkModeManuallySet)
@@ -585,26 +857,35 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
-        // Update Background Colors
-        // Method to open the Clear Confirmation Popup
+        /// <summary>
+        /// Opens the clear confirmation popup.
+        /// </summary>
         private void OpenClearConfirmation()
         {
             IsClearConfirmationOpen = true;
         }
 
-        // Method to confirm clearing the screen
+        /// <summary>
+        /// Confirms the clearing of all shapes and closes the confirmation popup.
+        /// </summary>
         private void ConfirmClear()
         {
             ClearShapes(); // Existing method to clear shapes
             IsClearConfirmationOpen = false;
         }
 
-        // Method to cancel the clear action
+        /// <summary>
+        /// Cancels the clear action and closes the confirmation popup.
+        /// </summary>
         private void CancelClear()
         {
             IsClearConfirmationOpen = false;
         }
 
+        /// <summary>
+        /// Updates the background colors based on the dark mode setting.
+        /// </summary>
+        /// <param name="isDarkMode">Indicates whether dark mode is active.</param>
         private void UpdateBackground(bool isDarkMode)
         {
             if (isDarkMode)
@@ -619,13 +900,21 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
-        // Function to open the download popup
+        /// <summary>
+        /// Opens the download popup.
+        /// </summary>
         private void OpenDownloadPopup()
         {
             IsDownloadPopupOpen = true;
             OnPropertyChanged(nameof(IsDownloadPopupOpen));
         }
 
+        /// <summary>
+        /// Downloads the selected snapshot item.
+        /// </summary>
+        /// <summary>
+        /// Downloads the selected snapshot item.
+        /// </summary>
         private void DownloadSelectedItem()
         {
             if (SelectedDownloadItem!=null)
@@ -653,6 +942,9 @@ namespace WhiteboardGUI.ViewModel
             OnPropertyChanged(nameof(IsDownloadPopupOpen));
         }
 
+        /// <summary>
+        /// Initializes the download items by fetching snapshots asynchronously.
+        /// </summary>
         private async void InitializeDownloadItems()
         {
             List<SnapShotDownloadItem> newSnaps = await _snapShotService.getSnaps("a",true);
@@ -660,6 +952,9 @@ namespace WhiteboardGUI.ViewModel
             OnPropertyChanged(nameof(DownloadItems));
         }
 
+        /// <summary>
+        /// Refreshes the download items by fetching the latest snapshots asynchronously.
+        /// </summary>
         private async void RefreshDownloadItems()
         {
             
@@ -668,24 +963,39 @@ namespace WhiteboardGUI.ViewModel
             OnPropertyChanged(nameof(DownloadItems));
         }
 
-        //Z-Index
+        /// <summary>
+        /// Sends the specified shape one step backward in the Z-order.
+        /// </summary>
+        /// <param name="shape">The shape to move backward.</param>
         private void SendBackward(IShape shape)
         {
             _moveShapeZIndexing.MoveShapeBackward(shape);
             _renderingService.RenderShape(shape, "INDEX-BACKWARD");
         }
 
+        /// <summary>
+        /// Sends the specified shape to the back of the Z-order.
+        /// </summary>
+        /// <param name="shape">The shape to send to the back.</param>
         private void SendToBack(IShape shape)
         {
             _moveShapeZIndexing.MoveShapeBack(shape);
             _renderingService.RenderShape(shape, "INDEX-BACK");
         }
 
+        /// <summary>
+        /// Updates the selected color based on the RGB components.
+        /// </summary>
         private void UpdateSelectedColor()
         {
             SelectedColor = Color.FromRgb(Red, Green, Blue);
         }
 
+        /// <summary>
+        /// Selects a color based on the provided color name.
+        /// Adjusts the current color if dark mode is active and the selected color is black.
+        /// </summary>
+        /// <param name="colorName">The name of the color to select.</param>
         private void SelectColor(string colorName)
         {
             var color = (Color)ColorConverter.ConvertFromString(colorName);
@@ -700,6 +1010,9 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Performs an undo operation if possible.
+        /// </summary>
         private void CallUndo()
         {
             if (_undoRedoService.UndoList.Count > 0)
@@ -708,6 +1021,9 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Performs a redo operation if possible.
+        /// </summary>
         private void CallRedo()
         {
             if (_undoRedoService.RedoList.Count > 0)
@@ -716,12 +1032,19 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Opens the popup window for submitting a snapshot filename.
+        /// </summary>
         private void OpenPopup()
         {
             SnapShotFileName = "";
             IsPopupOpen = true;
         }
 
+        /// <summary>
+        /// Submits the snapshot filename and uploads the snapshot asynchronously.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task SubmitFileName()
         {
             IsUploading = true;
@@ -744,46 +1067,27 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Clears all shapes from the canvas.
+        /// </summary>
         private void ClearShapes()
         {
             _renderingService.RenderShape(null, "CLEAR");
         }
 
-        // Methods
-        //private async System.Threading.Tasks.Task TriggerHostCheckbox()
-        //{
-        //    if (IsHost == true)
-        //    {
-        //        Debug.WriteLine("ViewModel host start");
-        //        await _networkingService.StartHost();
-        //    }
-        //    else
-        //    {
-        //        _networkingService.StopHost();
-        //    }
-        //}
-
-        //private async System.Threading.Tasks.Task TriggerClientCheckBox(int port)
-        //{
-        //    Debug.WriteLine("IsClient:", IsClient.ToString());
-        //    if (IsClient == false)
-        //    {
-        //        _networkingService.StopClient();
-        //    }
-        //    else
-        //    {
-        //        IsClient = true;
-        //        Debug.WriteLine("ViewModel client start");
-        //        await _networkingService.StartClient(port);
-        //    }
-        //}
-
+        /// <summary>
+        /// Stops the host and updates the hosting state.
+        /// </summary>
         private void StopHost()
         {
             IsHost = false;
             _networkingService.StopHost();
         }
 
+        /// <summary>
+        /// Selects the drawing tool based on the specified shape type.
+        /// </summary>
+        /// <param name="tool">The shape type to select as the current tool.</param>
         private void SelectTool(ShapeType tool)
         {
             CurrentTool = tool;
@@ -791,13 +1095,25 @@ namespace WhiteboardGUI.ViewModel
             //TextInput = string.Empty;
         }
 
+        /// <summary>
+        /// Selects the specified shape.
+        /// </summary>
+        /// <param name="shape">The shape to select.</param>
         private void SelectShape(IShape shape) { }
 
+        /// <summary>
+        /// Deletes the specified shape by rendering a delete action.
+        /// </summary>
+        /// <param name="shape">The shape to delete.</param>
         private void DeleteShape(IShape shape)
         {
             _renderingService.RenderShape(shape, "DELETE");
         }
 
+        
+        /// <summary>
+        /// Deletes the currently selected shape and clears the selection.
+        /// </summary>
         private void DeleteSelectedShape()
         {
             if (SelectedShape != null)
@@ -807,6 +1123,13 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether a given point is over the specified shape.
+        /// Uses simple bounding box hit testing.
+        /// </summary>
+        /// <param name="shape">The shape to test against.</param>
+        /// <param name="point">The point to test.</param>
+        /// <returns>True if the point is over the shape; otherwise, false.</returns>
         public bool IsPointOverShape(IShape shape, Point point)
         {
             // Simple bounding box hit testing
@@ -814,6 +1137,11 @@ namespace WhiteboardGUI.ViewModel
             return bounds.Contains(point);
         }
 
+        /// <summary>
+        /// Edits the text of the specified shape if it is a <see cref="TextShape"/>.
+        /// Activates the textbox for editing.
+        /// </summary>
+        /// <param name="shape">The shape to edit.</param>
         private void EditText(IShape shape)
         {
             if (shape is TextShape textShape)
@@ -844,6 +1172,11 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Handles the left mouse button down event on the canvas.
+        /// Initiates shape drawing, selection, or textbox activation based on the current tool.
+        /// </summary>
+        /// <param name="e">Mouse button event arguments.</param>
         private void OnCanvasLeftMouseDown(MouseButtonEventArgs e)
         {
             // Pass the canvas as the element
@@ -963,6 +1296,12 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Moves the specified shape based on the current mouse position.
+        /// Updates the shape's position properties accordingly.
+        /// </summary>
+        /// <param name="shape">The shape to move.</param>
+        /// <param name="currentPoint">The current mouse position.</param>
         private void MoveShape(IShape shape, Point currentPoint)
         {
             Vector delta = currentPoint - _lastMousePosition;
@@ -1000,6 +1339,11 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Handles the mouse move event on the canvas.
+        /// Updates the shape being drawn or moved based on the current tool and mouse state.
+        /// </summary>
+        /// <param name="e">Mouse event arguments.</param>
         private void OnCanvasMouseMove(MouseEventArgs e)
         {
             //without textbox
@@ -1025,6 +1369,11 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Handles the left mouse button up event on the canvas.
+        /// Finalizes shape drawing or selection based on the current state.
+        /// </summary>
+        /// <param name="e">Mouse button event arguments.</param>
         private void OnCanvasMouseUp(MouseButtonEventArgs e)
         {
             if (_capturedElement != null)
@@ -1049,6 +1398,12 @@ namespace WhiteboardGUI.ViewModel
             _isSelecting = false;
         }
 
+        /// <summary>
+        /// Creates a new shape based on the current tool and starting point.
+        /// Initializes shape properties such as color, thickness, and position.
+        /// </summary>
+        /// <param name="startPoint">The starting point of the shape.</param>
+        /// <returns>A new instance of a shape implementing <see cref="IShape"/>.</returns>
         public IShape CreateShape(Point startPoint)
         {
             IShape shape = null;
@@ -1096,6 +1451,11 @@ namespace WhiteboardGUI.ViewModel
             return shape;
         }
 
+        /// <summary>
+        /// Updates the shape's properties based on the current point.
+        /// </summary>
+        /// <param name="shape">The shape to update.</param>
+        /// <param name="currentPoint">The current position of the mouse.</param>
         private void UpdateShape(IShape shape, Point currentPoint)
         {
             switch (shape)
@@ -1114,6 +1474,12 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Handles the event when a shape is received from the network.
+        /// Adds the shape to the canvas and updates undo history if required.
+        /// </summary>
+        /// <param name="shape">The received shape.</param>
+        /// <param name="addToUndo">Indicates whether to update the undo history.</param>
         private void OnShapeReceived(IShape shape, bool addToUndo)
         {
             Application.Current.Dispatcher.Invoke(() =>
@@ -1129,6 +1495,10 @@ namespace WhiteboardGUI.ViewModel
             });
         }
 
+        /// <summary>
+        /// Locks the specified shape and updates its appearance based on the locking user.
+        /// </summary>
+        /// <param name="shape">The shape to lock.</param>
         private void OnShapeLocked(IShape shape)
         {
             var existingShape = Shapes.FirstOrDefault(s =>
@@ -1152,6 +1522,10 @@ namespace WhiteboardGUI.ViewModel
         
         }
 
+        /// <summary>
+        /// Unlocks the specified shape and updates its appearance.
+        /// </summary>
+        /// <param name="shape">The shape to unlock.</param>
         private void OnShapeUnlocked(IShape shape)
         {
             var existingShape = Shapes.FirstOrDefault(s =>
@@ -1168,7 +1542,10 @@ namespace WhiteboardGUI.ViewModel
         }
 
 
-
+        /// <summary>
+        /// Modifies the properties of an existing shape based on a received shape update.
+        /// </summary>
+        /// <param name="shape">The modified shape.</param>
         private void OnShapeModified(IShape shape)
         {
             Application.Current.Dispatcher.Invoke(() =>
@@ -1261,6 +1638,10 @@ namespace WhiteboardGUI.ViewModel
             });
         }
 
+        /// <summary>
+        /// Deletes the specified shape from the canvas and updates the synchronized shapes.
+        /// </summary>
+        /// <param name="shape">The shape to delete.</param>
         private void OnShapeDeleted(IShape shape)
         {
             Application.Current.Dispatcher.Invoke(() =>
@@ -1277,6 +1658,9 @@ namespace WhiteboardGUI.ViewModel
             });
         }
 
+        /// <summary>
+        /// Clears all shapes from the canvas and resets undo/redo history and synchronized shapes.
+        /// </summary>
         private void OnShapeClear()
         {
             Application.Current.Dispatcher.Invoke(() =>
@@ -1288,6 +1672,9 @@ namespace WhiteboardGUI.ViewModel
             });
         }
 
+        /// <summary>
+        /// Cancels text box input and clears the current text box model.
+        /// </summary>
         public void CancelTextBox()
         {
             TextInput = string.Empty;
@@ -1296,6 +1683,9 @@ namespace WhiteboardGUI.ViewModel
             OnPropertyChanged(nameof(TextBoxVisibility));
         }
 
+        /// <summary>
+        /// Finalizes text box input and updates or creates a text shape accordingly.
+        /// </summary>
         public void FinalizeTextBox()
         {
             if ((_currentTextboxModel != null))
@@ -1342,6 +1732,10 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Notifies listeners of property value changes.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that changed.</param>
         protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
@@ -1359,6 +1753,9 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets details about the currently hovered shape, such as creator and modifier.
+        /// </summary>
         public string HoveredShapeDetails
         {
             get
@@ -1374,6 +1771,9 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether a shape is currently hovered over.
+        /// </summary>
         public bool IsShapeHovered
         {
             get => _isShapeHovered;
@@ -1387,8 +1787,9 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
-        // Dark Mode Property
-
+        /// <summary>
+        /// Gets or sets a value indicating whether dark mode is enabled.
+        /// </summary>
         public bool IsDarkMode
         {
             get => _isDarkMode;
@@ -1425,9 +1826,9 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
-        // Background Properties
-       
-
+        /// <summary>
+        /// Gets or sets the background color for the page.
+        /// </summary>
         public Brush PageBackground
         {
             get => _pageBackground;
@@ -1441,6 +1842,9 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets or sets the background color for the canvas.
+        /// </summary>
         public Brush CanvasBackground
         {
             get => _canvasBackground;

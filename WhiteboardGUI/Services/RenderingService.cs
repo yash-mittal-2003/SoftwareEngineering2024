@@ -1,3 +1,16 @@
+/**************************************************************************************************
+ * Filename    = RenderingService.cs
+ *
+ * Authors     = Likith Anaparty
+ *
+ * Product     = WhiteBoard
+ * 
+ * Project     = Rendering shapes
+ *
+ * Description = Helps in rendering shapes sent over the network on the whiteboard
+ *************************************************************************************************/
+
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,12 +22,39 @@ using WhiteboardGUI.Models;
 
 namespace WhiteboardGUI.Services
 {
+    /// <summary>
+    /// Manages rendering operations for the whiteboard application, including shape creation,
+    /// modification, deletion, and synchronization across clients.
+    /// </summary>
     public class RenderingService
     {
+        /// <summary>
+        /// Service responsible for network communications and shape synchronization.
+        /// </summary>
         NetworkingService _networkingService;
+
+        /// <summary>
+        /// Service that manages undo and redo operations for shape manipulations.
+        /// </summary>
         UndoRedoService _undoRedoService;
+
+        /// <summary>
+        /// Collection of shapes currently present on the whiteboard.
+        /// </summary>
         ObservableCollection<IShape> Shapes;
+
+        /// <summary>
+        /// Unique identifier for the current user.
+        /// </summary>
         double _userId;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RenderingService"/> class.
+        /// </summary>
+        /// <param name="networkingService">The networking service for communication.</param>
+        /// <param name="undoRedoService">The service managing undo and redo operations.</param>
+        /// <param name="shapes">The collection of shapes on the whiteboard.</param>
+        /// <param name="UserID">The unique identifier of the user.</param>
         public RenderingService(NetworkingService networkingService, UndoRedoService undoRedoService, ObservableCollection<IShape> shapes, double UserID)
         {
             _networkingService = networkingService;
@@ -22,6 +62,12 @@ namespace WhiteboardGUI.Services
             Shapes = shapes;
             _userId = UserID;
         }
+
+        /// <summary>
+        /// Updates the synchronized shapes by replacing the existing shape with the new one.
+        /// </summary>
+        /// <param name="shape">The new shape to synchronize.</param>
+        /// <returns>The previous version of the shape, if it existed; otherwise, null.</returns>
         private IShape UpdateSynchronizedShapes(IShape shape)
         {
             var prevShape = _networkingService._synchronizedShapes.Where(s => s.ShapeId == shape.ShapeId && s.UserID == shape.UserID).FirstOrDefault();
@@ -29,6 +75,12 @@ namespace WhiteboardGUI.Services
             _networkingService._synchronizedShapes.Add(shape);
             return prevShape;
         }
+
+        /// <summary>
+        /// Renders the specified shape based on the given command.
+        /// </summary>
+        /// <param name="currentShape">The shape to render or manipulate.</param>
+        /// <param name="command">The command indicating the action to perform (e.g., CREATE, MODIFY, DELETE).</param>
         internal void RenderShape(IShape currentShape, string command)
         {
 

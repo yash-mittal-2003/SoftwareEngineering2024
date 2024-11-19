@@ -1,7 +1,7 @@
 /******************************************************************************
- * Filename    = CircleShape.cs
+ * Filename    = ReceivedDataService.cs
  *
- * Author      = Likith Anaparty
+ * Author      = Likith Anaparty and Vishnu Nair
  *
  * Product     = WhiteBoard
  *

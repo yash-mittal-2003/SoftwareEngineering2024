@@ -1,4 +1,19 @@
-﻿using System;
+﻿/**************************************************************************************************
+ * Filename    : DarkModeColorConverter.cs
+ *
+ * Author      : Rachit Jain and Kshitij Ghodake
+ *
+ * Product     : WhiteBoard
+ * 
+ * Project     : Dark Mode Support
+ *
+ * Description : Implements a multi-value converter that adjusts color values based on dark mode
+ *               settings. This ensures that UI elements maintain appropriate contrast and visibility
+ *               when dark mode is enabled, enhancing the user experience.
+ *************************************************************************************************/
+
+
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows;

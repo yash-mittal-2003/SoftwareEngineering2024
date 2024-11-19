@@ -1,4 +1,18 @@
-﻿using System;
+﻿/**************************************************************************************************
+ * Filename    : HoverAdorner.cs
+ *
+ * Author      : Rachit Jain
+ *
+ * Product     : WhiteBoard
+ * 
+ * Project     : Tooltip Feature for Canvas Shapes
+ *
+ * Description : Implements an adorner that displays a tooltip-like UI element near the mouse pointer,
+ *               showing information about shapes and their creators when the user hovers over them
+ *               on the canvas.
+ *************************************************************************************************/
+
+using System;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;

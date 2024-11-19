@@ -1,24 +1,55 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿/**************************************************************************************************
+ * Filename    = Searialization.cs
+ *
+ * Authors     = Vishnu Nair
+ *
+ * Product     = WhiteBoard Application
+ * 
+ * Project     = Data serialization
+ *
+ * Description = Handles serialization and de-serialization of the shapes
+ *************************************************************************************************/
+
+
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using WhiteboardGUI.Models;
 
 namespace WhiteboardGUI.Services
 {
+    /// <summary>
+    /// Provides methods for serializing and deserializing shapes and snapshots.
+    /// </summary>
     public static class SerializationService
     {
+        
+        /// <summary>
+        /// Serializes an <see cref="IShape"/> object to a JSON string.
+        /// </summary>
+        /// <param name="shape">The shape object to serialize.</param>
+        /// <returns>A JSON string representation of the shape.</returns>
         public static string SerializeShape(IShape shape)
         {
             return JsonConvert.SerializeObject(shape);
         }
 
+        /// <summary>
+        /// Serializes a <see cref="SnapShot"/> object to a JSON string.
+        /// </summary>
+        /// <param name="snapShot">The snapshot object to serialize.</param>
+        /// <returns>A JSON string representation of the snapshot.</returns>
         public static string SerializeSnapShot(SnapShot snapShot)
         {
             return JsonConvert.SerializeObject(snapShot);
         }
 
+
+        /// <summary>
+        /// Deserializes a JSON string into a <see cref="SnapShot"/> object.
+        /// </summary>
+        /// <param name="data">The JSON string to deserialize.</param>
+        /// <returns>A <see cref="SnapShot"/> object represented by the JSON string.</returns>
         public static SnapShot DeserializeSnapShot(String data)
         {
 
@@ -28,6 +59,12 @@ namespace WhiteboardGUI.Services
             });
         }
 
+        /// <summary>
+        /// Deserializes a JSON string into an <see cref="IShape"/> object.
+        /// </summary>
+        /// <param name="data">The JSON string to deserialize.</param>
+        /// <returns>An <see cref="IShape"/> object represented by the JSON string.</returns>
+        /// <exception cref="NotSupportedException">Thrown when the shape type is not supported.</exception>
         public static IShape DeserializeShape(string data)
         {
             var shapeDict = JsonConvert.DeserializeObject<Dictionary<string, object>>(data);
@@ -45,13 +82,22 @@ namespace WhiteboardGUI.Services
         }
 
 
-        // Serialize an ObservableCollection of IShape
+        /// <summary>
+        /// Serializes an <see cref="ObservableCollection{IShape}"/> to a JSON string.
+        /// </summary>
+        /// <param name="shapes">The collection of shapes to serialize.</param>
+        /// <returns>A JSON string representation of the shape collection.</returns>
         public static string SerializeShapes(ObservableCollection<IShape> shapes)
         {
             return JsonConvert.SerializeObject(shapes);
         }
 
-        // Deserialize an ObservableCollection of IShape
+        /// <summary>
+        /// Deserializes a JSON string into an <see cref="ObservableCollection{IShape}"/>.
+        /// </summary>
+        /// <param name="data">The JSON string to deserialize.</param>
+        /// <returns>An <see cref="ObservableCollection{IShape}"/> represented by the JSON string.</returns>
+        /// <exception cref="NotSupportedException">Thrown when a shape type in the JSON is not supported.</exception>
         public static ObservableCollection<IShape> DeserializeShapes(string data)
         {
             var shapeList = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(data);
