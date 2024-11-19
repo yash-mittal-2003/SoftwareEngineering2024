@@ -272,7 +272,7 @@ namespace WhiteboardGUI.Services
         /// Downloads a snapshot and renders its shapes on the whiteboard.
         /// </summary>
         /// <param name="selectedDownloadItem">The snapshot item to be downloaded.</param>
-        internal void DownloadSnapShot(SnapShotDownloadItem selectedDownloadItem)
+        public void DownloadSnapShot(SnapShotDownloadItem selectedDownloadItem)
         {
             // Retrieve the snapshot from local storage
             ObservableCollection<IShape> snapShot = getSnapShot(selectedDownloadItem);

@@ -33,12 +33,9 @@
 
     <Page.Resources>
 
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <conv:BooleanToTextConverter x:Key="BooleanToTextConverter" />
         <conv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
-        <conv:NullToBooleanConverter x:Key="NullToBooleanConverter" />
         <conv:DarkModeColorConverter x:Key="DarkModeColorConverter" />
-        <conv:LockToStrokeConverter x:Key="LockToStrokeConverter" />
 
 
         <!--  Style for the Track Buttons  -->

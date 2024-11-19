@@ -81,7 +81,7 @@ namespace WhiteboardGUI.Services
         /// </summary>
         /// <param name="currentShape">The shape to render or manipulate.</param>
         /// <param name="command">The command indicating the action to perform (e.g., CREATE, MODIFY, DELETE).</param>
-        internal void RenderShape(IShape currentShape, string command)
+        public void RenderShape(IShape currentShape, string command)
         {
 
             if (command == "CREATE")
