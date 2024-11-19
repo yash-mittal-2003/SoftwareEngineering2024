@@ -982,11 +982,15 @@
           "Networking": "1.0.0"
         },
         "runtime": {
-          "Content.dll": {}
+          "Content.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Dashboard/1.0.0": {
         "dependencies": {
+          "FileCloner": "1.0.0",
           "Google.Apis": "1.68.0",
           "Google.Apis.Auth": "1.68.0",
           "LiveCharts.Wpf": "0.9.7",
@@ -998,7 +1002,10 @@
           "Updater": "1.0.0"
         },
         "runtime": {
-          "Dashboard.dll": {}
+          "Dashboard.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "FileCloner/1.0.0": {
@@ -1007,7 +1014,10 @@
           "Networking": "1.0.0"
         },
         "runtime": {
-          "FileCloner.dll": {}
+          "FileCloner.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Networking/1.0.0": {
@@ -1018,7 +1028,10 @@
           "System.ServiceModel.Primitives": "8.0.0"
         },
         "runtime": {
-          "Networking.dll": {}
+          "Networking.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Screenshare/1.0.0": {
@@ -1034,7 +1047,10 @@
           "UKSIVTSOSAT": "1.0.0"
         },
         "runtime": {
-          "Screenshare.dll": {}
+          "Screenshare.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "ToolInterface/1.0.0": {
@@ -1042,7 +1058,10 @@
           "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {
-          "ToolInterface.dll": {}
+          "ToolInterface.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Updater/1.0.0": {
@@ -1051,7 +1070,10 @@
           "ToolInterface": "1.0.0"
         },
         "runtime": {
-          "Updater.dll": {}
+          "Updater.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "ViewModel/1.0.0": {
@@ -1071,7 +1093,10 @@
           "Updater": "1.0.0"
         },
         "runtime": {
-          "ViewModel.dll": {}
+          "ViewModel.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "SECloud/1.0.0.0": {
