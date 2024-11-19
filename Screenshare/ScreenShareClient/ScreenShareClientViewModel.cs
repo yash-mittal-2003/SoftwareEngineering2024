@@ -2,7 +2,6 @@
 // Contains view model for screenshare client.
 
 
-
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -11,9 +10,9 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Screenshare.ScreenShareClient
 {
-     
+
     // ViewModel class for client
-     
+
     public class ScreenshareClientViewModel :
     INotifyPropertyChanged
     {
@@ -28,21 +27,21 @@ namespace Screenshare.ScreenShareClient
 
         private DispatcherOperation? _sharingScreenOp;
 
-         
+
         // Gets the dispatcher to the main thread. In case it is not available (such as during
         // unit testing) the dispatcher associated with the current thread is returned.
-         
+
         private Dispatcher ApplicationMainThreadDispatcher =>
             (System.Windows.Application.Current?.Dispatcher != null) ?
                     System.Windows.Application.Current.Dispatcher :
                     Dispatcher.CurrentDispatcher;
 
-         
+
         // Boolean to store whether the screen is currently being stored or not.
         // When the boolen is changed, we call OnPropertyChanged to refresh the view.
         // We also start/stop the screenshare accordingly when the property is changed.
-         
-        public bool SharingScreen
+
+        virtual public bool SharingScreen
         {
             get => _sharingScreen;
 
@@ -51,7 +50,7 @@ namespace Screenshare.ScreenShareClient
                 // Execute the call on the application's main thread.
                 _sharingScreenOp = this.ApplicationMainThreadDispatcher.BeginInvoke(
                                     DispatcherPriority.Normal,
-                                    new System.Action(() =>
+                                    new Action(() =>
                                     {
                                         lock (this)
                                         {
@@ -72,18 +71,18 @@ namespace Screenshare.ScreenShareClient
         }
 
 
-         
+
         // Constructor for the ScreenshareClientViewModel.
-         
+
         public ScreenshareClientViewModel()
         {
             _model = ScreenshareClient.GetInstance(this);
             _sharingScreen = false;
         }
 
-         
+
         // Handles the property changed event raised on a component.
-         
+
         private void OnPropertyChanged(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));

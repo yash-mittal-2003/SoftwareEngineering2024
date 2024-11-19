@@ -15,10 +15,10 @@ namespace Screenshare.ScreenShareClient
     public partial class ScreenshareClient : INotificationHandler
     {
 
-        
+
         /// Method to stop screensharing. Calling this will stop sending both the image sending
         /// task and confirmation sending task. It will also call stop on the processor and capturer.
-        
+
         public void StopScreensharing()
         {
 
@@ -35,11 +35,11 @@ namespace Screenshare.ScreenShareClient
             Trace.WriteLine(Utils.GetDebugMessage("Successfully sent DEREGISTER packet to server", withTimeStamp: true));
         }
 
-        
+
         /// Method to stop sending confirmation packets. Will be called only when the client
         /// stops screensharing.
-        
-        private void StopConfirmationSending()
+
+        public void StopConfirmationSending()
         {
             if (_sendConfirmationTask == null)
             {
@@ -59,11 +59,11 @@ namespace Screenshare.ScreenShareClient
             _sendConfirmationTask = null;
         }
 
-        
+
         /// Method to stop image sending. Will be called whenever the screenshare is stopped by
         /// the client or the client is not on the displayed screen of the server.
-        
-        private void StopImageSending()
+
+        public void StopImageSending()
         {
             if (_sendImageTask == null)
             {
@@ -90,14 +90,14 @@ namespace Screenshare.ScreenShareClient
             _sendImageTask = null;
         }
 
-        
+
         /// Sends confirmation packet to server once every five seconds. The confirmation packet
         /// does not contain any data. The confirmation packets are always sent once the client
         /// has started screen share. In case the network gets disconnected, these packtes will
         /// stop reaching the server, as a result of which the server will remove the client
         /// as a 'screen sharer'.
-        
-        private void SendConfirmationPacket()
+
+        public void SendConfirmationPacket()
         {
             _confirmationCancellationToken = false;
             Debug.Assert(_id != null, Utils.GetDebugMessage("_id property found null"));
@@ -118,9 +118,9 @@ namespace Screenshare.ScreenShareClient
             _sendConfirmationTask.Start();
         }
 
-        
+
         /// Used by dashboard module to set the id and name for the client
-    
+
         public void SetUser(string id, string name)
         {
             _id = id;

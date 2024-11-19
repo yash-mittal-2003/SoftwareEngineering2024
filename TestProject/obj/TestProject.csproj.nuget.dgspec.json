@@ -1,32 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sagar\\Downloads\\SoftwareEngineering2024-final\\SoftwareEngineering2024-final\\TestProject\\TestProject.csproj": {}
+    "F:\\Final-SE\\SoftwareEngineering2024\\TestProject\\TestProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sagar\\Downloads\\SoftwareEngineering2024-final\\SoftwareEngineering2024-final\\TestProject\\TestProject.csproj": {
+    "F:\\Final-SE\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sagar\\Downloads\\SoftwareEngineering2024-final\\SoftwareEngineering2024-final\\TestProject\\TestProject.csproj",
-        "projectName": "TestProject",
-        "projectPath": "C:\\Users\\sagar\\Downloads\\SoftwareEngineering2024-final\\SoftwareEngineering2024-final\\TestProject\\TestProject.csproj",
-        "packagesPath": "C:\\Users\\sagar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sagar\\Downloads\\SoftwareEngineering2024-final\\SoftwareEngineering2024-final\\TestProject\\obj\\",
+        "projectUniqueName": "F:\\Final-SE\\SoftwareEngineering2024\\Networking\\Networking.csproj",
+        "projectName": "Networking",
+        "projectPath": "F:\\Final-SE\\SoftwareEngineering2024\\Networking\\Networking.csproj",
+        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
+        "outputPath": "F:\\Final-SE\\SoftwareEngineering2024\\Networking\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\sagar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net8.0-windows"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
             "projectReferences": {}
           }
         },
@@ -42,24 +42,30 @@
         }
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
           "dependencies": {
-            "MSTest": {
+            "Google.Protobuf": {
               "target": "Package",
-              "version": "[3.6.1, )"
+              "version": "[3.28.3, )"
             },
-            "Microsoft.NET.Test.Sdk": {
+            "Grpc.AspNetCore": {
               "target": "Package",
-              "version": "[17.11.1, )"
+              "version": "[2.66.0, )"
             },
-            "Microsoft.Testing.Extensions.CodeCoverage": {
+            "Grpc.Net.Client": {
               "target": "Package",
-              "version": "[17.12.6, )"
+              "version": "[2.66.0, )"
             },
-            "Microsoft.Testing.Extensions.TrxReport": {
+            "Grpc.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[1.4.0, )"
+              "version": "[2.67.0, )"
+            },
+            "System.ServiceModel.Primitives": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [
@@ -78,7 +84,194 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\Final-SE\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Final-SE\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj",
+        "projectName": "Screenshare",
+        "projectPath": "F:\\Final-SE\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj",
+        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
+        "outputPath": "F:\\Final-SE\\SoftwareEngineering2024\\Screenshare\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {
+              "F:\\Final-SE\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
+                "projectPath": "F:\\Final-SE\\SoftwareEngineering2024\\Networking\\Networking.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "SharpDX": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "SharpDX.DXGI": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "SharpDX.Direct3D11": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "System.Net.Http": {
+              "target": "Package",
+              "version": "[4.3.4, )"
+            },
+            "System.Text.RegularExpressions": {
+              "target": "Package",
+              "version": "[4.3.1, )"
+            },
+            "System.Windows.Extensions": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "UKSIVTSOSAT": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\Final-SE\\SoftwareEngineering2024\\TestProject\\TestProject.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Final-SE\\SoftwareEngineering2024\\TestProject\\TestProject.csproj",
+        "projectName": "TestProject",
+        "projectPath": "F:\\Final-SE\\SoftwareEngineering2024\\TestProject\\TestProject.csproj",
+        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
+        "outputPath": "F:\\Final-SE\\SoftwareEngineering2024\\TestProject\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {
+              "F:\\Final-SE\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
+                "projectPath": "F:\\Final-SE\\SoftwareEngineering2024\\Networking\\Networking.csproj"
+              },
+              "F:\\Final-SE\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj": {
+                "projectPath": "F:\\Final-SE\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "MSTest": {
+              "target": "Package",
+              "version": "[3.6.1, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.11.1, )"
+            },
+            "Microsoft.Testing.Extensions.CodeCoverage": {
+              "target": "Package",
+              "version": "[17.12.6, )"
+            },
+            "Microsoft.Testing.Extensions.TrxReport": {
+              "target": "Package",
+              "version": "[1.4.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.72, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

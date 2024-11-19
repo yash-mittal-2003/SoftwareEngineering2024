@@ -14,9 +14,9 @@ using System.DirectoryServices.ActiveDirectory;
 using System.Windows.Media;
 namespace Screenshare.ScreenShareClient
 {
-     
+
     // Class contains the necessary functions for taking the screenshot of the current screen.
-     
+
     public class Screenshot
     {
         private static readonly object _lock = new();
@@ -57,9 +57,9 @@ namespace Screenshare.ScreenShareClient
             }
         }
 
-         
+
         // Core function of class for taking the screenshot. Uses SharpDX for faster image capture.
-       
+
         public Bitmap MakeScreenshot(Int32 displayIndex = 0, Int32 adapterIndex = 0, Int32 maxTimeout = 5000)
         {
             InitializeVariables(displayIndex, adapterIndex);
@@ -91,9 +91,9 @@ namespace Screenshare.ScreenShareClient
             return SmallBitmap;
         }
 
-         
+
         // Initializes the members of the class.
-         
+
         private void InitializeVariables(Int32 displayIndex, Int32 adapterIndex, Boolean forcedInitialization = false)
         {
             Boolean displayIndexChanged = MakeScreenshot_LastDisplayIndexValue != displayIndex;
@@ -134,9 +134,9 @@ namespace Screenshare.ScreenShareClient
             }
         }
 
-         
+
         // Disposes the class memebers to avoid memory hogging.
-         
+
         public void DisposeVariables()
         {
             _bitmap?.Dispose();

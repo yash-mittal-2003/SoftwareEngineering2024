@@ -807,10 +807,7 @@
           "Networking": "1.0.0"
         },
         "runtime": {
-          "Content.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "Content.dll": {}
         }
       },
       "Dashboard/1.0.0": {
@@ -826,10 +823,7 @@
           "Updater": "1.0.0"
         },
         "runtime": {
-          "Dashboard.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "Dashboard.dll": {}
         }
       },
       "FileCloner/1.0.0": {
@@ -838,10 +832,7 @@
           "Networking": "1.0.0"
         },
         "runtime": {
-          "FileCloner.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "FileCloner.dll": {}
         }
       },
       "Networking/1.0.0": {
@@ -852,10 +843,7 @@
           "System.ServiceModel.Primitives": "8.0.0"
         },
         "runtime": {
-          "Networking.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "Networking.dll": {}
         }
       },
       "Screenshare/1.0.0": {
@@ -871,10 +859,7 @@
           "UKSIVTSOSAT": "1.0.0"
         },
         "runtime": {
-          "Screenshare.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "Screenshare.dll": {}
         }
       },
       "ToolInterface/1.0.0": {
@@ -882,10 +867,7 @@
           "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {
-          "ToolInterface.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "ToolInterface.dll": {}
         }
       },
       "Updater/1.0.0": {
@@ -894,10 +876,7 @@
           "ToolInterface": "1.0.0"
         },
         "runtime": {
-          "Updater.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "Updater.dll": {}
         }
       },
       "SECloud/1.0.0.0": {

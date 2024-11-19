@@ -12,10 +12,10 @@ using System.Net;
 
 namespace Screenshare.ScreenShareClient
 {
-    
+
     /// Class contains implementation of the ScreenshareClient which will
     /// take the processed images and send it to the server via networking module
-    
+
     public partial class ScreenshareClient : INotificationHandler
     {
 
@@ -44,35 +44,35 @@ namespace Screenshare.ScreenShareClient
         // View model for screenshare client
         private ScreenshareClientViewModel _viewModel;
 
-        
+
         /// Timer object which keeps track of the time the CONFIRMATION packet
         /// was received last from the client to tell that the client is still
         /// presenting the screen.
-        
+
         private readonly System.Timers.Timer? _timer;
 
-        
+
         /// The timeout value in "milliseconds" defining the timeout for the timer in
         /// SharedClientScreen which represents the maximum time to wait for the arrival
         /// of the packet from the client with the CONFIRMATION header.
-        
+
         public static double Timeout { get; } = 200 * 1000;
 
-        
+
         /// Setting up the ScreenCapturer and ScreenProcessor Class
         /// Taking instance of communicator from communicator factory
         /// and subscribing to it.
-        
+
         private ScreenshareClient(bool isDebugging)
         {
             _capturer = new ScreenCapturer();
             _processor = new ScreenProcessor(_capturer);
-            _id = findIp();
+            //_id = findIp();
             if (!isDebugging)
             {
                 _communicator = CommunicationFactory.GetCommunicator(true);
                 _communicator.Subscribe(Utils.ModuleIdentifier, this, true);
-                _communicator.Start("10.128.5.227", "60620");
+                //_communicator.Start("10.128.5.227", "60620");
             }
 
             try
@@ -118,10 +118,10 @@ namespace Screenshare.ScreenShareClient
             Trace.WriteLine(Utils.GetDebugMessage($"Timeout occurred", withTimeStamp: true));
         }
 
-        
+
         /// Gives an instance of ScreenshareClient class and that instance is always 
         /// the same i.e. singleton pattern.
-        
+
         public static ScreenshareClient GetInstance(ScreenshareClientViewModel viewModel = null, bool isDebugging = false)
         {
             if (_screenShareClient == null)
@@ -132,22 +132,22 @@ namespace Screenshare.ScreenShareClient
             Trace.WriteLine(Utils.GetDebugMessage("Successfully created an instance of ScreenshareClient", withTimeStamp: true));
             return _screenShareClient;
         }
-        public void SetUserDetails(string username , string id)
+        public void SetUserDetails(string username, string id)
         {
             _name = username;
             _id = id;
         }
 
-        
+
         /// When client clicks the screensharing button, this function gets executed
         /// It will send a register packet to the server and it will even start sending the
         /// confirmation packets to the sever
-        
+
         public void StartScreensharing()
         {
             // Start the timer.
             _timer.Enabled = true;
-            
+
             Debug.Assert(_id != null, Utils.GetDebugMessage("_id property found null"));
             Debug.Assert(_name != null, Utils.GetDebugMessage("_name property found null"));
 
@@ -162,11 +162,11 @@ namespace Screenshare.ScreenShareClient
 
         }
 
-        
+
         /// This function will be invoked on message from server
         /// If the message is SEND then start capturing, processing and sending functions
         /// Otherwise, if the message was STOP then just stop the image sending part
-        
+
         /// <param name="serializedData"> Serialized data from the network module </param>
         public void OnDataReceived(string serializedData)
         {
@@ -211,9 +211,9 @@ namespace Screenshare.ScreenShareClient
 
 
 
-        
+
         /// Resets the time of the timer object.
-        
+
         public void UpdateTimer()
         {
             Debug.Assert(_timer != null, Utils.GetDebugMessage("_timer is found null"));
@@ -230,11 +230,11 @@ namespace Screenshare.ScreenShareClient
             }
         }
 
-        
+
         /// Image sending function which will take image pixel diffs from processor and 
         /// send it to the server via the networking module. Images are sent only if there
         /// are any changes in pixels as compared to previous image.
-        
+
         private void ImageSending()
         {
 
@@ -262,7 +262,7 @@ namespace Screenshare.ScreenShareClient
                 string serializedData = JsonSerializer.Serialize(dataPacket);
 
                 Trace.WriteLine(Utils.GetDebugMessage($"Sent frame {cnt} of size {serializedData.Length}", withTimeStamp: true));
-                if (dataPacket != null || dataPacket.Data== null || dataPacket.ChangedPixels == null || dataPacket.Data =="")
+                if (dataPacket != null || dataPacket.Data == null || dataPacket.ChangedPixels == null || dataPacket.Data == "")
                 {
                     _communicator.Send(serializedData, Utils.ModuleIdentifier, null);
                     cnt++;
@@ -270,9 +270,9 @@ namespace Screenshare.ScreenShareClient
             }
         }
 
-        
+
         /// Starting the image sending function on a thread.
-        
+
         private void StartImageSending()
         {
             _capturer.StartCapture();

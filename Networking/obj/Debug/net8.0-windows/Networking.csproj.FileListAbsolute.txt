@@ -36,3 +36,16 @@ C:\Users\Asus\OneDrive\Desktop\SoftwareEngineering2024-final\Networking\obj\Debu
 C:\Users\Asus\OneDrive\Desktop\SoftwareEngineering2024-final\Networking\obj\Debug\net8.0-windows\refint\Networking.dll
 C:\Users\Asus\OneDrive\Desktop\SoftwareEngineering2024-final\Networking\obj\Debug\net8.0-windows\Networking.pdb
 C:\Users\Asus\OneDrive\Desktop\SoftwareEngineering2024-final\Networking\obj\Debug\net8.0-windows\ref\Networking.dll
+F:\Final-SE\SoftwareEngineering2024\Networking\bin\Debug\net8.0-windows\Networking.deps.json
+F:\Final-SE\SoftwareEngineering2024\Networking\bin\Debug\net8.0-windows\Networking.dll
+F:\Final-SE\SoftwareEngineering2024\Networking\bin\Debug\net8.0-windows\Networking.pdb
+F:\Final-SE\SoftwareEngineering2024\Networking\obj\Debug\net8.0-windows\Networking.csproj.AssemblyReference.cache
+F:\Final-SE\SoftwareEngineering2024\Networking\obj\Debug\net8.0-windows\Networking.GeneratedMSBuildEditorConfig.editorconfig
+F:\Final-SE\SoftwareEngineering2024\Networking\obj\Debug\net8.0-windows\Networking.AssemblyInfoInputs.cache
+F:\Final-SE\SoftwareEngineering2024\Networking\obj\Debug\net8.0-windows\Networking.AssemblyInfo.cs
+F:\Final-SE\SoftwareEngineering2024\Networking\obj\Debug\net8.0-windows\Networking.csproj.CoreCompileInputs.cache
+F:\Final-SE\SoftwareEngineering2024\Networking\obj\Debug\net8.0-windows\Networking.sourcelink.json
+F:\Final-SE\SoftwareEngineering2024\Networking\obj\Debug\net8.0-windows\Networking.dll
+F:\Final-SE\SoftwareEngineering2024\Networking\obj\Debug\net8.0-windows\refint\Networking.dll
+F:\Final-SE\SoftwareEngineering2024\Networking\obj\Debug\net8.0-windows\Networking.pdb
+F:\Final-SE\SoftwareEngineering2024\Networking\obj\Debug\net8.0-windows\ref\Networking.dll

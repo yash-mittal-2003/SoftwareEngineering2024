@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Screenshare.ScreenShareClient
 {
-     
+
     // Class contains implementation of the screen capturing using threads (tasks)
-     
+
     public class ScreenCapturer
     {
         readonly Queue<Bitmap> _capturedFrame;
@@ -31,9 +31,9 @@ namespace Screenshare.ScreenShareClient
             Trace.WriteLine(Utils.GetDebugMessage("[Screenshare] Successfully created an instance of ScreenCapturer.", withTimeStamp: true));
         }
 
-         
+
         // Returns the bitmap image at the front of _capturedFrame queue. 
-         
+
         public Bitmap? GetImage(ref bool cancellationToken)
         {
             while (true)
@@ -53,20 +53,20 @@ namespace Screenshare.ScreenShareClient
 
             lock (_capturedFrame)
             {
-                if (_capturedFrame.Count  !=0 )
+                if (_capturedFrame.Count != 0)
                 {
                     return _capturedFrame.Dequeue();
                 }
                 else
                 {
-                    return null ;
+                    return null;
                 }
             }
         }
 
-         
+
         // Returns the length of the _capturedFrame queue
-         
+
         public int GetCapturedFrameLength()
         {
             lock (_capturedFrame)
@@ -76,9 +76,9 @@ namespace Screenshare.ScreenShareClient
             }
         }
 
-         
+
         // Creates the task for capturing screenshots and starts capturing
-         
+
         public void StartCapture()
         {
             Trace.WriteLine(Utils.GetDebugMessage($"[Screenshare] Starting Screen Capture.", withTimeStamp: true));
@@ -120,9 +120,9 @@ namespace Screenshare.ScreenShareClient
             Trace.WriteLine(Utils.GetDebugMessage($"[Screenshare] Screen Capture started successfully.", withTimeStamp: true));
         }
 
-         
+
         // Stops the capturing by Cancelling the task and clears the _capturedFrame queue.
-         
+
         public void StopCapture()
         {
             Trace.WriteLine(Utils.GetDebugMessage($"[Screenshare] Stopping Screen Capture.", withTimeStamp: true));

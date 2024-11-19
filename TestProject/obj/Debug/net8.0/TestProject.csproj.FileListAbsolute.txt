@@ -251,3 +251,16 @@ C:\Users\Asus\OneDrive\Desktop\SoftwareEngineering2024-final\TestProject\obj\Deb
 C:\Users\Asus\OneDrive\Desktop\SoftwareEngineering2024-final\TestProject\obj\Debug\net8.0\TestProject.pdb
 C:\Users\Asus\OneDrive\Desktop\SoftwareEngineering2024-final\TestProject\obj\Debug\net8.0\TestProject.genruntimeconfig.cache
 C:\Users\Asus\OneDrive\Desktop\SoftwareEngineering2024-final\TestProject\obj\Debug\net8.0\ref\TestProject.dll
+F:\Final-SE\SoftwareEngineering2024\TestProject\obj\Debug\net8.0\TestProject.csproj.AssemblyReference.cache
+F:\Final-SE\SoftwareEngineering2024\TestProject\obj\Debug\net8.0\TestProject.GeneratedMSBuildEditorConfig.editorconfig
+F:\Final-SE\SoftwareEngineering2024\TestProject\obj\Debug\net8.0\TestProject.AssemblyInfoInputs.cache
+F:\Final-SE\SoftwareEngineering2024\TestProject\obj\Debug\net8.0\TestProject.AssemblyInfo.cs
+F:\Final-SE\SoftwareEngineering2024\TestProject\obj\Debug\net8.0\TestProject.csproj.CoreCompileInputs.cache
+F:\Final-SE\SoftwareEngineering2024\TestProject\obj\Debug\net8.0\TestProject.gentestingplatformentrypointinputcache.cache
+F:\Final-SE\SoftwareEngineering2024\TestProject\obj\Debug\net8.0\TestProject.genautoregisteredextensionsinputcache.cache
+F:\Final-SE\SoftwareEngineering2024\TestProject\obj\Debug\net8.0\AutoRegisteredExtensions.cs
+F:\Final-SE\SoftwareEngineering2024\TestProject\obj\Debug\net8.0\TestPlatformEntryPoint.cs
+F:\Final-SE\SoftwareEngineering2024\TestProject\obj\Debug\net8.0\TestProject.sourcelink.json
+F:\Final-SE\SoftwareEngineering2024\TestProject\obj\Debug\net8.0\TestProject.dll
+F:\Final-SE\SoftwareEngineering2024\TestProject\obj\Debug\net8.0\refint\TestProject.dll
+F:\Final-SE\SoftwareEngineering2024\TestProject\obj\Debug\net8.0\TestProject.pdb

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Screenshare;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -10,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace Screenshare.ScreenShareClient
 {
-    
+
     /// Class contains implementation of the screen processing using threads (tasks)
-    
+
     public class ScreenProcessor
     {
         // The queue in which the image will be enqueued after
@@ -46,10 +47,10 @@ namespace Screenshare.ScreenShareClient
         // Stores whether diff image is being sent for the first time or not
         private int _first_xor = 0;
 
-        
+
         /// Called by ScreenshareClient.
         /// Initializes queue, oldRes, newRes, cancellation token and the previous image.
-        
+
         public ScreenProcessor(ScreenCapturer Capturer)
         {
             _capturer = Capturer;
@@ -59,10 +60,10 @@ namespace Screenshare.ScreenShareClient
             Trace.WriteLine(Utils.GetDebugMessage("Successfully created an instance of ScreenProcessor", withTimeStamp: true));
         }
 
-        
+
         /// Pops and return the image from the queue. If there is no image in the queue then it waits for 
         /// the queue to become not empty
-        
+
         public (string, List<PixelDifference>) GetFrame(ref bool cancellationToken)
         {
             while (true)
@@ -88,14 +89,14 @@ namespace Screenshare.ScreenShareClient
                 }
                 else
                 {
-                    return ("",null);
+                    return ("", null);
                 }
             }
         }
 
-        
+
         /// Returns the length of the processed image queue 
-        
+
         public int GetProcessedFrameLength()
         {
             lock (_processedFrame)
@@ -105,10 +106,10 @@ namespace Screenshare.ScreenShareClient
             }
         }
 
-        
+
         /// In this function we go through every pixel of both the images and
         /// returns a bitmap image which has xor of all the coorosponding pixels
-        
+
         public static unsafe List<PixelDifference>? Process(Bitmap curr, Bitmap prev)
         {
 
@@ -169,10 +170,10 @@ namespace Screenshare.ScreenShareClient
             return changes;
         }
 
-        
+
         /// Main function which will run in loop and capture the image
         /// calculate the image bits differences and append it in the array
-        
+
         private void Processing()
         {
             while (!_cancellationToken)
@@ -203,10 +204,10 @@ namespace Screenshare.ScreenShareClient
             }
         }
 
-        
+
         /// Called by ScreenshareClient when the client starts screen sharing.
         /// Creates a task for the Processing function.
-        
+
         public void StartProcessing()
         {
             // dropping one frame to set the previous image value
@@ -249,11 +250,11 @@ namespace Screenshare.ScreenShareClient
             }
         }
 
-        
+
         /// Called by ScreenshareClient when the client stops screen sharing
         /// kill the processor task and make the processor task variable null
         /// Empty the Queue.
-        
+
         public void StopProcessing()
         {
             Debug.Assert(_processorTask != null, Utils.GetDebugMessage("_processorTask was null, cannot call cancel."));
@@ -274,9 +275,9 @@ namespace Screenshare.ScreenShareClient
             Trace.WriteLine(Utils.GetDebugMessage("Successfully stopped image processing", withTimeStamp: true));
         }
 
-        
+
         /// Setting new resolution for sending the image. 
-        
+
         /// <param name="res"> New resolution values </param>
         public void SetNewResolution(int windowCount)
         {
@@ -296,10 +297,10 @@ namespace Screenshare.ScreenShareClient
                 " variable", withTimeStamp: true));
         }
 
-        
+
         /// Compressing the image byte array data using Deflated stream. It provides
         /// a lossless compression.
-        
+
         /// <param name="data">Image data to be compressed</param>
         /// <returns>Compressed data</returns>
         public static byte[] CompressByteArray(byte[] data)
@@ -312,10 +313,10 @@ namespace Screenshare.ScreenShareClient
             return output.ToArray();
         }
 
-        
+
         /// Called by StartProcessing, if the image resolution has changed then set
         /// the new image resolution
-        
+
         public (string, List<PixelDifference>) Compress(Bitmap img)
         {
             List<PixelDifference>? new_img = null;
@@ -326,8 +327,8 @@ namespace Screenshare.ScreenShareClient
                 // not null then process the image using the previous image
                 if (prevImage != null && _newRes == _currentRes)
                 {
-                   // new_img = Process(img, prevImage);
-                   new_img = null;
+                    // new_img = Process(img, prevImage);
+                    new_img = null;
                 }
                 // else we need to update the current res with the new res and change the resolution
                 // of captured image to the new resolution
@@ -338,7 +339,7 @@ namespace Screenshare.ScreenShareClient
             }
             // compressing image to the current  resolution values
             img = new Bitmap(img, _currentRes.Width, _currentRes.Height);
-           // new_img = null;
+            // new_img = null;
 
             // if no processing happened then send the whole image
             if (new_img == null)
