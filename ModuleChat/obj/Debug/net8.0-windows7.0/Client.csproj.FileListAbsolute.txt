@@ -1,0 +1,223 @@
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.deps.json
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.runtimeconfig.json
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.exe
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.exe
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.deps.json
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.runtimeconfig.json
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.dll
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.pdb
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Networking.dll
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.dll
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Networking.pdb
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.pdb
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.AssemblyReference.cache
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\MainWindow.baml
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\MainWindow.g.cs
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\App.g.cs
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\GeneratedInternalTypeHelper.g.cs
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client_MarkupCompile.cache
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client_MarkupCompile.lref
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\App.baml
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.g.resources
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.AssemblyInfoInputs.cache
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.AssemblyInfo.cs
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.Up2Date
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.dll
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\refint\Client.dll
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.pdb
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.genruntimeconfig.cache
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\ref\Client.dll
+C:\Users\USER\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.AssemblyReference.cache
+C:\Users\USER\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\MainWindow.baml
+C:\Users\USER\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\MainWindow.g.cs
+C:\Users\USER\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\App.g.cs
+C:\Users\USER\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\GeneratedInternalTypeHelper.g.cs
+C:\Users\USER\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client_MarkupCompile.cache
+C:\Users\USER\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client_MarkupCompile.lref
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.deps.json
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.runtimeconfig.json
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.exe
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.exe
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.deps.json
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.runtimeconfig.json
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.dll
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.pdb
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Networking.dll
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.dll
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Networking.pdb
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.pdb
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.AssemblyReference.cache
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\MainWindow.g.cs
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\App.g.cs
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\GeneratedInternalTypeHelper.g.cs
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client_MarkupCompile.cache
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client_MarkupCompile.lref
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\App.baml
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\MainWindow.baml
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.g.resources
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.AssemblyInfoInputs.cache
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.AssemblyInfo.cs
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.Up2Date
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.dll
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\refint\Client.dll
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.pdb
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.genruntimeconfig.cache
+C:\Users\pragn\Downloads\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0-20241104T061558Z-001\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\ref\Client.dll
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.deps.json
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.runtimeconfig.json
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.exe
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.exe
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.deps.json
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.runtimeconfig.json
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.dll
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.pdb
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Networking.dll
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.dll
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Networking.pdb
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.pdb
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.AssemblyReference.cache
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\MainWindow.g.cs
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\App.g.cs
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\GeneratedInternalTypeHelper.g.cs
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client_MarkupCompile.cache
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client_MarkupCompile.lref
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\App.baml
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\MainWindow.baml
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.g.resources
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.AssemblyInfoInputs.cache
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.AssemblyInfo.cs
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.Up2Date
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.dll
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\refint\Client.dll
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.pdb
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.genruntimeconfig.cache
+C:\Users\pragn\Downloads\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\ref\Client.dll
+C:\Users\USER\Downloads\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.exe
+C:\Users\USER\Downloads\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.dll
+C:\Users\USER\Downloads\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Network.dll
+C:\Users\USER\Downloads\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.dll
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.AssemblyReference.cache
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\MainWindow.g.cs
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\App.g.cs
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\GeneratedInternalTypeHelper.g.cs
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client_MarkupCompile.cache
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client_MarkupCompile.lref
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\App.baml
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\MainWindow.baml
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.g.resources
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.AssemblyInfoInputs.cache
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.AssemblyInfo.cs
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\refint\Client.dll
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.pdb
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.deps.json
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.runtimeconfig.json
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.exe
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.exe
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.deps.json
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.runtimeconfig.json
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.dll
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.pdb
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Network.dll
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.dll
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Network.pdb
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.pdb
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.Up2Date
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.dll
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.genruntimeconfig.cache
+C:\Users\Satya\OneDrive\Documents\Coding\chatapp\chatapp\chatapp\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\ref\Client.dll
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.deps.json
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.runtimeconfig.json
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.exe
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.exe
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.deps.json
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.runtimeconfig.json
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.dll
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.pdb
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Network.dll
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.dll
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Network.pdb
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.pdb
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.AssemblyReference.cache
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\MainWindow.g.cs
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\App.g.cs
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\GeneratedInternalTypeHelper.g.cs
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client_MarkupCompile.cache
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client_MarkupCompile.lref
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\App.baml
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\MainWindow.baml
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.g.resources
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.AssemblyInfoInputs.cache
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.AssemblyInfo.cs
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.Up2Date
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.dll
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\refint\Client.dll
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.pdb
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.genruntimeconfig.cache
+C:\Users\pragn\Downloads\ChatApp 4.0 (5)\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\ref\Client.dll
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.deps.json
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.runtimeconfig.json
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.exe
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.exe
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.deps.json
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.runtimeconfig.json
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.dll
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.pdb
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Network.dll
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.dll
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Network.pdb
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Server.pdb
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.AssemblyReference.cache
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\MainWindow.g.cs
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\App.g.cs
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\GeneratedInternalTypeHelper.g.cs
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client_MarkupCompile.cache
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client_MarkupCompile.lref
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\App.baml
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\MainWindow.baml
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.g.resources
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.AssemblyInfoInputs.cache
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.AssemblyInfo.cs
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.Up2Date
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.dll
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\refint\Client.dll
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.pdb
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.genruntimeconfig.cache
+C:\Users\Satya\Videos\New contenttt\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\ref\Client.dll
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.exe
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.deps.json
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.runtimeconfig.json
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.dll
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Client.pdb
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Network.dll
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\bin\Debug\net8.0-windows7.0\Network.pdb
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.AssemblyReference.cache
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\ContentPage.g.cs
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\App.g.cs
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\GeneratedInternalTypeHelper.g.cs
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client_MarkupCompile.cache
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client_MarkupCompile.lref
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\App.baml
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\ContentPage.baml
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.g.resources
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.AssemblyInfoInputs.cache
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.AssemblyInfo.cs
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.csproj.Up2Date
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.dll
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\refint\Client.dll
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.pdb
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\Client.genruntimeconfig.cache
+C:\Users\Gopal Pallakonda\OneDrive\Documents\Software Engineering Integrated\satyInteg\ChatApp 4.0 (4)\ChatApp 4.0\ModuleChat\ModuleChat\obj\Debug\net8.0-windows7.0\ref\Client.dll

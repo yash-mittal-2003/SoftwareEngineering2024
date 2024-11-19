@@ -1,0 +1,69 @@
+{
+  "version": 2,
+  "dgSpecHash": "DxNP1Y29EOc=",
+  "success": false,
+  "projectFilePath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024-final\\Tests\\Tests.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Error",
+      "message": "Failed to download package 'Microsoft.ApplicationInsights.2.22.0' from 'https://api.nuget.org/v3-flatcontainer/microsoft.applicationinsights/2.22.0/microsoft.applicationinsights.2.22.0.nupkg'.\r\nAn error occurred while sending the request.\r\n  The remote name could not be resolved: 'api.nuget.org'"
+    },
+    {
+      "code": "Undefined",
+      "level": "Error",
+      "message": "Failed to download package 'Microsoft.TestPlatform.ObjectModel.17.11.1' from 'https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.objectmodel/17.11.1/microsoft.testplatform.objectmodel.17.11.1.nupkg'.\r\nAn error occurred while sending the request.\r\n  The remote name could not be resolved: 'api.nuget.org'"
+    },
+    {
+      "code": "Undefined",
+      "level": "Error",
+      "message": "Failed to download package 'Microsoft.Testing.Platform.1.4.1' from 'https://api.nuget.org/v3-flatcontainer/microsoft.testing.platform/1.4.1/microsoft.testing.platform.1.4.1.nupkg'.\r\nAn error occurred while sending the request.\r\n  The remote name could not be resolved: 'api.nuget.org'"
+    },
+    {
+      "code": "Undefined",
+      "level": "Error",
+      "message": "Failed to download package 'Microsoft.TestPlatform.TestHost.17.11.1' from 'https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.testhost/17.11.1/microsoft.testplatform.testhost.17.11.1.nupkg'.\r\nAn error occurred while sending the request.\r\n  The remote name could not be resolved: 'api.nuget.org'"
+    },
+    {
+      "code": "Undefined",
+      "level": "Error",
+      "message": "Failed to download package 'Microsoft.Testing.Platform.MSBuild.1.4.1' from 'https://api.nuget.org/v3-flatcontainer/microsoft.testing.platform.msbuild/1.4.1/microsoft.testing.platform.msbuild.1.4.1.nupkg'.\r\nAn error occurred while sending the request.\r\n  The remote name could not be resolved: 'api.nuget.org'"
+    },
+    {
+      "code": "Undefined",
+      "level": "Error",
+      "message": "Failed to download package 'Microsoft.CodeCoverage.17.11.1' from 'https://api.nuget.org/v3-flatcontainer/microsoft.codecoverage/17.11.1/microsoft.codecoverage.17.11.1.nupkg'.\r\nAn error occurred while sending the request.\r\n  The remote name could not be resolved: 'api.nuget.org'"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Failed to retrieve information about 'Microsoft.TestPlatform.ObjectModel' from remote source 'https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.objectmodel/index.json'.\r\n  An error occurred while sending the request.\r\n  The remote name could not be resolved: 'api.nuget.org'",
+      "libraryId": "Microsoft.TestPlatform.ObjectModel"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Failed to retrieve information about 'Microsoft.Testing.Platform' from remote source 'https://api.nuget.org/v3-flatcontainer/microsoft.testing.platform/index.json'.\r\n  An error occurred while sending the request.\r\n  The remote name could not be resolved: 'api.nuget.org'",
+      "libraryId": "Microsoft.Testing.Platform"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Failed to retrieve information about 'Microsoft.ApplicationInsights' from remote source 'https://api.nuget.org/v3-flatcontainer/microsoft.applicationinsights/index.json'.\r\n  An error occurred while sending the request.\r\n  The remote name could not be resolved: 'api.nuget.org'",
+      "libraryId": "Microsoft.ApplicationInsights"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Failed to retrieve information about 'Microsoft.TestPlatform.TestHost' from remote source 'https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.testhost/index.json'.\r\n  An error occurred while sending the request.\r\n  The remote name could not be resolved: 'api.nuget.org'",
+      "libraryId": "Microsoft.TestPlatform.TestHost"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Failed to retrieve information about 'Microsoft.Testing.Platform.MSBuild' from remote source 'https://api.nuget.org/v3-flatcontainer/microsoft.testing.platform.msbuild/index.json'.\r\n  An error occurred while sending the request.\r\n  The remote name could not be resolved: 'api.nuget.org'",
+      "libraryId": "Microsoft.Testing.Platform.MSBuild"
+    }
+  ]
+}

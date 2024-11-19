@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Backround.png" />
+    <None Remove="Resources\DarkBackground.jpg" />
+    <None Remove="Resources\DarkBackground.png" />
+    <None Remove="Resources\send-mail.png" />
+    <None Remove="Resources\time_background.jpg" />
+  </ItemGroup>
+
+	<ProjectReference Include="..\Dashboard\Dashboard.csproj" />
+	<ProjectReference Include="..\Networking\Networking.csproj" />
+	<ItemGroup>
+	  <Resource Include="Resources\Backround.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Resources\DarkBackground.png" />
+	  <Resource Include="Resources\send-mail.png" />
+	  <Resource Include="Resources\time_background.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="BoolToBrushConverter.cs">
+	    <CustomToolNamespace>ModuleChat</CustomToolNamespace>
+	  </Compile>
+	</ItemGroup>
+
+</Project>

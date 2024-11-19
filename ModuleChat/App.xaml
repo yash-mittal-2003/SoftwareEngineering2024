@@ -1,0 +1,14 @@
+﻿<Application x:Class="ModuleChat.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ModuleChat"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <local:EmptyStringToVisibilityConverter x:Key="EmptyStringToVisibilityConverter"/>
+        <local:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+        <local:BoolToBrushConverter x:Key="BoolToBrushConverter"/>
+        <local:BoolToAlignmentConverter x:Key="BoolToAlignmentConverter"/>
+        <local:BoolToForegroundConverter x:Key="BoolToForegroundConverter"/>
+        <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Application.Resources>
+</Application>
