@@ -107,6 +107,10 @@ public class ReceiveQueueListener
 
             Packet packet = _receivingQueue.Dequeue();
 
+            if (packet == null){
+                continue;
+            }
+
             // Identifying the module which the packet belongs to
             string moduleName = packet._moduleOfPacket;
 
