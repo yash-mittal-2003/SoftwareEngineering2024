@@ -24,9 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{692AA595-A997-4907-87AB-4074C9A750E0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EditorConfig", "EditorConfig", "{215B9813-8F05-4E02-B8EB-E8E219F6B951}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\Downloads\editorconfig = ..\..\..\Downloads\editorconfig
-	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestCases", "TestCases\TestCases.csproj", "{868F2CB0-8AB8-48D7-86A0-5ECF83A39CFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,6 +73,10 @@ Global
 		{692AA595-A997-4907-87AB-4074C9A750E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{692AA595-A997-4907-87AB-4074C9A750E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{692AA595-A997-4907-87AB-4074C9A750E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{868F2CB0-8AB8-48D7-86A0-5ECF83A39CFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{868F2CB0-8AB8-48D7-86A0-5ECF83A39CFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{868F2CB0-8AB8-48D7-86A0-5ECF83A39CFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{868F2CB0-8AB8-48D7-86A0-5ECF83A39CFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
