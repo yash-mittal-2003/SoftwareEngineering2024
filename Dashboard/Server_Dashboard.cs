@@ -144,6 +144,8 @@ namespace Dashboard
                 OnPropertyChanged(nameof(ServerUserList));
             }
             Trace.WriteLine("[DashboardServer] started server");
+            WhiteboardGUI.Models.ServerOrClient serverOrClient = WhiteboardGUI.Models.ServerOrClient.ServerOrClientInstance;
+            serverOrClient.SetUserDetails(UserName, "1");
             return serverCredentials;
         }
 
