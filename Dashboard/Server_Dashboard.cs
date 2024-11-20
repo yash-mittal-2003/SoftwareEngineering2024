@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Networking;
 using Networking.Communication;
+using WhiteboardGUI;
 
 namespace Dashboard
 {

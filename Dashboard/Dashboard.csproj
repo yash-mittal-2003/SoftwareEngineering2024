@@ -20,6 +20,7 @@
     <ProjectReference Include="..\Networking\Networking.csproj" />
     <ProjectReference Include="..\Screenshare\Screenshare.csproj" />
     <ProjectReference Include="..\Updater\Updater.csproj" />
+    <ProjectReference Include="..\WhiteboardGUI\WhiteboardGUI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
