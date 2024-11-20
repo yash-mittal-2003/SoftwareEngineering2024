@@ -33,7 +33,6 @@ namespace Content.ChatViewModel
         public MainViewModel()
         {
             _server = new ChatServer();
-            _server.Start();
             _client = new ChatClient();
             _client.LatestAction += SyncClientList;
             _client.MessageReceived += OnMessageReceived;
@@ -230,7 +229,7 @@ namespace Content.ChatViewModel
         /// Clears the input field after sending.
         /// </summary>
 
-        private void SendButton_Click()
+        public void SendButton_Click()
         {
             string message = MessageTextBox_Text;
 
@@ -261,7 +260,7 @@ namespace Content.ChatViewModel
         /// <param name="sender">The sender of the message.</param>
         /// <param name="message">The received message content.</param>
 
-        private void OnMessageReceived(object sender, string message)
+        public void OnMessageReceived(object sender, string message)
         {
             Debug.WriteLine($"Message received: {message}");
             ChatHistory += message + Environment.NewLine;
@@ -322,7 +321,7 @@ namespace Content.ChatViewModel
         /// Sends a message to the server and clears the input field.
         /// </summary>
 
-        private void SendMessage()
+        public void SendMessage()
         {
             _client.SendMessage(Message);
             Message = string.Empty;

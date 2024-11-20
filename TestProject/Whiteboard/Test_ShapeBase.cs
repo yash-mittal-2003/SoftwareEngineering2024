@@ -3,155 +3,154 @@ using System;
 using System.Windows;
 using WhiteboardGUI.Models;
 
-namespace UnitTests
+namespace Whiteboard;
+
+[TestClass]
+public class Test_ShapeBase
 {
-    [TestClass]
-    public class Test_ShapeBase
+    // A derived class for testing purposes
+    public class TestShape : ShapeBase
     {
-        // A derived class for testing purposes
-        public class TestShape : ShapeBase
+        public override string ShapeType => "TestShape";
+        public override Rect GetBounds() => new Rect(0, 0, 100, 100);
+        public override IShape Clone() => new TestShape
         {
-            public override string ShapeType => "TestShape";
-            public override Rect GetBounds() => new Rect(0, 0, 100, 100);
-            public override IShape Clone() => new TestShape
+            ShapeId = this.ShapeId,
+            Color = this.Color,
+            StrokeThickness = this.StrokeThickness,
+            UserID = this.UserID,
+            LastModifierID = this.LastModifierID,
+            ZIndex = this.ZIndex,
+            IsSelected = this.IsSelected
+        };
+    }
+
+    [TestMethod]
+    public void ShapeBase_Constructor_ShouldInitializeDefaultValues()
+    {
+        // Arrange & Act
+        var shape = new TestShape();
+
+        // Assert
+        Assert.AreEqual(Guid.Empty, shape.ShapeId);
+        Assert.AreEqual("#000000", shape.Color);
+        Assert.AreEqual(0, shape.StrokeThickness);
+        Assert.AreEqual(0, shape.UserID);
+        Assert.AreEqual(0, shape.LastModifierID);
+        Assert.AreEqual(0, shape.ZIndex);
+        Assert.AreEqual(false, shape.IsSelected);
+    }
+
+    [TestMethod]
+    public void ShapeBase_PropertyChanged_ShouldNotifyOnValueChange()
+    {
+        // Arrange
+        var shape = new TestShape();
+        bool eventTriggered = false;
+        shape.PropertyChanged += (sender, e) =>
+        {
+            if (e.PropertyName == nameof(shape.Color))
             {
-                ShapeId = this.ShapeId,
-                Color = this.Color,
-                StrokeThickness = this.StrokeThickness,
-                UserID = this.UserID,
-                LastModifierID = this.LastModifierID,
-                ZIndex = this.ZIndex,
-                IsSelected = this.IsSelected
-            };
-        }
+                eventTriggered = true;
+            }
+        };
 
-        [TestMethod]
-        public void ShapeBase_Constructor_ShouldInitializeDefaultValues()
+        // Act
+        shape.Color = "#FF0000";
+
+        // Assert
+        Assert.IsTrue(eventTriggered);
+    }
+
+    [TestMethod]
+    public void ShapeBase_SetZIndex_ShouldTriggerPropertyChanged()
+    {
+        // Arrange
+        var shape = new TestShape();
+        bool eventTriggered = false;
+        shape.PropertyChanged += (sender, e) =>
         {
-            // Arrange & Act
-            var shape = new TestShape();
-
-            // Assert
-            Assert.AreEqual(Guid.Empty, shape.ShapeId);
-            Assert.AreEqual("#000000", shape.Color);
-            Assert.AreEqual(0, shape.StrokeThickness);
-            Assert.AreEqual(0, shape.UserID);
-            Assert.AreEqual(0, shape.LastModifierID);
-            Assert.AreEqual(0, shape.ZIndex);
-            Assert.AreEqual(false, shape.IsSelected);
-        }
-
-        [TestMethod]
-        public void ShapeBase_PropertyChanged_ShouldNotifyOnValueChange()
-        {
-            // Arrange
-            var shape = new TestShape();
-            bool eventTriggered = false;
-            shape.PropertyChanged += (sender, e) =>
+            if (e.PropertyName == nameof(shape.ZIndex))
             {
-                if (e.PropertyName == nameof(shape.Color))
-                {
-                    eventTriggered = true;
-                }
-            };
+                eventTriggered = true;
+            }
+        };
 
-            // Act
-            shape.Color = "#FF0000";
+        // Act
+        shape.ZIndex = 5;
 
-            // Assert
-            Assert.IsTrue(eventTriggered);
-        }
+        // Assert
+        Assert.IsTrue(eventTriggered);
+    }
 
-        [TestMethod]
-        public void ShapeBase_SetZIndex_ShouldTriggerPropertyChanged()
+    [TestMethod]
+    public void ShapeBase_SetIsSelected_ShouldTriggerPropertyChanged()
+    {
+        // Arrange
+        var shape = new TestShape();
+        bool eventTriggered = false;
+        shape.PropertyChanged += (sender, e) =>
         {
-            // Arrange
-            var shape = new TestShape();
-            bool eventTriggered = false;
-            shape.PropertyChanged += (sender, e) =>
+            if (e.PropertyName == nameof(shape.IsSelected))
             {
-                if (e.PropertyName == nameof(shape.ZIndex))
-                {
-                    eventTriggered = true;
-                }
-            };
+                eventTriggered = true;
+            }
+        };
 
-            // Act
-            shape.ZIndex = 5;
+        // Act
+        shape.IsSelected = true;
 
-            // Assert
-            Assert.IsTrue(eventTriggered);
-        }
+        // Assert
+        Assert.IsTrue(eventTriggered);
+    }
 
-        [TestMethod]
-        public void ShapeBase_SetIsSelected_ShouldTriggerPropertyChanged()
+    [TestMethod]
+    public void ShapeBase_Clone_ShouldReturnEqualShape()
+    {
+        // Arrange
+        var originalShape = new TestShape
         {
-            // Arrange
-            var shape = new TestShape();
-            bool eventTriggered = false;
-            shape.PropertyChanged += (sender, e) =>
-            {
-                if (e.PropertyName == nameof(shape.IsSelected))
-                {
-                    eventTriggered = true;
-                }
-            };
+            ShapeId = Guid.NewGuid(),
+            Color = "#00FF00",
+            StrokeThickness = 2,
+            UserID = 1,
+            LastModifierID = 2,
+            ZIndex = 10,
+            IsSelected = true
+        };
 
-            // Act
-            shape.IsSelected = true;
+        // Act
+        var clonedShape = originalShape.Clone();
 
-            // Assert
-            Assert.IsTrue(eventTriggered);
-        }
+        // Assert
+        Assert.AreNotSame(originalShape, clonedShape);
+        Assert.AreEqual(originalShape.ShapeId, clonedShape.ShapeId);
+        Assert.AreEqual(originalShape.Color, clonedShape.Color);
+        Assert.AreEqual(originalShape.StrokeThickness, clonedShape.StrokeThickness);
+        Assert.AreEqual(originalShape.UserID, clonedShape.UserID);
+        Assert.AreEqual(originalShape.LastModifierID, clonedShape.LastModifierID);
+        Assert.AreEqual(originalShape.ZIndex, clonedShape.ZIndex);
+        Assert.AreEqual(originalShape.IsSelected, clonedShape.IsSelected);
+    }
 
-        [TestMethod]
-        public void ShapeBase_Clone_ShouldReturnEqualShape()
+    [TestMethod]
+    public void ShapeBase_SetShapeId_ShouldTriggerPropertyChanged()
+    {
+        // Arrange
+        var shape = new TestShape();
+        bool eventTriggered = false;
+        shape.PropertyChanged += (sender, e) =>
         {
-            // Arrange
-            var originalShape = new TestShape
+            if (e.PropertyName == nameof(shape.ShapeId))
             {
-                ShapeId = Guid.NewGuid(),
-                Color = "#00FF00",
-                StrokeThickness = 2,
-                UserID = 1,
-                LastModifierID = 2,
-                ZIndex = 10,
-                IsSelected = true
-            };
+                eventTriggered = true;
+            }
+        };
 
-            // Act
-            var clonedShape = originalShape.Clone();
+        // Act
+        shape.ShapeId = Guid.NewGuid();
 
-            // Assert
-            Assert.AreNotSame(originalShape, clonedShape);
-            Assert.AreEqual(originalShape.ShapeId, clonedShape.ShapeId);
-            Assert.AreEqual(originalShape.Color, clonedShape.Color);
-            Assert.AreEqual(originalShape.StrokeThickness, clonedShape.StrokeThickness);
-            Assert.AreEqual(originalShape.UserID, clonedShape.UserID);
-            Assert.AreEqual(originalShape.LastModifierID, clonedShape.LastModifierID);
-            Assert.AreEqual(originalShape.ZIndex, clonedShape.ZIndex);
-            Assert.AreEqual(originalShape.IsSelected, clonedShape.IsSelected);
-        }
-
-        [TestMethod]
-        public void ShapeBase_SetShapeId_ShouldTriggerPropertyChanged()
-        {
-            // Arrange
-            var shape = new TestShape();
-            bool eventTriggered = false;
-            shape.PropertyChanged += (sender, e) =>
-            {
-                if (e.PropertyName == nameof(shape.ShapeId))
-                {
-                    eventTriggered = true;
-                }
-            };
-
-            // Act
-            shape.ShapeId = Guid.NewGuid();
-
-            // Assert
-            Assert.IsTrue(eventTriggered);
-        }
+        // Assert
+        Assert.IsTrue(eventTriggered);
     }
 }

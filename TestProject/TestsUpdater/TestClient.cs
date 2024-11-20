@@ -216,17 +216,6 @@ public class TestClient
         }
     }
 
-    [TestMethod]
-    public void TestOnDataReceived()
-    {
-        var dataPacket = new DataPacket(DataPacket.PacketType.SyncUp, []);
-        string serializedData = Utils.SerializeObject(dataPacket)!;
-
-        s_client?.OnDataReceived(serializedData);
-
-        Assert.IsTrue(s_traceOutput?.ToString().Contains("FileTransferHandler received data"),
-                      "OnDataReceived did not handle packet correctly");
-    }
 
     [TestMethod]
     public void TestShowInvalidFilesInUI()

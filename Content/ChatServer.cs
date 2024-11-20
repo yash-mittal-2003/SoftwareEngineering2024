@@ -34,16 +34,6 @@ namespace Content
             _communicator.Subscribe("ChatModule", this, isHighPriority: true);
 
         }
-        public void Start()
-        {
-            _communicator.Subscribe("ChatModule", this, isHighPriority: true);
-
-        }
-
-        public void Stop()
-        {
-            _communicator.Stop();
-        }
 
         /// <summary>
         /// Processes incoming data from clients. Handles message types such as:

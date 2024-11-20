@@ -5,7 +5,7 @@ using System.Windows.Media;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WhiteboardGUI.Converters;
 
-namespace UnitTests
+namespace Whiteboard
 {
     [TestClass]
     public class Test_DarkModeColorConverter

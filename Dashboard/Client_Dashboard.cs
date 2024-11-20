@@ -15,6 +15,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using Screenshare;
 using WhiteboardGUI;
+using Content.ChatViewModel;
 
 namespace Dashboard
 {
@@ -58,6 +59,8 @@ namespace Dashboard
         private readonly Screenshare.ScreenShareClient.ScreenshareClient _screenShareClient = Screenshare.ScreenShareClient.ScreenshareClient.GetInstance();
 
         private readonly Updater.Client _updaterClient = Updater.Client.GetClientInstance();
+
+        MainViewModel _contentInstance = MainViewModel.GetInstance;
         /// <summary>
         /// Initializes a new instance of the Client_Dashboard class.
         /// </summary>
@@ -143,6 +146,7 @@ namespace Dashboard
             WhiteboardGUI.Models.ServerOrClient serverOrClient = WhiteboardGUI.Models.ServerOrClient.ServerOrClientInstance;
             serverOrClient.SetUserDetails(UserName, UserID);
 
+            _contentInstance.SetUserDetails_client(UserName, UserID, UserProfileUrl);
             Trace.WriteLine("[DashboardServer] sent info to whiteboard client");
         }
 
