@@ -97,7 +97,7 @@ public class Server : INotificationHandler
     /// Send SyncUp request to client
     /// </summary>
     /// <param name="clientId">ID of the client</param>
-    private void SyncUp(string clientId)
+    public void SyncUp(string clientId)
     {
         try
         {
