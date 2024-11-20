@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViewModel;
 using Screenshare;
-//using WhiteboardGUI;
+using WhiteboardGUI;
 
 namespace UXModule.Views
 {
@@ -27,7 +27,7 @@ namespace UXModule.Views
     {
         // Static instances for different pages
         private static DashboardPage dashboardPage;
-        private static WhiteboardPage whiteboardPage;
+        private static WhiteboardGUI.Views.MainPage whiteboardPage;
         private static UpdaterPage updaterPage;
         private static FileCloner.Views.MainPage fileClonerPage;
         private static ScreensharePage screensharePage;
@@ -74,8 +74,8 @@ namespace UXModule.Views
         /// </summary>
         private void WhiteboardClick(object sender, RoutedEventArgs e)
         {
-            // whiteboardPage = new WhiteboardPage(); // Create new instance of WhiteboardPage
-            // Main.Content = whiteboardPage; // Set WhiteboardPage as content
+            whiteboardPage = new WhiteboardGUI.Views.MainPage(); // Create new instance of WhiteboardPage
+            Main.Content = whiteboardPage; // Set WhiteboardPage as content
         }
 
         /// <summary>

@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SoftwareEngineering2024\\UXModule\\UXModule.csproj": {}
+    "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\UXModule\\UXModule.csproj": {}
   },
   "projects": {
-    "D:\\SoftwareEngineering2024\\Content\\Content.csproj": {
+    "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Content\\Content.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SoftwareEngineering2024\\Content\\Content.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Content\\Content.csproj",
         "projectName": "Content",
-        "projectPath": "D:\\SoftwareEngineering2024\\Content\\Content.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\SoftwareEngineering2024\\Content\\obj\\",
+        "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Content\\Content.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Content\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,17 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "D:\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj"
-              },
-              "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj"
               }
             }
           }
@@ -45,12 +47,27 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "System.Security.Cryptography.ProtectedData": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "System.Windows.Extensions": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "UKSIVTSOSAT": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -67,21 +84,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj": {
+    "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj",
         "projectName": "Dashboard",
-        "projectPath": "D:\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\SoftwareEngineering2024\\Dashboard\\obj\\",
+        "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Dashboard\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -89,23 +110,24 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "D:\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj"
               },
-              "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj"
               },
-              "D:\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj"
               },
-              "D:\\SoftwareEngineering2024\\Updater\\Updater.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Updater\\Updater.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Updater\\Updater.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Updater\\Updater.csproj"
               }
             }
           }
@@ -118,8 +140,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -166,21 +189,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj": {
+    "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj",
         "projectName": "FileCloner",
-        "projectPath": "D:\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\SoftwareEngineering2024\\FileCloner\\obj\\",
+        "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\FileCloner\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -188,14 +215,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj"
               }
             }
           }
@@ -208,8 +236,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -239,21 +268,25 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
+    "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj",
         "projectName": "Networking",
-        "projectPath": "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\SoftwareEngineering2024\\Networking\\obj\\",
+        "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -261,6 +294,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -277,8 +311,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -323,21 +358,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj": {
+    "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj",
         "projectName": "Screenshare",
-        "projectPath": "D:\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\SoftwareEngineering2024\\Screenshare\\obj\\",
+        "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Screenshare\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -345,14 +384,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj"
               }
             }
           }
@@ -365,8 +405,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -421,21 +462,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SoftwareEngineering2024\\SoftwareEngineering2024-UpdaterNew\\ToolInterface\\ToolInterface.csproj": {
+    "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\SoftwareEngineering2024-UpdaterNew\\ToolInterface\\ToolInterface.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SoftwareEngineering2024\\SoftwareEngineering2024-UpdaterNew\\ToolInterface\\ToolInterface.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\SoftwareEngineering2024-UpdaterNew\\ToolInterface\\ToolInterface.csproj",
         "projectName": "ToolInterface",
-        "projectPath": "D:\\SoftwareEngineering2024\\SoftwareEngineering2024-UpdaterNew\\ToolInterface\\ToolInterface.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\SoftwareEngineering2024\\SoftwareEngineering2024-UpdaterNew\\ToolInterface\\obj\\",
+        "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\SoftwareEngineering2024-UpdaterNew\\ToolInterface\\ToolInterface.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\SoftwareEngineering2024-UpdaterNew\\ToolInterface\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -443,6 +488,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -459,8 +505,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -487,21 +534,91 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SoftwareEngineering2024\\Updater\\Updater.csproj": {
+    "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ToolInterface\\ToolInterface.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SoftwareEngineering2024\\Updater\\Updater.csproj",
-        "projectName": "Updater",
-        "projectPath": "D:\\SoftwareEngineering2024\\Updater\\Updater.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\SoftwareEngineering2024\\Updater\\obj\\",
+        "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ToolInterface\\ToolInterface.csproj",
+        "projectName": "ToolInterface",
+        "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ToolInterface\\ToolInterface.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ToolInterface\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Updater\\Updater.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Updater\\Updater.csproj",
+        "projectName": "Updater",
+        "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Updater\\Updater.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Updater\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -509,17 +626,21 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj"
               },
-              "D:\\SoftwareEngineering2024\\SoftwareEngineering2024-UpdaterNew\\ToolInterface\\ToolInterface.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\SoftwareEngineering2024-UpdaterNew\\ToolInterface\\ToolInterface.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\SoftwareEngineering2024-UpdaterNew\\ToolInterface\\ToolInterface.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\SoftwareEngineering2024-UpdaterNew\\ToolInterface\\ToolInterface.csproj"
+              },
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ToolInterface\\ToolInterface.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ToolInterface\\ToolInterface.csproj"
               }
             }
           }
@@ -532,8 +653,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -554,21 +676,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SoftwareEngineering2024\\UXModule\\UXModule.csproj": {
+    "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\UXModule\\UXModule.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SoftwareEngineering2024\\UXModule\\UXModule.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\UXModule\\UXModule.csproj",
         "projectName": "UXModule",
-        "projectPath": "D:\\SoftwareEngineering2024\\UXModule\\UXModule.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\SoftwareEngineering2024\\UXModule\\obj\\",
+        "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\UXModule\\UXModule.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\UXModule\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -576,32 +702,36 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "D:\\SoftwareEngineering2024\\Content\\Content.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Content\\Content.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Content\\Content.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Content\\Content.csproj"
               },
-              "D:\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj"
               },
-              "D:\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj"
               },
-              "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj"
               },
-              "D:\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj"
               },
-              "D:\\SoftwareEngineering2024\\Updater\\Updater.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Updater\\Updater.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Updater\\Updater.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Updater\\Updater.csproj"
               },
-              "D:\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj"
+              },
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\WhiteboardGUI\\WhiteboardGUI.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\WhiteboardGUI\\WhiteboardGUI.csproj"
               }
             }
           }
@@ -614,8 +744,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -689,21 +820,25 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj": {
+    "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj",
         "projectName": "ViewModel",
-        "projectPath": "D:\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\SoftwareEngineering2024\\ViewModel\\obj\\",
+        "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ViewModel\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -711,26 +846,21 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "D:\\SoftwareEngineering2024\\Content\\Content.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Content\\Content.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj"
               },
-              "D:\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj"
               },
-              "D:\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj"
-              },
-              "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj"
-              },
-              "D:\\SoftwareEngineering2024\\Updater\\Updater.csproj": {
-                "projectPath": "D:\\SoftwareEngineering2024\\Updater\\Updater.csproj"
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Updater\\Updater.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Updater\\Updater.csproj"
               }
             }
           }
@@ -743,8 +873,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -799,7 +930,110 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\WhiteboardGUI\\WhiteboardGUI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\WhiteboardGUI\\WhiteboardGUI.csproj",
+        "projectName": "WhiteboardGUI",
+        "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\WhiteboardGUI\\WhiteboardGUI.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\WhiteboardGUI\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {
+              "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
+                "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "Microsoft.Extensions.Logging.Console": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "Microsoft.Xaml.Behaviors.Wpf": {
+              "target": "Package",
+              "version": "[1.1.135, )"
+            },
+            "MvvmLightLibs": {
+              "target": "Package",
+              "version": "[5.4.1.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

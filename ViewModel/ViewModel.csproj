@@ -18,9 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Content\Content.csproj" />
     <ProjectReference Include="..\Dashboard\Dashboard.csproj" />
-    <ProjectReference Include="..\FileCloner\FileCloner.csproj" />
     <ProjectReference Include="..\Networking\Networking.csproj" />
     <ProjectReference Include="..\Updater\Updater.csproj" />
   </ItemGroup>
@@ -31,12 +29,6 @@
     <Reference Include="SECloud">
       <HintPath>..\SECloud.dll</HintPath>
     </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="ChatViewModel\BoolToBrushConverter.cs">
-      <CustomToolNamespace>ModuleChat</CustomToolNamespace>
-    </Compile>
   </ItemGroup>
 
 </Project>

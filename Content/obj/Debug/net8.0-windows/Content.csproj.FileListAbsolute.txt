@@ -21,85 +21,35 @@ C:\Users\Asus\OneDrive\Desktop\SoftwareEngineering2024-final\Content\obj\Debug\n
 C:\Users\Asus\OneDrive\Desktop\SoftwareEngineering2024-final\Content\obj\Debug\net8.0-windows\refint\Content.dll
 C:\Users\Asus\OneDrive\Desktop\SoftwareEngineering2024-final\Content\obj\Debug\net8.0-windows\Content.pdb
 C:\Users\Asus\OneDrive\Desktop\SoftwareEngineering2024-final\Content\obj\Debug\net8.0-windows\ref\Content.dll
-F:\Final-SE\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Content.deps.json
-F:\Final-SE\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Content.dll
-F:\Final-SE\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Content.pdb
-F:\Final-SE\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Dashboard.dll
-F:\Final-SE\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Networking.dll
-F:\Final-SE\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Screenshare.dll
-F:\Final-SE\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\ToolInterface.dll
-F:\Final-SE\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Updater.dll
-F:\Final-SE\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Dashboard.pdb
-F:\Final-SE\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Networking.pdb
-F:\Final-SE\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Screenshare.pdb
-F:\Final-SE\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\ToolInterface.pdb
-F:\Final-SE\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Updater.pdb
-F:\Final-SE\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.csproj.AssemblyReference.cache
-F:\Final-SE\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.GeneratedMSBuildEditorConfig.editorconfig
-F:\Final-SE\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.AssemblyInfoInputs.cache
-F:\Final-SE\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.AssemblyInfo.cs
-F:\Final-SE\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.csproj.CoreCompileInputs.cache
-F:\Final-SE\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.sourcelink.json
-F:\Final-SE\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.csproj.Up2Date
-F:\Final-SE\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.dll
-F:\Final-SE\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\refint\Content.dll
-F:\Final-SE\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.pdb
-F:\Final-SE\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\ref\Content.dll
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Content.deps.json
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Content.dll
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Content.pdb
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Dashboard.dll
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Networking.dll
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Screenshare.dll
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\ToolInterface.dll
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Updater.dll
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Dashboard.pdb
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Networking.pdb
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Screenshare.pdb
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\ToolInterface.pdb
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Updater.pdb
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.csproj.AssemblyReference.cache
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.GeneratedMSBuildEditorConfig.editorconfig
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.AssemblyInfoInputs.cache
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.AssemblyInfo.cs
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.csproj.CoreCompileInputs.cache
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.sourcelink.json
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.csproj.Up2Date
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.dll
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\refint\Content.dll
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.pdb
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\ref\Content.dll
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\FileCloner.exe
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\FileCloner.deps.json
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\FileCloner.runtimeconfig.json
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\FileCloner.dll
-C:\Mac\Home\Downloads\final\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\FileCloner.pdb
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\FileCloner.deps.json
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\FileCloner.runtimeconfig.json
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\FileCloner.exe
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Content.deps.json
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Content.dll
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Content.pdb
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Dashboard.dll
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\FileCloner.dll
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Networking.dll
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Screenshare.dll
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\ToolInterface.dll
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Updater.dll
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Dashboard.pdb
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Networking.pdb
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\FileCloner.pdb
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Screenshare.pdb
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\ToolInterface.pdb
-D:\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Updater.pdb
-D:\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.csproj.AssemblyReference.cache
-D:\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.GeneratedMSBuildEditorConfig.editorconfig
-D:\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.AssemblyInfoInputs.cache
-D:\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.AssemblyInfo.cs
-D:\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.csproj.CoreCompileInputs.cache
-D:\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.sourcelink.json
-D:\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.csproj.Up2Date
-D:\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.dll
-D:\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\refint\Content.dll
-D:\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.pdb
-D:\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\ref\Content.dll
+C:\Users\Gopal Pallakonda\OneDrive\Documents\SEGIT\Content\bin\Debug\net8.0-windows\Content.deps.json
+C:\Users\Gopal Pallakonda\OneDrive\Documents\SEGIT\Content\bin\Debug\net8.0-windows\Content.dll
+C:\Users\Gopal Pallakonda\OneDrive\Documents\SEGIT\Content\bin\Debug\net8.0-windows\Content.pdb
+C:\Users\Gopal Pallakonda\OneDrive\Documents\SEGIT\Content\bin\Debug\net8.0-windows\Networking.dll
+C:\Users\Gopal Pallakonda\OneDrive\Documents\SEGIT\Content\bin\Debug\net8.0-windows\Networking.pdb
+C:\Users\Gopal Pallakonda\OneDrive\Documents\SEGIT\Content\obj\Debug\net8.0-windows\Content.csproj.AssemblyReference.cache
+C:\Users\Gopal Pallakonda\OneDrive\Documents\SEGIT\Content\obj\Debug\net8.0-windows\Content.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gopal Pallakonda\OneDrive\Documents\SEGIT\Content\obj\Debug\net8.0-windows\Content.AssemblyInfoInputs.cache
+C:\Users\Gopal Pallakonda\OneDrive\Documents\SEGIT\Content\obj\Debug\net8.0-windows\Content.AssemblyInfo.cs
+C:\Users\Gopal Pallakonda\OneDrive\Documents\SEGIT\Content\obj\Debug\net8.0-windows\Content.csproj.CoreCompileInputs.cache
+C:\Users\Gopal Pallakonda\OneDrive\Documents\SEGIT\Content\obj\Debug\net8.0-windows\Content.sourcelink.json
+C:\Users\Gopal Pallakonda\OneDrive\Documents\SEGIT\Content\obj\Debug\net8.0-windows\Content.csproj.Up2Date
+C:\Users\Gopal Pallakonda\OneDrive\Documents\SEGIT\Content\obj\Debug\net8.0-windows\Content.dll
+C:\Users\Gopal Pallakonda\OneDrive\Documents\SEGIT\Content\obj\Debug\net8.0-windows\refint\Content.dll
+C:\Users\Gopal Pallakonda\OneDrive\Documents\SEGIT\Content\obj\Debug\net8.0-windows\Content.pdb
+C:\Users\Gopal Pallakonda\OneDrive\Documents\SEGIT\Content\obj\Debug\net8.0-windows\ref\Content.dll
+C:\Users\Asus\OneDrive\Desktop\SE-Final version\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Content.deps.json
+C:\Users\Asus\OneDrive\Desktop\SE-Final version\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Content.dll
+C:\Users\Asus\OneDrive\Desktop\SE-Final version\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Content.pdb
+C:\Users\Asus\OneDrive\Desktop\SE-Final version\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Networking.dll
+C:\Users\Asus\OneDrive\Desktop\SE-Final version\SoftwareEngineering2024\Content\bin\Debug\net8.0-windows\Networking.pdb
+C:\Users\Asus\OneDrive\Desktop\SE-Final version\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.csproj.AssemblyReference.cache
+C:\Users\Asus\OneDrive\Desktop\SE-Final version\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\OneDrive\Desktop\SE-Final version\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.AssemblyInfoInputs.cache
+C:\Users\Asus\OneDrive\Desktop\SE-Final version\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.AssemblyInfo.cs
+C:\Users\Asus\OneDrive\Desktop\SE-Final version\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.csproj.CoreCompileInputs.cache
+C:\Users\Asus\OneDrive\Desktop\SE-Final version\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.sourcelink.json
+C:\Users\Asus\OneDrive\Desktop\SE-Final version\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.csproj.Up2Date
+C:\Users\Asus\OneDrive\Desktop\SE-Final version\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.dll
+C:\Users\Asus\OneDrive\Desktop\SE-Final version\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\refint\Content.dll
+C:\Users\Asus\OneDrive\Desktop\SE-Final version\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\Content.pdb
+C:\Users\Asus\OneDrive\Desktop\SE-Final version\SoftwareEngineering2024\Content\obj\Debug\net8.0-windows\ref\Content.dll

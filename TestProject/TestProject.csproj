@@ -24,8 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Content\Content.csproj" />
     <ProjectReference Include="..\Networking\Networking.csproj" />
     <ProjectReference Include="..\Screenshare\Screenshare.csproj" />
+    <ProjectReference Include="..\WhiteboardGUI\WhiteboardGUI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

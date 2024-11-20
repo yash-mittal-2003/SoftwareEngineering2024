@@ -16,7 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dashboard\Dashboard.csproj" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="9.0.0" />
+    <PackageReference Include="System.Windows.Extensions" Version="9.0.0" />
+    <PackageReference Include="UKSIVTSOSAT" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Networking\Networking.csproj" />
   </ItemGroup>
 
@@ -39,6 +44,12 @@
     <Resource Include="Resources\time_background.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ChatViewModel\BoolToBrushConverter.cs">
+      <CustomToolNamespace>ModuleChat</CustomToolNamespace>
+    </Compile>
   </ItemGroup>
 
 </Project>

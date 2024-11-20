@@ -1561,20 +1561,6 @@
           "Microsoft.WindowsDesktop.App.WPF"
         ]
       },
-      "Content/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "dependencies": {
-          "Dashboard": "1.0.0",
-          "Networking": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Content.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Content.dll": {}
-        }
-      },
       "Dashboard/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -4958,11 +4944,6 @@
         "uksivtsosat.nuspec"
       ]
     },
-    "Content/1.0.0": {
-      "type": "project",
-      "path": "../Content/Content.csproj",
-      "msbuildProject": "../Content/Content.csproj"
-    },
     "Dashboard/1.0.0": {
       "type": "project",
       "path": "../Dashboard/Dashboard.csproj",
@@ -4996,9 +4977,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
-      "Content >= 1.0.0",
       "Dashboard >= 1.0.0",
-      "FileCloner >= 1.0.0",
       "Google.Apis >= 1.68.0",
       "Google.Apis.Auth >= 1.68.0",
       "LiveCharts.Wpf >= 0.9.7",
@@ -5012,19 +4991,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\hp\\.nuget\\packages\\": {}
+    "C:\\Users\\Asus\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj",
+      "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj",
       "projectName": "ViewModel",
-      "projectPath": "D:\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj",
-      "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "D:\\SoftwareEngineering2024\\ViewModel\\obj\\",
+      "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj",
+      "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ViewModel\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5032,26 +5016,21 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "D:\\SoftwareEngineering2024\\Content\\Content.csproj": {
-              "projectPath": "D:\\SoftwareEngineering2024\\Content\\Content.csproj"
+            "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj": {
+              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj"
             },
-            "D:\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj": {
-              "projectPath": "D:\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj"
+            "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
+              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj"
             },
-            "D:\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj": {
-              "projectPath": "D:\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj"
-            },
-            "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
-              "projectPath": "D:\\SoftwareEngineering2024\\Networking\\Networking.csproj"
-            },
-            "D:\\SoftwareEngineering2024\\Updater\\Updater.csproj": {
-              "projectPath": "D:\\SoftwareEngineering2024\\Updater\\Updater.csproj"
+            "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Updater\\Updater.csproj": {
+              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Updater\\Updater.csproj"
             }
           }
         }
@@ -5064,8 +5043,9 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "direct"
-      }
+        "auditMode": "all"
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0-windows7.0": {
@@ -5120,11 +5100,31 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
   "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.Formats.Asn1' 6.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-447r-wph3-92pm",
+      "libraryId": "System.Formats.Asn1",
+      "targetGraphs": [
+        "net8.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.Security.Cryptography.Pkcs' 6.0.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-555c-2p6r-68mm",
+      "libraryId": "System.Security.Cryptography.Pkcs",
+      "targetGraphs": [
+        "net8.0-windows7.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",

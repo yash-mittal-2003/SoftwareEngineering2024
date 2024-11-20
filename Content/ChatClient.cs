@@ -12,87 +12,113 @@ namespace Content
 {
     public class ChatClient : INotificationHandler
     {
-
         private ICommunicator _communicator = CommunicationFactory.GetCommunicator(true);
 
         public List<string> _clientList = new();
         public event EventHandler<string> MessageReceived;
         public event EventHandler<List<string>> ClientListUpdated;
 
-        public Dictionary<int, string> Client_dict = new();
-        public ObservableCollection<string> ClientListobs = new();
+        public Dictionary<int, string> _client_dict = new();
+        public ObservableCollection<string> _clientListobs = new();
         public event PropertyChangedEventHandler PropertyChanged;
         public event Action LatestAction;
-        public string clientIdCheck;
+        public string _clientIdCheck;
 
         public string Username { get; set; }
-        public string clientId { get; set; }
-
+        public string ClientId { get; set; }
         public string UserProfileUrl { get; set; }
 
-        public void ChatClient_start()
+        /// <summary>
+        /// Initializes a new instance of the ChatClient class, subscribing to the communicator
+        /// with a high-priority subscription for the "ChatModule".
+        /// </summary>
+
+        public ChatClient()
         {
             _communicator.Subscribe("ChatModule", this, isHighPriority: true);
         }
 
-        public void Start()
-        {
+        /// <summary>
+        /// Starts the communicator with the specified server IP and port, then attempts to connect to the chat module. 
+        /// Sends a formatted connect message upon successful connection or invokes a failure event.
+        /// </summary>
+        /// <param name="serverIP">The IP address of the server.</param>
+        /// <param name="serverPort">The port number of the server.</param>
 
+        public void Start(string serverIP, string serverPort)
+        {
+            string result = _communicator.Start(serverIP, serverPort);
+            if (result == "success")
+            {
                 string messageType = "connect";
                 string formattedMessage = $"{messageType}|{messageType}|{Username}|{messageType}|{messageType}";
                 _communicator.Send(formattedMessage, "ChatModule", null);
+            }
+            else
+            {
+                MessageReceived?.Invoke(this, "Failed to connect to the server.");
+            }
         }
+
+        /// <summary>
+        /// Sends a message to the chat server. Supports both public and private messaging, with private messages requiring
+        /// recipient ID adjustment to match server requirements.
+        /// </summary>
+        /// <param name="message">The message content to send.</param>
+        /// <param name="recipientId">Optional recipient ID for private messages. If null, the message is sent publicly.</param>
 
         public void SendMessage(string message, string recipientId = null)
         {
             string messageType = recipientId == null ? "public" : "private";
             if (recipientId != null)
             {
-                int x = Int32.Parse(recipientId);
+                int x = int.Parse(recipientId);
                 x = x - 1;
                 recipientId = x.ToString();
             }
-            string formattedMessage = $"{messageType}|{message}|{Username}|{clientId}|{recipientId}";
+            string formattedMessage = $"{messageType}|{message}|{Username}|{ClientId}|{recipientId}";
 
             _communicator.Send(formattedMessage, "ChatModule", null);
             if (messageType == "private")
             {
-                int x = Int32.Parse(clientIdCheck);
+                int x = int.Parse(_clientIdCheck);
                 x = x - 1;
                 string recipee = x.ToString();
 
-                string formattedMessage2 = $"{messageType}|{message}|{Username}|{clientId}|{recipee}";
+                string formattedMessage2 = $"{messageType}|{message}|{Username}|{ClientId}|{recipee}";
                 _communicator.Send(formattedMessage2, "ChatModule", null);
             }
         }
+
+        /// <summary>
+        /// Handles incoming data from the server. Parses the serialized data and performs actions based on the message type.
+        /// Updates the client list for "clientlist" messages, handles private messages, and broadcasts other messages.
+        /// </summary>
+        /// <param name="serializedData">The data received from the server, in serialized string format.</param>
 
         public void OnDataReceived(string serializedData)
         {
             MessageReceived?.Invoke(this, serializedData);
 
-            var dataParts = serializedData.Split('|');
+            string[] dataParts = serializedData.Split('|');
             if (dataParts[0] == "clientlist")
             {
                 // Update Client dictionary and ObservableCollection for the client list
-                Client_dict = JsonSerializer.Deserialize<Dictionary<int, string>>(dataParts[1]);
+                _client_dict = JsonSerializer.Deserialize<Dictionary<int, string>>(dataParts[1]);
 
-                clientIdCheck = Client_dict.FirstOrDefault(x => x.Value == Username).Key.ToString();
+                _clientIdCheck = _client_dict.FirstOrDefault(x => x.Value == Username).Key.ToString();
 
-                foreach (var kvp in Client_dict)
+                foreach (KeyValuePair<int, string> kvp in _client_dict)
                 {
-                    Console.WriteLine($"Client_dict  {kvp.Value}");
-                    //ClientListobs.Add();
+                    Console.WriteLine($"_client_dict  {kvp.Value}");
                 }
 
-                //Dispatcher.CurrentDispatcher.Invoke(() =>
                 System.Windows.Application.Current.Dispatcher.Invoke(() =>
-
                 {
                     LatestAction?.Invoke();
                 });
 
-                // Notify any listeners that the ClientListobs has been updated
-                OnPropertyChanged(nameof(ClientListobs));
+                OnPropertyChanged(nameof(_clientListobs));
 
             }
             else if (dataParts[1] == "private")
@@ -107,7 +133,15 @@ namespace Content
                 MessageReceived?.Invoke(this, serializedData);
             }
         }
-        protected void OnPropertyChanged(string propertyName) =>
+
+        /// <summary>
+        /// Notifies listeners that a property value has changed, primarily used for the client list.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that changed.</param>
+        /// 
+        protected void OnPropertyChanged(string propertyName)
+        {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

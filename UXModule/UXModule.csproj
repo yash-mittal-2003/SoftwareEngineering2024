@@ -39,6 +39,7 @@
     <ProjectReference Include="..\Screenshare\Screenshare.csproj" />
     <ProjectReference Include="..\Updater\Updater.csproj" />
     <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
+    <ProjectReference Include="..\WhiteboardGUI\WhiteboardGUI.csproj" />
   </ItemGroup>
 
 

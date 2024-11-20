@@ -8,9 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "ViewModel/1.0.0": {
         "dependencies": {
-          "Content": "1.0.0",
           "Dashboard": "1.0.0",
-          "FileCloner": "1.0.0",
           "Google.Apis": "1.68.0",
           "Google.Apis.Auth": "1.68.0",
           "LiveCharts.Wpf": "0.9.7",
@@ -801,15 +799,6 @@
           }
         }
       },
-      "Content/1.0.0": {
-        "dependencies": {
-          "Dashboard": "1.0.0",
-          "Networking": "1.0.0"
-        },
-        "runtime": {
-          "Content.dll": {}
-        }
-      },
       "Dashboard/1.0.0": {
         "dependencies": {
           "FileCloner": "1.0.0",
@@ -824,7 +813,10 @@
           "Updater": "1.0.0"
         },
         "runtime": {
-          "Dashboard.dll": {}
+          "Dashboard.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "FileCloner/1.0.0": {
@@ -833,7 +825,10 @@
           "Networking": "1.0.0"
         },
         "runtime": {
-          "FileCloner.dll": {}
+          "FileCloner.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Networking/1.0.0": {
@@ -844,7 +839,10 @@
           "System.ServiceModel.Primitives": "8.0.0"
         },
         "runtime": {
-          "Networking.dll": {}
+          "Networking.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Screenshare/1.0.0": {
@@ -860,15 +858,10 @@
           "UKSIVTSOSAT": "1.0.0"
         },
         "runtime": {
-          "Screenshare.dll": {}
-        }
-      },
-      "ToolInterface/1.0.0": {
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.3"
-        },
-        "runtime": {
-          "ToolInterface.dll": {}
+          "Screenshare.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Updater/1.0.0": {
@@ -877,12 +870,23 @@
           "ToolInterface": "1.0.0"
         },
         "runtime": {
-          "Updater.dll": {}
+          "Updater.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "SECloud/1.0.0.0": {
         "runtime": {
           "SECloud.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ToolInterface.Reference/1.0.0.0": {
+        "runtime": {
+          "ToolInterface.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -1526,11 +1530,6 @@
       "path": "uksivtsosat/1.0.0",
       "hashPath": "uksivtsosat.1.0.0.nupkg.sha512"
     },
-    "Content/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
     "Dashboard/1.0.0": {
       "type": "project",
       "serviceable": false,
@@ -1551,17 +1550,17 @@
       "serviceable": false,
       "sha512": ""
     },
-    "ToolInterface/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
     "Updater/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
     "SECloud/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ToolInterface.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

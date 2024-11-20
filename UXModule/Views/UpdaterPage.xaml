@@ -6,7 +6,9 @@
       xmlns:local="clr-namespace:UXModule.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="UpdaterPage">
+      Title="UpdaterPage"
+      HorizontalAlignment="Stretch"
+      VerticalAlignment="Stretch">
 
 
 
@@ -62,7 +64,7 @@
     </Page.Resources>
 
     <!-- Main Grid Layout -->
-    <Grid>
+    <Grid  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <!-- Outer Grid with additional rows for spacing -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -75,8 +77,11 @@
         <!-- Available Tools Section -->
         <StackPanel Margin="20 0 20 0" Grid.Row="1">
             <TextBlock Text="Available Tools" FontSize="16" FontWeight="Bold" Foreground="#FBE4D8" Margin="10,20,0,20" />
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#DFB6B2" Grid.Column="1">
-                <ListView x:Name="ToolViewList" ItemsSource="{Binding AvailableToolsList}" Margin="0,0,0,0" BorderThickness="2" BorderBrush="#FBE4D8" Height="190" Background="#DFB6B2" Width="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Background="Transparent" Grid.Column="1">
+                <ListView x:Name="ToolViewList" ItemsSource="{Binding AvailableToolsList}" 
+                  Margin="0,0,0,0" BorderThickness="2" BorderBrush="#FBE4D8" 
+                  Height="190" Background="#DFB6B2" Width="1200"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <ListView.Resources>
                         <!-- Style for Column Header -->
                         <Style TargetType="{x:Type GridViewColumnHeader}">
@@ -86,19 +91,22 @@
                             <Setter Property="FontSize" Value="15"/>
                             <Setter Property="FontFamily" Value="Segoe UI"/>
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                            <!-- Prevent resizing -->
                         </Style>
                     </ListView.Resources>
                     <ListView.View>
-                        <GridView>
-                            <!-- Set Width="Auto" to ensure the columns adjust based on content -->
+                        <GridView AllowsColumnReorder="False">
+                            <!-- Prevent column drag/drop -->
+                            <!-- Adjust the column widths to match the total ListView width -->
                             <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150" />
-                            <GridViewColumn Header="Version" DisplayMemberBinding="{Binding Version}" Width="120" />
+                            <GridViewColumn Header="Version" DisplayMemberBinding="{Binding Version}" Width="100" />
                             <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="200" />
                             <GridViewColumn Header="Deprecated" DisplayMemberBinding="{Binding Deprecated}" Width="100" />
                             <GridViewColumn Header="Created By" DisplayMemberBinding="{Binding CreatedBy}" Width="150" />
                             <GridViewColumn Header="Last Updated/Created" DisplayMemberBinding="{Binding LastUpdated}" Width="150" />
                             <GridViewColumn Header="Last Modified" DisplayMemberBinding="{Binding LastModified}" Width="150" />
-                            <GridViewColumn Header="Creator Email" DisplayMemberBinding="{Binding CreatorEmail}" Width="200"/>
+                            <GridViewColumn Header="Creator Email" DisplayMemberBinding="{Binding CreatorEmail}" Width="200" />
                         </GridView>
                     </ListView.View>
                 </ListView>
