@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Networking\Networking.csproj" />
-    <ProjectReference Include="..\SoftwareEngineering2024-UpdaterNew\ToolInterface\ToolInterface.csproj" />
+    <ProjectReference Include="..\ToolInterface\ToolInterface.csproj" />
 
   </ItemGroup>
 
