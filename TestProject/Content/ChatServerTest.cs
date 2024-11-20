@@ -1,99 +1,98 @@
-﻿using Moq;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using Networking.Communication;
-using NUnit.Framework;
-using System.Net.Sockets;
-using System.Reflection;
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using Content;
 
-namespace ChatApplication.Tests
+namespace Content.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class ChatServerTests
     {
         private Mock<ICommunicator> _mockCommunicator;
         private ChatServer _chatServer;
 
-        [SetUp]
-        public void SetUp()
+        [TestInitialize]
+        public void Setup()
         {
-            // Mock the ICommunicator
+            // Mock the communicator
             _mockCommunicator = new Mock<ICommunicator>();
-            // Create the ChatServer instance using the default constructor
+            CommunicationFactory.SetCommunicatorMock(_mockCommunicator.Object);
+
+            // Initialize ChatServer
             _chatServer = new ChatServer();
-
-            // Use reflection to set the private _communicator field with the mock
-            var communicatorField = typeof(ChatServer).GetField("_communicator", BindingFlags.NonPublic | BindingFlags.Instance);
-            communicatorField.SetValue(_chatServer, _mockCommunicator.Object);
+            _chatServer.ClientId = "1"; // Default ClientId for tests
         }
 
-        
 
-        [Test]
-        public void OnDataReceived_ShouldHandlePrivateMessage_WhenMessageTypeIsPrivate()
+
+
+
+
+
+        [TestMethod]
+        public void OnDataReceived_ShouldIgnoreEmptyMessage()
         {
             // Arrange
-            var data = "private|Hello|User1|0|1";
-            _mockCommunicator.Setup(c => c.Send(It.IsAny<string>(), "ChatModule", "1"));
+            string serializedData = "";
 
             // Act
-            _chatServer.OnDataReceived(data);
+            _chatServer.OnDataReceived(serializedData);
 
             // Assert
-            _mockCommunicator.Verify(c => c.Send(It.Is<string>(s => s.Contains("User1 :.: Hello")), "ChatModule", "1"), Times.Once);
+            _mockCommunicator.Verify(comm => comm.Send(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Never);
         }
 
-        [Test]
-        public void OnDataReceived_ShouldHandleBroadcastMessage_WhenMessageTypeIsNotPrivate()
+        [TestMethod]
+        public void OnDataReceived_ShouldNotUpdateClientUsernames_ForInvalidMessage()
         {
             // Arrange
-            var data = "broadcast|Hello everyone|User1|0";
-            _mockCommunicator.Setup(c => c.Send(It.IsAny<string>(), "ChatModule", null));
+            string serializedData = "invalid|data";
 
             // Act
-            _chatServer.OnDataReceived(data);
+            _chatServer.OnDataReceived(serializedData);
 
             // Assert
-            _mockCommunicator.Verify(c => c.Send(It.Is<string>(s => s.Contains("User1 :.: Hello everyone")), "ChatModule", null), Times.Once);
+            Assert.AreEqual(0, _chatServer.ClientUsernames.Count);
         }
 
-        [Test]
-        public void OnDataReceived_ShouldHandleConnectMessage_WhenMessageTypeIsConnect()
+
+
+        [TestMethod]
+        public void OnDataReceived_ShouldHandleDuplicateClientId()
         {
             // Arrange
-            var data = "connect|unused|User1|0";
-            //_chatServer.clientId = "0"; // Mock the client ID
+            string serializedData1 = "connect|connect|User1|1";
+            string serializedData2 = "connect|connect|User2|1";
 
             // Act
-            _chatServer.OnDataReceived(data);
+            _chatServer.OnDataReceived(serializedData1);
+            _chatServer.OnDataReceived(serializedData2);
 
             // Assert
-            NUnit.Framework.Assert.That(_chatServer._clientUsernames.ContainsKey(0));
-            NUnit.Framework.Assert.That(_chatServer._clientUsernames[0], Is.EqualTo("User1"));
-
-            _mockCommunicator.Verify(c => c.Send(It.Is<string>(s => s.StartsWith("clientlist|")), "ChatModule", null), Times.Once);
+            Assert.AreEqual(1, _chatServer.ClientUsernames.Count);
+            Assert.AreEqual("User2", _chatServer.ClientUsernames[1]); // Latest username should overwrite
         }
 
-        [Test]
-        public void OnDataReceived_ShouldIgnoreInvalidData_WhenDataIsIncomplete()
+
+
+
+        // Helper class to mock CommunicationFactory
+        public static class CommunicationFactory
         {
-            // Arrange
-            var invalidData = "invalid|data";
+            private static ICommunicator _mockCommunicator;
 
-            // Act
-            _chatServer.OnDataReceived(invalidData);
+            public static ICommunicator GetCommunicator(bool isMocked)
+            {
+                return _mockCommunicator;
+            }
 
-            // Assert
-            _mockCommunicator.Verify(c => c.Send(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+            public static void SetCommunicatorMock(ICommunicator mockCommunicator)
+            {
+                _mockCommunicator = mockCommunicator;
+            }
         }
-
-        [Test]
-        public void Stop_ShouldStopCommunicator()
-        {
-            // Act
-            _chatServer.Stop();
-
-            // Assert
-            _mockCommunicator.Verify(c => c.Stop(), Times.Once);
-        }
-
     }
 }

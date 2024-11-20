@@ -16,6 +16,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
     <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.12.6" />
     <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="1.4.0" />
@@ -34,7 +38,7 @@
 
   <ItemGroup>
     <Reference Include="SECloud">
-      <HintPath>..\..\..\SoftwareEngineering2024-final\SECloud.dll</HintPath>
+      <HintPath>..\SECloud.dll</HintPath>
     </Reference>
   </ItemGroup>
 

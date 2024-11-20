@@ -9,7 +9,7 @@ using WhiteboardGUI.Models;
 using WhiteboardGUI.Services;
 
 
-namespace UnitTests
+namespace Whiteboard
 {
     [TestClass]
     public class MoveShapeZIndexingTests

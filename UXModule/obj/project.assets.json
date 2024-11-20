@@ -3329,6 +3329,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "Content": "1.0.0",
           "FileCloner": "1.0.0",
           "Google.Apis": "1.68.0",
           "Google.Apis.Auth": "1.68.0",
@@ -3338,7 +3339,8 @@
           "Screenshare": "1.0.0",
           "SharpDX.Direct3D11": "4.2.0",
           "System.Drawing.Common": "9.0.0",
-          "Updater": "1.0.0"
+          "Updater": "1.0.0",
+          "WhiteboardGUI": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Dashboard.dll": {}
@@ -3404,9 +3406,6 @@
       "ToolInterface/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.3"
-        },
         "compile": {
           "bin/placeholder/ToolInterface.dll": {}
         },
@@ -9954,8 +9953,8 @@
     },
     "ToolInterface/1.0.0": {
       "type": "project",
-      "path": "../SoftwareEngineering2024-UpdaterNew/ToolInterface/ToolInterface.csproj",
-      "msbuildProject": "../SoftwareEngineering2024-UpdaterNew/ToolInterface/ToolInterface.csproj"
+      "path": "../ToolInterface/ToolInterface.csproj",
+      "msbuildProject": "../ToolInterface/ToolInterface.csproj"
     },
     "Updater/1.0.0": {
       "type": "project",
@@ -10004,11 +10003,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\UXModule\\UXModule.csproj",
+      "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\UXModule\\UXModule.csproj",
       "projectName": "UXModule",
-      "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\UXModule\\UXModule.csproj",
+      "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\UXModule\\UXModule.csproj",
       "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\UXModule\\obj\\",
+      "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\UXModule\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -10030,29 +10029,29 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Content\\Content.csproj": {
-              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Content\\Content.csproj"
+            "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\Content\\Content.csproj": {
+              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\Content\\Content.csproj"
             },
-            "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj": {
-              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj"
+            "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj": {
+              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\Dashboard\\Dashboard.csproj"
             },
-            "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj": {
-              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj"
+            "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj": {
+              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\FileCloner\\FileCloner.csproj"
             },
-            "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
-              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Networking\\Networking.csproj"
+            "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
+              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\Networking\\Networking.csproj"
             },
-            "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj": {
-              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj"
+            "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj": {
+              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\Screenshare\\Screenshare.csproj"
             },
-            "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Updater\\Updater.csproj": {
-              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\Updater\\Updater.csproj"
+            "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\Updater\\Updater.csproj": {
+              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\Updater\\Updater.csproj"
             },
-            "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj": {
-              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj"
+            "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj": {
+              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\ViewModel\\ViewModel.csproj"
             },
-            "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\WhiteboardGUI\\WhiteboardGUI.csproj": {
-              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\WhiteboardGUI\\WhiteboardGUI.csproj"
+            "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\WhiteboardGUI\\WhiteboardGUI.csproj": {
+              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\WhiteboardGUI\\WhiteboardGUI.csproj"
             }
           }
         }

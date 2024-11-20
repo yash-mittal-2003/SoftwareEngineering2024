@@ -1922,6 +1922,7 @@
       },
       "Dashboard/1.0.0": {
         "dependencies": {
+          "Content": "1.0.0",
           "FileCloner": "1.0.0",
           "Google.Apis": "1.68.0",
           "Google.Apis.Auth": "1.68.0",
@@ -1931,7 +1932,8 @@
           "Screenshare": "1.0.0",
           "SharpDX.Direct3D11": "4.2.0",
           "System.Drawing.Common": "9.0.0",
-          "Updater": "1.0.0"
+          "Updater": "1.0.0",
+          "WhiteboardGUI": "1.0.0"
         },
         "runtime": {
           "Dashboard.dll": {
@@ -1980,6 +1982,14 @@
         },
         "runtime": {
           "Screenshare.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ToolInterface/1.0.0": {
+        "runtime": {
+          "ToolInterface.dll": {
             "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -2039,14 +2049,6 @@
       "SECloud/1.0.0.0": {
         "runtime": {
           "SECloud.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "ToolInterface.Reference/1.0.0.0": {
-        "runtime": {
-          "ToolInterface.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -3282,6 +3284,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "ToolInterface/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Updater/1.0.0": {
       "type": "project",
       "serviceable": false,
@@ -3298,11 +3305,6 @@
       "sha512": ""
     },
     "SECloud/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "ToolInterface.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

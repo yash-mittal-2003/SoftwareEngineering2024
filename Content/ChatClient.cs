@@ -45,19 +45,11 @@ namespace Content
         /// <param name="serverIP">The IP address of the server.</param>
         /// <param name="serverPort">The port number of the server.</param>
 
-        public void Start(string serverIP, string serverPort)
+        public void Start()
         {
-            string result = _communicator.Start(serverIP, serverPort);
-            if (result == "success")
-            {
-                string messageType = "connect";
-                string formattedMessage = $"{messageType}|{messageType}|{Username}|{messageType}|{messageType}";
-                _communicator.Send(formattedMessage, "ChatModule", null);
-            }
-            else
-            {
-                MessageReceived?.Invoke(this, "Failed to connect to the server.");
-            }
+            string messageType = "connect";
+            string formattedMessage = $"{messageType}|{messageType}|{Username}|{messageType}|{messageType}";
+            _communicator.Send(formattedMessage, "ChatModule", null);
         }
 
         /// <summary>

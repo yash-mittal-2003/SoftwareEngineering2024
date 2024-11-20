@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Windows;
 using WhiteboardGUI.Models;
 
-namespace UnitTests
+namespace Whiteboard
 {
     [TestClass]
     public class ScribbleShapeTests

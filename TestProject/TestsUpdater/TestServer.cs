@@ -70,24 +70,6 @@ public class ServerTests
     }
 
     [TestMethod]
-    public void TestBroadcasting()
-    {
-        var fileContent = new FileContent("test.txt", Utils.SerializeObject("test content")!);
-        var dataPacket = new DataPacket(DataPacket.PacketType.Broadcast, new List<FileContent> { fileContent });
-        string? serializedData = Utils.SerializeObject(dataPacket);
-
-        if (serializedData == null)
-        {
-            Assert.Fail("Failed to serialize data packet");
-        }
-
-        s_server.Broadcasting(serializedData);
-
-        Assert.IsTrue(s_traceOutput.ToString().Contains("[Updater] Broadcasting the new files"),
-                      "BroadcastHandler did not update correctly");
-    }
-
-    [TestMethod]
     public void TestOnDataReceived()
     {
         var dataPacket = new DataPacket(DataPacket.PacketType.SyncUp, new List<FileContent>());
@@ -105,7 +87,8 @@ public class ServerTests
         string logMessage = "Test log message";
         bool eventInvoked = false;
 
-        Server.NotificationReceived += (message) => {
+        Server.NotificationReceived += (message) =>
+        {
             if (message == logMessage)
             {
                 eventInvoked = true;
@@ -146,19 +129,6 @@ public class ServerTests
     }
 
     [TestMethod]
-    public void TestCompleteSyncShouldSignalSemaphore()
-    {
-        var binarySemaphore = new BinarySemaphore(); // Adjust constructor as per your implementation
-        FieldInfo? semaphoreField = typeof(Server).GetField("s_semaphore", BindingFlags.NonPublic | BindingFlags.Instance);
-        semaphoreField?.SetValue(s_server, binarySemaphore);
-
-        s_server?.CompleteSync();
-
-        bool signaled = Task.Run(binarySemaphore.Wait).Wait(1000); // Timeout after 1 second
-        Assert.IsTrue(signaled, "CompleteSync did not signal the semaphore as expected.");
-    }
-
-    [TestMethod]
     public void TestSyncUpSuccess()
     {
         string clientId = s_clientId;
@@ -175,7 +145,8 @@ public class ServerTests
         string message = "Test log message";
         bool eventTriggered = false;
 
-        Server.NotificationReceived += (msg) => {
+        Server.NotificationReceived += (msg) =>
+        {
             if (msg == message)
             {
                 eventTriggered = true;

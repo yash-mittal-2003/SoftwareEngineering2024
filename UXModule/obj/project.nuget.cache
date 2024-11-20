@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Dp0oYRdJBN4=",
+  "dgSpecHash": "x/AgqKI7Px4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE-Final version\\SoftwareEngineering2024\\UXModule\\UXModule.csproj",
+  "projectFilePath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SoftwareEngineering2024\\UXModule\\UXModule.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Asus\\.nuget\\packages\\commonservicelocator\\2.0.2\\commonservicelocator.2.0.2.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\google.apis\\1.68.0\\google.apis.1.68.0.nupkg.sha512",

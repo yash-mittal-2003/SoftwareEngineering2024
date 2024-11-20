@@ -2,7 +2,7 @@
 using System;
 using WhiteboardGUI.Models;
 
-namespace UnitTests
+namespace Whiteboard
 {
     [TestClass]
     public class LineShapeTests

@@ -3,7 +3,7 @@ using System;
 using System.Windows.Input;
 using WhiteboardGUI.ViewModel;
 
-namespace UnitTests
+namespace Whiteboard
 {
     [TestClass]
     public class RelayCommandTests

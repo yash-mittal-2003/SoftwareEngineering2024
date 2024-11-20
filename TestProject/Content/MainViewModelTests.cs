@@ -1,89 +1,154 @@
-﻿using Moq;
-using Xunit;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.ComponentModel;
-using System;
-using ModuleChat;
+using Content.ChatViewModel;
+using Content;
 
-namespace ChatApplication.Tests
+namespace MainViewModelTests
 {
+    [TestClass]
     public class MainViewModelTests
     {
-        // Mocking ChatClient dependency
-        private readonly Mock<ChatClient> _mockChatClient;
-        private readonly MainViewModel _viewModel;
 
-        public MainViewModelTests()
-        {
-            _mockChatClient = new Mock<ChatClient>();
-            _viewModel = new MainViewModel();
-        }
 
-        [Fact]
-        public void Constructor_InitializesCorrectly()
-        {
-            Xunit.Assert.NotNull(_viewModel.Messages);
-            Xunit.Assert.NotNull(_viewModel.Clientte);
-        }
-
-        
-        [Fact]
-        public void BackToOriginalMessages_RestoresOriginalContent()
+        [TestMethod]
+        public void ChatHistory_PropertyChangedEventTriggered()
         {
             // Arrange
-            var message = new ChatMessage("TestUser", "Hello World", DateTime.Now.ToString("HH:mm"), true);
-            message.HighlightedText = "Hello";
-            _viewModel.Messages.Add(message);
+            var viewModel = new MainViewModel();
+            bool eventTriggered = false;
+            viewModel.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == nameof(viewModel.ChatHistory))
+                {
+                    eventTriggered = true;
+                }
+            };
 
             // Act
-            _viewModel.BackToOriginalMessages();
-
-            // Xunit.Assert
-            Xunit.Assert.Equal("Hello World", message.Content);
-            Xunit.Assert.Empty(message.HighlightedText);
-        }
-
-        [Fact]
-        public void DeleteMessage_MessageIsDeleted_UpdatesMessageContent()
-        {
-            // Arrange
-            var message = new ChatMessage("TestUser", "Hello World", DateTime.Now.ToString("HH:mm"), true);
-            _viewModel.Messages.Add(message);
-
-            // Act
-            _viewModel.DeleteMessage(message);
-
-            // Xunit.Assert
-            Xunit.Assert.Equal("[Message deleted]", message.Content);
-            Xunit.Assert.True(message.IsDeleted);
-        }
-
-        [Fact]
-        public void SendButton_Click_SendsMessage()
-        {
-            // Arrange
-            _viewModel.MessageTextBox_Text = "Test message";
-            _viewModel.Recipientt = "Everyone";
-
-            // Act
-            _viewModel.SendMessageCommand.Execute(null);
+            viewModel.ChatHistory = "New chat history";
 
             // Assert
-            Xunit.Assert.Equal("  Type something...", _viewModel.MessageTextBox_Text);
+            Assert.IsTrue(eventTriggered);
+            Assert.AreEqual("New chat history", viewModel.ChatHistory);
         }
 
-        [Fact]
-        public void SearchMessages_HandlesEmptyQuery_Gracefully()
+        [TestMethod]
+        public void Message_PropertyChangedEventTriggered()
         {
             // Arrange
-            _viewModel.Messages.Add(new ChatMessage("User1", "Hello World", DateTime.Now.ToString("HH:mm"), true));
+            var viewModel = new MainViewModel();
+            bool eventTriggered = false;
+            viewModel.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == nameof(viewModel.Message))
+                {
+                    eventTriggered = true;
+                }
+            };
 
             // Act
-            _viewModel.SearchMessages(string.Empty);
+            viewModel.Message = "New message";
 
             // Assert
-            Xunit.Assert.Empty(_viewModel.SearchResults);
+            Assert.IsTrue(eventTriggered);
+            Assert.AreEqual("New message", viewModel.Message);
         }
+
+        [TestMethod]
+        public void IsNotFoundPopupOpen_PropertyChangedEventTriggered()
+        {
+            // Arrange
+            var viewModel = new MainViewModel();
+            bool eventTriggered = false;
+            viewModel.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == nameof(viewModel.IsNotFoundPopupOpen))
+                {
+                    eventTriggered = true;
+                }
+            };
+
+            // Act
+            viewModel.IsNotFoundPopupOpen = true;
+
+            // Assert
+            Assert.IsTrue(eventTriggered);
+            Assert.IsTrue(viewModel.IsNotFoundPopupOpen);
+        }
+
+        [TestMethod]
+        public void DeleteMessage_MarksMessageAsDeleted()
+        {
+            // Arrange
+            var viewModel = new MainViewModel();
+            var message = new ChatMessage("User1", "Original message", "10:00 AM", true);
+
+            // Act
+            viewModel.DeleteMessage(message);
+
+            // Assert
+            Assert.IsTrue(message.IsDeleted);
+            Assert.AreEqual("[Message deleted]", message.Content);
+            Assert.AreEqual("[Message deleted]", message.Text);
+        }
+
+        [TestMethod]
+        public void SearchMessages_FindsMatchingMessages()
+        {
+            // Arrange
+            var viewModel = new MainViewModel();
+            viewModel.Messages.Add(new ChatMessage("User1", "Hello World", "10:00 AM", true));
+            viewModel.Messages.Add(new ChatMessage("User2", "Hello Universe", "10:01 AM", false));
+
+            // Act
+            viewModel.SearchMessages("Hello");
+
+            // Assert
+            Assert.AreEqual(2, viewModel.SearchResults.Count);
+        }
+
+        [TestMethod]
+        public void SearchMessages_HighlightsMatchingText()
+        {
+            // Arrange
+            var viewModel = new MainViewModel();
+            var message = new ChatMessage("User1", "Hello World", "10:00 AM", true);
+            viewModel.Messages.Add(message);
+
+            // Act
+            viewModel.SearchMessages("World");
+
+            // Assert
+            var result = viewModel.SearchResults.First();
+            Assert.AreEqual("Hello ", result.Content);
+            Assert.AreEqual("World", result.HighlightedText);
+            Assert.AreEqual("", result.HighlightedAfterText);
+        }
+
+        [TestMethod]
+        public void BackToOriginalMessages_RestoresOriginalMessages()
+        {
+            // Arrange
+            var viewModel = new MainViewModel();
+            var message = new ChatMessage("User1", "Hello World", "10:00 AM", true);
+            viewModel.Messages.Add(message);
+            viewModel.SearchMessages("World");
+
+            // Act
+            viewModel.BackToOriginalMessages();
+
+            // Assert
+            Assert.AreEqual("Hello World", message.Content);
+            Assert.AreEqual("", message.HighlightedText);
+            Assert.AreEqual("", message.HighlightedAfterText);
+        }
+
+
+
+
+
+
     }
 }
+//MainViewmodelTests
