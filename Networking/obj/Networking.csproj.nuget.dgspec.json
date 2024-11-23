@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Asus\\OneDrive\\Desktop\\SE\\SoftwareEngineering2024\\Networking\\Networking.csproj": {}
+    "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\Networking\\Networking.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Asus\\OneDrive\\Desktop\\SE\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
+    "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE\\SoftwareEngineering2024\\Networking\\Networking.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\Networking\\Networking.csproj",
         "projectName": "Networking",
-        "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE\\SoftwareEngineering2024\\Networking\\Networking.csproj",
+        "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\Networking\\Networking.csproj",
         "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\SE\\SoftwareEngineering2024\\Networking\\obj\\",
+        "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\Networking\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

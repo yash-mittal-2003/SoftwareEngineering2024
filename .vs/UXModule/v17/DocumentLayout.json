@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\SoftwareEngineering2024\\",
+  "WorkspaceRootPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4CEC5659-2D01-4F4E-BDA6-7957E27A099B}|UXModule\\UXModule.csproj|d:\\softwareengineering2024\\uxmodule\\views\\screenshareserver.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{4CEC5659-2D01-4F4E-BDA6-7957E27A099B}|UXModule\\UXModule.csproj|c:\\users\\asus\\onedrive\\desktop\\dryrun\\softwareengineering2024\\uxmodule\\views\\screenshareserver.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{4CEC5659-2D01-4F4E-BDA6-7957E27A099B}|UXModule\\UXModule.csproj|solutionrelative:uxmodule\\views\\screenshareserver.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4CEC5659-2D01-4F4E-BDA6-7957E27A099B}|UXModule\\UXModule.csproj|d:\\softwareengineering2024\\uxmodule\\views\\screenshareclient.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{4CEC5659-2D01-4F4E-BDA6-7957E27A099B}|UXModule\\UXModule.csproj|c:\\users\\asus\\onedrive\\desktop\\dryrun\\softwareengineering2024\\uxmodule\\views\\screenshareclient.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{4CEC5659-2D01-4F4E-BDA6-7957E27A099B}|UXModule\\UXModule.csproj|solutionrelative:uxmodule\\views\\screenshareclient.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
@@ -18,19 +18,27 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{131369f2-062d-44a2-8671-91ff31efb4f4}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ScreenShareServer.xaml",
-              "DocumentMoniker": "D:\\SoftwareEngineering2024\\UXModule\\Views\\ScreenShareServer.xaml",
+              "DocumentMoniker": "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\UXModule\\Views\\ScreenShareServer.xaml",
               "RelativeDocumentMoniker": "UXModule\\Views\\ScreenShareServer.xaml",
-              "ToolTip": "D:\\SoftwareEngineering2024\\UXModule\\Views\\ScreenShareServer.xaml",
+              "ToolTip": "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\UXModule\\Views\\ScreenShareServer.xaml",
               "RelativeToolTip": "UXModule\\Views\\ScreenShareServer.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-11-19T14:13:11.113Z",
@@ -40,13 +48,12 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "ScreenShareClient.xaml",
-              "DocumentMoniker": "D:\\SoftwareEngineering2024\\UXModule\\Views\\ScreenShareClient.xaml",
+              "DocumentMoniker": "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\UXModule\\Views\\ScreenShareClient.xaml",
               "RelativeDocumentMoniker": "UXModule\\Views\\ScreenShareClient.xaml",
-              "ToolTip": "D:\\SoftwareEngineering2024\\UXModule\\Views\\ScreenShareClient.xaml",
+              "ToolTip": "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\UXModule\\Views\\ScreenShareClient.xaml",
               "RelativeToolTip": "UXModule\\Views\\ScreenShareClient.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-19T14:12:40.505Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-19T14:12:40.505Z"
             }
           ]
         }
