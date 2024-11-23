@@ -39,7 +39,7 @@ namespace UXModule.Views
             bool response = _viewModel.ClientLeaveSession();
             if (response)
             {
-                this.NavigationService.Navigate(new LoginPage(_viewModel));
+                this.NavigationService.Navigate(new HomePage(_viewModel));
             }
         }
 

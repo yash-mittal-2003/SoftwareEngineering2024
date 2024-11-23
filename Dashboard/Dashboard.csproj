@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Cloud Module\SECloud\SECloud\SECloud.csproj" />
     <ProjectReference Include="..\Content\Content.csproj" />
     <ProjectReference Include="..\FileCloner\FileCloner.csproj" />
     <ProjectReference Include="..\Networking\Networking.csproj" />
