@@ -90,6 +90,7 @@ public class Server : INotificationHandler
     public void Broadcast(string serializedPacket)
     {
         Thread thread = new Thread(() => Broadcasting(serializedPacket));
+        thread.IsBackground = true;
         thread.Start();
     }
 

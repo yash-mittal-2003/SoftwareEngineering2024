@@ -50,7 +50,12 @@ public partial class MainPageViewModel : ViewModelBase
 
         //For watching files and updating any changes in the UI accordingly
         Thread fileWatcherThread = new(() => WatchFile(RootDirectoryPath));
+
+        fileWatcherThread.IsBackground = true;
+
         fileWatcherThread.Start();
+
+
 
         //Only SendRequest button will be enabled in the beginning
         IsSendRequestEnabled = true;
