@@ -8,17 +8,16 @@
  * Description = Enumerating ShapeTypes
  *****************************************************************************/
 
-namespace WhiteboardGUI.Models
+namespace WhiteboardGUI.Models;
+
+/// <summary>
+/// Defines the types of shapes available in the Whiteboard application.
+/// </summary>
+public enum ShapeType
 {
-    /// <summary>
-    /// Defines the types of shapes available in the Whiteboard application.
-    /// </summary>
-    public enum ShapeType
-    {
-        Pencil,
-        Line,
-        Circle,
-        Text,
-        Select
-    }
+    Pencil,
+    Line,
+    Circle,
+    Text,
+    Select
 }

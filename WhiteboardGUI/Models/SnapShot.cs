@@ -7,64 +7,63 @@ using System.Text;
 using System.Threading.Tasks;
 using WhiteboardGUI.Services;
 
-namespace WhiteboardGUI.Models
+namespace WhiteboardGUI.Models;
+
+/// <summary>
+/// Represents an item available for snapshot download.
+/// </summary>
+public class SnapShotDownloadItem
 {
     /// <summary>
-    /// Represents an item available for snapshot download.
+    /// Initializes a new instance of the <see cref="SnapShotDownloadItem"/> class.
     /// </summary>
-    public class SnapShotDownloadItem
+    /// <param name="snapShotFileName">The file name of the snapshot.</param>
+    /// <param name="dateTime">The timestamp of the snapshot.</param>
+    public SnapShotDownloadItem(string snapShotFileName, DateTime dateTime)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SnapShotDownloadItem"/> class.
-        /// </summary>
-        /// <param name="snapShotFileName">The file name of the snapshot.</param>
-        /// <param name="dateTime">The timestamp of the snapshot.</param>
-        public SnapShotDownloadItem(string snapShotFileName, DateTime dateTime)
-        {
-            FileName = snapShotFileName;
-            Time = dateTime;
-        }
-
-        /// <summary>
-        /// Gets or sets the file name of the snapshot.
-        /// </summary>
-        public string FileName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the timestamp of the snapshot.
-        /// </summary>
-        public DateTime Time { get; set; }
+        FileName = snapShotFileName;
+        Time = dateTime;
     }
 
     /// <summary>
-    /// Represents a snapshot object with user and shape data.
+    /// Gets or sets the file name of the snapshot.
     /// </summary>
-    public class SnapShot
-    {
-        /// <summary>
-        /// The user ID associated with the snapshot.
-        /// </summary>
-        public string userID;
+    public string FileName { get; set; }
 
-        /// <summary>
-        /// The file name of the snapshot.
-        /// </summary>
-        public string fileName;
+    /// <summary>
+    /// Gets or sets the timestamp of the snapshot.
+    /// </summary>
+    public DateTime Time { get; set; }
+}
 
-        /// <summary>
-        /// The date and time when the snapshot was created.
-        /// </summary>
-        public DateTime dateTime;
+/// <summary>
+/// Represents a snapshot object with user and shape data.
+/// </summary>
+public class SnapShot
+{
+    /// <summary>
+    /// The user ID associated with the snapshot.
+    /// </summary>
+    public string userID;
 
-        /// <summary>
-        /// A collection of shapes in the snapshot.
-        /// </summary>
-        [JsonConverter(typeof(ShapeConverter))]
-        public ObservableCollection<IShape> Shapes;
+    /// <summary>
+    /// The file name of the snapshot.
+    /// </summary>
+    public string fileName;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SnapShot"/> class.
-        /// </summary>
-        public SnapShot() { }
-    }
+    /// <summary>
+    /// The date and time when the snapshot was created.
+    /// </summary>
+    public DateTime dateTime;
+
+    /// <summary>
+    /// A collection of shapes in the snapshot.
+    /// </summary>
+    [JsonConverter(typeof(ShapeConverter))]
+    public ObservableCollection<IShape> Shapes;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SnapShot"/> class.
+    /// </summary>
+    public SnapShot() { }
 }

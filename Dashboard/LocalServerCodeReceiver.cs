@@ -8,94 +8,92 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Dashboard
+namespace Dashboard;
+
+/// <summary>
+/// Local server code receiver class implementing ICodeReceiver interface.
+/// Handles the redirection and reception of OAuth 2.0 authorization codes.
+/// </summary>
+public class LocalServerCodeReceiver : ICodeReceiver
 {
+    private readonly string redirectUri;
+
     /// <summary>
-    /// Local server code receiver class implementing ICodeReceiver interface.
-    /// Handles the redirection and reception of OAuth 2.0 authorization codes.
+    /// Initializes a new instance of the LocalServerCodeReceiver class.
     /// </summary>
-    public class LocalServerCodeReceiver : ICodeReceiver
+    /// <param name="redirectUri">The redirect URI for the OAuth 2.0 response.</param>
+    public LocalServerCodeReceiver(string redirectUri)
     {
-        private readonly string redirectUri;
-
-        /// <summary>
-        /// Initializes a new instance of the LocalServerCodeReceiver class.
-        /// </summary>
-        /// <param name="redirectUri">The redirect URI for the OAuth 2.0 response.</param>
-        public LocalServerCodeReceiver(string redirectUri)
+        if (!redirectUri.EndsWith("/"))
         {
-            if (!redirectUri.EndsWith("/"))
-            {
-                redirectUri += "/";
-            }
-            this.redirectUri = redirectUri;
+            redirectUri += "/";
         }
+        this.redirectUri = redirectUri;
+    }
 
-        /// <summary>
-        /// Gets the redirect URI.
-        /// </summary>
-        public string RedirectUri => redirectUri;
+    /// <summary>
+    /// Gets the redirect URI.
+    /// </summary>
+    public string RedirectUri => redirectUri;
 
-        /// <summary>
-        /// Receives the authorization code asynchronously.
-        /// </summary>
-        /// <param name="url">The authorization code request URL.</param>
-        /// <param name="taskCancellationToken">The cancellation token.</param>
-        /// <returns>The authorization code response URL.</returns>
-        public async Task<AuthorizationCodeResponseUrl> ReceiveCodeAsync(AuthorizationCodeRequestUrl url, CancellationToken taskCancellationToken)
+    /// <summary>
+    /// Receives the authorization code asynchronously.
+    /// </summary>
+    /// <param name="url">The authorization code request URL.</param>
+    /// <param name="taskCancellationToken">The cancellation token.</param>
+    /// <returns>The authorization code response URL.</returns>
+    public async Task<AuthorizationCodeResponseUrl> ReceiveCodeAsync(AuthorizationCodeRequestUrl url, CancellationToken taskCancellationToken)
+    {
+        string authorizationUrl = url.Build().AbsoluteUri;
+
+        using var listener = new HttpListener();
+        listener.Prefixes.Add(RedirectUri);
+        listener.Start();
+
+        try
         {
-            string authorizationUrl = url.Build().AbsoluteUri;
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo {
+                FileName = authorizationUrl,
+                UseShellExecute = true
+            });
 
-            using (var listener = new HttpListener())
+            // Wait for the authorization response with cancellation token
+            HttpListenerContext context = await listener.GetContextAsync().ConfigureAwait(false);
+
+            // Extract query parameters before sending response
+            NameValueCollection queryString = context.Request.QueryString;
+            LogQueryString(queryString);
+
+            // Create response parameters dictionary
+            var responseParameters = new System.Collections.Generic.Dictionary<string, string>();
+            foreach (string key in queryString.AllKeys)
             {
-                listener.Prefixes.Add(RedirectUri);
-                listener.Start();
+                responseParameters[key] = queryString[key] ?? string.Empty;
+            }
 
-                try
-                {
-                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-                    {
-                        FileName = authorizationUrl,
-                        UseShellExecute = true
-                    });
+            // Validate response parameters
+            if (queryString == null || !queryString.HasKeys())
+            {
+                throw new InvalidOperationException("No query string received.");
+            }
 
-                    // Wait for the authorization response with cancellation token
-                    var context = await listener.GetContextAsync().ConfigureAwait(false);
+            string code = queryString["code"];
+            string error = queryString["error"];
 
-                    // Extract query parameters before sending response
-                    var queryString = context.Request.QueryString;
-                    LogQueryString(queryString);
+            if (!string.IsNullOrEmpty(error))
+            {
+                throw new InvalidOperationException($"OAuth authorization error: {error}");
+            }
 
-                    // Create response parameters dictionary
-                    var responseParameters = new System.Collections.Generic.Dictionary<string, string>();
-                    foreach (string key in queryString.AllKeys)
-                    {
-                        responseParameters[key] = queryString[key] ?? string.Empty;
-                    }
+            if (string.IsNullOrEmpty(code))
+            {
+                throw new InvalidOperationException("No authorization code found in the response.");
+            }
 
-                    // Validate response parameters
-                    if (queryString == null || !queryString.HasKeys())
-                    {
-                        throw new InvalidOperationException("No query string received.");
-                    }
-
-                    string code = queryString["code"];
-                    string error = queryString["error"];
-
-                    if (!string.IsNullOrEmpty(error))
-                    {
-                        throw new InvalidOperationException($"OAuth authorization error: {error}");
-                    }
-
-                    if (string.IsNullOrEmpty(code))
-                    {
-                        throw new InvalidOperationException("No authorization code found in the response.");
-                    }
-
-                    // Send response to browser with a hyperlink to close the window
-                    using (var response = context.Response)
-                    {
-                        string responseString = @"
+            // Send response to browser with a hyperlink to close the window
+            using (HttpListenerResponse response = context.Response)
+            {
+                string responseString = @"
                         <html>
                             <head>
                                 <title>Authorization Complete</title>
@@ -109,43 +107,41 @@ namespace Dashboard
                                 Authorization complete. You can <a href='javascript:closeWindow()'>close</a> this window.
                             </body>
                         </html>";
-                        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
-                        response.ContentLength64 = buffer.Length;
-                        await response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
-                    }
-
-                    return new AuthorizationCodeResponseUrl(responseParameters);
-                }
-                catch (Exception ex)
-                {
-                    throw new InvalidOperationException($"Failed to receive authorization response: {ex.Message}", ex);
-                }
-                finally
-                {
-                    listener.Stop();
-                }
+                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
+                response.ContentLength64 = buffer.Length;
+                await response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
             }
+
+            return new AuthorizationCodeResponseUrl(responseParameters);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException($"Failed to receive authorization response: {ex.Message}", ex);
+        }
+        finally
+        {
+            listener.Stop();
+        }
+    }
+
+    /// <summary>
+    /// Logs the query string parameters.
+    /// </summary>
+    /// <param name="queryString">The query string parameters.</param>
+    private void LogQueryString(NameValueCollection queryString)
+    {
+        if (queryString == null)
+        {
+            Console.WriteLine("Query string is null.");
+            return;
         }
 
-        /// <summary>
-        /// Logs the query string parameters.
-        /// </summary>
-        /// <param name="queryString">The query string parameters.</param>
-        private void LogQueryString(NameValueCollection queryString)
+        Console.WriteLine("Full query string: " + queryString.ToString());
+
+        Console.WriteLine("Received query string parameters:");
+        foreach (string key in queryString.AllKeys)
         {
-            if (queryString == null)
-            {
-                Console.WriteLine("Query string is null.");
-                return;
-            }
-
-            Console.WriteLine("Full query string: " + queryString.ToString());
-
-            Console.WriteLine("Received query string parameters:");
-            foreach (string key in queryString.AllKeys)
-            {
-                Console.WriteLine($"{key}: {queryString[key]}");
-            }
+            Console.WriteLine($"{key}: {queryString[key]}");
         }
     }
 }

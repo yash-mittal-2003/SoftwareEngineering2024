@@ -3,36 +3,35 @@
 
 using System.Runtime.Serialization;
 
-namespace Screenshare
+namespace Screenshare;
+
+
+// Enumerates all the headers that could be present in the data packet
+// sent by the client.
+
+public enum ClientDataHeader
 {
+     
+    // Register a client for screen sharing.
+  
+    [EnumMember(Value = "REGISTER")]
+    Register,
 
-    // Enumerates all the headers that could be present in the data packet
-    // sent by the client.
+   
+    // De-register a client for screen sharing.
+   
+    [EnumMember(Value = "DEREGISTER")]
+    Deregister,
+
     
-    public enum ClientDataHeader
-    {
-         
-        // Register a client for screen sharing.
-      
-        [EnumMember(Value = "REGISTER")]
-        Register,
+    // Image received from the client.
+  
+    [EnumMember(Value = "IMAGE")]
+    Image,
 
-       
-        // De-register a client for screen sharing.
-       
-        [EnumMember(Value = "DEREGISTER")]
-        Deregister,
-
-        
-        // Image received from the client.
-      
-        [EnumMember(Value = "IMAGE")]
-        Image,
-
-      
-        // Confirmation packet received from the client.
-      
-        [EnumMember(Value = "CONFIRMATION")]
-        Confirmation
-    }
+  
+    // Confirmation packet received from the client.
+  
+    [EnumMember(Value = "CONFIRMATION")]
+    Confirmation
 }

@@ -5,25 +5,24 @@
 
 using System.Collections.Generic;
 
-namespace Screenshare.ScreenShareServer
+namespace Screenshare.ScreenShareServer;
+
+ 
+// Interface to be implemented by the server view model and used by
+// the server data model to notify the view model.
+ 
+public interface IMessageListener
 {
      
-    // Interface to be implemented by the server view model and used by
-    // the server data model to notify the view model.
+    // Notifies that subscribers list has been changed.
+    // This will happen when a client either starts or stops screen sharing.
+    public void OnSubscribersChanged(List<SharedClientScreen> subscribers);
+
      
-    public interface IMessageListener
-    {
-         
-        // Notifies that subscribers list has been changed.
-        // This will happen when a client either starts or stops screen sharing.
-        public void OnSubscribersChanged(List<SharedClientScreen> subscribers);
+    // Notifies that a client has started screen sharing.
+    public void OnScreenshareStart(string clientId, string clientName);
 
-         
-        // Notifies that a client has started screen sharing.
-        public void OnScreenshareStart(string clientId, string clientName);
-
-         
-        // Notifies that a client has stopped screen sharing.
-        public void OnScreenshareStop(string clientId, string clientName);
-    }
+     
+    // Notifies that a client has stopped screen sharing.
+    public void OnScreenshareStop(string clientId, string clientName);
 }

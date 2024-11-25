@@ -9,7 +9,6 @@ using System.Text.Json.Serialization;
 using Networking;
 using Networking.Communication;
 using WhiteboardGUI;
-using Content.ChatViewModel;
 
 namespace Dashboard
 {
@@ -93,7 +92,6 @@ namespace Dashboard
 
         public FileCloner.Models.NetworkService.Server _fileClonerInstance = FileCloner.Models.NetworkService.Server.GetServerInstance();
         public Updater.Server _updaterServerInstance = Updater.Server.GetServerInstance();
-        MainViewModel _contentInstance = MainViewModel.GetInstance;
 
         /// <summary>
         /// Initializes a new instance of the ServerDashboard class.
@@ -146,12 +144,8 @@ namespace Dashboard
                 // Notify that server user is ready
                 OnPropertyChanged(nameof(ServerUserList));
             }
-
-
             Trace.WriteLine("[DashboardServer] started server");
-            _contentInstance.SetUserDetails_server(UserName, ProfilePictureUrl);
             WhiteboardGUI.Models.ServerOrClient serverOrClient = WhiteboardGUI.Models.ServerOrClient.ServerOrClientInstance;
-
             serverOrClient.SetUserDetails(UserName, "1");
             return serverCredentials;
         }
@@ -329,6 +323,8 @@ namespace Dashboard
             string jsonMessage = JsonSerializer.Serialize(dashboardMessage);
             BroadcastMessage(jsonMessage);
             ServerUserList.Clear();
+            System.Threading.Thread.Sleep(8000);
+            _communicator.Stop();
             return true;
         }
 

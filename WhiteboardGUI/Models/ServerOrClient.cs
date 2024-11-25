@@ -1,4 +1,4 @@
-/**************************************************************************************************
+﻿/**************************************************************************************************
  * Filename    = ServerOrClient.cs
  *
  * Author      = Likith Anaparty
@@ -21,63 +21,62 @@ using System.Threading.Tasks;
 using WhiteboardGUI.Services;
 using WhiteboardGUI.ViewModel;
 
-namespace WhiteboardGUI.Models
+namespace WhiteboardGUI.Models;
+
+/// <summary>
+/// Represents a singleton class to manage server or client user details.
+/// </summary>
+public class ServerOrClient
 {
     /// <summary>
-    /// Represents a singleton class to manage server or client user details.
+    /// Stores the username of the user.
     /// </summary>
-    public class ServerOrClient
+    public string userName;
+
+    /// <summary>
+    /// Stores the user ID of the user.
+    /// </summary>
+    public int userId;
+
+    /// <summary>
+    /// Object used for ensuring thread safety in singleton instance creation.
+    /// </summary>
+    private static readonly object padlock = new object();
+
+    /// <summary>
+    /// Singleton instance of the ServerOrClient class.
+    /// </summary>
+    private static ServerOrClient _serverOrClient;
+
+    /// <summary>
+    /// Gets the singleton instance of the ServerOrClient class.
+    /// Ensures thread-safe creation of the instance.
+    /// </summary>
+    public static ServerOrClient ServerOrClientInstance
     {
-        /// <summary>
-        /// Stores the username of the user.
-        /// </summary>
-        public string userName;
-
-        /// <summary>
-        /// Stores the user ID of the user.
-        /// </summary>
-        public int userId;
-
-        /// <summary>
-        /// Object used for ensuring thread safety in singleton instance creation.
-        /// </summary>
-        private static readonly object padlock = new object();
-
-        /// <summary>
-        /// Singleton instance of the ServerOrClient class.
-        /// </summary>
-        private static ServerOrClient _serverOrClient;
-
-        /// <summary>
-        /// Gets the singleton instance of the ServerOrClient class.
-        /// Ensures thread-safe creation of the instance.
-        /// </summary>
-        public static ServerOrClient ServerOrClientInstance
+        get
         {
-            get
+            lock (padlock)
             {
-                lock (padlock)
+                if (_serverOrClient == null)
                 {
-                    if (_serverOrClient == null)
-                    {
-                        _serverOrClient = new ServerOrClient();
-                    }
-
-                    return _serverOrClient;
+                    _serverOrClient = new ServerOrClient();
                 }
+
+                return _serverOrClient;
             }
         }
+    }
 
-        /// <summary>
-        /// Sets the user details including username and user ID.
-        /// </summary>
-        /// <param name="username">The username of the user.</param>
-        /// <param name="userid">The user ID as a string, which will be parsed into an integer.</param>
-        /// <exception cref="FormatException">Thrown if the userid cannot be parsed into an integer.</exception>
-        public void SetUserDetails(string username, string userid)
-        {
-            userName = username;
-            userId = int.Parse(userid);
-        }
+    /// <summary>
+    /// Sets the user details including username and user ID.
+    /// </summary>
+    /// <param name="username">The username of the user.</param>
+    /// <param name="userid">The user ID as a string, which will be parsed into an integer.</param>
+    /// <exception cref="FormatException">Thrown if the userid cannot be parsed into an integer.</exception>
+    public void SetUserDetails(string username, string userid)
+    {
+        userName = username;
+        userId = int.Parse(userid);
     }
 }
