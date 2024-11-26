@@ -77,7 +77,7 @@ public class CloudViewModel
     //Method to retrieve the SAS token
     private static string Token()
     {
-        return "sp=racwdli&st=2024-11-12T08:57:21Z&se=2024-11-12T18:57:21Z&spr=https&sv=2022-11-02&sr=c&sig=0EwLtsdRB%2FfYBYImEucoLROlQD6yBWLktzPHoKfm6ik%3D";
+        return "sp=racwdli&st=2024-11-23T08:59:00Z&se=2024-11-30T16:59:00Z&spr=https&sv=2022-11-02&sr=c&sig=WrpuCccbFULandQ5wmO0hS2JGu%2B7TD5a%2BDucFIrQRY4%3D";
     }
 
     // Method to retrieve the team name for cloud configuration

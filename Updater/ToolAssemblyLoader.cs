@@ -58,90 +58,110 @@ public class ToolAssemblyLoader : IToolAssemblyLoader
                 // only processing dll files
                 if (File.Exists(file) && IsDLLFile(file))
                 {
-                    // Use a custom AssemblyLoadContext to load and unload the assembly
-                    var loadContext = new AssemblyLoadContext("ToolAssemblyLoaderContext", true);
-                    Assembly assembly = loadContext.LoadFromAssemblyPath(file);
-                    Trace.WriteLine($"[Updater] File Assembly: {assembly}");
-
-                    TargetFrameworkAttribute? targetFrameworkAttribute = assembly.GetCustomAttribute<TargetFrameworkAttribute>();
-
-                    // the tools are limited to .NET version 8.0
-                    if (targetFrameworkAttribute != null && targetFrameworkAttribute.FrameworkName == ".NETCoreApp,Version=v8.0")
+                    // to make sure that only non corrupted DLLs are processed
+                    try
                     {
-                        try
+                        // Use a custom AssemblyLoadContext to load and unload the assembly
+                        var loadContext = new AssemblyLoadContext("ToolAssemblyLoaderContext", true);
+                        Assembly assembly = loadContext.LoadFromAssemblyPath(file);
+                        Trace.WriteLine($"[Updater] File Assembly: {assembly}");
+
+                        TargetFrameworkAttribute? targetFrameworkAttribute = assembly.GetCustomAttribute<TargetFrameworkAttribute>();
+
+                        // the tools are limited to .NET version 8.0
+                        if (targetFrameworkAttribute != null && targetFrameworkAttribute.FrameworkName == ".NETCoreApp,Version=v8.0")
                         {
-                            Type toolInterface = typeof(ITool);
-                            Type[] types = assembly.GetTypes();
-
-                            foreach (Type type in types)
+                            try
                             {
-                                // only classes implementing ITool should be fetched
-                                if (toolInterface.IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract)
+                                Type toolInterface = typeof(ITool);
+                                Type[] types = assembly.GetTypes();
+
+                                foreach (Type type in types)
                                 {
-                                    MethodInfo[] methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
-
-                                    // Attempt to create an instance of the type that implements ITool
-                                    try
+                                    // only classes implementing ITool should be fetched
+                                    if (toolInterface.IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract)
                                     {
-                                        object? instance = Activator.CreateInstance(type);
-                                        if (instance != null)
+                                        MethodInfo[] methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+
+                                        // Attempt to create an instance of the type that implements ITool
+                                        try
                                         {
-                                            Trace.WriteLine($"[Updater] Instance of {type.FullName} created successfully!");
-
-                                            PropertyInfo[] properties = toolInterface.GetProperties();
-                                            foreach (PropertyInfo property in properties)
+                                            object? instance = Activator.CreateInstance(type);
+                                            if (instance != null)
                                             {
-                                                if (property.CanRead)  // To ensure the property is readable
-                                                {
-                                                    // converting all values to strings
-                                                    object? value = property.GetValue(instance);
-                                                    string valueAsString = value switch {
-                                                        Version version => version.ToString(),
-                                                        DateTime dateTime => dateTime.ToString("yyyy-MM-dd"),
-                                                        _ => value?.ToString() ?? "null"
-                                                    };
+                                                Trace.WriteLine($"[Updater] Instance of {type.FullName} created successfully!");
 
-                                                    if (toolPropertyMap.ContainsKey(property.Name))
+                                                PropertyInfo[] properties = toolInterface.GetProperties();
+                                                foreach (PropertyInfo property in properties)
+                                                {
+                                                    if (property.CanRead)  // To ensure the property is readable
                                                     {
-                                                        toolPropertyMap[property.Name].Add(valueAsString); // appending to the map values if key exists
+                                                        // converting all values to strings
+                                                        object? value = property.GetValue(instance);
+                                                        string valueAsString = value switch
+                                                        {
+                                                            Version version => version.ToString(),
+                                                            DateTime dateTime => dateTime.ToString("yyyy-MM-dd"),
+                                                            _ => value?.ToString() ?? "null",
+                                                        };
+
+                                                        if (toolPropertyMap.ContainsKey(property.Name))
+                                                        {
+                                                            if(property.Name == "Name")
+                                                            {
+                                                                valueAsString = type.FullName;
+                                                            }
+                                                            toolPropertyMap[property.Name].Add(valueAsString); // appending to the map values if key exists
+                                                        }
+                                                        else
+                                                        {
+                                                            if (property.Name == "Name")
+                                                            {
+                                                                valueAsString = type.FullName;
+                                                            }
+                                                            toolPropertyMap[property.Name] = [valueAsString]; // creating a new list for values for new key
+                                                        }
+                                                        Trace.WriteLine($"{property.Name}: {valueAsString}");
                                                     }
-                                                    else
-                                                    {
-                                                        toolPropertyMap[property.Name] = [valueAsString]; // creating a new list for values for new key
-                                                    }
-                                                    Trace.WriteLine($"{property.Name}: {valueAsString}");
                                                 }
                                             }
+                                            else
+                                            {
+                                                Trace.WriteLine($"[Updater] Failed to create instance for {type.FullName}. Constructor might be missing or inaccessible.");
+                                                throw new InvalidOperationException($"[Updater] Failed to create instance for {type.FullName}. Constructor might be missing or inaccessible.");
+                                            }
                                         }
-                                        else
+                                        catch (Exception ex)
                                         {
-                                            throw new InvalidOperationException($"[Updater] Failed to create instance for {type.FullName}. Constructor might be missing or inaccessible.");
+                                            Trace.WriteLine($"[Updater] Failed to create an instance of {type.FullName}: {ex.Message}");
+                                            throw new InvalidOperationException($"[Updater] Failed to create an instance of {type.FullName}: {ex.Message}", ex);
                                         }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        throw new InvalidOperationException($"[Updater] Failed to create an instance of {type.FullName}: {ex.Message}", ex);
                                     }
                                 }
                             }
+                            catch (Exception e)
+                            {
+                                Trace.WriteLine($"[Updater] Error while processing {file}: {e.Message}");
+                            }
                         }
-                        catch (Exception e)
+                        else
                         {
-                            Trace.WriteLine($"[Updater] Error while processing {file}: {e.Message}");
+                            Trace.WriteLine($"[Updater] Invalid Target Framework for Assembly {assembly.GetName()}.");
                         }
-                    }
-                    else
-                    {
-                        Trace.WriteLine($"[Updater] Invalid Target Framework for Assembly {assembly.GetName()}.");
-                    }
 
-                    // Unload the assembly by unloading the AssemblyLoadContext
-                    loadContext.Unload();
+                        // Unload the assembly by unloading the AssemblyLoadContext
+                        loadContext.Unload();
+                    }
+                    catch (Exception e)
+                    {
+                        Trace.WriteLine($"[Updater] {e.Message}");
+                    }
                 }
             }
         }
         catch (Exception ex)
         {
+            Trace.WriteLine($"[Updater] Unexpected error: {ex.Message}");
             throw new Exception($"[Updater] Unexpected error: {ex.Message}", ex);
         }
 

@@ -13,6 +13,7 @@
 using Networking.Communication;
 using Networking;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Updater;
 
@@ -24,20 +25,22 @@ public class Client : INotificationHandler
     private readonly ICommunicator _communicator;
     private static readonly string s_clientDirectory = AppConstants.ToolsDirectory;
     private static Client? s_instance;
-    private static readonly object s_lock = new object();
+    private static readonly object s_lock = new();
     private string? _clientId;
 
     /// <summary>
     /// Constructor
     /// </summary>
+    [ExcludeFromCodeCoverage]
     private Client()
     {
         _communicator = CommunicationFactory.GetCommunicator(isClientSide: true);
         _communicator.Subscribe("FileTransferHandler", this);
     }
 
-    public void GetClientId(string clientId)
+    public virtual void GetClientId(string clientId)
     {
+        Trace.WriteLine("[Updater] Client ID recieved successfully.");
         _clientId = clientId;
     }
 
@@ -45,10 +48,7 @@ public class Client : INotificationHandler
     {
         lock (s_lock)
         {
-            if (s_instance == null)
-            {
-                s_instance = new Client();
-            }
+            s_instance ??= new Client();
 
             if (notificationReceived != null)
             {
@@ -61,7 +61,7 @@ public class Client : INotificationHandler
     /// <summary>
     /// Sends a SyncUp request to the server
     /// </summary>
-    public void SyncUp()
+    public virtual void SyncUp()
     {
         try
         {
@@ -81,21 +81,16 @@ public class Client : INotificationHandler
         }
     }
 
-    public void Stop()
-    {
-        UpdateUILogs("Client disconnected");
-        _communicator.Stop();
-    }
-
-
     public static void ShowInvalidFilesInUI(List<string> invalidFiles)
     {
         UpdateUILogs("Invalid filenames: Please change the name of the following files and manually sync up again");
+        Trace.WriteLine("Invalid filenames");
         foreach (string file in invalidFiles)
         {
             UpdateUILogs(file);
         }
         UpdateUILogs("Sync up failed");
+        Trace.WriteLine("Sync up failed");
     }
 
     /// <summary>
@@ -111,13 +106,13 @@ public class Client : INotificationHandler
             switch (dataPacket.DataPacketType)
             {
                 case DataPacket.PacketType.SyncUp:
-                    SyncUpHandler(dataPacket, communicator);
+                    SyncUpHandler(communicator);
                     break;
                 case DataPacket.PacketType.InvalidSync:
-                    InvalidSyncHandler(dataPacket, communicator);
+                    InvalidSyncHandler(dataPacket);
                     break;
                 case DataPacket.PacketType.Broadcast:
-                    BroadcastHandler(dataPacket, communicator);
+                    BroadcastHandler(dataPacket);
                     break;
                 case DataPacket.PacketType.Differences:
                     DifferencesHandler(dataPacket, communicator);
@@ -137,10 +132,11 @@ public class Client : INotificationHandler
     /// <summary>
     /// Handler for SyncUp packet. Sends metadata to server. 
     /// </summary>
-    public static void SyncUpHandler(DataPacket dataPacket, ICommunicator communicator)
+    public static void SyncUpHandler(ICommunicator communicator)
     {
         try
         {
+            Trace.WriteLine("[Updater] Received SyncUp request from server");
             UpdateUILogs("Received SyncUp request from server");
             string? serializedMetaData = Utils.SerializedMetadataPacket() ?? throw new Exception("Failed to serialize metadata");
 
@@ -149,6 +145,7 @@ public class Client : INotificationHandler
             communicator.Send(serializedMetaData, "FileTransferHandler", null);
 
             UpdateUILogs("Metadata sent to server");
+            Trace.WriteLine("[Updater] Metadata sent to server");
         }
         catch (Exception ex)
         {
@@ -156,7 +153,7 @@ public class Client : INotificationHandler
         }
     }
 
-    public static void InvalidSyncHandler(DataPacket dataPacket, ICommunicator communicator)
+    public static void InvalidSyncHandler(DataPacket dataPacket)
     {
         try
         {
@@ -168,6 +165,7 @@ public class Client : INotificationHandler
             string serializedContent = fileContent.SerializedContent;
             List<string> invalidFileNames = Utils.DeserializeObject<List<string>>(serializedContent);
             UpdateUILogs("Received invalid file names from server");
+            Trace.WriteLine("Received invalid file names from server");
             ShowInvalidFilesInUI(invalidFileNames);
         }
         catch (Exception ex)
@@ -179,7 +177,7 @@ public class Client : INotificationHandler
     /// <summary>
     /// Handler for Broadcast packet. Updates client with files from server.
     /// </summary>
-    public static void BroadcastHandler(DataPacket dataPacket, ICommunicator communicator)
+    public static void BroadcastHandler(DataPacket dataPacket)
     {
         try
         {
@@ -203,6 +201,7 @@ public class Client : INotificationHandler
                 }
             }
             UpdateUILogs("Up-to-date with the server");
+            Trace.WriteLine("Up-to-date with the server");
         }
         catch (Exception ex)
         {
@@ -268,14 +267,14 @@ public class Client : INotificationHandler
             // Using the deserialized differences list to retrieve UniqueClientFiles
             List<string?> filenameList = differencesList
                 .Where(difference => difference != null && difference.Key == "-1")
-                .SelectMany(difference => difference.Value?.Select(fileDetail => fileDetail.FileName) ?? new List<string>())
+                .SelectMany(difference => difference.Value?.Select(fileDetail => fileDetail.FileName) ?? [])
                 .Distinct()
                 .ToList();
 
             UpdateUILogs("Recieved request for files from Server");
 
             // Create list of FileContent to send back
-            List<FileContent> fileContentToSend = new List<FileContent>();
+            List<FileContent> fileContentToSend = [];
 
             foreach (string? filename in filenameList)
             {
@@ -288,13 +287,13 @@ public class Client : INotificationHandler
                     string filePath = Path.Combine(s_clientDirectory, filename);
                     string? content = Utils.ReadBinaryFile(filePath) ?? throw new Exception("Failed to read file");
                     string? serializedContent = Utils.SerializeObject(content) ?? throw new Exception("Failed to serialize content");
-                    FileContent fileContent = new FileContent(filename, serializedContent);
+                    FileContent fileContent = new(filename, serializedContent);
                     fileContentToSend.Add(fileContent);
                 }
             }
 
             // Create DataPacket to send
-            DataPacket dataPacketToSend = new DataPacket(DataPacket.PacketType.ClientFiles, fileContentToSend);
+            DataPacket dataPacketToSend = new(DataPacket.PacketType.ClientFiles, fileContentToSend);
 
             // Serialize and send DataPacket
             string? serializedDataPacket = Utils.SerializeObject(dataPacketToSend) ?? throw new Exception("Failed to serialize DataPacket");
@@ -311,6 +310,7 @@ public class Client : INotificationHandler
     /// <summary>
     /// Method to handle data received from the server
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public void OnDataReceived(string serializedData)
     {
         try

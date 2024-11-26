@@ -2085,24 +2085,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Asus\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Garima Ranjan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\Updater\\Updater.csproj",
+      "projectUniqueName": "C:\\Users\\Garima Ranjan\\Desktop\\FinalSE\\SoftwareEngineering2024\\Updater\\Updater.csproj",
       "projectName": "Updater",
-      "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\Updater\\Updater.csproj",
-      "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\Updater\\obj\\",
+      "projectPath": "C:\\Users\\Garima Ranjan\\Desktop\\FinalSE\\SoftwareEngineering2024\\Updater\\Updater.csproj",
+      "packagesPath": "C:\\Users\\Garima Ranjan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Garima Ranjan\\Desktop\\FinalSE\\SoftwareEngineering2024\\Updater\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Garima Ranjan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2110,21 +2105,20 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\Cloud Module\\SECloud\\SECloud\\SECloud.csproj": {
-              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\Cloud Module\\SECloud\\SECloud\\SECloud.csproj"
+            "C:\\Users\\Garima Ranjan\\Desktop\\FinalSE\\SoftwareEngineering2024\\Cloud Module\\SECloud\\SECloud\\SECloud.csproj": {
+              "projectPath": "C:\\Users\\Garima Ranjan\\Desktop\\FinalSE\\SoftwareEngineering2024\\Cloud Module\\SECloud\\SECloud\\SECloud.csproj"
             },
-            "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
-              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\Networking\\Networking.csproj"
+            "C:\\Users\\Garima Ranjan\\Desktop\\FinalSE\\SoftwareEngineering2024\\Networking\\Networking.csproj": {
+              "projectPath": "C:\\Users\\Garima Ranjan\\Desktop\\FinalSE\\SoftwareEngineering2024\\Networking\\Networking.csproj"
             },
-            "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\ToolInterface\\ToolInterface.csproj": {
-              "projectPath": "C:\\Users\\Asus\\OneDrive\\Desktop\\DRYRUN\\SoftwareEngineering2024\\ToolInterface\\ToolInterface.csproj"
+            "C:\\Users\\Garima Ranjan\\Desktop\\FinalSE\\SoftwareEngineering2024\\ToolInterface\\ToolInterface.csproj": {
+              "projectPath": "C:\\Users\\Garima Ranjan\\Desktop\\FinalSE\\SoftwareEngineering2024\\ToolInterface\\ToolInterface.csproj"
             }
           }
         }
@@ -2137,9 +2131,8 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
-      },
-      "SdkAnalysisLevel": "9.0.100"
+        "auditMode": "direct"
+      }
     },
     "frameworks": {
       "net8.0-windows7.0": {
@@ -2160,30 +2153,8 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'System.Formats.Asn1' 6.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-447r-wph3-92pm",
-      "libraryId": "System.Formats.Asn1",
-      "targetGraphs": [
-        "net8.0-windows7.0"
-      ]
-    },
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'System.Security.Cryptography.Pkcs' 6.0.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-555c-2p6r-68mm",
-      "libraryId": "System.Security.Cryptography.Pkcs",
-      "targetGraphs": [
-        "net8.0-windows7.0"
-      ]
-    }
-  ]
+  }
 }

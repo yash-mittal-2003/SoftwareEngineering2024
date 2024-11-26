@@ -14,6 +14,7 @@ using Networking.Communication;
 using Networking;
 using System.Net.Sockets;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Updater;
 
@@ -141,20 +142,6 @@ public class Server : INotificationHandler
         }
     }
 
-    // private static void InvalidSyncUp(DataPacket dataPacket, ICommunicator communicator, string clientId, DirectoryMetadataComparer comparerInstance)
-    // {
-    //     try
-    //     {
-    //         UpdateUILogs("Invalid SyncUp request received");
-    //         Trace.WriteLine("[Updater] Invalid SyncUp request received");
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         Trace.WriteLine($"[Updater] Error in InvalidSyncUp: {ex.Message}");
-    //     }
-    // }
-
-
     /// <summary>
     /// Complete the sync by Signalling _semaphore
     /// </summary>
@@ -221,7 +208,7 @@ public class Server : INotificationHandler
     /// <param name="communicator">Communicator object</param>
     /// <param name="server">Server object</param>
     /// <param name="clientId">Client ID</param>
-    private static void SyncUpHandler(DataPacket dataPacket, ICommunicator communicator, Server server, string clientId)
+    public static void SyncUpHandler(DataPacket dataPacket, ICommunicator communicator, Server server, string clientId)
     {
         try
         {
@@ -260,7 +247,7 @@ public class Server : INotificationHandler
     /// <param name="dataPacket">Data packet</param>
     /// <param name="communicator">Communicator object</param>
     /// <param name="clientId">Client ID</param>
-    private static void MetadataHandler(DataPacket dataPacket, ICommunicator communicator, Server server, string clientId)
+    public static void MetadataHandler(DataPacket dataPacket, ICommunicator communicator, Server server, string clientId)
     {
         try
         {
@@ -467,10 +454,11 @@ public class Server : INotificationHandler
     /// <param name="communicator">Communicator object</param>
     /// <param name="server">Server object</param>
     /// <param name="clientId">Client ID</param>
-    private static void ClientFilesHandler(DataPacket dataPacket, ICommunicator communicator, Server server, string clientId)
+    public static void ClientFilesHandler(DataPacket dataPacket, ICommunicator communicator, Server server, string clientId)
     {
         try
         {
+            Trace.WriteLine("[Updater] Recieved files from client");
             UpdateUILogs("Recieved files from client");
             // File list
             List<FileContent> fileContentList = dataPacket.FileContentList;
@@ -530,6 +518,7 @@ public class Server : INotificationHandler
     /// <summary>
     /// Handle data received from client
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public void OnDataReceived(string serializedData)
     {
         try
@@ -562,7 +551,6 @@ public class Server : INotificationHandler
         {
         }
     }
-
 
     public void SetUser(string clientId, TcpClient socket)
     {

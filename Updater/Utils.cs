@@ -109,9 +109,10 @@ public class Utils
     /// Generates serialized packet containing metadata of files in a directory.
     /// </summary>
     /// <returns>Serialized packet containing metadata of files in a directory.</returns>
-    public static string? SerializedMetadataPacket()
+    public static string? SerializedMetadataPacket(string? folderPath = null)
     {
-        DirectoryMetadataGenerator metadataGenerator = new DirectoryMetadataGenerator(AppConstants.ToolsDirectory);
+        if (folderPath == null) folderPath = AppConstants.ToolsDirectory;
+        DirectoryMetadataGenerator metadataGenerator = new DirectoryMetadataGenerator(folderPath);
 
         if (metadataGenerator == null)
         {

@@ -89,7 +89,8 @@ public class ServerViewModel : INotifyPropertyChanged
                 // Extract properties for each file if keys exist
                 Dictionary<string, List<string>> toolPropertiesCopy = toolProperties;
 
-                var fileData = new {
+                var fileData = new
+                {
                     Id = toolPropertiesCopy.ContainsKey("Id") ? toolProperties["Id"] : ["N/A"],
                     Name = toolPropertiesCopy.ContainsKey("Name") ? toolProperties["Name"] : ["N/A"],
                     Description = toolPropertiesCopy.ContainsKey("Description") ? toolProperties["Description"] : ["N/A"],
@@ -151,13 +152,13 @@ public class ServerViewModel : INotifyPropertyChanged
             File.Copy(filePath, targetFilePath, overwrite: true);
             // Notify the user and log success
             _logServiceViewModel.UpdateLogDetails($"File uploaded successfully: {Path.GetFileName(filePath)}");
-            MessageBox.Show("File uploaded successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            _logServiceViewModel.ShowNotification("Success: File uploaded successfully!");
         }
         catch (Exception ex)
         {
             // Handle errors during file copy
             _logServiceViewModel.UpdateLogDetails($"Failed to upload file: {ex.Message}");
-            MessageBox.Show($"Error uploading file: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            _logServiceViewModel.ShowNotification($"Error uploading file: {ex.Message}");
         }
 
         // Broadcast the serialized packet

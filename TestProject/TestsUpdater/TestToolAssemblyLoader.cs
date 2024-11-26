@@ -9,6 +9,7 @@
 *
 * Description = Unit tests for ToolAssemblyLoader.cs
 *****************************************************************************/
+using System.Diagnostics;
 using Updater;
 
 namespace TestsUpdater;
@@ -21,39 +22,116 @@ public class TestToolAssemblyLoader
 {
     private readonly string _emptyTestFolderPath = @"EmptyTestingFolder";
     private readonly string _nonExistingFolder = @"DoesNotExistTestingFolder";
-    private readonly string _testFolderPath = @"../../../TestingFolder";
+    private readonly string _testFolderPath = @"../../../TestsUpdater/TestingFolder";
+    private readonly string _corruptedDllFolderPath = @"CorruptedDllTestingFolder";
     private ToolAssemblyLoader? _loader;
-    /// <summary>
-    /// Set up the testing environment by ensuring the empty test folder is created and clean.
-    /// </summary>
 
+    /// <summary>
+    /// Set up the testing environment by ensuring the empty test folder is created.
+    /// </summary>
     [TestInitialize]
     public void SetUp()
     {
         // Ensure the test directory exists and is clean
-        if (Directory.Exists(_emptyTestFolderPath))
+        if (!Directory.Exists(_emptyTestFolderPath))
         {
-            Directory.Delete(_emptyTestFolderPath, true);
+            Directory.CreateDirectory(_emptyTestFolderPath);
         }
-        Directory.CreateDirectory(_emptyTestFolderPath);
-    }
-    /// <summary>
-    /// Clean up the testing environment by deleting the empty test folder after tests.
-    /// </summary>
 
+        if (!Directory.Exists(_corruptedDllFolderPath))
+        {
+            Directory.CreateDirectory(_corruptedDllFolderPath);
+        }
+    }
+
+    /// <summary>
+    /// Deletes a file with retry logic to handle any IOExceptions.
+    /// </summary>
+    private void DeleteFileWithRetry(string filePath)
+    {
+        const int maxRetries = 3;
+        const int delay = 100; // 100 ms
+
+        for (int attempt = 1; attempt <= maxRetries; attempt++)
+        {
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    // Ensure file is not read-only before attempting deletion
+                    File.SetAttributes(filePath, FileAttributes.Normal);
+                    File.Delete(filePath);
+                }
+                break; // Break the loop if deletion is successful
+            }
+            catch (IOException)
+            {
+                if (attempt == maxRetries)
+                {
+                    throw; // Re-throw after max retries
+                }
+                Thread.Sleep(delay); // Wait before retrying
+            }
+        }
+    }
+
+    /// <summary>
+    /// Deletes a directory with retry logic to handle any IOExceptions.
+    /// </summary>
+    private void DeleteDirectoryWithRetry(string directoryPath)
+    {
+        const int maxRetries = 3;
+        const int delay = 100; // 100 ms
+
+        for (int attempt = 1; attempt <= maxRetries; attempt++)
+        {
+            try
+            {
+                if (Directory.Exists(directoryPath))
+                {
+                    Directory.Delete(directoryPath, true); // Delete directory and contents
+                }
+                break; // Break the loop if deletion is successful
+            }
+            catch (IOException)
+            {
+                if (attempt == maxRetries)
+                {
+                    throw; // Re-throw after max retries
+                }
+                Thread.Sleep(delay); // Wait before retrying
+            }
+        }
+    }
+
+    /// <summary>
+    /// Clean up any files or directories created during the tests, with retry logic.
+    /// </summary>
     [TestCleanup]
     public void CleanUp()
     {
-        // Clean up test files
-        if (Directory.Exists(_emptyTestFolderPath))
+        try
         {
-            Directory.Delete(_emptyTestFolderPath, true);
+            Trace.WriteLine("Cleaning up test files.");
+
+            // Clean up the files and directories with retry logic
+            DeleteFileWithRetry(_emptyTestFolderPath);
+            DeleteFileWithRetry(_corruptedDllFolderPath);
+
+            // Remove any directories if they exist
+            DeleteDirectoryWithRetry(_emptyTestFolderPath);
+            DeleteDirectoryWithRetry(_corruptedDllFolderPath);
+        }
+        catch (IOException ex)
+        {
+            Trace.WriteLine($"Cleanup failed: {ex.Message}");
+            throw;
         }
     }
+
     /// <summary>
     /// Test case to verify that an empty folder returns an empty dictionary when loading tools.
     /// </summary>
-
     [TestMethod]
     public void TestLoadToolsFromFolderEmptyFolderReturnsEmptyDictionary()
     {
@@ -65,10 +143,10 @@ public class TestToolAssemblyLoader
         Dictionary<string, List<string>> result = _loader.LoadToolsFromFolder(_nonExistingFolder);
         Assert.AreEqual(0, result.Count, "Expected empty dictionary for an empty folder.");
     }
+
     /// <summary>
     /// Test case to verify that non-DLL files are ignored when loading tools.
     /// </summary>
-
     [TestMethod]
     public void TestLoadToolsFromFolderIgnoresNonDllFiles()
     {
@@ -77,10 +155,10 @@ public class TestToolAssemblyLoader
         Dictionary<string, List<string>> result = _loader.LoadToolsFromFolder(_emptyTestFolderPath);
         Assert.AreEqual(0, result.Count, "Expected empty dictionary when no DLL files are present.");
     }
+
     /// <summary>
     /// Test case to verify that valid DLL files are loaded correctly and return expected tool properties.
     /// </summary>
-
     [TestMethod]
     public void TestLoadToolsFromFolderValidDllWithIToolReturnsToolProperties()
     {
@@ -99,7 +177,7 @@ public class TestToolAssemblyLoader
         Assert.AreEqual("4", ids.FirstOrDefault(), "Expected Id was not found.");
 
         Assert.IsTrue(result.TryGetValue("Name", out List<string>? names), "Key 'Name' not found.");
-        Assert.AreEqual("OtherExample", names.FirstOrDefault(), "Expected Name was not found.");
+        Assert.AreEqual("OtherExampleAnalyzer.OtherExample", names.FirstOrDefault(), "Expected Name was not found.");
 
         Assert.IsTrue(result.TryGetValue("Description", out List<string>? descriptions), "Key 'Description' not found.");
         Assert.AreEqual("OtherExample Description", descriptions.FirstOrDefault(), "Expected Description was not found.");
@@ -129,11 +207,31 @@ public class TestToolAssemblyLoader
     public void TestLoadToolsFromFolderHandlesInvalidDllFiles()
     {
         _loader = new ToolAssemblyLoader();
-        string testFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../CopyTestFolder");
+        string testFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../TestsUpdater/CopyTestFolder");
         _ = Path.Combine(testFolderPath, "InvalidDLL.dll");
 
         // Attempting to load tools from the folder containing the invalid DLL
         Dictionary<string, List<string>> result = _loader.LoadToolsFromFolder(testFolderPath);
         Assert.AreEqual(1, result["Id"].Count, "Invalid DLL files should not populate the toolPropertyMap.");
+    }
+
+    /// <summary>
+    /// Test case to verify that corrupted DLL files are handled properly and don't cause a crash.
+    /// </summary>
+    [TestMethod]
+    public void TestLoadToolsFromFolderHandlesCorruptedDllFiles()
+    {
+        _loader = new ToolAssemblyLoader();
+        string corruptedTestFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _corruptedDllFolderPath);
+
+        // Simulate a corrupted DLL file by creating an empty file with a .dll extension
+        string corruptedDllPath = Path.Combine(corruptedTestFolderPath, "corrupted.dll");
+        File.WriteAllText(corruptedDllPath, "This is not a valid DLL.");
+
+        // Load tools from the folder containing the corrupted DLL
+        Dictionary<string, List<string>> result = _loader.LoadToolsFromFolder(corruptedTestFolderPath);
+
+        // Verify that the result is an empty dictionary, indicating that the corrupted DLL was ignored
+        Assert.AreEqual(0, result.Count, "Expected empty dictionary after encountering a corrupted DLL.");
     }
 }

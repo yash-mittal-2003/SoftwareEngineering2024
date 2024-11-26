@@ -19,15 +19,15 @@ namespace Updater;
 public class DirectoryMetadataComparer
 {
     [XmlElement("MetadataDifference")]
-    public List<MetadataDifference> Differences { get; private set; } = new List<MetadataDifference>();
+    public List<MetadataDifference> Differences { get; private set; } = [];
 
     // Properties for storing unique files in server and client directories
     [XmlElement("UniqueServerFiles")]
-    public List<string> UniqueServerFiles { get; private set; } = new List<string>();
+    public List<string> UniqueServerFiles { get; private set; } = [];
     [XmlElement("UniqueClientFiles")]
 
-    public List<string> UniqueClientFiles { get; private set; } = new List<string>();
-    public List<string>? InvalidSyncUpFiles { get; private set; } = new List<string>();
+    public List<string> UniqueClientFiles { get; private set; } = [];
+    public List<string>? InvalidSyncUpFiles { get; private set; } = [];
 
     // Parameterless constructor for XML serialization
     public DirectoryMetadataComparer() { }
@@ -52,7 +52,7 @@ public class DirectoryMetadataComparer
         // Initialize differences for three cases
         Differences.Add(new MetadataDifference { Key = "-1", Value = [] }); // In B but not in A
         Differences.Add(new MetadataDifference { Key = "0", Value = [] });  // Files with same hash but different names
-        Differences.Add(new MetadataDifference { Key = "1", Value = new List<FileDetail>() });    // In A but not in B
+        Differences.Add(new MetadataDifference { Key = "1", Value = [] });    // In A but not in B
 
         List<KeyValuePair<string, string>> hashToFileA = CreateHashToFileDictionary(metadataA);
         List<KeyValuePair<string, string>> hashToFileB = CreateHashToFileDictionary(metadataB);

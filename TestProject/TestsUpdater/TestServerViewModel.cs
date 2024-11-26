@@ -59,7 +59,7 @@ public class TestServerViewModel
     [TestMethod]
     public void TestBroadcastToClientsShouldLogMessageWhenCalled()
     {
-        string testFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../CopyTestFolder");
+        string testFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../TestsUpdater/CopyTestFolder");
         string filePath = Path.Combine(testFolderPath, "InvalidDLL.dll");
 
         string fileName = "InvalidDLL.dll";
