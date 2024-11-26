@@ -9,11 +9,10 @@
 *
 * Description = Unit tests for ToolListViewModel.cs
 *****************************************************************************/
+
 using Moq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using Updater;
 using ViewModel.UpdaterViewModel;
 
@@ -22,18 +21,39 @@ namespace TestsUpdater;
 [TestClass]
 public class TestToolListViewModel
 {
+    /// <summary>
+    /// Mock object for IToolAssemblyLoader to simulate dependency behavior.
+    /// </summary>
     private Mock<IToolAssemblyLoader>? _mockDllLoader;
+
+    /// <summary>
+    /// Instance of ToolListViewModel under test.
+    /// </summary>
     private ToolListViewModel? _viewModel;
-    // contains both v1 and v2 of a tool
+
+    /// <summary>
+    /// Path to the folder containing both v1 and v2 of the tools.
+    /// </summary>
     private string _testFolderPath = @"../../../TestsUpdater/TestingFolder";
 
-    // contains v2 of a tool
+    /// <summary>
+    /// Path to the folder containing only v2 of the tools.
+    /// </summary>
     private readonly string _copyTestFolderPath = @"../../../TestsUpdater/CopyTestFolder";
 
+    /// <summary>
+    /// Custom trace listener used to capture trace messages for validation.
+    /// </summary>
     private class TestTraceListener : TraceListener
     {
+        /// <summary>
+        /// Captured trace messages.
+        /// </summary>
         public List<string> Messages { get; } = new List<string>();
 
+        /// <summary>
+        /// Captures trace messages written without a new line.
+        /// </summary>
         public override void Write(string? message)
         {
             if (message != null)
@@ -42,6 +62,9 @@ public class TestToolListViewModel
             }
         }
 
+        /// <summary>
+        /// Captures trace messages written with a new line.
+        /// </summary>
         public override void WriteLine(string? message)
         {
             if (message != null)
@@ -51,8 +74,15 @@ public class TestToolListViewModel
         }
     }
 
+    /// <summary>
+    /// Instance of the custom trace listener.
+    /// </summary>
     private TestTraceListener? _traceListener;
 
+    /// <summary>
+    /// Sets up the test environment before each test.
+    /// Initializes mocks, directories, and the custom trace listener.
+    /// </summary>
     [TestInitialize]
     public void Setup()
     {
@@ -64,16 +94,22 @@ public class TestToolListViewModel
         Trace.Listeners.Add(_traceListener);
     }
 
+    /// <summary>
+    /// Cleans up the test environment after each test.
+    /// Removes the custom trace listener.
+    /// </summary>
     [TestCleanup]
     public void Cleanup()
     {
-        // Ensure only the test-specific trace listener is removed
         if (_traceListener != null)
         {
             Trace.Listeners.Remove(_traceListener);
         }
     }
 
+    /// <summary>
+    /// Verifies that calling LoadAvailableTools uses the tools directory defined in TApps constants.
+    /// </summary>
     [TestMethod]
     public void TestLoadAvailableToolsUseToolsDirectoryInTAppsConstant()
     {
@@ -81,6 +117,9 @@ public class TestToolListViewModel
         _viewModel.LoadAvailableTools();
     }
 
+    /// <summary>
+    /// Verifies that LoadAvailableTools populates the AvailableToolsList when valid tools are available.
+    /// </summary>
     [TestMethod]
     public void TestLoadAvailableToolsShouldPopulateAvailableToolsListWhenToolsAreAvailable()
     {
@@ -97,10 +136,12 @@ public class TestToolListViewModel
         Assert.AreEqual("2.0.0", tool.Version);
     }
 
+    /// <summary>
+    /// Verifies that LoadAvailableTools replaces older versions of tools when newer versions exist.
+    /// </summary>
     [TestMethod]
     public void TestLoadAvailableToolsShouldReplaceOlderVersionWhenNewerVersionExists()
     {
-        // TestingFolder contains both v1 and v2 of the same Tool
         string testFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _testFolderPath);
 
         var viewModel = new ToolListViewModel(testFolderPath);
@@ -108,7 +149,6 @@ public class TestToolListViewModel
         viewModel.LoadAvailableTools(testFolderPath);
         ObservableCollection<Tool>? updatedTools = viewModel.AvailableToolsList;
 
-        // Assert: Verify that the newer version replaced the older one
         Assert.AreEqual(1, updatedTools?.Count);
         if (updatedTools != null)
         {
@@ -118,6 +158,9 @@ public class TestToolListViewModel
         }
     }
 
+    /// <summary>
+    /// Verifies that LoadAvailableTools raises a PropertyChanged event when the tools list is updated.
+    /// </summary>
     [TestMethod]
     public void TestLoadAvailableToolsShouldFirePropertyChangedWhenToolsAreUpdated()
     {
@@ -138,21 +181,24 @@ public class TestToolListViewModel
         Assert.IsTrue(wasPropertyChangedFired);
     }
 
+    /// <summary>
+    /// Verifies that LoadAvailableTools generates the expected trace messages during execution.
+    /// </summary>
     [TestMethod]
     public void TestLoadAvailableToolsShouldGenerateExpectedTraceLines()
     {
-        // Arrange
         string testFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _testFolderPath);
 
         _viewModel = new ToolListViewModel(testFolderPath);
 
-        // Act
         _viewModel.LoadAvailableTools(testFolderPath);
 
-        // Assert: Verify trace messages
         bool replacedOlderVersionMsg = _traceListener!.Messages.Any(msg => msg.Contains("[Updater] Replaced older version with new version for tool"));
         bool addedNewToolMsg = _traceListener.Messages.Any(msg => msg.Contains("[Updater] Added new tool"));
         bool successMsg = _traceListener.Messages.Any(msg => msg.Contains("Available Tools information updated successfully"));
+
+        Thread.Sleep(1000);
+        Trace.Flush();
 
         Assert.IsTrue(replacedOlderVersionMsg, "Expected trace message for replacing older version was not found.");
         Assert.IsTrue(addedNewToolMsg, "Expected trace message for adding new tool was not found.");

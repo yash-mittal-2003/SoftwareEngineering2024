@@ -1,4 +1,16 @@
-﻿using System.Text;
+﻿/******************************************************************************
+* Filename    = TestUtils.cs
+*
+* Author      = Amithabh A. 
+*
+* Product     = Updater
+* 
+* Project     = Lab Monitoring Software
+*
+* Description = Unit tests for Utils.cs
+*****************************************************************************/
+
+using System.Text;
 using System.Diagnostics;
 using Updater;
 

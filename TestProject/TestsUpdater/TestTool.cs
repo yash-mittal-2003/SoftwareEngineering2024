@@ -9,6 +9,7 @@
 *
 * Description = Unit Tests for Tool.cs
 *****************************************************************************/
+
 using ViewModel.UpdaterViewModel;
 
 namespace TestsUpdater;
