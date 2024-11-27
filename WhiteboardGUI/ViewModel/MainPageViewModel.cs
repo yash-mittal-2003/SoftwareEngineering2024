@@ -867,6 +867,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private void OpenClearConfirmation()
     {
+        FinalizeTextBox();
         IsClearConfirmationOpen = true;
     }
 
@@ -1052,6 +1053,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private void OpenPopup()
     {
+        FinalizeTextBox();
         SnapShotFileName = "";
         IsPopupOpen = true;
     }
@@ -1677,6 +1679,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private void OnShapeClear()
     {
+        FinalizeTextBox();
         Application.Current.Dispatcher.Invoke(() =>
         {
             Shapes.Clear();
@@ -1747,6 +1750,7 @@ public class MainPageViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(TextBoxVisibility));
         }
     }
+
 
     /// <summary>
     /// Notifies listeners of property value changes.
