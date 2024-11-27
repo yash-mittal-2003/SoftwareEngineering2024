@@ -906,10 +906,20 @@ public class MainPageViewModel : INotifyPropertyChanged
     }
 
     /// <summary>
+    /// Check whether downloadItems are initialized
+    /// </summary>
+    private bool _isDownloadItemsFilled = false;
+
+    /// <summary>
     /// Opens the download popup.
     /// </summary>
     private void OpenDownloadPopup()
     {
+        if (!_isDownloadItemsFilled)
+        { 
+            InitializeDownloadItems(); 
+        }
+        _isDownloadItemsFilled = true;
         IsDownloadPopupOpen = true;
         OnPropertyChanged(nameof(IsDownloadPopupOpen));
     }

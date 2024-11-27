@@ -90,14 +90,6 @@ public class SnapShotService
         InitializeCloudService();
     }
 
-    public SnapShotService(NetworkingService networkingService, RenderingService renderingService, ObservableCollection<IShape> shapes, UndoRedoService undoRedoService)
-    {
-        _networkingService = networkingService;
-        _renderingService = renderingService;
-        _shapes = shapes;
-        _undoRedoService = undoRedoService;
-    }
-
     /// <summary>
     /// Initializes the cloud service for managing snapshot uploads and downloads.
     /// </summary>
@@ -117,7 +109,7 @@ public class SnapShotService
         var httpClient = new HttpClient(); // Simplified for testing
 
         // Configuration for the cloud service
-        var baseUrl = "https://secloudapp-2024.azurewebsites.net/api";
+        string baseUrl = "https://secloudapp-2024.azurewebsites.net/api";
         string team = "whiteboard";
         string sasToken = "sp=racwdli&st=2024-11-14T21:02:09Z&se=2024-11-30T05:02:09Z&spr=https&sv=2022-11-02&sr=c&sig=tSw6pO8%2FgqiG2MgU%2FoepmRkFuuJrTerVy%2BDn91Y0WH8%3D";
 
