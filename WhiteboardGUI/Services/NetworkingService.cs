@@ -123,7 +123,10 @@ public class NetworkingService : INotificationHandler
         if (_isHost)
         {
             int id = _receivedDataService.DataReceived(serializedData);
-            if (id == -1) return;
+            if (id == -1)
+            {
+                return;
+            }
             BroadcastShapeData(serializedData);
         }
         else
