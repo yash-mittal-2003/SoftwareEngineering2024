@@ -26,6 +26,9 @@ public abstract class ShapeBase : IShape
     private double _strokeThickness;
     private double _userID;
     private double _lastModifierID;
+    private string _userName;
+    private string _profilePictureURL;
+    private string _lastModifiedBy;
     private bool _isSelected;
     private int _zIndex;
     private bool _isLocked;
@@ -38,8 +41,7 @@ public abstract class ShapeBase : IShape
     public bool IsLocked
     {
         get => _isLocked;
-        set
-        {
+        set {
             if (_isLocked != value)
             {
                 _isLocked = value;
@@ -54,8 +56,7 @@ public abstract class ShapeBase : IShape
     public double LockedByUserID
     {
         get => _lockedByUserID;
-        set
-        {
+        set {
             if (_lockedByUserID != value)
             {
                 _lockedByUserID = value;
@@ -70,8 +71,7 @@ public abstract class ShapeBase : IShape
     public string BoundingBoxColor
     {
         get => _boundingBoxColor;
-        set
-        {
+        set {
             if (_boundingBoxColor != value)
             {
                 _boundingBoxColor = value;
@@ -145,6 +145,17 @@ public abstract class ShapeBase : IShape
         get => _userID;
         set { _userID = value; OnPropertyChanged(nameof(UserID)); }
     }
+    public string UserName
+    {
+        get => _userName;
+        set { _userName = value; OnPropertyChanged(nameof(UserName)); }
+    }
+
+    public string ProfilePictureURL
+    {
+        get => _profilePictureURL;
+        set { _profilePictureURL = value; OnPropertyChanged(nameof(ProfilePictureURL)); }
+    }
 
     /// <summary>
     /// Gets or sets the ID of the last user who modified the shape.
@@ -155,6 +166,11 @@ public abstract class ShapeBase : IShape
         set { _lastModifierID = value; OnPropertyChanged(nameof(LastModifierID)); }
     }
 
+    public string LastModifiedBy
+    {
+        get => _lastModifiedBy;
+        set { _lastModifiedBy = value; OnPropertyChanged(nameof(LastModifiedBy)); }
+    }
     /// <summary>
     /// Gets the bounding rectangle of the shape.
     /// </summary>

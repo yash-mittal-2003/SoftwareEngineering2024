@@ -20,6 +20,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace WhiteboardGUI.Adorners;
 
@@ -32,7 +33,8 @@ public class HoverAdorner : Adorner
     private readonly Border _border;
     private readonly StackPanel _stackPanel;
     private readonly Image _image;
-    private readonly TextBlock _textBlock;
+    private readonly TextBlock _textBlockCreator;
+    private readonly TextBlock _textBlockModified;
     private readonly Ellipse _colorPreview;
     private readonly Point _mousePosition;
 
@@ -49,20 +51,39 @@ public class HoverAdorner : Adorner
     {
         _mousePosition = mousePosition;
         _visuals = new VisualCollection(this);
+        string[] lines = text.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+        string userName = null;
+        string lastModifiedBy = null;
+
+        foreach (var line in lines)
+        {
+            // Split each line by ": " to separate the key and value
+            var parts = line.Split(new[] { ": " }, StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length == 2)
+            {
+                if (parts[0].Trim() == "Created By")
+                {
+                    userName = parts[1].Trim().Split(' ')[0];
+                }
+                else if (parts[0].Trim() == "Last Modified By")
+                {
+                    lastModifiedBy = parts[1].Trim().Split(' ')[0];
+                }
+            }
+        }
 
         // Initialize Image
-        _image = new Image
-        {
+        _image = new Image {
             Source = imageSource,
             Width = 40, // Set desired width
             Height = 40, // Set desired height
-            Margin = new Thickness(0, 0, 5, 0), // Margin between image and text
+            Margin = new Thickness(0, 5, 5, 5), // Margin between image and text
             IsHitTestVisible = false
         };
 
         // Initialize Color Preview Ellipse
-        _colorPreview = new Ellipse
-        {
+        _colorPreview = new Ellipse {
             Width = 16,
             Height = 16,
             Fill = new SolidColorBrush(shapeColor),
@@ -73,9 +94,18 @@ public class HoverAdorner : Adorner
         };
 
         // Initialize TextBlock
-        _textBlock = new TextBlock
-        {
-            Text = text,
+        _textBlockCreator = new TextBlock {
+            Text = $"Created By: {userName}",
+            TextWrapping = TextWrapping.Wrap,
+            FontSize = 14,
+            Foreground = Brushes.Black,
+            Background = Brushes.Transparent,
+            Padding = new Thickness(0),
+            IsHitTestVisible = false
+        };
+
+        _textBlockModified = new TextBlock {
+            Text = $"Last Modified By: {lastModifiedBy}",
             TextWrapping = TextWrapping.Wrap,
             FontSize = 14,
             Foreground = Brushes.Black,
@@ -85,16 +115,14 @@ public class HoverAdorner : Adorner
         };
 
         // Initialize StackPanel to contain Image and TextBlock
-        _stackPanel = new StackPanel
-        {
+        _stackPanel = new StackPanel {
             Orientation = Orientation.Vertical,
-            Children = { _image, _colorPreview, _textBlock },
+            Children = { _image, _colorPreview, _textBlockCreator, _textBlockModified },
             IsHitTestVisible = false
         };
 
         // Initialize Border to contain the StackPanel
-        _border = new Border
-        {
+        _border = new Border {
             Child = _stackPanel,
             Background = Brushes.LightYellow,
             BorderBrush = Brushes.Black,
@@ -164,8 +192,35 @@ public class HoverAdorner : Adorner
     /// <param name="text">The new text to display.</param>
     public void UpdateText(string text)
     {
-        _textBlock.Text = text;
+        string[] lines = text.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        string userName = null;
+        string lastModifiedBy = null;
+
+        foreach (var line in lines)
+        {
+            // Split each line by ": " to separate the key and value
+            var parts = line.Split(new[] { ": " }, StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length == 2)
+            {
+                if (string.Equals(parts[0].Trim(), "Created By", StringComparison.OrdinalIgnoreCase))
+                {
+                    var nameParts = parts[1].Trim().Split(' ');
+                    userName = nameParts.Length > 0 ? nameParts[0] : parts[1].Trim();
+                }
+                else if (string.Equals(parts[0].Trim(), "Last Modified By", StringComparison.OrdinalIgnoreCase))
+                {
+                    var nameParts = parts[1].Trim().Split(' ');
+                    lastModifiedBy = nameParts.Length > 0 ? nameParts[0] : parts[1].Trim();
+                }
+            }
+        }
+
+        // Update the TextBlocks with the extracted first names
+        _textBlockCreator.Text = $"Created By: {userName}";
+        _textBlockModified.Text = $"Last Modified By: {lastModifiedBy}";
+
         InvalidateMeasure();
         InvalidateVisual();
     }
+
 }
