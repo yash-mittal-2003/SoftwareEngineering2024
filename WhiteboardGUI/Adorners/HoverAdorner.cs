@@ -56,10 +56,10 @@ public class HoverAdorner : Adorner
         string userName = null;
         string lastModifiedBy = null;
 
-        foreach (var line in lines)
+        foreach (string line in lines)
         {
             // Split each line by ": " to separate the key and value
-            var parts = line.Split(new[] { ": " }, StringSplitOptions.RemoveEmptyEntries);
+            string[] parts = line.Split(new[] { ": " }, StringSplitOptions.RemoveEmptyEntries);
             if (parts.Length == 2)
             {
                 if (parts[0].Trim() == "Created By")
@@ -196,20 +196,20 @@ public class HoverAdorner : Adorner
         string userName = null;
         string lastModifiedBy = null;
 
-        foreach (var line in lines)
+        foreach (string line in lines)
         {
             // Split each line by ": " to separate the key and value
-            var parts = line.Split(new[] { ": " }, StringSplitOptions.RemoveEmptyEntries);
+            string[] parts = line.Split(new[] { ": " }, StringSplitOptions.RemoveEmptyEntries);
             if (parts.Length == 2)
             {
                 if (string.Equals(parts[0].Trim(), "Created By", StringComparison.OrdinalIgnoreCase))
                 {
-                    var nameParts = parts[1].Trim().Split(' ');
+                    string[] nameParts = parts[1].Trim().Split(' ');
                     userName = nameParts.Length > 0 ? nameParts[0] : parts[1].Trim();
                 }
                 else if (string.Equals(parts[0].Trim(), "Last Modified By", StringComparison.OrdinalIgnoreCase))
                 {
-                    var nameParts = parts[1].Trim().Split(' ');
+                    string[] nameParts = parts[1].Trim().Split(' ');
                     lastModifiedBy = nameParts.Length > 0 ? nameParts[0] : parts[1].Trim();
                 }
             }

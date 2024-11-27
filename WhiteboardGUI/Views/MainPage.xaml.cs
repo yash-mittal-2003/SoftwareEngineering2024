@@ -159,7 +159,7 @@ public partial class MainPage : Page
             Mouse.Capture(null);
             if (this.DataContext is MainPageViewModel viewModel)
             {
-                viewModel._renderingService.RenderShape(_resizingShape, "MODIFY");
+                viewModel.RenderingService.RenderShape(_resizingShape, "MODIFY");
             }
             _resizingShape = null;
             _currentHandle = null;

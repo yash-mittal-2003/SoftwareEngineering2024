@@ -130,7 +130,12 @@ public class CircleShape : ShapeBase
             CenterY = this.CenterY,
             RadiusX = this.RadiusX,
             RadiusY = this.RadiusY,
-            ZIndex = this.ZIndex
+            ZIndex = this.ZIndex,
+            UserName = this.UserName,
+            ProfilePictureURL = this.ProfilePictureURL,
+            LastModifiedBy = this.LastModifiedBy,
+            BoundingBoxColor = this.BoundingBoxColor,
+            LockedByUserID = this.LockedByUserID
         };
     }
 }

@@ -125,7 +125,12 @@ public class ScribbleShape : ShapeBase
             LastModifierID = this.LastModifierID,
             IsSelected = false, // New shape should not be selected by default
             Points = new List<Point>(this.Points), // Create a deep copy of the points
-            ZIndex = this.ZIndex
+            ZIndex = this.ZIndex,
+            UserName = this.UserName,
+            ProfilePictureURL = this.ProfilePictureURL,
+            LastModifiedBy = this.LastModifiedBy,
+            BoundingBoxColor = this.BoundingBoxColor,
+            LockedByUserID = this.LockedByUserID
         };
     }
 }

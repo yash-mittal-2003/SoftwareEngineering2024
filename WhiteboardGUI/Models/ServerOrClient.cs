@@ -43,7 +43,7 @@ public class ServerOrClient
     /// </summary>
     public string _userEmail;
 
-    public string profilePictureURL;
+    public string _profilePictureURL;
 
     /// <summary>
     /// Object used for ensuring thread safety in singleton instance creation.
@@ -86,7 +86,7 @@ public class ServerOrClient
         _userName = username;
         _userId = int.Parse(userid);
         _userEmail = useremail;
-        profilePictureURL = profileURL;
+        _profilePictureURL = profileURL;
 
     }
 }
