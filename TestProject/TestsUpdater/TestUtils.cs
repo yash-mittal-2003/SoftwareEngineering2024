@@ -7,8 +7,8 @@ namespace TestsUpdater;
 [TestClass]
 public class TestUtils
 {
-    private readonly string _testFilePath = Path.Combine(Path.GetTempPath(), "testFile.bin");
-    private readonly string _testTextFilePath = Path.Combine(Path.GetTempPath(), "testTextFile.txt");
+    private readonly string _testFilePath = Path.GetTempFileName();
+    private readonly string _testTextFilePath = Path.GetTempFileName();
     private readonly string _base64TestData = Convert.ToBase64String(Encoding.UTF8.GetBytes("test binary content"));
 
     [TestMethod]
@@ -100,8 +100,6 @@ public class TestUtils
         }
     }
 
-    // NOTE: This test is specifically for windows 
-
     [TestMethod]
     public void TestSerializedMetadataPacketShouldReturnValidPacketWhenCalled()
     {
@@ -190,23 +188,72 @@ public class TestUtils
         Assert.IsTrue(output.Contains("An error occurred while writing to the file"), "Error message not logged correctly.");
     }
 
-    // Clean up temporary test files
+    private void DeleteFileWithRetry(string filePath)
+    {
+        const int maxRetries = 4;
+        const int delay = 100; // 100 ms
+
+        for (int attempt = 1; attempt <= maxRetries; attempt++)
+        {
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+                break;
+            }
+            catch (IOException)
+            {
+                if (attempt == maxRetries)
+                {
+                    throw; // Re-throw after max retries
+                }
+                Thread.Sleep(delay); // Wait before retrying
+            }
+        }
+    }
+
+    private void DeleteDirectoryWithRetry(string directoryPath)
+    {
+        const int maxRetries = 4;
+        const int delay = 100; // 100 ms
+
+        for (int attempt = 1; attempt <= maxRetries; attempt++)
+        {
+            try
+            {
+                if (Directory.Exists(directoryPath))
+                {
+                    Directory.Delete(directoryPath, true);
+                }
+                break;
+            }
+            catch (IOException)
+            {
+                if (attempt == maxRetries)
+                {
+                    throw; // Re-throw after max retries
+                }
+                Thread.Sleep(delay); // Wait before retrying
+            }
+        }
+    }
+
     [TestCleanup]
     public void Cleanup()
     {
-        if (File.Exists(_testFilePath))
+        try
         {
-            File.Delete(_testFilePath);
+            Trace.WriteLine($"Cleaning up test files.");
+            DeleteFileWithRetry(_testFilePath);
+            DeleteFileWithRetry(_testTextFilePath);
+            DeleteDirectoryWithRetry(Path.Combine(Path.GetTempPath(), "ToolsDirectory"));
         }
-
-        if (File.Exists(_testTextFilePath))
+        catch (IOException ex)
         {
-            File.Delete(_testTextFilePath);
-        }
-
-        if (Directory.Exists(Path.GetTempPath() + "ToolsDirectory"))
-        {
-            Directory.Delete(Path.GetTempPath() + "ToolsDirectory", true);
+            Trace.WriteLine($"Cleanup failed: {ex.Message}");
+            throw;
         }
     }
 }

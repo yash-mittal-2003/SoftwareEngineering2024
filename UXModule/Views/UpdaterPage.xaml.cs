@@ -70,9 +70,12 @@ public partial class UpdaterPage : Page
 
     private void OnMessageReceived(string message)
     {
-        _toolListViewModel.LoadAvailableTools(); // Refresh the tool list on message receipt 
-        LogServiceViewModel.ShowNotification(message); // Show received message as a notification 
-        LogServiceViewModel.UpdateLogDetails(message); // Update log with received message 
+        Dispatcher.Invoke(() =>
+        {
+            _toolListViewModel.LoadAvailableTools(); // Refresh the tool list on message receipt 
+            LogServiceViewModel.ShowNotification(message); // Show received message as a notification 
+            LogServiceViewModel.UpdateLogDetails(message); // Update log with received message 
+        });
     }
 
     private async void SyncButtonClick(object sender, RoutedEventArgs e)
@@ -83,12 +86,12 @@ public partial class UpdaterPage : Page
             {
                 try
                 {
-                    LogServiceViewModel.UpdateLogDetails("Initiating sync with the server...\n");
+                    Dispatcher.Invoke(() => LogServiceViewModel.UpdateLogDetails("Initiating sync with the server..."));
                     await s_clientViewModel.SyncUpAsync(); // Call the sync method on the ViewModel
                 }
                 catch (Exception)
                 {
-                    LogServiceViewModel.UpdateLogDetails("Client is not connected. Please connect first.\n");
+                    Dispatcher.Invoke(() => LogServiceViewModel.UpdateLogDetails("Client is not connected. Please connect first."));
                 }
             }
         }
@@ -118,27 +121,27 @@ public partial class UpdaterPage : Page
     private async void SyncCloudButtonClick(object sender, RoutedEventArgs e)
     {
         // Disable the Sync button to prevent multiple syncs at the same time
-        CloudSyncButton.IsEnabled = false;
+        Dispatcher.Invoke(() => CloudSyncButton.IsEnabled = false);
         if (s_cloudViewModel != null)
         {
             if (_sessionType == "server")
             {
                 try
                 {
-                    LogServiceViewModel.UpdateLogDetails("Server is running. Starting cloud sync.");
+                    Dispatcher.Invoke(() => LogServiceViewModel.UpdateLogDetails("Server is running. Starting cloud sync."));
 
                     // Perform cloud sync asynchronously
                     await s_cloudViewModel.PerformCloudSync();
 
-                    LogServiceViewModel.UpdateLogDetails("Cloud sync completed.");
+                    Dispatcher.Invoke(() => LogServiceViewModel.UpdateLogDetails("Cloud sync completed."));
                 }
                 catch (Exception ex)
                 {
-                    LogServiceViewModel.UpdateLogDetails($"Error during cloud sync: {ex.Message}");
+                    Dispatcher.Invoke(() => LogServiceViewModel.UpdateLogDetails($"Error during cloud sync: {ex.Message}"));
                 }
                 finally
                 {
-                    CloudSyncButton.IsEnabled = true; // Re-enable Sync button
+                    Dispatcher.Invoke(() => CloudSyncButton.IsEnabled = true); // Re-enable Sync button
                 }
             }
         }
@@ -146,6 +149,6 @@ public partial class UpdaterPage : Page
 
     private void ClosePopup(object sender, RoutedEventArgs e)
     {
-        LogServiceViewModel.NotificationVisible = false;
+        Dispatcher.Invoke(() => LogServiceViewModel.NotificationVisible = false);
     }
 }

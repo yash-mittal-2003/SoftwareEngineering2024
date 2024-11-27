@@ -70,6 +70,7 @@ public class ToolListViewModel : INotifyPropertyChanged
                 };
                 // Check if a tool with the same unique key exists
                 Tool? existingTool = AvailableToolsList.FirstOrDefault(tool =>
+                tool.ID == newTool.ID &&
                 tool.Name == newTool.Name &&
                 tool.CreatedBy == newTool.CreatedBy &&
                 tool.CreatorEmail == newTool.CreatorEmail);

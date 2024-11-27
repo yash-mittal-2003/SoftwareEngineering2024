@@ -9,12 +9,8 @@
 *
 * Description = Unit tests for ToolListViewModel.cs
 *****************************************************************************/
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -29,14 +25,14 @@ public class TestToolListViewModel
     private Mock<IToolAssemblyLoader>? _mockDllLoader;
     private ToolListViewModel? _viewModel;
     // contains both v1 and v2 of a tool
-    private string _testFolderPath = @"../../../TestingFolder";
+    private string _testFolderPath = @"../../../TestsUpdater/TestingFolder";
 
     // contains v2 of a tool
-    private readonly string _copyTestFolderPath = @"../../../CopyTestFolder";
+    private readonly string _copyTestFolderPath = @"../../../TestsUpdater/CopyTestFolder";
 
     private class TestTraceListener : TraceListener
     {
-        public List<string> Messages { get; } = [];
+        public List<string> Messages { get; } = new List<string>();
 
         public override void Write(string? message)
         {
@@ -71,6 +67,7 @@ public class TestToolListViewModel
     [TestCleanup]
     public void Cleanup()
     {
+        // Ensure only the test-specific trace listener is removed
         if (_traceListener != null)
         {
             Trace.Listeners.Remove(_traceListener);
@@ -96,7 +93,7 @@ public class TestToolListViewModel
         Assert.AreEqual(1, _viewModel.AvailableToolsList.Count);
 
         Tool tool = _viewModel.AvailableToolsList[0];
-        Assert.AreEqual("OtherExample", tool.Name);
+        Assert.AreEqual("OtherExampleAnalyzer.OtherExample", tool.Name);
         Assert.AreEqual("2.0.0", tool.Version);
     }
 
@@ -116,7 +113,7 @@ public class TestToolListViewModel
         if (updatedTools != null)
         {
             Tool updatedTool = updatedTools.First();
-            Assert.AreEqual("OtherExample", updatedTool.Name);
+            Assert.AreEqual("OtherExampleAnalyzer.OtherExample", updatedTool.Name);
             Assert.AreEqual("2.0.0", updatedTool.Version);
         }
     }
@@ -153,11 +150,12 @@ public class TestToolListViewModel
         _viewModel.LoadAvailableTools(testFolderPath);
 
         // Assert: Verify trace messages
-        Assert.IsTrue(_traceListener!.Messages.Any(msg => msg.Contains("[Updater] Replaced older version with new version for tool")),
-            "Expected trace message for replacing older version was not found.");
-        Assert.IsTrue(_traceListener.Messages.Any(msg => msg.Contains("[Updater] Added new tool")),
-            "Expected trace message for adding new tool was not found.");
-        Assert.IsTrue(_traceListener.Messages.Any(msg => msg.Contains("Available Tools information updated successfully")),
-            "Expected trace message for successful update was not found.");
+        bool replacedOlderVersionMsg = _traceListener!.Messages.Any(msg => msg.Contains("[Updater] Replaced older version with new version for tool"));
+        bool addedNewToolMsg = _traceListener.Messages.Any(msg => msg.Contains("[Updater] Added new tool"));
+        bool successMsg = _traceListener.Messages.Any(msg => msg.Contains("Available Tools information updated successfully"));
+
+        Assert.IsTrue(replacedOlderVersionMsg, "Expected trace message for replacing older version was not found.");
+        Assert.IsTrue(addedNewToolMsg, "Expected trace message for adding new tool was not found.");
+        Assert.IsTrue(successMsg, "Expected trace message for successful update was not found.");
     }
 }
