@@ -1,4 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿/******************************************************************************
+* Filename    = TestClient.cs
+*
+* Author      = Amithabh A
+*
+* Product     = Updater
+* 
+* Project     = Lab Monitoring Software
+*
+* Description = Unit Tests for BinarySemaphore.cs
+*****************************************************************************/
+
 using Updater;
 
 namespace TestsUpdater;

@@ -1,4 +1,16 @@
-﻿using System.Windows;
+﻿/******************************************************************************
+* Filename    = TestLogServiceViewModel.cs
+*
+* Author      = N. Pawan Kumar
+*
+* Product     = Updater
+* 
+* Project     = Lab Monitoring Software
+*
+* Description = Unit Tests for LogServiceViewModel.cs
+*****************************************************************************/
+
+using System.Windows;
 using Updater;
 using ViewModel.UpdaterViewModel;
 

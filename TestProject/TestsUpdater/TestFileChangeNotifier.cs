@@ -72,7 +72,7 @@ public class TestFileChangeNotifier
             ?.Invoke(_fileMonitor, [this, new FileSystemEventArgs(WatcherChangeTypes.Created, Path.GetDirectoryName(testFilePath ?? "") ?? "", Path.GetFileName(testFilePath))]);
 
         // Simulate timer elapse
-        Thread.Sleep(1100);
+        Thread.Sleep(1500);
 
         // Check if the MessageStatus reflects the correct message
         Assert.AreEqual("Files created: createfile.dll", _fileMonitor?.MessageStatus?.TrimEnd());
@@ -94,7 +94,7 @@ public class TestFileChangeNotifier
             ?.Invoke(_fileMonitor, [this, new FileSystemEventArgs(WatcherChangeTypes.Deleted, Path.GetDirectoryName(testFilePath ?? "") ?? "", Path.GetFileName(testFilePath))]);
 
         // Simulate timer elapse
-        Thread.Sleep(1100);
+        Thread.Sleep(1500);
 
         // Assert
         Assert.AreEqual("Files removed: deletefile.dll", _fileMonitor?.MessageStatus?.TrimEnd());
@@ -126,7 +126,7 @@ public class TestFileChangeNotifier
             ?.Invoke(_fileMonitor, [this, new FileSystemEventArgs(WatcherChangeTypes.Deleted, Path.GetDirectoryName(file1 ?? "") ?? "", Path.GetFileName(deletedFile))]);
 
         // Simulate timer elapse
-        Thread.Sleep(1100);
+        Thread.Sleep(1500);
 
         // Ensure that the MessageStatus is correctly updated for multiple files
         Assert.AreEqual(

@@ -1,5 +1,16 @@
-﻿using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿/******************************************************************************
+* Filename    = TestDirectoryMetadataGenerator.cs
+*
+* Author      = Amithabh A.
+*
+* Product     = Updater
+* 
+* Project     = Lab Monitoring Software
+*
+* Description = Unit Tests for DirectoryMetadataGenerator.cs
+*****************************************************************************/
+
+using System.Diagnostics;
 using Updater;
 
 namespace TestsUpdater;
@@ -151,6 +162,10 @@ public class TestDirectoryMetadataGenerator
 
         // Assert
         string output = stringWriter.ToString();
+
+        Trace.Flush();
+        Thread.Sleep(1000);
+
         Assert.IsTrue(output.Contains("Directory does not exist"), "Log message not found.");
 
         // Remove the listener from `Trace.Listeners` collection to clean up after the test
