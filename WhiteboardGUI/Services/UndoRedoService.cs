@@ -10,6 +10,7 @@
  * Description = Implementation for undo redo feature for the actions performed on the canvas
  *************************************************************************************************/
 
+using System.Diagnostics;
 using WhiteboardGUI.Models;
 
 namespace WhiteboardGUI.Services;
@@ -40,6 +41,8 @@ public class UndoRedoService
     /// <param name="shape">The shape whose modifications are to be removed.</param>
     public void RemoveLastModified(NetworkingService networkingService, IShape shape)
     {
+        Trace.TraceInformation($"Entering RemoveLastModified for ShapeId: {shape.ShapeId}, UserID: {shape.UserID}");
+
         _undoList.RemoveAll(item =>
             item.Item1 != null &&
             item.Item1.ShapeId == shape.ShapeId &&
@@ -49,6 +52,8 @@ public class UndoRedoService
             item.Item1 != null &&
             item.Item1.ShapeId == shape.ShapeId &&
             item.Item1.UserID == shape.UserID);
+
+        Trace.TraceInformation($"Exiting RemoveLastModified for ShapeId: {shape.ShapeId}, UserID: {shape.UserID}");
     }
 
     /// <summary>
@@ -59,12 +64,16 @@ public class UndoRedoService
     /// <param name="previousShape">The previous state of the shape.</param>
     public void UpdateLastDrawing(IShape currentShape, IShape previousShape)
     {
+        Trace.TraceInformation($"Entering UpdateLastDrawing for ShapeId: {currentShape.ShapeId}, UserID: {currentShape.UserID}");
+
         _undoList.Add((currentShape, previousShape));
         if (_undoList.Count > 5)
         {
-            // Removes the oldest modification if the undo list exceeds 5 entries.
+            Trace.TraceInformation("Undo list exceeded 5 entries. Removing the oldest entry.");
             _undoList.RemoveAt(0);
         }
+
+        Trace.TraceInformation($"Exiting UpdateLastDrawing for ShapeId: {currentShape.ShapeId}, UserID: {currentShape.UserID}");
     }
 
     /// <summary>
@@ -73,16 +82,25 @@ public class UndoRedoService
     /// </summary>
     public void Undo()
     {
+        Trace.TraceInformation("Entering Undo");
+
         if (_undoList.Count > 0)
         {
+            Trace.TraceInformation("Performing Undo operation.");
             _redoList.Add((_undoList[_undoList.Count - 1].Item2, _undoList[_undoList.Count - 1].Item1));
             if (_redoList.Count > 5)
             {
-                // Removes the oldest redo action if the redo list exceeds 5 entries.
+                Trace.TraceInformation("Redo list exceeded 5 entries. Removing the oldest entry.");
                 _redoList.RemoveAt(0);
             }
             _undoList.RemoveAt(_undoList.Count - 1);
         }
+        else
+        {
+            Trace.TraceWarning("Undo list is empty. Nothing to undo.");
+        }
+
+        Trace.TraceInformation("Exiting Undo");
     }
 
     /// <summary>
@@ -90,10 +108,19 @@ public class UndoRedoService
     /// </summary>
     public void Redo()
     {
+        Trace.TraceInformation("Entering Redo");
+
         if (_redoList.Count > 0)
         {
+            Trace.TraceInformation("Performing Redo operation.");
             _undoList.Add((_redoList[_redoList.Count - 1].Item2, _redoList[_redoList.Count - 1].Item1));
             _redoList.RemoveAt(_redoList.Count - 1);
         }
+        else
+        {
+            Trace.TraceWarning("Redo list is empty. Nothing to redo.");
+        }
+
+        Trace.TraceInformation("Exiting Redo");
     }
 }

@@ -23,7 +23,6 @@ namespace WhiteboardGUI.Services;
 /// </summary>
 public static class SerializationService
 {
-    
     /// <summary>
     /// Serializes an <see cref="IShape"/> object to a JSON string.
     /// </summary>
@@ -31,7 +30,10 @@ public static class SerializationService
     /// <returns>A JSON string representation of the shape.</returns>
     public static string SerializeShape(IShape shape)
     {
-        return JsonConvert.SerializeObject(shape);
+        Trace.TraceInformation("Entering SerializeShape");
+        string result = JsonConvert.SerializeObject(shape);
+        Trace.TraceInformation("Exiting SerializeShape");
+        return result;
     }
 
     /// <summary>
@@ -41,9 +43,11 @@ public static class SerializationService
     /// <returns>A JSON string representation of the snapshot.</returns>
     public static string SerializeSnapShot(SnapShot snapShot)
     {
-        return JsonConvert.SerializeObject(snapShot);
+        Trace.TraceInformation("Entering SerializeSnapShot");
+        string result = JsonConvert.SerializeObject(snapShot);
+        Trace.TraceInformation("Exiting SerializeSnapShot");
+        return result;
     }
-
 
     /// <summary>
     /// Deserializes a JSON string into a <see cref="SnapShot"/> object.
@@ -52,11 +56,12 @@ public static class SerializationService
     /// <returns>A <see cref="SnapShot"/> object represented by the JSON string.</returns>
     public static SnapShot DeserializeSnapShot(string data)
     {
-
-        return JsonConvert.DeserializeObject<SnapShot>(data, new JsonSerializerSettings
-        {
+        Trace.TraceInformation("Entering DeserializeSnapShot");
+        SnapShot result = JsonConvert.DeserializeObject<SnapShot>(data, new JsonSerializerSettings {
             TypeNameHandling = TypeNameHandling.Auto
         });
+        Trace.TraceInformation("Exiting DeserializeSnapShot");
+        return result;
     }
 
     /// <summary>
@@ -67,20 +72,22 @@ public static class SerializationService
     /// <exception cref="NotSupportedException">Thrown when the shape type is not supported.</exception>
     public static IShape DeserializeShape(string data)
     {
+        Trace.TraceInformation("Entering DeserializeShape");
         Dictionary<string, object>? shapeDict = JsonConvert.DeserializeObject<Dictionary<string, object>>(data);
         string shapeType = shapeDict["ShapeType"].ToString();
-        Debug.WriteLine(shapeType);
+        Trace.TraceInformation($"Deserializing shape of type: {shapeType}");
 
-        return shapeType switch
-        {
+        IShape result = shapeType switch {
             "Circle" => JsonConvert.DeserializeObject<CircleShape>(data),
             "Line" => JsonConvert.DeserializeObject<LineShape>(data),
             "Scribble" => JsonConvert.DeserializeObject<ScribbleShape>(data),
             "TextShape" => JsonConvert.DeserializeObject<TextShape>(data),
             _ => throw new NotSupportedException("Shape type not supported"),
         };
-    }
 
+        Trace.TraceInformation("Exiting DeserializeShape");
+        return result;
+    }
 
     /// <summary>
     /// Serializes an <see cref="ObservableCollection{IShape}"/> to a JSON string.
@@ -89,7 +96,10 @@ public static class SerializationService
     /// <returns>A JSON string representation of the shape collection.</returns>
     public static string SerializeShapes(ObservableCollection<IShape> shapes)
     {
-        return JsonConvert.SerializeObject(shapes);
+        Trace.TraceInformation("Entering SerializeShapes");
+        string result = JsonConvert.SerializeObject(shapes);
+        Trace.TraceInformation("Exiting SerializeShapes");
+        return result;
     }
 
     /// <summary>
@@ -100,16 +110,16 @@ public static class SerializationService
     /// <exception cref="NotSupportedException">Thrown when a shape type in the JSON is not supported.</exception>
     public static ObservableCollection<IShape> DeserializeShapes(string data)
     {
+        Trace.TraceInformation("Entering DeserializeShapes");
         List<Dictionary<string, object>>? shapeList = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(data);
         var shapes = new ObservableCollection<IShape>();
 
         foreach (Dictionary<string, object> shapeDict in shapeList)
         {
             string shapeType = shapeDict["ShapeType"].ToString();
-            Debug.WriteLine($"Deserializing shape of type: {shapeType}");
+            Trace.TraceInformation($"Deserializing shape of type: {shapeType}");
 
-            IShape shape = shapeType switch
-            {
+            IShape shape = shapeType switch {
                 "Circle" => JsonConvert.DeserializeObject<CircleShape>(JsonConvert.SerializeObject(shapeDict)),
                 "Line" => JsonConvert.DeserializeObject<LineShape>(JsonConvert.SerializeObject(shapeDict)),
                 "Scribble" => JsonConvert.DeserializeObject<ScribbleShape>(JsonConvert.SerializeObject(shapeDict)),
@@ -120,6 +130,8 @@ public static class SerializationService
             shapes.Add(shape);
         }
 
+        Trace.TraceInformation("Exiting DeserializeShapes");
         return shapes;
     }
 }
+

@@ -21,6 +21,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace WhiteboardGUI.Adorners;
 
@@ -35,7 +36,6 @@ public class HoverAdorner : Adorner
     private readonly Image _image;
     private readonly TextBlock _textBlockCreator;
     private readonly TextBlock _textBlockModified;
-    //private readonly Ellipse _colorPreview;
     private readonly Point _mousePosition;
 
     /// <summary>
@@ -49,6 +49,7 @@ public class HoverAdorner : Adorner
     public HoverAdorner(UIElement adornedElement, string text, Point mousePosition, ImageSource imageSource, Color shapeColor)
         : base(adornedElement)
     {
+        Trace.TraceInformation("Initializing HoverAdorner");
         _mousePosition = mousePosition;
         _visuals = new VisualCollection(this);
         string[] lines = text.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
@@ -58,7 +59,6 @@ public class HoverAdorner : Adorner
 
         foreach (string line in lines)
         {
-            // Split each line by ": " to separate the key and value
             string[] parts = line.Split(new[] { ": " }, StringSplitOptions.RemoveEmptyEntries);
             if (parts.Length == 2)
             {
@@ -81,27 +81,15 @@ public class HoverAdorner : Adorner
         {
             lastModifiedBy = lastModifiedBy.Substring(0, 15);
         }
-        // Initialize Image
+
         _image = new Image {
             Source = imageSource,
-            Width = 60, // Set desired width
-            Height = 60, // Set desired height
-            Margin = new Thickness(5, 5, 5, 5), // Margin between image and text
+            Width = 60,
+            Height = 60,
+            Margin = new Thickness(5, 5, 5, 5),
             IsHitTestVisible = false
         };
 
-        // Initialize Color Preview Ellipse
-        //_colorPreview = new Ellipse {
-        //    Width = 16,
-        //    Height = 16,
-        //    Fill = new SolidColorBrush(shapeColor),
-        //    Stroke = Brushes.Black,
-        //    StrokeThickness = 1,
-        //    Margin = new Thickness(0, 0, 5, 0),
-        //    IsHitTestVisible = false
-        //};
-
-        // Initialize TextBlock
         _textBlockCreator = new TextBlock {
             Text = $"Created By: {userName}... ",
             TextWrapping = TextWrapping.Wrap,
@@ -122,14 +110,12 @@ public class HoverAdorner : Adorner
             IsHitTestVisible = false
         };
 
-        // Initialize StackPanel to contain Image and TextBlock
         _stackPanel = new StackPanel {
             Orientation = Orientation.Vertical,
             Children = { _image, _textBlockCreator, _textBlockModified },
             IsHitTestVisible = false
         };
 
-        // Initialize Border to contain the StackPanel
         _border = new Border {
             Child = _stackPanel,
             Background = Brushes.LightYellow,
@@ -140,12 +126,19 @@ public class HoverAdorner : Adorner
         };
 
         _visuals.Add(_border);
+        Trace.TraceInformation("HoverAdorner initialized successfully");
     }
 
     /// <summary>
     /// Gets the number of visual children managed by the adorner.
     /// </summary>
-    protected override int VisualChildrenCount => _visuals.Count;
+    protected override int VisualChildrenCount
+    {
+        get {
+            Trace.TraceInformation("Getting VisualChildrenCount");
+            return _visuals.Count;
+        }
+    }
 
     /// <summary>
     /// Gets a specific visual child by index.
@@ -154,6 +147,7 @@ public class HoverAdorner : Adorner
     /// <returns>The visual child at the specified index.</returns>
     protected override Visual GetVisualChild(int index)
     {
+        Trace.TraceInformation($"Getting VisualChild at index: {index}");
         return _visuals[index];
     }
 
@@ -164,6 +158,7 @@ public class HoverAdorner : Adorner
     /// <returns>The desired size of the adorner.</returns>
     protected override Size MeasureOverride(Size constraint)
     {
+        Trace.TraceInformation("Measuring size for HoverAdorner");
         _border.Measure(constraint);
         return _border.DesiredSize;
     }
@@ -175,11 +170,10 @@ public class HoverAdorner : Adorner
     /// <returns>The arranged size of the adorner.</returns>
     protected override Size ArrangeOverride(Size finalSize)
     {
-        // Position the Adorner near the mouse position
-        double x = _mousePosition.X + 10; // Offset by 10 pixels
-        double y = _mousePosition.Y + 10; // Offset by 10 pixels
+        Trace.TraceInformation("Arranging HoverAdorner");
+        double x = _mousePosition.X + 10;
+        double y = _mousePosition.Y + 10;
 
-        // Ensure the Adorner doesn't go outside the adorned element's bounds
         if (x + _border.DesiredSize.Width > finalSize.Width)
         {
             x = finalSize.Width - _border.DesiredSize.Width - 10;
@@ -200,13 +194,13 @@ public class HoverAdorner : Adorner
     /// <param name="text">The new text to display.</param>
     public void UpdateText(string text)
     {
+        Trace.TraceInformation("Updating text in HoverAdorner");
         string[] lines = text.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
         string userName = null;
         string lastModifiedBy = null;
 
         foreach (string line in lines)
         {
-            // Split each line by ": " to separate the key and value
             string[] parts = line.Split(new[] { ": " }, StringSplitOptions.RemoveEmptyEntries);
             if (parts.Length == 2)
             {
@@ -231,12 +225,13 @@ public class HoverAdorner : Adorner
         {
             lastModifiedBy = lastModifiedBy.Substring(0, 15);
         }
-        // Update the TextBlocks with the extracted first names
+
         _textBlockCreator.Text = $"Created By: {userName}";
         _textBlockModified.Text = $"Last Modified By: {lastModifiedBy}";
 
         InvalidateMeasure();
         InvalidateVisual();
+        Trace.TraceInformation("HoverAdorner text updated successfully");
     }
-
 }
+

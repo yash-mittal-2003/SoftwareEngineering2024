@@ -133,8 +133,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     private static readonly object s_padlock = new object();
     public static MainPageViewModel WhiteboardInstance
     {
-        get
-        {
+        get {
             lock (s_padlock)
             {
                 if (s_whiteboardInstance == null)
@@ -155,8 +154,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public string DefaultColor
     {
         get => _defaultColor;
-        set
-        {
+        set {
             if (_defaultColor != value)
             {
                 _defaultColor = value;
@@ -208,8 +206,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public byte Red
     {
         get => _red;
-        set
-        {
+        set {
             _red = value;
             OnPropertyChanged(nameof(Red));
             UpdateSelectedColor();
@@ -223,8 +220,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public byte Green
     {
         get => _green;
-        set
-        {
+        set {
             _green = value;
             OnPropertyChanged(nameof(Green));
             UpdateSelectedColor();
@@ -238,8 +234,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public byte Blue
     {
         get => _blue;
-        set
-        {
+        set {
             _blue = value;
             OnPropertyChanged(nameof(Blue));
             UpdateSelectedColor();
@@ -252,8 +247,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public bool IsUploading
     {
         get => _isUploading;
-        set
-        {
+        set {
             _isUploading = value;
             OnPropertyChanged(nameof(IsUploading));
         }
@@ -265,8 +259,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public bool IsDragging
     {
         get => _isDragging;
-        set
-        {
+        set {
             _isDragging = value;
             OnPropertyChanged(nameof(IsDragging));
         }
@@ -278,8 +271,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public bool IsDownloading
     {
         get => _isDownloading;
-        set
-        {
+        set {
             _isDownloading = value;
             OnPropertyChanged(nameof(IsDownloading));
         }
@@ -292,8 +284,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public double SelectedThickness
     {
         get => _selectedThickness;
-        set
-        {
+        set {
             if (_selectedThickness != value)
             {
                 _selectedThickness = value;
@@ -315,8 +306,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public Color SelectedColor
     {
         get => _selectedColor;
-        set
-        {
+        set {
             if (_selectedColor != value)
             {
                 _selectedColor = value;
@@ -337,8 +327,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public Color CurrentColor
     {
         get => _currentColor;
-        set
-        {
+        set {
             if (_currentColor != value)
             {
                 _currentColor = value;
@@ -355,6 +344,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="e">Event arguments.</param>
     private void Shapes_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
     {
+        Trace.TraceInformation("Shapes collection changed");
         _moveShapeZIndexing.UpdateZIndices();
     }
 
@@ -365,8 +355,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public string TextInput
     {
         get => _textInput;
-        set
-        {
+        set {
             _textInput = value;
             OnPropertyChanged(nameof(TextInput));
             Debug.WriteLine(_textInput);
@@ -380,8 +369,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public bool IsTextBoxActive
     {
         get => _isTextBoxActive;
-        set
-        {
+        set {
             _isTextBoxActive = value;
             OnPropertyChanged(nameof(IsTextBoxActive));
             OnPropertyChanged(nameof(TextBoxVisibility));
@@ -394,8 +382,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public bool IsPopupOpen
     {
         get => _isPopupOpen;
-        set
-        {
+        set {
             if (_isPopupOpen != value)
             {
                 _isPopupOpen = value;
@@ -428,8 +415,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public ObservableCollection<IShape> Shapes
     {
         get => _shapes;
-        set
-        {
+        set {
             _shapes = value;
             OnPropertyChanged(nameof(Shapes));
         }
@@ -441,8 +427,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public string SnapShotFileName
     {
         get => _snapShotFileName;
-        set
-        {
+        set {
             if (_snapShotFileName != value)
             {
                 _snapShotFileName = value;
@@ -458,8 +443,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public IShape SelectedShape
     {
         get => _selectedShape;
-        set
-        {
+        set {
             if (_selectedShape != value)
             {
                 if (_selectedShape != null)
@@ -492,8 +476,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public ShapeType CurrentTool
     {
         get => _currentTool;
-        set
-        {
+        set {
             //without textbox
             _currentTool = value;
             OnPropertyChanged(nameof(CurrentTool));
@@ -525,8 +508,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public SnapShotDownloadItem SelectedDownloadItem
     {
         get => _selectedDownloadItem;
-        set
-        {
+        set {
             _selectedDownloadItem = value;
             OnPropertyChanged(nameof(SelectedDownloadItem));
             OnPropertyChanged(nameof(CanDownload)); // Notify change for CanDownload
@@ -536,7 +518,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <summary>
     /// Gets a value indicating whether a download can be performed.
     /// </summary>
-    public bool CanDownload => !(SelectedDownloadItem==null);
+    public bool CanDownload => !(SelectedDownloadItem == null);
 
     /// <summary>
     /// Gets or sets a value indicating whether the download popup is open.
@@ -549,8 +531,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     public bool IsClearConfirmationOpen
     {
         get => _isClearConfirmationOpen;
-        set
-        {
+        set {
             if (_isClearConfirmationOpen != value)
             {
                 _isClearConfirmationOpen = value;
@@ -722,6 +703,8 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     public MainPageViewModel()
     {
+        Trace.TraceInformation("Initializing MainPageViewModel");
+
         Shapes = new ObservableCollection<IShape>();
         _userId = _serverOrClient._userId;
         _userName = _serverOrClient._userName;
@@ -763,8 +746,7 @@ public class MainPageViewModel : INotifyPropertyChanged
 
         Debug.WriteLine("ViewModel init start");
         SelectToolCommand = new RelayCommand<ShapeType>(SelectTool);
-        DrawShapeCommand = new RelayCommand<object>(parameter =>
-        {
+        DrawShapeCommand = new RelayCommand<object>(parameter => {
             if (parameter is Tuple<IShape, string> args)
             {
                 RenderingService.RenderShape(args.Item1, args.Item2);
@@ -820,9 +802,9 @@ public class MainPageViewModel : INotifyPropertyChanged
 
         //_whiteboardInstance = this;
 
-
+        Trace.TraceInformation("MainPageViewModel initialized successfully");
     }
-    
+
     /// <summary>
     /// Determines whether dark mode should be active based on the current time.
     /// Dark mode is active from 7 PM to 6 AM.
@@ -830,6 +812,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <returns>True if dark mode should be active; otherwise, false.</returns>
     private bool CheckIfDarkMode()
     {
+        Trace.TraceInformation("Entering CheckIfDarkMode");
         TimeSpan now = DateTime.Now.TimeOfDay;
         var start = new TimeSpan(19, 0, 0); // 7 PM
         var end = new TimeSpan(6, 0, 0); // 6 AM
@@ -837,8 +820,10 @@ public class MainPageViewModel : INotifyPropertyChanged
         // Dark Mode is active from 7 PM to 6 AM
         if (now >= start || now < end)
         {
+            Trace.TraceInformation("Dark mode is active");
             return true;
         }
+        Trace.TraceInformation("Dark mode is not active");
         return false;
     }
 
@@ -850,6 +835,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="e">Event arguments.</param>
     private void Timer_Tick(object sender, EventArgs e)
     {
+        Trace.TraceInformation("Timer_Tick event triggered");
         if (!_isDarkModeManuallySet)
         {
             bool currentDarkMode = CheckIfDarkMode();
@@ -867,6 +853,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private void OpenClearConfirmation()
     {
+        Trace.TraceInformation("Opening clear confirmation popup");
         IsClearConfirmationOpen = true;
     }
 
@@ -875,6 +862,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private void ConfirmClear()
     {
+        Trace.TraceInformation("Confirming clear shapes");
         ClearShapes(); // Existing method to clear shapes
         IsClearConfirmationOpen = false;
     }
@@ -884,6 +872,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private void CancelClear()
     {
+        Trace.TraceInformation("Cancelling clear shapes");
         IsClearConfirmationOpen = false;
     }
 
@@ -893,6 +882,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="isDarkMode">Indicates whether dark mode is active.</param>
     private void UpdateBackground(bool isDarkMode)
     {
+        Trace.TraceInformation($"Updating background to {(isDarkMode ? "dark" : "light")} mode");
         if (isDarkMode)
         {
             PageBackground = new SolidColorBrush(Color.FromRgb(30, 30, 30)); // Dark gray
@@ -915,9 +905,10 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private void OpenDownloadPopup()
     {
+        Trace.TraceInformation("Opening download popup");
         if (!_isDownloadItemsFilled)
-        { 
-            InitializeDownloadItems(); 
+        {
+            InitializeDownloadItems();
         }
         _isDownloadItemsFilled = true;
         IsDownloadPopupOpen = true;
@@ -927,12 +918,10 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <summary>
     /// Downloads the selected snapshot item.
     /// </summary>
-    /// <summary>
-    /// Downloads the selected snapshot item.
-    /// </summary>
     private void DownloadSelectedItem()
     {
-        if (SelectedDownloadItem!=null)
+        Trace.TraceInformation("Downloading selected item");
+        if (SelectedDownloadItem != null)
         {
             IsDownloading = false;
             try
@@ -943,7 +932,7 @@ public class MainPageViewModel : INotifyPropertyChanged
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Download failed: {ex.Message}");
+                Trace.TraceError($"Download failed: {ex.Message}");
             }
             finally
             {
@@ -962,7 +951,8 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private async void InitializeDownloadItems()
     {
-        List<SnapShotDownloadItem> newSnaps = await _snapShotService.GetSnaps("a",true);
+        Trace.TraceInformation("Initializing download items");
+        List<SnapShotDownloadItem> newSnaps = await _snapShotService.GetSnaps("a", true);
         DownloadItems = new ListCollectionView(newSnaps);
         OnPropertyChanged(nameof(DownloadItems));
     }
@@ -972,8 +962,8 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private async void RefreshDownloadItems()
     {
-        
-        List<SnapShotDownloadItem> newSnaps = await _snapShotService.GetSnaps("a",false);
+        Trace.TraceInformation("Refreshing download items");
+        List<SnapShotDownloadItem> newSnaps = await _snapShotService.GetSnaps("a", false);
         DownloadItems = new ListCollectionView(newSnaps);
         OnPropertyChanged(nameof(DownloadItems));
     }
@@ -984,6 +974,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="shape">The shape to move backward.</param>
     private void SendBackward(IShape shape)
     {
+        Trace.TraceInformation($"Sending shape {shape.ShapeId} backward");
         _moveShapeZIndexing.MoveShapeBackward(shape);
         RenderingService.RenderShape(shape, "INDEX-BACKWARD");
     }
@@ -994,6 +985,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="shape">The shape to send to the back.</param>
     private void SendToBack(IShape shape)
     {
+        Trace.TraceInformation($"Sending shape {shape.ShapeId} to back");
         _moveShapeZIndexing.MoveShapeBack(shape);
         RenderingService.RenderShape(shape, "INDEX-BACK");
     }
@@ -1003,6 +995,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private void UpdateSelectedColor()
     {
+        Trace.TraceInformation("Updating selected color");
         SelectedColor = Color.FromRgb(Red, Green, Blue);
     }
 
@@ -1013,6 +1006,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="colorName">The name of the color to select.</param>
     private void SelectColor(string colorName)
     {
+        Trace.TraceInformation($"Selecting color {colorName}");
         var color = (Color)ColorConverter.ConvertFromString(colorName);
         SelectedColor = color;
         if (IsDarkMode && colorName == "Black")
@@ -1030,10 +1024,17 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private void CallUndo()
     {
+        Trace.TraceInformation("Entering CallUndo");
         if (_undoRedoService._undoList.Count > 0)
         {
+            Trace.TraceInformation("Undo list has items. Performing Undo.");
             RenderingService.RenderShape(null, "UNDO");
         }
+        else
+        {
+            Trace.TraceWarning("Undo list is empty. Nothing to undo.");
+        }
+        Trace.TraceInformation("Exiting CallUndo");
     }
 
     /// <summary>
@@ -1041,10 +1042,17 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private void CallRedo()
     {
+        Trace.TraceInformation("Entering CallRedo");
         if (_undoRedoService._redoList.Count > 0)
         {
+            Trace.TraceInformation("Redo list has items. Performing Redo.");
             RenderingService.RenderShape(null, "REDO");
         }
+        else
+        {
+            Trace.TraceWarning("Redo list is empty. Nothing to redo.");
+        }
+        Trace.TraceInformation("Exiting CallRedo");
     }
 
     /// <summary>
@@ -1052,8 +1060,10 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private void OpenPopup()
     {
+        Trace.TraceInformation("Entering OpenPopup");
         SnapShotFileName = "";
         IsPopupOpen = true;
+        Trace.TraceInformation("Exiting OpenPopup");
     }
 
     /// <summary>
@@ -1062,23 +1072,26 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <returns>A task that represents the asynchronous operation.</returns>
     private async Task SubmitFileName()
     {
+        Trace.TraceInformation("Entering SubmitFileName");
         IsUploading = true;
 
         try
         {
+            Trace.TraceInformation($"Uploading snapshot with filename: {SnapShotFileName}");
             // Call the asynchronous upload method
             await _snapShotService.UploadSnapShot(SnapShotFileName, Shapes, false);
+            Trace.TraceInformation("Snapshot uploaded successfully.");
             IsPopupOpen = false;
-            Debug.WriteLine("Snapshot uploaded successfully.");
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Upload failed: {ex.Message}");
+            Trace.TraceError($"Upload failed: {ex.Message}");
         }
         finally
         {
             // Re-enable UI elements
             IsUploading = false;
+            Trace.TraceInformation("Exiting SubmitFileName");
         }
     }
 
@@ -1087,7 +1100,9 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private void ClearShapes()
     {
+        Trace.TraceInformation("Entering ClearShapes");
         RenderingService.RenderShape(null, "CLEAR");
+        Trace.TraceInformation("Exiting ClearShapes");
     }
 
     /// <summary>
@@ -1095,8 +1110,10 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private void StopHost()
     {
+        Trace.TraceInformation("Entering StopHost");
         IsHost = false;
         _networkingService.StopHost();
+        Trace.TraceInformation("Exiting StopHost");
     }
 
     /// <summary>
@@ -1105,16 +1122,22 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="tool">The shape type to select as the current tool.</param>
     private void SelectTool(ShapeType tool)
     {
+        Trace.TraceInformation($"Selecting tool: {tool}");
         CurrentTool = tool;
         //for textbox
         //TextInput = string.Empty;
+        Trace.TraceInformation($"Exiting SelectTool: {tool}");
     }
 
     /// <summary>
     /// Selects the specified shape.
     /// </summary>
     /// <param name="shape">The shape to select.</param>
-    private void SelectShape(IShape shape) { }
+    private void SelectShape(IShape shape)
+    {
+        Trace.TraceInformation($"SelectShape called with shape ID: {shape.ShapeId}");
+        // Method implementation (currently empty)
+    }
 
     /// <summary>
     /// Deletes the specified shape by rendering a delete action.
@@ -1122,20 +1145,29 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="shape">The shape to delete.</param>
     private void DeleteShape(IShape shape)
     {
+        Trace.TraceInformation($"Deleting shape with ID: {shape.ShapeId}");
         RenderingService.RenderShape(shape, "DELETE");
+        Trace.TraceInformation($"Exiting DeleteShape for shape ID: {shape.ShapeId}");
     }
 
-    
+
     /// <summary>
     /// Deletes the currently selected shape and clears the selection.
     /// </summary>
     private void DeleteSelectedShape()
     {
+        Trace.TraceInformation("Entering DeleteSelectedShape");
         if (SelectedShape != null)
         {
+            Trace.TraceInformation($"Deleting selected shape with ID: {SelectedShape.ShapeId}");
             RenderingService.RenderShape(SelectedShape, "DELETE");
             SelectedShape = null;
         }
+        else
+        {
+            Trace.TraceWarning("No shape is selected to delete.");
+        }
+        Trace.TraceInformation("Exiting DeleteSelectedShape");
     }
 
     /// <summary>
@@ -1147,9 +1179,12 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <returns>True if the point is over the shape; otherwise, false.</returns>
     public bool IsPointOverShape(IShape shape, Point point)
     {
+        Trace.TraceInformation($"Checking if point {point} is over shape ID: {shape.ShapeId}");
         // Simple bounding box hit testing
         Rect bounds = shape.GetBounds();
-        return bounds.Contains(point);
+        bool isOver = bounds.Contains(point);
+        Trace.TraceInformation($"IsPointOverShape result for shape ID {shape.ShapeId}: {isOver}");
+        return isOver;
     }
 
     /// <summary>
@@ -1159,10 +1194,12 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="shape">The shape to edit.</param>
     private void EditText(IShape shape)
     {
+        Trace.TraceInformation($"Entering EditText for shape ID: {shape.ShapeId}");
         if (shape is TextShape textShape)
         {
             if (CurrentTool == ShapeType.Select)
             {
+                Trace.TraceInformation($"Editing text shape with ID: {textShape.ShapeId}");
                 // Found a TextShape under the click
                 _currentTextShape = textShape;
                 IsTextBoxActive = true;
@@ -1172,8 +1209,7 @@ public class MainPageViewModel : INotifyPropertyChanged
                 _currentTextShape.OnPropertyChanged(null);
                 //OnPropertyChanged(nameof(textShape.Color));
                 // Create a TextboxModel over the existing TextShape
-                var textboxModel = new TextboxModel
-                {
+                var textboxModel = new TextboxModel {
                     X = textShape.X,
                     Y = textShape.Y,
                     Width = textShape.Width,
@@ -1183,8 +1219,10 @@ public class MainPageViewModel : INotifyPropertyChanged
                 _currentTextboxModel = textboxModel;
                 Shapes.Add(textboxModel);
                 OnPropertyChanged(nameof(TextBoxVisibility));
+                Trace.TraceInformation($"Activated textbox for shape ID: {shape.ShapeId}");
             }
         }
+        Trace.TraceInformation($"Exiting EditText for shape ID: {shape.ShapeId}");
     }
 
     /// <summary>
@@ -1194,18 +1232,23 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="e">Mouse button event arguments.</param>
     private void OnCanvasLeftMouseDown(MouseButtonEventArgs e)
     {
+        Trace.TraceInformation("Entering OnCanvasLeftMouseDown");
         // Pass the canvas as the element
         if (IsTextBoxActive == true)
         {
+            Trace.TraceInformation("TextBox is active. Finalizing TextBox before proceeding.");
             FinalizeTextBox();
         }
         if (e.Source is FrameworkElement canvas)
         {
+            Trace.TraceInformation("Canvas element detected. Capturing mouse.");
             canvas.CaptureMouse(); // Capture the mouse
             _capturedElement = canvas; // Store the captured element
             _startPoint = e.GetPosition(canvas);
+            Trace.TraceInformation($"Mouse down at position: {_startPoint}");
             if (CurrentTool == ShapeType.Select)
             {
+                Trace.TraceInformation("Current tool is Select. Initiating selection logic.");
                 // Implement selection logic
                 //if (SelectedShape != null)
                 //{
@@ -1217,13 +1260,14 @@ public class MainPageViewModel : INotifyPropertyChanged
                 {
                     if (IsPointOverShape(shape, _startPoint))
                     {
-
+                        Trace.TraceInformation($"Shape found under cursor: {shape.ShapeId}");
                         if (shape.IsLocked && shape.LockedByUserID != _networkingService._clientID)
                         {
-                            // Shape is locked by someone else
+                            Trace.TraceWarning($"Shape ID: {shape.ShapeId} is locked by another user (UserID: {shape.LockedByUserID}).");
 
                             if (SelectedShape != null)
                             {
+                                Trace.TraceInformation($"Unlocking previously selected shape ID: {SelectedShape.ShapeId}");
                                 SelectedShape.LockedByUserID = -1;
 
                                 RenderingService.RenderShape(SelectedShape, "UNLOCK");
@@ -1237,9 +1281,10 @@ public class MainPageViewModel : INotifyPropertyChanged
                         }
                         else
                         {
-
+                            Trace.TraceInformation($"Selecting shape ID: {shape.ShapeId}");
                             if (SelectedShape != null)
                             {
+                                Trace.TraceInformation($"Unlocking previously selected shape ID: {SelectedShape.ShapeId}");
                                 SelectedShape.LockedByUserID = -1;
 
                                 RenderingService.RenderShape(SelectedShape, "UNLOCK");
@@ -1259,22 +1304,22 @@ public class MainPageViewModel : INotifyPropertyChanged
 
                 if (loopBreaker == false)
                 {
-
+                    Trace.TraceInformation("No shape found under cursor. Clearing selection.");
                     _isSelecting = false;
                     if (SelectedShape != null)
                     {
+                        Trace.TraceInformation($"Unlocking previously selected shape ID: {SelectedShape.ShapeId}");
                         SelectedShape.LockedByUserID = -1;
 
                         RenderingService.RenderShape(SelectedShape, "UNLOCK");
                     }
                     SelectedShape = null;
-
                 }
             }
             else if (CurrentTool == ShapeType.Text)
             {
+                Trace.TraceInformation("Current tool is Text. Activating TextBox.");
                 // Get the position of the click
-
                 Point position = e.GetPosition((IInputElement)e.Source);
                 var textboxModel = new TextboxModel {
                     X = position.X,
@@ -1288,25 +1333,35 @@ public class MainPageViewModel : INotifyPropertyChanged
                 IsTextBoxActive = true;
                 Shapes.Add(textboxModel);
                 OnPropertyChanged(nameof(TextBoxVisibility));
+                Trace.TraceInformation($"TextBox activated at position: {position}");
             }
             else
             {
+                Trace.TraceInformation($"Current tool is {CurrentTool}. Initiating shape creation.");
                 // Start drawing a new shape
                 IShape newShape = CreateShape(_startPoint);
                 if (newShape != null)
                 {
+                    Trace.TraceInformation($"New shape created with ID: {newShape.ShapeId}");
                     newShape.BoundingBoxColor = "blue";
                     Shapes.Add(newShape);
                     if (SelectedShape != null)
                     {
+                        Trace.TraceInformation($"Unlocking previously selected shape ID: {SelectedShape.ShapeId}");
                         SelectedShape.LockedByUserID = -1;
 
                         RenderingService.RenderShape(SelectedShape, "UNLOCK");
                     }
                     SelectedShape = newShape;
+                    Trace.TraceInformation($"Shape ID: {newShape.ShapeId} is now selected.");
+                }
+                else
+                {
+                    Trace.TraceError("Failed to create a new shape.");
                 }
             }
         }
+        Trace.TraceInformation("Exiting OnCanvasLeftMouseDown");
     }
 
     /// <summary>
@@ -1317,7 +1372,9 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="currentPoint">The current mouse position.</param>
     private void MoveShape(IShape shape, Point currentPoint)
     {
+        Trace.TraceInformation($"Entering MoveShape for shape ID: {shape.ShapeId}");
         Vector delta = currentPoint - _lastMousePosition;
+        Trace.TraceInformation($"Mouse moved by delta: {delta}");
         switch (shape)
         {
             case LineShape line:
@@ -1325,10 +1382,12 @@ public class MainPageViewModel : INotifyPropertyChanged
                 line.StartY += delta.Y;
                 line.EndX += delta.X;
                 line.EndY += delta.Y;
+                Trace.TraceInformation($"Moved LineShape ID: {shape.ShapeId} by delta: {delta}");
                 break;
             case CircleShape circle:
                 circle.CenterX += delta.X;
                 circle.CenterY += delta.Y;
+                Trace.TraceInformation($"Moved CircleShape ID: {shape.ShapeId} by delta: {delta}");
                 break;
             case ScribbleShape scribble:
                 for (int i = 0; i < scribble.Points.Count; i++)
@@ -1338,10 +1397,12 @@ public class MainPageViewModel : INotifyPropertyChanged
                         scribble.Points[i].Y + delta.Y
                     );
                 }
+                Trace.TraceInformation($"Moved ScribbleShape ID: {shape.ShapeId} by delta: {delta}");
                 break;
             case TextShape text:
                 text.X += delta.X;
                 text.Y += delta.Y;
+                Trace.TraceInformation($"Moved TextShape ID: {shape.ShapeId} by delta: {delta}");
                 break;
         }
 
@@ -1349,7 +1410,9 @@ public class MainPageViewModel : INotifyPropertyChanged
         if (shape is ShapeBase shapeBase)
         {
             shapeBase.OnPropertyChanged(null); // Notify all properties have changed
+            Trace.TraceInformation($"Property changes notified for shape ID: {shape.ShapeId}");
         }
+        Trace.TraceInformation($"Exiting MoveShape for shape ID: {shape.ShapeId}");
     }
 
     /// <summary>
@@ -1359,26 +1422,33 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="e">Mouse event arguments.</param>
     private void OnCanvasMouseMove(MouseEventArgs e)
     {
+        Trace.TraceInformation("Entering OnCanvasMouseMove");
         //without textbox
         if (e.LeftButton == MouseButtonState.Pressed && SelectedShape != null)
         {
+            Trace.TraceInformation($"Mouse move with selected shape ID: {SelectedShape.ShapeId}");
             if (e.Source is FrameworkElement canvas)
             {
                 Point currentPoint = e.GetPosition(canvas);
+                Trace.TraceInformation($"Current mouse position: {currentPoint}");
                 if (_isDragging)
                 {
+                    Trace.TraceInformation($"Dragging flag is set. Current tool: {CurrentTool}");
                     if (CurrentTool == ShapeType.Select && SelectedShape != null)
                     {
+                        Trace.TraceInformation($"Moving selected shape ID: {SelectedShape.ShapeId}");
                         MoveShape(SelectedShape, currentPoint);
                         _lastMousePosition = currentPoint;
                     }
                     else if (SelectedShape != null)
                     {
+                        Trace.TraceInformation($"Updating shape ID: {SelectedShape.ShapeId}");
                         UpdateShape(SelectedShape, currentPoint);
                     }
                 }
             }
         }
+        Trace.TraceInformation("Exiting OnCanvasMouseMove");
     }
 
     /// <summary>
@@ -1388,8 +1458,10 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="e">Mouse button event arguments.</param>
     private void OnCanvasMouseUp(MouseButtonEventArgs e)
     {
+        Trace.TraceInformation("Entering OnCanvasMouseUp");
         if (_capturedElement != null)
         {
+            Trace.TraceInformation("Releasing captured mouse.");
             _capturedElement.ReleaseMouseCapture(); // Release the mouse capture
             _capturedElement = null;
         }
@@ -1397,17 +1469,20 @@ public class MainPageViewModel : INotifyPropertyChanged
         //without textbox
         if (SelectedShape != null && !_isSelecting)
         {
+            Trace.TraceInformation($"Finalizing shape creation for shape ID: {SelectedShape.ShapeId}");
             // Finalize shape drawing
             RenderingService.RenderShape(SelectedShape, "CREATE");
             SelectedShape = null;
         }
         else if (IsShapeSelected)
         {
+            Trace.TraceInformation($"Modifying selected shape ID: {SelectedShape.ShapeId}");
             RenderingService.RenderShape(SelectedShape, "MODIFY");
             Debug.WriteLine(SelectedShape.IsSelected);
             //SelectedShape = null;
         }
         _isSelecting = false;
+        Trace.TraceInformation("Exiting OnCanvasMouseUp");
     }
 
     /// <summary>
@@ -1418,22 +1493,22 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <returns>A new instance of a shape implementing <see cref="IShape"/>.</returns>
     public IShape CreateShape(Point startPoint)
     {
+        Trace.TraceInformation($"Entering CreateShape with tool: {CurrentTool} at startPoint: {startPoint}");
         IShape shape = null;
         switch (CurrentTool)
         {
             case ShapeType.Pencil:
-                var scribbleShape = new ScribbleShape
-                {
+                var scribbleShape = new ScribbleShape {
                     Color = SelectedColor.ToString(),
                     StrokeThickness = SelectedThickness,
                     Points = new System.Collections.Generic.List<Point> { startPoint },
                 };
 
                 shape = scribbleShape;
+                Trace.TraceInformation($"Created ScribbleShape with ID: {shape.ShapeId}");
                 break;
             case ShapeType.Line:
-                var lineShape = new LineShape
-                {
+                var lineShape = new LineShape {
                     StartX = startPoint.X,
                     StartY = startPoint.Y,
                     EndX = startPoint.X,
@@ -1443,10 +1518,10 @@ public class MainPageViewModel : INotifyPropertyChanged
                 };
 
                 shape = lineShape;
+                Trace.TraceInformation($"Created LineShape with ID: {shape.ShapeId}");
                 break;
             case ShapeType.Circle:
-                var circleShape = new CircleShape
-                {
+                var circleShape = new CircleShape {
                     CenterX = startPoint.X,
                     CenterY = startPoint.Y,
                     RadiusX = 0,
@@ -1456,12 +1531,18 @@ public class MainPageViewModel : INotifyPropertyChanged
                 };
 
                 shape = circleShape;
+                Trace.TraceInformation($"Created CircleShape with ID: {shape.ShapeId}");
                 break;
         }
-        shape.UserID = _networkingService._clientID;
-        shape.UserName = _userName;
-        shape.ProfilePictureURL = _profilePictureURL;
-        shape.ShapeId = Guid.NewGuid();
+        if (shape != null)
+        {
+            shape.UserID = _networkingService._clientID;
+            shape.UserName = _userName;
+            shape.ProfilePictureURL = _profilePictureURL;
+            shape.ShapeId = Guid.NewGuid();
+            Trace.TraceInformation($"Initialized shape properties for shape ID: {shape.ShapeId}");
+        }
+        Trace.TraceInformation($"Exiting CreateShape with shape ID: {shape?.ShapeId}");
         return shape;
     }
 
@@ -1472,20 +1553,25 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="currentPoint">The current position of the mouse.</param>
     private void UpdateShape(IShape shape, Point currentPoint)
     {
+        Trace.TraceInformation($"Entering UpdateShape for shape ID: {shape.ShapeId} with currentPoint: {currentPoint}");
         switch (shape)
         {
             case ScribbleShape scribble:
                 scribble.AddPoint(currentPoint);
+                Trace.TraceInformation($"Added point to ScribbleShape ID: {shape.ShapeId}");
                 break;
             case LineShape line:
                 line.EndX = currentPoint.X;
                 line.EndY = currentPoint.Y;
+                Trace.TraceInformation($"Updated LineShape ID: {shape.ShapeId} to EndX: {line.EndX}, EndY: {line.EndY}");
                 break;
             case CircleShape circle:
                 circle.RadiusX = Math.Abs(currentPoint.X - circle.CenterX);
                 circle.RadiusY = Math.Abs(currentPoint.Y - circle.CenterY);
+                Trace.TraceInformation($"Updated CircleShape ID: {shape.ShapeId} to RadiusX: {circle.RadiusX}, RadiusY: {circle.RadiusY}");
                 break;
         }
+        Trace.TraceInformation($"Exiting UpdateShape for shape ID: {shape.ShapeId}");
     }
 
     /// <summary>
@@ -1496,17 +1582,21 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="addToUndo">Indicates whether to update the undo history.</param>
     private void OnShapeReceived(IShape shape, bool addToUndo)
     {
-        Application.Current.Dispatcher.Invoke(() =>
-        {
+        Trace.TraceInformation($"Entering OnShapeReceived for shape ID: {shape.ShapeId}, addToUndo: {addToUndo}");
+        Application.Current.Dispatcher.Invoke(() => {
+            Trace.TraceInformation($"Adding received shape ID: {shape.ShapeId} to Shapes collection");
             shape.IsSelected = false;
             Shapes.Add(shape);
             IShape newShape = shape.Clone();
             _networkingService._synchronizedShapes.Add(newShape);
+            Trace.TraceInformation($"Cloned shape ID: {newShape.ShapeId} and added to synchronized shapes");
             if (addToUndo)
             {
+                Trace.TraceInformation($"Removing last modified entry for shape ID: {shape.ShapeId} from undo history");
                 _undoRedoService.RemoveLastModified(_networkingService, shape);
             }
         });
+        Trace.TraceInformation($"Exiting OnShapeReceived for shape ID: {shape.ShapeId}");
     }
 
     /// <summary>
@@ -1515,25 +1605,33 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="shape">The shape to lock.</param>
     private void OnShapeLocked(IShape shape)
     {
+        Trace.TraceInformation($"Entering OnShapeLocked for shape ID: {shape.ShapeId}");
         IShape? existingShape = Shapes.FirstOrDefault(s =>
                s.ShapeId == shape.ShapeId && s.UserID == shape.UserID
            );
-
-        existingShape.IsLocked = true;
-        existingShape.LockedByUserID = shape.LockedByUserID;
-        existingShape.IsSelected = true;
-
-        if (existingShape.LockedByUserID != ClientID)
+        if (existingShape != null)
         {
-            existingShape.BoundingBoxColor = "red";
-        }
+            Trace.TraceInformation($"Locking shape ID: {existingShape.ShapeId} by UserID: {shape.LockedByUserID}");
+            existingShape.IsLocked = true;
+            existingShape.LockedByUserID = shape.LockedByUserID;
+            existingShape.IsSelected = true;
 
-        else if (existingShape.LockedByUserID == ClientID)
+            if (existingShape.LockedByUserID != ClientID)
+            {
+                existingShape.BoundingBoxColor = "red";
+                Trace.TraceInformation($"Shape ID: {existingShape.ShapeId} is locked by another user. BoundingBoxColor set to red.");
+            }
+            else if (existingShape.LockedByUserID == ClientID)
+            {
+                existingShape.BoundingBoxColor = "blue";
+                Trace.TraceInformation($"Shape ID: {existingShape.ShapeId} is locked by the current user. BoundingBoxColor set to blue.");
+            }
+        }
+        else
         {
-
-            existingShape.BoundingBoxColor = "blue";
+            Trace.TraceWarning($"Shape ID: {shape.ShapeId} not found in Shapes collection during lock operation.");
         }
-    
+        Trace.TraceInformation($"Exiting OnShapeLocked for shape ID: {shape.ShapeId}");
     }
 
     /// <summary>
@@ -1542,17 +1640,27 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="shape">The shape to unlock.</param>
     private void OnShapeUnlocked(IShape shape)
     {
+        Trace.TraceInformation($"Entering OnShapeUnlocked for shape ID: {shape.ShapeId}");
         IShape? existingShape = Shapes.FirstOrDefault(s =>
                s.ShapeId == shape.ShapeId && s.UserID == shape.UserID
            );
-
-        existingShape.IsLocked = false;
-        existingShape.LockedByUserID = -1;
-        existingShape.IsSelected = false;
-        if (existingShape.LockedByUserID != ClientID)
+        if (existingShape != null)
         {
-            existingShape.BoundingBoxColor = "blue";
+            Trace.TraceInformation($"Unlocking shape ID: {existingShape.ShapeId}");
+            existingShape.IsLocked = false;
+            existingShape.LockedByUserID = -1;
+            existingShape.IsSelected = false;
+            if (existingShape.LockedByUserID != ClientID)
+            {
+                existingShape.BoundingBoxColor = "blue";
+                Trace.TraceInformation($"Shape ID: {existingShape.ShapeId} BoundingBoxColor set to blue.");
+            }
         }
+        else
+        {
+            Trace.TraceWarning($"Shape ID: {shape.ShapeId} not found in Shapes collection during unlock operation.");
+        }
+        Trace.TraceInformation($"Exiting OnShapeUnlocked for shape ID: {shape.ShapeId}");
     }
 
 
@@ -1562,14 +1670,21 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="shape">The modified shape.</param>
     private void OnShapeModified(IShape shape)
     {
-        Application.Current.Dispatcher.Invoke(() =>
-        {
+        Trace.TraceInformation($"Entering OnShapeModified for shape ID: {shape.ShapeId}");
+        Application.Current.Dispatcher.Invoke(() => {
+            Trace.TraceInformation($"Modifying shape ID: {shape.ShapeId}");
             shape.IsSelected = false;
             //Shapes.Add(shape);
 
             IShape? existingShape = Shapes.FirstOrDefault(s =>
                 s.ShapeId == shape.ShapeId && s.UserID == shape.UserID
             );
+
+            if (existingShape == null)
+            {
+                Trace.TraceWarning($"Shape ID: {shape.ShapeId} not found in Shapes collection during modification.");
+                return;
+            }
 
             switch (shape.ShapeType)
             {
@@ -1579,6 +1694,7 @@ public class MainPageViewModel : INotifyPropertyChanged
                         && shape is CircleShape modifiedCircle
                     )
                     {
+                        Trace.TraceInformation($"Modifying CircleShape ID: {existingCircle.ShapeId}");
                         existingCircle.LastModifierID = modifiedCircle.LastModifierID;
                         existingCircle.Color = modifiedCircle.Color;
                         existingCircle.StrokeThickness = modifiedCircle.StrokeThickness;
@@ -1589,6 +1705,7 @@ public class MainPageViewModel : INotifyPropertyChanged
                         existingCircle.RadiusX = modifiedCircle.RadiusX;
                         existingCircle.RadiusY = modifiedCircle.RadiusY;
                         existingCircle.ZIndex = modifiedCircle.ZIndex;
+                        Trace.TraceInformation($"CircleShape ID: {existingCircle.ShapeId} updated.");
                     }
                     break;
                 case "Line":
@@ -1597,6 +1714,7 @@ public class MainPageViewModel : INotifyPropertyChanged
                         && shape is LineShape modifiedLine
                     )
                     {
+                        Trace.TraceInformation($"Modifying LineShape ID: {existingLine.ShapeId}");
                         // Update common properties
                         existingLine.LastModifierID = modifiedLine.LastModifierID;
                         existingLine.Color = modifiedLine.Color;
@@ -1608,6 +1726,7 @@ public class MainPageViewModel : INotifyPropertyChanged
                         existingLine.EndX = modifiedLine.EndX;
                         existingLine.EndY = modifiedLine.EndY;
                         existingLine.ZIndex = modifiedLine.ZIndex;
+                        Trace.TraceInformation($"LineShape ID: {existingLine.ShapeId} updated.");
                     }
                     break;
                 case "Scribble":
@@ -1616,6 +1735,7 @@ public class MainPageViewModel : INotifyPropertyChanged
                         && shape is ScribbleShape modifiedScribble
                     )
                     {
+                        Trace.TraceInformation($"Modifying ScribbleShape ID: {existingScribble.ShapeId}");
                         // Update common properties
                         existingScribble.LastModifierID = modifiedScribble.LastModifierID;
                         existingScribble.Color = modifiedScribble.Color;
@@ -1624,6 +1744,7 @@ public class MainPageViewModel : INotifyPropertyChanged
                         // Update Scribble-specific properties
                         existingScribble.Points = new List<Point>(modifiedScribble.Points);
                         existingScribble.ZIndex = modifiedScribble.ZIndex;
+                        Trace.TraceInformation($"ScribbleShape ID: {existingScribble.ShapeId} updated.");
                     }
                     break;
                 case "TextShape":
@@ -1632,6 +1753,7 @@ public class MainPageViewModel : INotifyPropertyChanged
                         && shape is TextShape modifiedText
                     )
                     {
+                        Trace.TraceInformation($"Modifying TextShape ID: {existingText.ShapeId}");
                         // Update common properties
                         existingText.LastModifierID = modifiedText.LastModifierID;
                         existingText.Color = modifiedText.Color;
@@ -1643,13 +1765,17 @@ public class MainPageViewModel : INotifyPropertyChanged
                         existingText.Y = modifiedText.Y;
                         existingText.FontSize = modifiedText.FontSize;
                         existingText.ZIndex = modifiedText.ZIndex;
+                        Trace.TraceInformation($"TextShape ID: {existingText.ShapeId} updated.");
                     }
                     break;
             }
 
             IShape newShape = shape.Clone();
+            Trace.TraceInformation($"Cloning modified shape ID: {newShape.ShapeId}");
             _undoRedoService.RemoveLastModified(_networkingService, shape);
+            Trace.TraceInformation($"Removed last modified entry for shape ID: {shape.ShapeId} from undo history");
         });
+        Trace.TraceInformation($"Exiting OnShapeModified for shape ID: {shape.ShapeId}");
     }
 
     /// <summary>
@@ -1658,18 +1784,22 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="shape">The shape to delete.</param>
     private void OnShapeDeleted(IShape shape)
     {
-        Application.Current.Dispatcher.Invoke(() =>
-        {
+        Trace.TraceInformation($"Entering OnShapeDeleted for shape ID: {shape.ShapeId}");
+        Application.Current.Dispatcher.Invoke(() => {
+            Trace.TraceInformation($"Attempting to remove shape ID: {shape.ShapeId} from Shapes collection");
             foreach (IShape s in Shapes)
             {
                 if (s.ShapeId == shape.ShapeId)
                 {
                     Shapes.Remove(s);
+                    Trace.TraceInformation($"Shape ID: {s.ShapeId} removed from Shapes collection");
                     break;
                 }
             }
             _networkingService._synchronizedShapes.Remove(shape);
+            Trace.TraceInformation($"Shape ID: {shape.ShapeId} removed from synchronized shapes");
         });
+        Trace.TraceInformation($"Exiting OnShapeDeleted for shape ID: {shape.ShapeId}");
     }
 
     /// <summary>
@@ -1677,13 +1807,20 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private void OnShapeClear()
     {
-        Application.Current.Dispatcher.Invoke(() =>
-        {
+        Trace.TraceInformation("Entering OnShapeClear");
+        Application.Current.Dispatcher.Invoke(() => {
+            Trace.TraceInformation("Clearing all shapes from Shapes collection");
             Shapes.Clear();
+            Trace.TraceInformation("Cleared Shapes collection");
+            Trace.TraceInformation("Clearing undo and redo lists");
             _undoRedoService._redoList.Clear();
             _undoRedoService._undoList.Clear();
+            Trace.TraceInformation("Cleared undo and redo lists");
+            Trace.TraceInformation("Clearing synchronized shapes");
             _networkingService._synchronizedShapes.Clear();
+            Trace.TraceInformation("Cleared synchronized shapes");
         });
+        Trace.TraceInformation("Exiting OnShapeClear");
     }
 
     /// <summary>
@@ -1691,10 +1828,12 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     public void CancelTextBox()
     {
+        Trace.TraceInformation("Entering CancelTextBox");
         TextInput = string.Empty;
         IsTextBoxActive = false;
         _currentTextShape = null;
         OnPropertyChanged(nameof(TextBoxVisibility));
+        Trace.TraceInformation("Exiting CancelTextBox");
     }
 
     /// <summary>
@@ -1702,12 +1841,14 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     public void FinalizeTextBox()
     {
+        Trace.TraceInformation("Entering FinalizeTextBox");
         if ((_currentTextboxModel != null))
         {
             if (!string.IsNullOrEmpty(_currentTextboxModel.Text))
             {
                 if (_currentTextShape != null)
                 {
+                    Trace.TraceInformation($"Finalizing text update for TextShape ID: {_currentTextShape.ShapeId}");
                     // We are editing an existing TextShape
                     _currentTextShape.Text = _currentTextboxModel.Text;
                     _currentTextShape.Color = "black";
@@ -1715,12 +1856,14 @@ public class MainPageViewModel : INotifyPropertyChanged
                     _currentTextShape.X = _currentTextboxModel.X;
                     _currentTextShape.Y = _currentTextboxModel.Y;
 
-                    
+
                     _currentTextShape.OnPropertyChanged(null);
                     RenderingService.RenderShape(_currentTextShape, "MODIFY");
+                    Trace.TraceInformation($"TextShape ID: {_currentTextShape.ShapeId} modified with new text.");
                 }
                 else
                 {
+                    Trace.TraceInformation("Creating a new TextShape.");
                     // Create a new TextShape
                     var textShape = new TextShape {
                         X = _currentTextboxModel.X,
@@ -1737,6 +1880,7 @@ public class MainPageViewModel : INotifyPropertyChanged
                     };
                     Shapes.Add(textShape);
                     RenderingService.RenderShape(textShape, "CREATE");
+                    Trace.TraceInformation($"Created new TextShape with ID: {textShape.ShapeId}");
                 }
             }
             TextInput = string.Empty;
@@ -1745,6 +1889,12 @@ public class MainPageViewModel : INotifyPropertyChanged
             _currentTextboxModel = null;
             _currentTextShape = null;
             OnPropertyChanged(nameof(TextBoxVisibility));
+            Trace.TraceInformation("Exiting FinalizeTextBox");
+        }
+        else
+        {
+            Trace.TraceWarning("FinalizeTextBox called but _currentTextboxModel is null.");
+            Trace.TraceInformation("Exiting FinalizeTextBox without changes.");
         }
     }
 
@@ -1754,16 +1904,17 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// <param name="propertyName">The name of the property that changed.</param>
     protected void OnPropertyChanged(string propertyName)
     {
+        Trace.TraceInformation($"Property changed: {propertyName}");
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
     public IShape HoveredShape
     {
         get => _hoveredShape;
-        set
-        {
+        set {
             if (_hoveredShape != value)
             {
+                Trace.TraceInformation($"HoveredShape changed from ID: {_hoveredShape?.ShapeId} to ID: {value?.ShapeId}");
                 _hoveredShape = value;
                 OnPropertyChanged(nameof(HoveredShape));
                 OnPropertyChanged(nameof(HoveredShapeDetails));
@@ -1776,16 +1927,17 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     public string HoveredShapeDetails
     {
-        get
-        {
+        get {
             if (HoveredShape == null)
             {
+                Trace.TraceInformation("HoveredShapeDetails accessed but no shape is hovered.");
                 return string.Empty;
             }
             // Customize the details based on the shape type
             string details =
                 $"Created By: {HoveredShape.UserName}\n"
                 + $"Last Modified By: {HoveredShape.LastModifiedBy}\n";
+            Trace.TraceInformation($"HoveredShapeDetails: {details}");
             return details;
         }
     }
@@ -1796,10 +1948,10 @@ public class MainPageViewModel : INotifyPropertyChanged
     public bool IsShapeHovered
     {
         get => _isShapeHovered;
-        set
-        {
+        set {
             if (_isShapeHovered != value)
             {
+                Trace.TraceInformation($"IsShapeHovered set to: {value}");
                 _isShapeHovered = value;
                 OnPropertyChanged(nameof(IsShapeHovered));
             }
@@ -1812,10 +1964,10 @@ public class MainPageViewModel : INotifyPropertyChanged
     public bool IsDarkMode
     {
         get => _isDarkMode;
-        set
-        {
+        set {
             if (_isDarkMode != value)
             {
+                Trace.TraceInformation($"IsDarkMode changing from {IsDarkMode} to {value}");
                 _isDarkMode = value;
                 OnPropertyChanged(nameof(IsDarkMode));
                 UpdateBackground(IsDarkMode);
@@ -1825,6 +1977,7 @@ public class MainPageViewModel : INotifyPropertyChanged
                     if (_selectedColor == Colors.Black)
                     {
                         CurrentColor = Colors.White;
+                        Trace.TraceInformation("Selected color changed to White due to dark mode.");
                     }
                 }
                 else
@@ -1833,6 +1986,7 @@ public class MainPageViewModel : INotifyPropertyChanged
                     if (_selectedColor == Colors.Black)
                     {
                         CurrentColor = Colors.Black;
+                        Trace.TraceInformation("Selected color changed to Black due to light mode.");
                     }
                 }
 
@@ -1840,6 +1994,7 @@ public class MainPageViewModel : INotifyPropertyChanged
                 if (!_isUpdatingDarkModeFromTimer)
                 {
                     _isDarkModeManuallySet = true;
+                    Trace.TraceInformation("Dark mode manually set by the user.");
                 }
             }
         }
@@ -1851,10 +2006,10 @@ public class MainPageViewModel : INotifyPropertyChanged
     public Brush PageBackground
     {
         get => _pageBackground;
-        set
-        {
+        set {
             if (_pageBackground != value)
             {
+                Trace.TraceInformation($"PageBackground changed to: {value}");
                 _pageBackground = value;
                 OnPropertyChanged(nameof(PageBackground));
             }
@@ -1867,10 +2022,10 @@ public class MainPageViewModel : INotifyPropertyChanged
     public Brush CanvasBackground
     {
         get => _canvasBackground;
-        set
-        {
+        set {
             if (_canvasBackground != value)
             {
+                Trace.TraceInformation($"CanvasBackground changed to: {value}");
                 _canvasBackground = value;
                 OnPropertyChanged(nameof(CanvasBackground));
             }

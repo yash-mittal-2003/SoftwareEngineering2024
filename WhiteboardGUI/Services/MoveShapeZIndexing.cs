@@ -28,7 +28,9 @@ public class MoveShapeZIndexing
     /// <param name="shapes">The collection of shapes to manage.</param>
     public MoveShapeZIndexing(ObservableCollection<IShape> shapes)
     {
+        Trace.TraceInformation("Entering constructor of MoveShapeZIndexing");
         _shapes = shapes;
+        Trace.TraceInformation("Exiting constructor of MoveShapeZIndexing");
     }
 
     /// <summary>
@@ -37,17 +39,20 @@ public class MoveShapeZIndexing
     /// <param name="shape">The shape to move.</param>
     public void MoveShapeBack(IShape shape)
     {
-        Application.Current.Dispatcher.Invoke(() =>
-        {
+        Trace.TraceInformation("Entering MoveShapeBack");
+        Application.Current.Dispatcher.Invoke(() => {
             if (shape == null || !(bool)_shapes.Any(s => (s as dynamic).ShapeId.Equals(shape.ShapeId)))
             {
+                Trace.TraceWarning("MoveShapeBack: Shape is null or not found in the collection.");
                 return;
             }
 
             _shapes.Remove(_shapes.FirstOrDefault(s => (s as dynamic).ShapeId == shape.ShapeId));
             _shapes.Insert(0, shape);
+            Trace.TraceInformation("MoveShapeBack: Shape moved to the back of the collection.");
             UpdateZIndices();
         });
+        Trace.TraceInformation("Exiting MoveShapeBack");
     }
 
     /// <summary>
@@ -55,10 +60,12 @@ public class MoveShapeZIndexing
     /// </summary>
     public void UpdateZIndices()
     {
+        Trace.TraceInformation("Entering UpdateZIndices");
         for (int i = 0; i < _shapes.Count; i++)
         {
             _shapes[i].ZIndex = i;
         }
+        Trace.TraceInformation("Exiting UpdateZIndices");
     }
 
     /// <summary>
@@ -67,10 +74,11 @@ public class MoveShapeZIndexing
     /// <param name="shape">The shape to move.</param>
     public void MoveShapeBackward(IShape shape)
     {
-        Application.Current.Dispatcher.Invoke(() =>
-        {
+        Trace.TraceInformation("Entering MoveShapeBackward");
+        Application.Current.Dispatcher.Invoke(() => {
             if (shape == null || !(bool)_shapes.Any(s => (s as dynamic).ShapeId.Equals(shape.ShapeId)))
             {
+                Trace.TraceWarning("MoveShapeBackward: Shape is null or not found in the collection.");
                 return;
             }
 
@@ -78,6 +86,7 @@ public class MoveShapeZIndexing
                              .FirstOrDefault(item => (item.s as dynamic).ShapeId.Equals(shape.ShapeId))?.index ?? -1;
             if (currentIndex <= 0)
             {
+                Trace.TraceWarning("MoveShapeBackward: Shape is already at the bottom of the collection.");
                 return; // Already at the bottom
             }
 
@@ -87,13 +96,14 @@ public class MoveShapeZIndexing
                 IShape otherShape = _shapes[i];
                 if (AreShapesOverlapping(shape, otherShape))
                 {
-                    // Swap shape with otherShape
+                    Trace.TraceInformation($"MoveShapeBackward: Swapping shape at index {currentIndex} with shape at index {i}.");
                     _shapes.Move(currentIndex, i);
                     UpdateZIndices();
                     break;
                 }
             }
         });
+        Trace.TraceInformation("Exiting MoveShapeBackward");
     }
 
     /// <summary>
@@ -104,23 +114,26 @@ public class MoveShapeZIndexing
     /// <returns><c>true</c> if the shapes overlap; otherwise, <c>false</c>.</returns>
     private bool AreShapesOverlapping(IShape shape1, IShape shape2)
     {
+        Trace.TraceInformation("Entering AreShapesOverlapping");
         Geometry strokeGeometry1 = GetShapeStrokeGeometry(shape1);
         Geometry strokeGeometry2 = GetShapeStrokeGeometry(shape2);
 
         if (strokeGeometry1 == null || strokeGeometry2 == null)
         {
+            Trace.TraceWarning("AreShapesOverlapping: One or both shapes have null stroke geometries.");
             return false;
         }
 
-        // Combine the two stroke geometries to find their intersection
-        // If the intersection is not empty, then the strokes overlap
         PathGeometry combinedGeometry = Geometry.Combine(
             strokeGeometry1,
             strokeGeometry2,
             GeometryCombineMode.Intersect,
             null);
 
-        return !combinedGeometry.IsEmpty();
+        bool result = !combinedGeometry.IsEmpty();
+        Trace.TraceInformation($"AreShapesOverlapping: Overlap result is {result}.");
+        Trace.TraceInformation("Exiting AreShapesOverlapping");
+        return result;
     }
 
     /// <summary>
@@ -130,8 +143,10 @@ public class MoveShapeZIndexing
     /// <returns>A <see cref="Geometry"/> object representing the stroke area, or <c>null</c> if unsupported.</returns>
     private Geometry GetShapeStrokeGeometry(IShape shape)
     {
+        Trace.TraceInformation("Entering GetShapeStrokeGeometry");
         if (shape == null)
         {
+            Trace.TraceWarning("GetShapeStrokeGeometry: Shape is null.");
             return null;
         }
 
@@ -140,68 +155,58 @@ public class MoveShapeZIndexing
         switch (shape)
         {
             case CircleShape circle:
-                {
-                    double centerX = circle.Left + circle.Width / 2;
-                    double centerY = circle.Top + circle.Height / 2;
-                    double radiusX = circle.Width / 2;
-                    double radiusY = circle.Height / 2;
-                    geometry = new EllipseGeometry(new Point(centerX, centerY), radiusX, radiusY);
-                    break;
-                }
+                Trace.TraceInformation("GetShapeStrokeGeometry: Processing CircleShape.");
+                geometry = new EllipseGeometry(new Point(circle.Left + circle.Width / 2, circle.Top + circle.Height / 2),
+                                               circle.Width / 2, circle.Height / 2);
+                break;
 
             case LineShape line:
-                {
-                    geometry = new LineGeometry(new Point(line.StartX, line.StartY), new Point(line.EndX, line.EndY));
-                    break;
-                }
+                Trace.TraceInformation("GetShapeStrokeGeometry: Processing LineShape.");
+                geometry = new LineGeometry(new Point(line.StartX, line.StartY), new Point(line.EndX, line.EndY));
+                break;
 
             case ScribbleShape scribble:
+                Trace.TraceInformation("GetShapeStrokeGeometry: Processing ScribbleShape.");
+                if (scribble.PointCollection == null || !scribble.PointCollection.Any())
                 {
-                    if (scribble.PointCollection == null || !scribble.PointCollection.Any())
-                    {
-                        return null;
-                    }
-                    StreamGeometry streamGeometry = new StreamGeometry();
-                    using (StreamGeometryContext ctx = streamGeometry.Open())
-                    {
-                        ctx.BeginFigure(scribble.PointCollection.First(), false, false);
-                        ctx.PolyLineTo(scribble.PointCollection.Skip(1).ToList(), true, true);
-                    }
-                    streamGeometry.Freeze(); // Makes the geometry immutable
-                    geometry = streamGeometry;
-                    break;
-                }
-
-            default:
-                {
-                    // Unsupported shape type
+                    Trace.TraceWarning("GetShapeStrokeGeometry: ScribbleShape has an empty or null PointCollection.");
                     return null;
                 }
+                StreamGeometry streamGeometry = new StreamGeometry();
+                using (StreamGeometryContext ctx = streamGeometry.Open())
+                {
+                    ctx.BeginFigure(scribble.PointCollection.First(), false, false);
+                    ctx.PolyLineTo(scribble.PointCollection.Skip(1).ToList(), true, true);
+                }
+                streamGeometry.Freeze();
+                geometry = streamGeometry;
+                break;
+
+            default:
+                Trace.TraceWarning("GetShapeStrokeGeometry: Unsupported shape type.");
+                return null;
         }
 
         if (geometry != null)
         {
             try
             {
-                // Create a Pen with the shape's stroke color and thickness
                 Color color = (Color)ColorConverter.ConvertFromString(shape.Color.ToString());
                 Pen pen = new Pen(new SolidColorBrush(color), shape.StrokeThickness);
-                pen.Freeze(); // Makes the pen immutable and improves performance
-
-                // Use GetWidenedPathGeometry to create a geometry that represents the area covered by the pen's stroke
+                pen.Freeze();
                 PathGeometry strokeGeometry = geometry.GetWidenedPathGeometry(pen);
-                strokeGeometry.Freeze(); // Optional: Freeze for performance if the geometry won't change
-
+                strokeGeometry.Freeze();
+                Trace.TraceInformation("GetShapeStrokeGeometry: Geometry successfully widened.");
                 return strokeGeometry;
             }
             catch (Exception ex)
             {
-                // Handle any exceptions that might occur during geometry widening
-                Debug.WriteLine($"Error widening geometry: {ex.Message}");
+                Trace.TraceError($"GetShapeStrokeGeometry: Error widening geometry - {ex.Message}");
                 return null;
             }
         }
 
+        Trace.TraceInformation("Exiting GetShapeStrokeGeometry");
         return null;
     }
 }

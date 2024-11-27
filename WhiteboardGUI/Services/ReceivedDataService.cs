@@ -1,22 +1,11 @@
-﻿/******************************************************************************
- * Filename    = ReceivedDataService.cs
- *
- * Author      = Likith Anaparty and Vishnu Nair
- *
- * Product     = WhiteBoard
- *
- * Project     = Networking for whiteboard
- *
- * Description = The methods and logic to do after a data and command is received
- *****************************************************************************/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WhiteboardGUI.Models;
+
 namespace WhiteboardGUI.Services;
 
 /// <summary>
@@ -80,7 +69,9 @@ public class ReceivedDataService
     /// <param name="id">The unique identifier for the instance.</param>
     public ReceivedDataService(int id)
     {
+        Trace.TraceInformation($"Initializing ReceivedDataService with ID: {id}");
         _id = id;
+        Trace.TraceInformation("ReceivedDataService initialized successfully");
     }
 
     /// <summary>
@@ -90,161 +81,151 @@ public class ReceivedDataService
     /// <returns>Returns 0 on successful processing, or -1 if the data is invalid or from the same sender.</returns>
     public int DataReceived(string receivedData)
     {
+        Trace.TraceInformation("Entering DataReceived");
+
         if (receivedData == null)
         {
+            Trace.TraceWarning("DataReceived: Received null data");
             return -1;
         }
 
         int index = receivedData.IndexOf("END");
-        int senderId = int.Parse(receivedData.Substring(2, index - 2));
+        if (index < 0)
+        {
+            Trace.TraceWarning("DataReceived: 'END' marker not found in data");
+            return -1;
+        }
 
+        int senderId = int.Parse(receivedData.Substring(2, index - 2));
         if (senderId == _id)
         {
+            Trace.TraceInformation($"DataReceived: Ignoring data from the same sender (ID: {senderId})");
             return -1;
         }
 
         receivedData = receivedData.Substring(index + "END".Length);
 
-        if (receivedData.StartsWith("DELETE:"))
+        try
         {
-            string data = receivedData.Substring(7);
-            IShape shape = SerializationService.DeserializeShape(data);
-
-            if (shape != null)
+            if (receivedData.StartsWith("DELETE:"))
             {
-                Guid shapeId = shape.ShapeId;
-                double shapeUserId = shape.UserID;
-
-                IShape? currentShape = _synchronizedShapes
-                    .Where(s => s.ShapeId == shapeId && s.UserID == shapeUserId)
-                    .FirstOrDefault();
-                if (currentShape != null)
+                Trace.TraceInformation("DataReceived: Processing DELETE command");
+                string data = receivedData.Substring(7);
+                IShape shape = SerializationService.DeserializeShape(data);
+                if (shape != null)
                 {
-                    ShapeDeleted?.Invoke(currentShape); // Deletes the shape based on the received data
-                }
-            }
-        }
-        else if (receivedData.StartsWith("CLEAR:"))
-        {
-            ShapesClear?.Invoke(); // Clears the screen if CLEAR command was received
-        }
-        else if (receivedData.StartsWith("INDEX-BACK:"))
-        {
-            string data = receivedData.Substring(11);
-            IShape shape = SerializationService.DeserializeShape(data);
-
-            if (shape != null)
-            {
-                Guid shapeId = shape.ShapeId;
-                double shapeUserId = shape.UserID;
-
-                IShape? currentShape = _synchronizedShapes
-                    .Where(s => s.ShapeId == shapeId && s.UserID == shapeUserId)
-                    .FirstOrDefault();
-                if (currentShape != null)
-                {
-                    ShapeSendToBack?.Invoke(currentShape); // Sends the shape to the last layer in the canvas
-                }
-            }
-        }
-        else if (receivedData.StartsWith("INDEX-BACKWARD:"))
-        {
-            string data = receivedData.Substring(15);
-            IShape shape = SerializationService.DeserializeShape(data);
-
-            if (shape != null)
-            {
-                Guid shapeId = shape.ShapeId;
-                double shapeUserId = shape.UserID;
-
-                IShape? currentShape = _synchronizedShapes
-                    .Where(s => s.ShapeId == shapeId && s.UserID == shapeUserId)
-                    .FirstOrDefault();
-                if (currentShape != null)
-                {
-                    ShapeSendBackward?.Invoke(currentShape); // Sends the shape one layer back
-                }
-            }
-        }
-        else if (receivedData.StartsWith("MODIFY:"))
-        {
-            string data = receivedData.Substring(7);
-            IShape shape = SerializationService.DeserializeShape(data);
-            Debug.WriteLine($"Received shape: {shape}");
-            if (shape != null)
-            {
-                Guid shapeId = shape.ShapeId;
-                double shapeUserId = shape.UserID;
-
-                IShape? currentShape = _synchronizedShapes
-                    .Where(s => s.ShapeId == shapeId && s.UserID == shapeUserId)
-                    .FirstOrDefault();
-                if (currentShape != null)
-                {
-                    ShapeModified?.Invoke(shape); // Changes the shape identified by its shape_id
-                }
-            }
-        }
-        else if (receivedData.StartsWith("CREATE:"))
-        {
-            string data = receivedData.Substring(7);
-            IShape shape = SerializationService.DeserializeShape(data);
-            if (shape != null)
-            {
-                ShapeReceived?.Invoke(shape, true); // Draws the shape sent over the network
-            }
-        }
-        else if (receivedData.StartsWith("DOWNLOAD:"))
-        {
-            string data = receivedData.Substring(9);
-            IShape shape = SerializationService.DeserializeShape(data);
-            if (shape != null)
-            {
-                ShapeReceived?.Invoke(shape, false); // For rendering snapshot after downloading
-            }
-        }
-        else if (receivedData.StartsWith("UNLOCK:"))
-        {
-            string data = receivedData.Substring(7);
-            IShape shape = SerializationService.DeserializeShape(data);
-            if (shape != null)
-            {
-                IShape? existingShape = _synchronizedShapes
-                    .FirstOrDefault(s => s.ShapeId == shape.ShapeId);
-                if (existingShape != null)
-                {
-                    existingShape.IsLocked = false;
-                    existingShape.LockedByUserID = -1;
-                    ShapeUnlocked?.Invoke(existingShape); // Unlocks the shape locked by another user
-                }
-            }
-        }
-        else if (receivedData.StartsWith("LOCK:")) 
-        {
-            string data = receivedData.Substring(5);
-            IShape shape = SerializationService.DeserializeShape(data);
-            if (shape != null)
-            {
-                IShape? existingShape = _synchronizedShapes
-                    .FirstOrDefault(s => s.ShapeId == shape.ShapeId);
-
-                if (existingShape != null)
-                {
-                    if (_id == 1)
+                    IShape? currentShape = _synchronizedShapes
+                        .Where(s => s.ShapeId == shape.ShapeId && s.UserID == shape.UserID)
+                        .FirstOrDefault();
+                    if (currentShape != null)
                     {
-                        if (existingShape.IsLocked)
-                        {
-                            receivedData = "UNLOCK:" + receivedData.Substring("LOCK:".Length);
-                        }
-                        else
-                        {
-                            existingShape.IsLocked = true;
-                            existingShape.LockedByUserID = senderId;
-                            ShapeLocked?.Invoke(existingShape); // Locks the shape
-                        }
+                        Trace.TraceInformation($"DataReceived: Deleting shape with ID {shape.ShapeId}");
+                        ShapeDeleted?.Invoke(currentShape);
                     }
-                    else
+                }
+            }
+            else if (receivedData.StartsWith("CLEAR:"))
+            {
+                Trace.TraceInformation("DataReceived: Processing CLEAR command");
+                ShapesClear?.Invoke();
+            }
+            else if (receivedData.StartsWith("INDEX-BACK:"))
+            {
+                Trace.TraceInformation("DataReceived: Processing INDEX-BACK command");
+                string data = receivedData.Substring(11);
+                IShape shape = SerializationService.DeserializeShape(data);
+                if (shape != null)
+                {
+                    IShape? currentShape = _synchronizedShapes
+                        .Where(s => s.ShapeId == shape.ShapeId && s.UserID == shape.UserID)
+                        .FirstOrDefault();
+                    if (currentShape != null)
                     {
+                        Trace.TraceInformation($"DataReceived: Sending shape with ID {shape.ShapeId} to back");
+                        ShapeSendToBack?.Invoke(currentShape);
+                    }
+                }
+            }
+            else if (receivedData.StartsWith("INDEX-BACKWARD:"))
+            {
+                Trace.TraceInformation("DataReceived: Processing INDEX-BACKWARD command");
+                string data = receivedData.Substring(15);
+                IShape shape = SerializationService.DeserializeShape(data);
+                if (shape != null)
+                {
+                    IShape? currentShape = _synchronizedShapes
+                        .Where(s => s.ShapeId == shape.ShapeId && s.UserID == shape.UserID)
+                        .FirstOrDefault();
+                    if (currentShape != null)
+                    {
+                        Trace.TraceInformation($"DataReceived: Sending shape with ID {shape.ShapeId} backward");
+                        ShapeSendBackward?.Invoke(currentShape);
+                    }
+                }
+            }
+            else if (receivedData.StartsWith("MODIFY:"))
+            {
+                Trace.TraceInformation("DataReceived: Processing MODIFY command");
+                string data = receivedData.Substring(7);
+                IShape shape = SerializationService.DeserializeShape(data);
+                if (shape != null)
+                {
+                    Trace.TraceInformation($"DataReceived: Modifying shape with ID {shape.ShapeId}");
+                    ShapeModified?.Invoke(shape);
+                }
+            }
+            else if (receivedData.StartsWith("CREATE:"))
+            {
+                Trace.TraceInformation("DataReceived: Processing CREATE command");
+                string data = receivedData.Substring(7);
+                IShape shape = SerializationService.DeserializeShape(data);
+                if (shape != null)
+                {
+                    Trace.TraceInformation($"DataReceived: Creating shape with ID {shape.ShapeId}");
+                    ShapeReceived?.Invoke(shape, true);
+                }
+            }
+            else if (receivedData.StartsWith("DOWNLOAD:"))
+            {
+                Trace.TraceInformation("DataReceived: Processing DOWNLOAD command");
+                string data = receivedData.Substring(9);
+                IShape shape = SerializationService.DeserializeShape(data);
+                if (shape != null)
+                {
+                    Trace.TraceInformation($"DataReceived: Downloading shape with ID {shape.ShapeId}");
+                    ShapeReceived?.Invoke(shape, false);
+                }
+            }
+            else if (receivedData.StartsWith("UNLOCK:"))
+            {
+                Trace.TraceInformation("DataReceived: Processing UNLOCK command");
+                string data = receivedData.Substring(7);
+                IShape shape = SerializationService.DeserializeShape(data);
+                if (shape != null)
+                {
+                    IShape? existingShape = _synchronizedShapes
+                        .FirstOrDefault(s => s.ShapeId == shape.ShapeId);
+                    if (existingShape != null)
+                    {
+                        Trace.TraceInformation($"DataReceived: Unlocking shape with ID {shape.ShapeId}");
+                        existingShape.IsLocked = false;
+                        existingShape.LockedByUserID = -1;
+                        ShapeUnlocked?.Invoke(existingShape);
+                    }
+                }
+            }
+            else if (receivedData.StartsWith("LOCK:"))
+            {
+                Trace.TraceInformation("DataReceived: Processing LOCK command");
+                string data = receivedData.Substring(5);
+                IShape shape = SerializationService.DeserializeShape(data);
+                if (shape != null)
+                {
+                    IShape? existingShape = _synchronizedShapes
+                        .FirstOrDefault(s => s.ShapeId == shape.ShapeId);
+                    if (existingShape != null)
+                    {
+                        Trace.TraceInformation($"DataReceived: Locking shape with ID {shape.ShapeId}");
                         existingShape.IsLocked = true;
                         existingShape.LockedByUserID = shape.LockedByUserID;
                         ShapeLocked?.Invoke(existingShape);
@@ -252,7 +233,13 @@ public class ReceivedDataService
                 }
             }
         }
+        catch (Exception ex)
+        {
+            Trace.TraceError($"DataReceived: Exception occurred - {ex.Message}");
+            return -1;
+        }
 
+        Trace.TraceInformation("Exiting DataReceived");
         return 0;
     }
 }

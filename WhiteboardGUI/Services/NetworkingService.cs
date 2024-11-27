@@ -14,6 +14,7 @@ using System.Diagnostics;
 using WhiteboardGUI.Models;
 using Networking.Communication;
 using Networking;
+
 namespace WhiteboardGUI.Services;
 
 /// <summary>
@@ -58,8 +59,10 @@ public class NetworkingService : INotificationHandler
     /// <param name="dataTransferService">Service responsible for data synchronization.</param>
     public NetworkingService(ReceivedDataService dataTransferService)
     {
+        Trace.TraceInformation("Entering NetworkingService constructor");
         _receivedDataService = dataTransferService;
         _synchronizedShapes = dataTransferService._synchronizedShapes;
+        Trace.TraceInformation("Exiting NetworkingService constructor");
     }
 
     /// <summary>
@@ -67,7 +70,9 @@ public class NetworkingService : INotificationHandler
     /// </summary>
     public void StartHost()
     {
+        Trace.TraceInformation("Entering StartHost");
         StartHostServer();
+        Trace.TraceInformation("Exiting StartHost");
     }
 
     /// <summary>
@@ -75,17 +80,20 @@ public class NetworkingService : INotificationHandler
     /// </summary>
     private void StartHostServer()
     {
+        Trace.TraceInformation("Entering StartHostServer");
         try
         {
             _communicator = CommunicationFactory.GetCommunicator(false);
             _communicator.Subscribe(_moduleIdentifier, this, false);
             _communicator.Start();
             _isHost = true;
+            Trace.TraceInformation("Host server started successfully");
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Host error: {ex.Message}");
+            Trace.TraceError($"Host server error: {ex.Message}");
         }
+        Trace.TraceInformation("Exiting StartHostServer");
     }
 
     /// <summary>
@@ -93,7 +101,9 @@ public class NetworkingService : INotificationHandler
     /// </summary>
     public void StartClient()
     {
+        Trace.TraceInformation("Entering StartClient");
         StartClientServer();
+        Trace.TraceInformation("Exiting StartClient");
     }
 
     /// <summary>
@@ -101,17 +111,20 @@ public class NetworkingService : INotificationHandler
     /// </summary>
     private void StartClientServer()
     {
+        Trace.TraceInformation("Entering StartClientServer");
         try
         {
             _communicator = CommunicationFactory.GetCommunicator(true);
             _communicator.Subscribe(_moduleIdentifier, this, false);
             _communicator.Start();
             _isHost = false;
+            Trace.TraceInformation("Client server started successfully");
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Host error: {ex.Message}");
+            Trace.TraceError($"Client server error: {ex.Message}");
         }
+        Trace.TraceInformation("Exiting StartClientServer");
     }
 
     /// <summary>
@@ -120,19 +133,32 @@ public class NetworkingService : INotificationHandler
     /// <param name="serializedData">The serialized data received.</param>
     public void OnDataReceived(string serializedData)
     {
-        if (_isHost)
+        Trace.TraceInformation("Entering OnDataReceived");
+        try
         {
-            int id = _receivedDataService.DataReceived(serializedData);
-            if (id == -1)
+            if (_isHost)
             {
-                return;
+                Trace.TraceInformation("Processing data as host");
+                int id = _receivedDataService.DataReceived(serializedData);
+                if (id == -1)
+                {
+                    Trace.TraceWarning("Data received is invalid, skipping broadcast");
+                    return;
+                }
+                BroadcastShapeData(serializedData);
+                Trace.TraceInformation("Broadcasted data successfully");
             }
-            BroadcastShapeData(serializedData);
+            else
+            {
+                Trace.TraceInformation("Processing data as client");
+                _receivedDataService.DataReceived(serializedData);
+            }
         }
-        else
+        catch (Exception ex)
         {
-            int id = _receivedDataService.DataReceived(serializedData);
+            Trace.TraceError($"Error processing received data: {ex.Message}");
         }
+        Trace.TraceInformation("Exiting OnDataReceived");
     }
 
     /// <summary>
@@ -141,7 +167,17 @@ public class NetworkingService : INotificationHandler
     /// <param name="serializedData">The serialized shape data to broadcast.</param>
     public void BroadcastShapeData(string serializedData)
     {
-        _communicator.Send(serializedData, _moduleIdentifier, null);
+        Trace.TraceInformation("Entering BroadcastShapeData");
+        try
+        {
+            _communicator.Send(serializedData, _moduleIdentifier, null);
+            Trace.TraceInformation("BroadcastShapeData: Data sent successfully");
+        }
+        catch (Exception ex)
+        {
+            Trace.TraceError($"Error broadcasting shape data: {ex.Message}");
+        }
+        Trace.TraceInformation("Exiting BroadcastShapeData");
     }
 
     /// <summary>
@@ -149,7 +185,10 @@ public class NetworkingService : INotificationHandler
     /// </summary>
     public void StopHost()
     {
+        Trace.TraceInformation("Entering StopHost");
         _communicator?.Stop();
+        Trace.TraceInformation("Host server stopped");
+        Trace.TraceInformation("Exiting StopHost");
     }
 
     /// <summary>
@@ -157,6 +196,10 @@ public class NetworkingService : INotificationHandler
     /// </summary>
     public void StopClient()
     {
+        Trace.TraceInformation("Entering StopClient");
         _communicator?.Stop();
+        Trace.TraceInformation("Client server stopped");
+        Trace.TraceInformation("Exiting StopClient");
     }
 }
+

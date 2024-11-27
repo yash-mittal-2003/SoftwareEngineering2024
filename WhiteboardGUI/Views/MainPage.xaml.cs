@@ -30,7 +30,7 @@ public partial class MainPage : Page
     private Point _startPoint;
     private Rect _initialBounds;
     private List<Point>? _initialPoints;
- 
+
     public MainPage()
     {
         InitializeComponent();
@@ -42,8 +42,10 @@ public partial class MainPage : Page
     /// </summary>
     private void Canvas_LeftMouseButtonDown(object sender, MouseButtonEventArgs e)
     {
+        System.Diagnostics.Trace.TraceInformation("Entering Canvas_LeftMouseButtonDown");
         ViewModel?.CanvasLeftMouseDownCommand.Execute(e);
         ViewModel.IsDragging = true;
+        System.Diagnostics.Trace.TraceInformation("Exiting Canvas_LeftMouseButtonDown");
     }
 
     /// <summary>
@@ -52,7 +54,9 @@ public partial class MainPage : Page
     /// </summary>
     private void Canvas_MouseMove(object sender, MouseEventArgs e)
     {
+        System.Diagnostics.Trace.TraceInformation("Entering Canvas_MouseMove");
         ViewModel?.CanvasMouseMoveCommand.Execute(e);
+        System.Diagnostics.Trace.TraceInformation("Exiting Canvas_MouseMove");
     }
 
     /// <summary>
@@ -61,8 +65,10 @@ public partial class MainPage : Page
     /// </summary>
     private void Canvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
+        System.Diagnostics.Trace.TraceInformation("Entering Canvas_MouseLeftButtonUp");
         ViewModel?.CanvasMouseUpCommand.Execute(e);
         ViewModel.IsDragging = false;
+        System.Diagnostics.Trace.TraceInformation("Exiting Canvas_MouseLeftButtonUp");
     }
 
     /// <summary>
@@ -70,7 +76,9 @@ public partial class MainPage : Page
     /// </summary>
     private void PaletteToggleButton_Checked(object sender, RoutedEventArgs e)
     {
+        System.Diagnostics.Trace.TraceInformation("PaletteToggleButton_Checked called. Opening ColorPopup.");
         ColorPopup.IsOpen = true;
+        System.Diagnostics.Trace.TraceInformation("ColorPopup opened.");
     }
 
     /// <summary>
@@ -78,7 +86,9 @@ public partial class MainPage : Page
     /// </summary>
     private void PaletteToggleButton_Unchecked(object sender, RoutedEventArgs e)
     {
+        System.Diagnostics.Trace.TraceInformation("PaletteToggleButton_Unchecked called. Closing ColorPopup.");
         ColorPopup.IsOpen = false;
+        System.Diagnostics.Trace.TraceInformation("ColorPopup closed.");
     }
 
     /// <summary>
@@ -86,7 +96,9 @@ public partial class MainPage : Page
     /// </summary>
     private void UploadButton_Click(object sender, RoutedEventArgs e)
     {
+        System.Diagnostics.Trace.TraceInformation("UploadButton_Click called. Opening UploadPopup.");
         UploadPopup.IsOpen = true;
+        System.Diagnostics.Trace.TraceInformation("UploadPopup opened.");
     }
 
     /// <summary>
@@ -95,8 +107,10 @@ public partial class MainPage : Page
     /// </summary>
     private void SubmitFileName_Click(object sender, RoutedEventArgs e)
     {
+        System.Diagnostics.Trace.TraceInformation("SubmitFileName_Click called. Closing UploadPopup and notifying user.");
         UploadPopup.IsOpen = false;
         MessageBox.Show($"Filename '{ViewModel.SnapShotFileName}' has been set.", "Filename Set", MessageBoxButton.OK, MessageBoxImage.Information);
+        System.Diagnostics.Trace.TraceInformation($"Filename '{ViewModel.SnapShotFileName}' has been set and user notified.");
     }
 
     /// <summary>
@@ -105,25 +119,31 @@ public partial class MainPage : Page
     /// </summary>
     private void ResizeHandle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
+        System.Diagnostics.Trace.TraceInformation("Entering ResizeHandle_MouseLeftButtonDown");
         if (sender is FrameworkElement rect)
         {
             _currentHandle = rect.Tag as string;
             _resizingShape = rect.DataContext as IShape;
+            System.Diagnostics.Trace.TraceInformation($"Resize handle '{_currentHandle}' pressed for shape ID: {_resizingShape?.ShapeId}");
             if (_resizingShape != null)
             {
                 _startPoint = e.GetPosition(this);
                 Mouse.Capture(rect);
+                System.Diagnostics.Trace.TraceInformation($"Mouse captured on resize handle '{_currentHandle}' at point {_startPoint}");
 
                 // Store initial bounds and points for scaling
                 _initialBounds = _resizingShape.GetBounds();
+                System.Diagnostics.Trace.TraceInformation($"Initial bounds stored for shape ID: {_resizingShape.ShapeId}");
                 if (_resizingShape is ScribbleShape scribble)
                 {
                     _initialPoints = new List<Point>(scribble.Points);
+                    System.Diagnostics.Trace.TraceInformation($"Initial points stored for ScribbleShape ID: {scribble.ShapeId}");
                 }
 
                 e.Handled = true;
             }
         }
+        System.Diagnostics.Trace.TraceInformation("Exiting ResizeHandle_MouseLeftButtonDown");
     }
 
     /// <summary>
@@ -132,20 +152,24 @@ public partial class MainPage : Page
     /// </summary>
     private void ResizeHandle_MouseMove(object sender, MouseEventArgs e)
     {
+        System.Diagnostics.Trace.TraceInformation("Entering ResizeHandle_MouseMove");
         if (_resizingShape != null && e.LeftButton == MouseButtonState.Pressed)
         {
             Point currentPoint = e.GetPosition(this);
             Vector totalDelta = currentPoint - _startPoint;
+            System.Diagnostics.Trace.TraceInformation($"Mouse moved to {currentPoint} with delta {totalDelta}");
             ResizeShape(_resizingShape, _currentHandle, currentPoint);
 
             // Conditionally update _startPoint only for CircleShape and LineShape
             if (!(_resizingShape is ScribbleShape))
             {
                 _startPoint = currentPoint;
+                System.Diagnostics.Trace.TraceInformation($"_startPoint updated to {currentPoint} for shape ID: {_resizingShape.ShapeId}");
             }
 
             e.Handled = true;
         }
+        System.Diagnostics.Trace.TraceInformation("Exiting ResizeHandle_MouseMove");
     }
 
     /// <summary>
@@ -154,18 +178,22 @@ public partial class MainPage : Page
     /// </summary>
     private void ResizeHandle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
+        System.Diagnostics.Trace.TraceInformation("Entering ResizeHandle_MouseLeftButtonUp");
         if (_resizingShape != null)
         {
             Mouse.Capture(null);
+            System.Diagnostics.Trace.TraceInformation($"Mouse capture released for shape ID: {_resizingShape.ShapeId}");
             if (this.DataContext is MainPageViewModel viewModel)
             {
                 viewModel.RenderingService.RenderShape(_resizingShape, "MODIFY");
+                System.Diagnostics.Trace.TraceInformation($"Rendered shape ID: {_resizingShape.ShapeId} with action 'MODIFY'");
             }
             _resizingShape = null;
             _currentHandle = null;
             _initialBounds = Rect.Empty;
             _initialPoints = null;
             e.Handled = true;
+            System.Diagnostics.Trace.TraceInformation("Exiting ResizeHandle_MouseLeftButtonUp");
         }
     }
 
@@ -175,6 +203,7 @@ public partial class MainPage : Page
     /// </summary>
     private void ResizeShape(IShape shape, string handle, Point currentPoint)
     {
+        System.Diagnostics.Trace.TraceInformation($"Entering ResizeShape for shape ID: {shape.ShapeId} with handle: {handle}");
         if (shape is LineShape line)
         {
             ResizeLineShape(line, handle, currentPoint);
@@ -183,13 +212,16 @@ public partial class MainPage : Page
         {
             ResizeCircleShape(circle, handle, currentPoint - _startPoint);
             _startPoint = currentPoint; // Update for CircleShape
+            System.Diagnostics.Trace.TraceInformation($"_startPoint updated for CircleShape ID: {circle.ShapeId}");
         }
         else if (shape is ScribbleShape scribble)
         {
             ResizeScribbleShape(scribble, handle, currentPoint - _startPoint);
             // Do not update _startPoint for ScribbleShape
+            System.Diagnostics.Trace.TraceInformation($"Resized ScribbleShape ID: {scribble.ShapeId} without updating _startPoint");
         }
         // Add more shapes if needed
+        System.Diagnostics.Trace.TraceInformation($"Exiting ResizeShape for shape ID: {shape.ShapeId}");
     }
 
     /// <summary>
@@ -197,15 +229,18 @@ public partial class MainPage : Page
     /// </summary>
     private void ResizeLineShape(LineShape line, string handle, Point currentPoint)
     {
+        System.Diagnostics.Trace.TraceInformation($"Resizing LineShape ID: {line.ShapeId} using handle: {handle}");
         if (handle == "Start")
         {
             line.StartX = currentPoint.X;
             line.StartY = currentPoint.Y;
+            System.Diagnostics.Trace.TraceInformation($"LineShape ID: {line.ShapeId} start point updated to ({line.StartX}, {line.StartY})");
         }
         else if (handle == "End")
         {
             line.EndX = currentPoint.X;
             line.EndY = currentPoint.Y;
+            System.Diagnostics.Trace.TraceInformation($"LineShape ID: {line.ShapeId} end point updated to ({line.EndX}, {line.EndY})");
         }
     }
 
@@ -217,8 +252,10 @@ public partial class MainPage : Page
     /// </summary>
     private void ResizeScribbleShape(ScribbleShape scribble, string handle, Vector totalDelta)
     {
+        System.Diagnostics.Trace.TraceInformation($"Entering ResizeScribbleShape for ScribbleShape ID: {scribble.ShapeId}");
         if (_initialBounds == Rect.Empty || _initialPoints == null)
         {
+            System.Diagnostics.Trace.TraceWarning($"Initial bounds or points not set for ScribbleShape ID: {scribble.ShapeId}");
             return;
         }
 
@@ -257,6 +294,8 @@ public partial class MainPage : Page
                 break;
         }
 
+        System.Diagnostics.Trace.TraceInformation($"Resizing ScribbleShape ID: {scribble.ShapeId} with newLeft: {newLeft}, newTop: {newTop}, newWidth: {newWidth}, newHeight: {newHeight}");
+
         // Enforce minimum size
         if (newWidth < minWidth)
         {
@@ -265,6 +304,7 @@ public partial class MainPage : Page
                 newLeft = _initialBounds.Right - minWidth;
             }
             newWidth = minWidth;
+            System.Diagnostics.Trace.TraceInformation($"ScribbleShape ID: {scribble.ShapeId} width adjusted to minimum size: {minWidth}");
         }
 
         if (newHeight < minHeight)
@@ -274,6 +314,7 @@ public partial class MainPage : Page
                 newTop = _initialBounds.Bottom - minHeight;
             }
             newHeight = minHeight;
+            System.Diagnostics.Trace.TraceInformation($"ScribbleShape ID: {scribble.ShapeId} height adjusted to minimum size: {minHeight}");
         }
 
         // Determine the anchor point based on handle
@@ -297,9 +338,13 @@ public partial class MainPage : Page
                 break;
         }
 
+        System.Diagnostics.Trace.TraceInformation($"Anchor point for ScribbleShape ID: {scribble.ShapeId} set to {anchor}");
+
         // Calculate scaling factors
         double scaleX = _initialBounds.Width != 0 ? newWidth / _initialBounds.Width : 1;
         double scaleY = _initialBounds.Height != 0 ? newHeight / _initialBounds.Height : 1;
+
+        System.Diagnostics.Trace.TraceInformation($"Scaling factors for ScribbleShape ID: {scribble.ShapeId} - scaleX: {scaleX}, scaleY: {scaleY}");
 
         // Apply scaling to each point relative to the anchor
         List<Point> newPoints = new List<Point>();
@@ -312,6 +357,8 @@ public partial class MainPage : Page
 
         // Update the ScribbleShape's points
         scribble.Points = newPoints;
+        System.Diagnostics.Trace.TraceInformation($"ScribbleShape ID: {scribble.ShapeId} points updated after resizing.");
+        System.Diagnostics.Trace.TraceInformation($"Exiting ResizeScribbleShape for ScribbleShape ID: {scribble.ShapeId}");
     }
 
     /// <summary>
@@ -320,6 +367,7 @@ public partial class MainPage : Page
     /// </summary>
     private void ResizeCircleShape(CircleShape circle, string handle, Vector delta)
     {
+        System.Diagnostics.Trace.TraceInformation($"Entering ResizeCircleShape for CircleShape ID: {circle.ShapeId} with handle: {handle}");
         double minSize = 8; // Minimum size to prevent collapsing
 
         switch (handle)
@@ -331,12 +379,19 @@ public partial class MainPage : Page
                     double newWidth = circle.Width - delta.X;
                     double newHeight = circle.Height - delta.Y;
 
+                    System.Diagnostics.Trace.TraceInformation($"Resizing TopLeft of CircleShape ID: {circle.ShapeId} to newLeft: {newLeft}, newTop: {newTop}, newWidth: {newWidth}, newHeight: {newHeight}");
+
                     if (newWidth >= minSize && newHeight >= minSize)
                     {
                         circle.CenterX = newLeft + newWidth / 2;
                         circle.CenterY = newTop + newHeight / 2;
                         circle.RadiusX = newWidth / 2;
                         circle.RadiusY = newHeight / 2;
+                        System.Diagnostics.Trace.TraceInformation($"CircleShape ID: {circle.ShapeId} resized successfully.");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Trace.TraceWarning($"CircleShape ID: {circle.ShapeId} resize ignored due to minimum size constraints.");
                     }
                     break;
                 }
@@ -346,12 +401,19 @@ public partial class MainPage : Page
                     double newWidth = circle.Width + delta.X;
                     double newHeight = circle.Height - delta.Y;
 
+                    System.Diagnostics.Trace.TraceInformation($"Resizing TopRight of CircleShape ID: {circle.ShapeId} to newTop: {newTop}, newWidth: {newWidth}, newHeight: {newHeight}");
+
                     if (newWidth >= minSize && newHeight >= minSize)
                     {
                         circle.CenterX = circle.Left + newWidth / 2;
                         circle.CenterY = newTop + newHeight / 2;
                         circle.RadiusX = newWidth / 2;
                         circle.RadiusY = newHeight / 2;
+                        System.Diagnostics.Trace.TraceInformation($"CircleShape ID: {circle.ShapeId} resized successfully.");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Trace.TraceWarning($"CircleShape ID: {circle.ShapeId} resize ignored due to minimum size constraints.");
                     }
                     break;
                 }
@@ -361,12 +423,19 @@ public partial class MainPage : Page
                     double newWidth = circle.Width - delta.X;
                     double newHeight = circle.Height + delta.Y;
 
+                    System.Diagnostics.Trace.TraceInformation($"Resizing BottomLeft of CircleShape ID: {circle.ShapeId} to newLeft: {newLeft}, newWidth: {newWidth}, newHeight: {newHeight}");
+
                     if (newWidth >= minSize && newHeight >= minSize)
                     {
                         circle.CenterX = newLeft + newWidth / 2;
                         circle.CenterY = circle.Top + newHeight / 2;
                         circle.RadiusX = newWidth / 2;
                         circle.RadiusY = newHeight / 2;
+                        System.Diagnostics.Trace.TraceInformation($"CircleShape ID: {circle.ShapeId} resized successfully.");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Trace.TraceWarning($"CircleShape ID: {circle.ShapeId} resize ignored due to minimum size constraints.");
                     }
                     break;
                 }
@@ -375,18 +444,27 @@ public partial class MainPage : Page
                     double newWidth = circle.Width + delta.X;
                     double newHeight = circle.Height + delta.Y;
 
+                    System.Diagnostics.Trace.TraceInformation($"Resizing BottomRight of CircleShape ID: {circle.ShapeId} to newWidth: {newWidth}, newHeight: {newHeight}");
+
                     if (newWidth >= minSize && newHeight >= minSize)
                     {
                         circle.CenterX = circle.Left + newWidth / 2;
                         circle.CenterY = circle.Top + newHeight / 2;
                         circle.RadiusX = newWidth / 2;
                         circle.RadiusY = newHeight / 2;
+                        System.Diagnostics.Trace.TraceInformation($"CircleShape ID: {circle.ShapeId} resized successfully.");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Trace.TraceWarning($"CircleShape ID: {circle.ShapeId} resize ignored due to minimum size constraints.");
                     }
                     break;
                 }
             default:
+                System.Diagnostics.Trace.TraceWarning($"Unknown handle '{handle}' for CircleShape ID: {circle.ShapeId}");
                 break;
         }
+        System.Diagnostics.Trace.TraceInformation($"Exiting ResizeCircleShape for CircleShape ID: {circle.ShapeId}");
     }
 
     /// <summary>
@@ -395,7 +473,9 @@ public partial class MainPage : Page
     /// </summary>
     private void Shape_MouseRightButtonDownText(object sender, MouseButtonEventArgs e)
     {
+        System.Diagnostics.Trace.TraceInformation("Entering Shape_MouseRightButtonDownText");
         GenerateContextMenuForRightClick(sender, e, true);
+        System.Diagnostics.Trace.TraceInformation("Exiting Shape_MouseRightButtonDownText");
     }
 
     /// <summary>
@@ -404,7 +484,9 @@ public partial class MainPage : Page
     /// </summary>
     private void Shape_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
     {
+        System.Diagnostics.Trace.TraceInformation("Entering Shape_MouseRightButtonDown");
         GenerateContextMenuForRightClick(sender, e, false);
+        System.Diagnostics.Trace.TraceInformation("Exiting Shape_MouseRightButtonDown");
     }
 
     /// <summary>
@@ -413,12 +495,14 @@ public partial class MainPage : Page
     /// </summary>
     private void GenerateContextMenuForRightClick(object sender, MouseButtonEventArgs e, bool isText)
     {
+        System.Diagnostics.Trace.TraceInformation($"Entering GenerateContextMenuForRightClick with isText={isText}");
         // Get the ViewModel
         var vm = this.DataContext as MainPageViewModel;
 
         // Check if the current tool is Select
         if (vm.CurrentTool != ShapeType.Select)
         {
+            System.Diagnostics.Trace.TraceInformation("Current tool is not Select. Context menu will not be generated.");
             return;
         }
 
@@ -429,6 +513,7 @@ public partial class MainPage : Page
         // Check if the shape is the selected shape
         if (vm.SelectedShape != shape)
         {
+            System.Diagnostics.Trace.TraceInformation("Clicked shape is not the selected shape. Context menu will not be generated.");
             return;
         }
 
@@ -440,12 +525,14 @@ public partial class MainPage : Page
             Command = vm.SendBackwardCommand,
             CommandParameter = shape
         };
+        System.Diagnostics.Trace.TraceInformation("Send Backward menu item created.");
 
         var sendToBackMenuItem = new MenuItem {
             Header = "Send to Back",
             Command = vm.SendToBackCommand,
             CommandParameter = shape
         };
+        System.Diagnostics.Trace.TraceInformation("Send to Back menu item created.");
 
         if (isText)
         {
@@ -455,19 +542,25 @@ public partial class MainPage : Page
                 CommandParameter = shape
             };
             contextMenu.Items.Add(editMenuItem);
+            System.Diagnostics.Trace.TraceInformation("Edit Text menu item added for text shape.");
         }
 
         contextMenu.Items.Add(sendBackwardMenuItem);
         contextMenu.Items.Add(sendToBackMenuItem);
+        System.Diagnostics.Trace.TraceInformation("Send Backward and Send to Back menu items added to context menu.");
 
         // Assign the ContextMenu to the shape element
         shapeElement.ContextMenu = contextMenu;
+        System.Diagnostics.Trace.TraceInformation("ContextMenu assigned to shape element.");
 
         // Open the ContextMenu
         contextMenu.IsOpen = true;
+        System.Diagnostics.Trace.TraceInformation("ContextMenu opened.");
 
         // Mark the event as handled to prevent further processing
         e.Handled = true;
+        System.Diagnostics.Trace.TraceInformation("Event handled in GenerateContextMenuForRightClick.");
+        System.Diagnostics.Trace.TraceInformation($"Exiting GenerateContextMenuForRightClick for shape ID: {shape?.ShapeId}");
     }
 
     /// <summary>
@@ -476,6 +569,7 @@ public partial class MainPage : Page
     /// </summary>
     private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
     {
-
+        System.Diagnostics.Trace.TraceInformation("Slider_ValueChanged event triggered.");
+        // Currently not implemented.
     }
 }
