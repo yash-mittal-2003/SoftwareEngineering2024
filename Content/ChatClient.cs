@@ -21,7 +21,8 @@ public class ChatClient : INotificationHandler
     public Dictionary<int, string> _client_dict = new();
     public ObservableCollection<string> _clientListobs = new();
     public event PropertyChangedEventHandler PropertyChanged;
-    public event Action LatestAction;
+
+    public event Action<Dictionary<int, string>> LatestAction;
     public string _clientIdCheck;
 
     public string Username { get; set; }
@@ -62,22 +63,22 @@ public class ChatClient : INotificationHandler
     public void SendMessage(string message, string recipientId = null)
     {
         string messageType = recipientId == null ? "public" : "private";
-        if (recipientId != null)
-        {
-            int x = int.Parse(recipientId);
-            x = x - 1;
-            recipientId = x.ToString();
-        }
+        //if (recipientId != null)
+        //{
+        //    int x = int.Parse(recipientId);
+        //    x = x - 1;
+        //    recipientId = x.ToString();
+        //}
         string formattedMessage = $"{messageType}|{message}|{Username}|{ClientId}|{recipientId}";
 
         _communicator.Send(formattedMessage, "ChatModule", null);
         if (messageType == "private")
         {
-            int x = int.Parse(_clientIdCheck);
-            x = x - 1;
-            string recipee = x.ToString();
+            //int x = int.Parse(_clientIdCheck);
+            //x = x - 1;
+            //string recipee = x.ToString();
 
-            string formattedMessage2 = $"{messageType}|{message}|{Username}|{ClientId}|{recipee}";
+            string formattedMessage2 = $"{messageType}|{message}|{Username}|{ClientId}|{ClientId}";
             _communicator.Send(formattedMessage2, "ChatModule", null);
         }
     }
@@ -100,14 +101,13 @@ public class ChatClient : INotificationHandler
 
             _clientIdCheck = _client_dict.FirstOrDefault(x => x.Value == Username).Key.ToString();
 
-            foreach (KeyValuePair<int, string> kvp in _client_dict)
-            {
-                Console.WriteLine($"_client_dict  {kvp.Value}");
-            }
+            //foreach (KeyValuePair<int, string> kvp in _client_dict)
+            //{
+            //    Console.WriteLine($"_client_dict  {kvp.Value}");
+            //}
 
-            System.Windows.Application.Current.Dispatcher.Invoke(() =>
-            {
-                LatestAction?.Invoke();
+            System.Windows.Application.Current.Dispatcher.Invoke(() => {
+                LatestAction?.Invoke(_client_dict);
             });
 
             OnPropertyChanged(nameof(_clientListobs));
@@ -122,7 +122,7 @@ public class ChatClient : INotificationHandler
         else
         {
             // Handle public message
-            MessageReceived?.Invoke(this, serializedData);
+            //MessageReceived?.Invoke(this, serializedData);
         }
     }
 

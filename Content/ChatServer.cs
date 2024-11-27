@@ -4,6 +4,7 @@ using Networking;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text.Json;
+using Content.ChatViewModel;
 
 namespace Content;
 
@@ -19,11 +20,13 @@ public class ChatServer : INotificationHandler
     /// </summary>
     private ICommunicator _communicator = CommunicationFactory.GetCommunicator(false);
 
-    public readonly Dictionary<int, string> ClientUsernames = new(); // Maps clientId to username
+    //public readonly Dictionary<int, string> ClientUsernames = new(); // Maps clientId to username
 
     public event EventHandler ClientUsernamesUpdated; //new
 
     public string ClientId { get; set; }
+
+    private static ChatServer? s_serverInstance;
 
     /// <summary>
     /// Stops the chat server by halting the communication service.
@@ -35,6 +38,18 @@ public class ChatServer : INotificationHandler
 
     }
 
+    public static ChatServer GetServerInstance
+    {
+        get {
+            if (s_serverInstance == null)
+            {
+                s_serverInstance = new ChatServer();
+            }
+            return s_serverInstance;
+        }
+
+    }
+
     /// <summary>
     /// Processes incoming data from clients. Handles message types such as:
     /// - "connect": Registers a new client and updates the client list.
@@ -42,6 +57,20 @@ public class ChatServer : INotificationHandler
     /// - Other types: Broadcasts public messages to all connected clients.
     /// </summary>
     /// <param name="serializedData">The serialized data received from a client.</param>
+
+
+    public void GetClientDictionary(Dictionary<int, string> clientDict)
+    {
+        //int clientIdInt = int.Parse(ClientId);
+        //ClientUsernames[clientIdInt] = senderUsername;
+        string clientDictionarySerialized = "";
+
+        clientDictionarySerialized = JsonSerializer.Serialize(clientDict);
+
+        string formattedMessage = $"clientlist|{clientDictionarySerialized}";
+        _communicator.Send(formattedMessage, "ChatModule", destination: null);
+    }
+
 
     public void OnDataReceived(string serializedData)
     {
@@ -58,21 +87,21 @@ public class ChatServer : INotificationHandler
 
 
 
-        if (messageType == "connect")
-        {
+        //if (messageType == "connect")
+        //{
 
-            int clientIdInt = int.Parse(ClientId);
-            ClientUsernames[clientIdInt] = senderUsername;
-            string tp = "";
+        //    int clientIdInt = int.Parse(ClientId);
+        //    ClientUsernames[clientIdInt] = senderUsername;
+        //    string tp = "";
 
-            tp = JsonSerializer.Serialize(ClientUsernames);
+        //    tp = JsonSerializer.Serialize(ClientUsernames);
 
-            string formattedMessage = $"clientlist|{tp}";
+        //    string formattedMessage = $"clientlist|{tp}";
 
 
-            _communicator.Send(formattedMessage, "ChatModule", destination: null);
+        //    _communicator.Send(formattedMessage, "ChatModule", destination: null);
 
-        }
+        //}
 
         string messageContent = dataParts[1];
         if (messageType == "private")
