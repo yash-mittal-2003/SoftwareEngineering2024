@@ -1,5 +1,7 @@
 <!--
-/**************************************************************************************************
+/***************************************************************************c:\users\kshitij\source\repos\softwareengineering2024\freeze-wala-whiteboard\whiteboardgui\views\mainpage.xaml.cs
+c:\users\kshitij\source\repos\softwareengineering2024\freeze-wala-whiteboard\whiteboardgui\views\mainpage.xaml
+***********************
  * Filename    : MainPage.xaml
  *
  * Author      : Rachit Jain and Kshitij Ghodake
@@ -988,39 +990,6 @@
                                         Text="Redo" />
                                 </StackPanel>
                             </Button>
-                            <!--  Toggle Buttons for Server and Client Modes  -->
-                            <ToggleButton
-                                Command="{Binding StartHostCommand}"
-                                IsChecked="{Binding IsHost, Mode=TwoWay}"
-                                Style="{StaticResource ToolBarToggleStyle}"
-                                ToolTip="Server Mode">
-                                <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                                    <Image
-                                        Width="20"
-                                        Height="20"
-                                        Source="Assets/servericon.png" />
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        FontSize="12"
-                                        Text="Server" />
-                                </StackPanel>
-                            </ToggleButton>
-                            <ToggleButton
-                                Command="{Binding StartClientCommand}"
-                                IsChecked="{Binding IsClient, Mode=TwoWay}"
-                                Style="{StaticResource ToolBarToggleStyle}"
-                                ToolTip="Client Mode">
-                                <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                                    <Image
-                                        Width="20"
-                                        Height="20"
-                                        Source="Assets/clienticon.png" />
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        FontSize="12"
-                                        Text="Client" />
-                                </StackPanel>
-                            </ToggleButton>
                             <!--  start  -->
                             <ToggleButton
                                 x:Name="PaletteToggleButton"
