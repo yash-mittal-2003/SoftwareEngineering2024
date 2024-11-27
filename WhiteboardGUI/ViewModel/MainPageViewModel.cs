@@ -125,9 +125,9 @@ public class MainPageViewModel : INotifyPropertyChanged
     private Brush _canvasBackground = new SolidColorBrush(Color.FromRgb(245, 245, 245)); // Light
     private static MainPageViewModel s_whiteboardInstance;
     private readonly ReceivedDataService _receivedDataService;
-    public string userName;
-    public int userId;
-    public string userEmail;
+    public string _userName;
+    public int _userId;
+    public string _userEmail;
 
     private static readonly object s_padlock = new object();
     public static MainPageViewModel WhiteboardInstance
@@ -723,10 +723,10 @@ public class MainPageViewModel : INotifyPropertyChanged
     {
         Shapes = new ObservableCollection<IShape>();
 
-        userId = _serverOrClient.userId;
-        userName = _serverOrClient.userName;
-        userEmail = _serverOrClient.userEmail;
-        _receivedDataService = new ReceivedDataService(userId);
+        _userId = _serverOrClient._userId;
+        _userName = _serverOrClient._userName;
+        _userEmail = _serverOrClient._userEmail;
+        _receivedDataService = new ReceivedDataService(_userId);
         _networkingService = new NetworkingService(_receivedDataService);
         if (_userId == 1)
         {
@@ -742,7 +742,7 @@ public class MainPageViewModel : INotifyPropertyChanged
             RenderingService,
             Shapes,
             _undoRedoService,
-            userEmail
+            _userEmail
         );
         _moveShapeZIndexing = new MoveShapeZIndexing(Shapes);
 
