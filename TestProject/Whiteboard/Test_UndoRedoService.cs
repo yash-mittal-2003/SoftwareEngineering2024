@@ -35,7 +35,7 @@ public class Test_UndoRedoService
     }
 
     [TestMethod]
-    public void UpdateLastDrawing_ShouldAddToUndoList()
+    public void UpdateLastDrawing_ShouldAddTo_undoList()
     {
         // Act
         _undoRedoService.UpdateLastDrawing(_shape1.Object, _shape2.Object);
@@ -47,7 +47,7 @@ public class Test_UndoRedoService
     }
 
     [TestMethod]
-    public void UpdateLastDrawing_ShouldLimitUndoListSize()
+    public void UpdateLastDrawing_ShouldLimit_undoListSize()
     {
         // Act
         for (int i = 0; i < 6; i++)
@@ -63,7 +63,7 @@ public class Test_UndoRedoService
     }
 
     [TestMethod]
-    public void Undo_ShouldMoveLastItemToRedoList()
+    public void Undo_ShouldMoveLastItemTo_redoList()
     {
         // Arrange
         _undoRedoService.UpdateLastDrawing(_shape1.Object, _shape2.Object);
@@ -79,7 +79,7 @@ public class Test_UndoRedoService
     }
 
     [TestMethod]
-    public void Undo_ShouldNotFailWhenUndoListIsEmpty()
+    public void Undo_ShouldNotFailWhen_undoListIsEmpty()
     {
         // Act
         _undoRedoService.Undo();
@@ -90,7 +90,7 @@ public class Test_UndoRedoService
     }
 
     [TestMethod]
-    public void Redo_ShouldMoveLastItemToUndoList()
+    public void Redo_ShouldMoveLastItemTo_undoList()
     {
         // Arrange
         _undoRedoService.UpdateLastDrawing(_shape1.Object, _shape2.Object);
@@ -107,7 +107,7 @@ public class Test_UndoRedoService
     }
 
     [TestMethod]
-    public void Redo_ShouldNotFailWhenRedoListIsEmpty()
+    public void Redo_ShouldNotFailWhen_redoListIsEmpty()
     {
         // Act
         _undoRedoService.Redo();
@@ -118,7 +118,7 @@ public class Test_UndoRedoService
     }
 
     //[TestMethod]
-    //public void RemoveLastModified_ShouldRemoveShapeFromUndoAndRedoLists()
+    //public void RemoveLastModified_ShouldRemoveShapeFromUndoAnd_redoLists()
     //{
     //    // Arrange
     //    _undoRedoService.UpdateLastDrawing(_shape1.Object, _shape2.Object);
@@ -128,8 +128,8 @@ public class Test_UndoRedoService
     //    _undoRedoService.RemoveLastModified(_networkingServiceMock.Object, _shape1.Object);
 
     //    // Assert
-    //    Assert.IsFalse(_undoRedoService.UndoList.Exists(item => item.Item1.ShapeId == _shape1.Object.ShapeId));
-    //    Assert.IsFalse(_undoRedoService.RedoList.Exists(item => item.Item1.ShapeId == _shape1.Object.ShapeId));
+    //    Assert.IsFalse(_undoRedoService._undoList.Exists(item => item.Item1.ShapeId == _shape1.Object.ShapeId));
+    //    Assert.IsFalse(_undoRedoService._redoList.Exists(item => item.Item1.ShapeId == _shape1.Object.ShapeId));
     //}
 
     //[TestMethod]
@@ -139,8 +139,8 @@ public class Test_UndoRedoService
     //    _undoRedoService.RemoveLastModified(_networkingServiceMock.Object, _shape1.Object);
 
     //    // Assert
-    //    Assert.AreEqual(0, _undoRedoService.UndoList.Count);
-    //    Assert.AreEqual(0, _undoRedoService.RedoList.Count);
+    //    Assert.AreEqual(0, _undoRedoService._undoList.Count);
+    //    Assert.AreEqual(0, _undoRedoService._redoList.Count);
     //}
 
     //[TestMethod]
@@ -157,6 +157,6 @@ public class Test_UndoRedoService
     //    _undoRedoService.RemoveLastModified(_networkingServiceMock.Object, differentShapeMock.Object);
 
     //    // Assert
-    //    Assert.AreEqual(1, _undoRedoService.UndoList.Count);
+    //    Assert.AreEqual(1, _undoRedoService._undoList.Count);
     //}
 }

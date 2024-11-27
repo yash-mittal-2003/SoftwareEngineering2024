@@ -117,7 +117,7 @@ public class SnapShotService
         var httpClient = new HttpClient(); // Simplified for testing
 
         // Configuration for the cloud service
-        string baseUrl = "https://secloudapp-2024.azurewebsites.net/api";
+        var baseUrl = "https://secloudapp-2024.azurewebsites.net/api";
         string team = "whiteboard";
         string sasToken = "sp=racwdli&st=2024-11-14T21:02:09Z&se=2024-11-30T05:02:09Z&spr=https&sv=2022-11-02&sr=c&sig=tSw6pO8%2FgqiG2MgU%2FoepmRkFuuJrTerVy%2BDn91Y0WH8%3D";
 
@@ -243,7 +243,7 @@ public class SnapShotService
         if (isInit)
         {
             // Search for JSON files in the cloud matching the user ID
-            ServiceResponse<JsonSearchResponse> response = await _cloudService.SearchJsonFilesAsync("userID", _userEmail.ToString());
+            ServiceResponse<JsonSearchResponse> response = await _cloudService.SearchJsonFilesAsync("_userID", _userEmail.ToString());
             if (response != null && response.Data != null && response.Data.Matches != null)
             {
                 // Populate the local list of SnapShotDownloadItems

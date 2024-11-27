@@ -84,7 +84,7 @@ public class RenderingService
     /// </summary>
     /// <param name="currentShape">The shape to render or manipulate.</param>
     /// <param name="command">The command indicating the action to perform (e.g., CREATE, MODIFY, DELETE).</param>
-    public void RenderShape(IShape currentShape, string command)
+    public virtual void RenderShape(IShape currentShape, string command)
     {
 
         if (command == "CREATE")
