@@ -41,7 +41,7 @@ public class ServerOrClient
     /// <summary>
     /// Stores the user email of the user.
     /// </summary>
-    public string userEmail;
+    public string _userEmail;
 
     /// <summary>
     /// Object used for ensuring thread safety in singleton instance creation.
@@ -81,8 +81,8 @@ public class ServerOrClient
     /// <exception cref="FormatException">Thrown if the userid cannot be parsed into an integer.</exception>
     public void SetUserDetails(string username, string userid, string useremail)
     {
-        userName = username;
-        userId = int.Parse(userid);
-        userEmail = useremail;
+        _userName = username;
+        _userId = int.Parse(userid);
+        _userEmail = useremail;
     }
 }

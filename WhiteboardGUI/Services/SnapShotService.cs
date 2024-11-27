@@ -1,4 +1,4 @@
-using SECloud.Services;
+﻿using SECloud.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -268,8 +268,8 @@ public class SnapShotService
         AddShapes(snapShot);
 
         // Clear undo and redo lists
-        _undoRedoService.RedoList.Clear();
-        _undoRedoService.UndoList.Clear();
+        _undoRedoService._redoList.Clear();
+        _undoRedoService._undoList.Clear();
     }
 
     /// <summary>
