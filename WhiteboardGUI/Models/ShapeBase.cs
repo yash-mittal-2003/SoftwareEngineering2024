@@ -27,6 +27,7 @@ public abstract class ShapeBase : IShape
     private double _userID;
     private double _lastModifierID;
     private string _userName;
+    private string _profilePictureURL;
     private string _lastModifiedBy;
     private bool _isSelected;
     private int zIndex;
@@ -147,6 +148,12 @@ public abstract class ShapeBase : IShape
     {
         get => _userName;
         set { _userName = value; OnPropertyChanged(nameof(UserName)); }
+    }
+
+    public string ProfilePictureURL
+    {
+        get => _profilePictureURL;
+        set { _profilePictureURL = value; OnPropertyChanged(nameof(ProfilePictureURL)); }
     }
 
     /// <summary>

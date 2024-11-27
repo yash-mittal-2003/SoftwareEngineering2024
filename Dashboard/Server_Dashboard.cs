@@ -146,7 +146,7 @@ namespace Dashboard
             }
             Trace.WriteLine("[DashboardServer] started server");
             WhiteboardGUI.Models.ServerOrClient serverOrClient = WhiteboardGUI.Models.ServerOrClient.ServerOrClientInstance;
-            serverOrClient.SetUserDetails(UserName, "1");
+            serverOrClient.SetUserDetails(UserName, "1", ProfilePictureUrl);
             return serverCredentials;
         }
 

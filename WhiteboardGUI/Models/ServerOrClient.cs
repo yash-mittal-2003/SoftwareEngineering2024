@@ -38,6 +38,8 @@ public class ServerOrClient
     /// </summary>
     public int userId;
 
+    public string profilePictureURL;
+
     /// <summary>
     /// Object used for ensuring thread safety in singleton instance creation.
     /// </summary>
@@ -74,9 +76,10 @@ public class ServerOrClient
     /// <param name="username">The username of the user.</param>
     /// <param name="userid">The user ID as a string, which will be parsed into an integer.</param>
     /// <exception cref="FormatException">Thrown if the userid cannot be parsed into an integer.</exception>
-    public void SetUserDetails(string username, string userid)
+    public void SetUserDetails(string username, string userid, string profileURL)
     {
         userName = username;
         userId = int.Parse(userid);
+        profilePictureURL = profileURL;
     }
 }

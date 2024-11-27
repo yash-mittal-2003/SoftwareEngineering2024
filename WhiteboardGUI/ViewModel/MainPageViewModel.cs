@@ -127,6 +127,7 @@ namespace WhiteboardGUI.ViewModel
         private readonly ReceivedDataService _receivedDataService;
         public string userName;
         public int userId;
+        public string profilePictureURL;
 
         private static readonly object padlock = new object();
         public static MainPageViewModel WhiteboardInstance
@@ -703,6 +704,7 @@ namespace WhiteboardGUI.ViewModel
             Shapes = new ObservableCollection<IShape>();
             userId = _serverOrClient.userId;
             userName = _serverOrClient.userName;
+            profilePictureURL = _serverOrClient.profilePictureURL;
             _receivedDataService = new ReceivedDataService(userId);
             _networkingService = new NetworkingService(_receivedDataService);
             if (userId == 1)
@@ -1422,6 +1424,7 @@ namespace WhiteboardGUI.ViewModel
             }
             shape.UserID = _networkingService._clientID;
             shape.UserName = userName;
+            shape.ProfilePictureURL = profilePictureURL;
             shape.ShapeId = Guid.NewGuid();
             return shape;
         }

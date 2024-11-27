@@ -162,10 +162,10 @@ public static class HighlightingService
     /// <returns>The image source of the shape, or null if unavailable.</returns>
     private static ImageSource GetImageSourceForShape(IShape shape)
     {
-        string imagePath = "../Views/Assets/sirphoto.png";
+        //string imagePath = "../Views/Assets/sirphoto.png";
         try
         {
-            return new BitmapImage(new Uri($"pack://application:,,,/{imagePath}", UriKind.Absolute));
+            return new BitmapImage(new Uri(shape.ProfilePictureURL));
         }
         catch
         {

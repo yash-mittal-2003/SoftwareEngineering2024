@@ -34,6 +34,7 @@ public interface IShape : INotifyPropertyChanged
     double LastModifierID { get; set; }
     string UserName { get; set; }
     string LastModifiedBy { get; set; }
+    string ProfilePictureURL { get; set; }
 
     /// <summary>
     /// Gets or sets the Z-index of the shape.
