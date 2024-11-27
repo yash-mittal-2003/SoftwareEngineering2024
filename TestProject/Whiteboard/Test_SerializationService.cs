@@ -1,4 +1,4 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -176,7 +176,7 @@ public class Test_SerializationService
         string serializedSnapShot = SerializationService.SerializeSnapShot(_snapShot);
 
         Assert.IsNotNull(serializedSnapShot);
-        Assert.IsTrue(serializedSnapShot.Contains("\"fileName\":\"testSnapshot\""));
+        Assert.IsTrue(serializedSnapShot.Contains("\"_fileName\":\"testSnapshot\""));
     }
 
     [TestMethod]
