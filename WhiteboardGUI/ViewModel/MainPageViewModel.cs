@@ -127,6 +127,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     private readonly ReceivedDataService _receivedDataService;
     public string userName;
     public int userId;
+    public string userEmail;
 
     private static readonly object padlock = new object();
     public static MainPageViewModel WhiteboardInstance
@@ -723,6 +724,7 @@ public class MainPageViewModel : INotifyPropertyChanged
         Shapes = new ObservableCollection<IShape>();
         userId = _serverOrClient.userId;
         userName = _serverOrClient.userName;
+        userEmail = _serverOrClient.userEmail;
         _receivedDataService = new ReceivedDataService(userId);
         _networkingService = new NetworkingService(_receivedDataService);
         if (userId == 1)
@@ -738,12 +740,12 @@ public class MainPageViewModel : INotifyPropertyChanged
             _networkingService,
             _renderingService,
             Shapes,
-            _undoRedoService
+            _undoRedoService,
+            userEmail
         );
         _moveShapeZIndexing = new MoveShapeZIndexing(Shapes);
 
         DownloadItems = new ListCollectionView(new List<SnapShotDownloadItem>());
-        InitializeDownloadItems();
         _snapShotService.OnSnapShotUploaded += RefreshDownloadItems;
 
         _receivedDataService.ShapeReceived += OnShapeReceived;
@@ -899,12 +901,18 @@ public class MainPageViewModel : INotifyPropertyChanged
             CanvasBackground = new SolidColorBrush(Color.FromRgb(255, 255, 255)); // White
         }
     }
+    /// <summary>
+    /// Check whether downloadItems are initialized
+    /// </summary>
+    private bool _isDownloadItemsFilled = false;
 
     /// <summary>
     /// Opens the download popup.
     /// </summary>
     private void OpenDownloadPopup()
     {
+        if (!_isDownloadItemsFilled) { InitializeDownloadItems(); }
+        _isDownloadItemsFilled = true;
         IsDownloadPopupOpen = true;
         OnPropertyChanged(nameof(IsDownloadPopupOpen));
     }
@@ -947,7 +955,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private async void InitializeDownloadItems()
     {
-        List<SnapShotDownloadItem> newSnaps = await _snapShotService.getSnaps("a",true);
+        List<SnapShotDownloadItem> newSnaps = await _snapShotService.GetSnaps("a",true);
         DownloadItems = new ListCollectionView(newSnaps);
         OnPropertyChanged(nameof(DownloadItems));
     }
@@ -958,7 +966,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     private async void RefreshDownloadItems()
     {
         
-        List<SnapShotDownloadItem> newSnaps = await _snapShotService.getSnaps("a",false);
+        List<SnapShotDownloadItem> newSnaps = await _snapShotService.GetSnaps("a",false);
         DownloadItems = new ListCollectionView(newSnaps);
         OnPropertyChanged(nameof(DownloadItems));
     }

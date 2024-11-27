@@ -39,6 +39,11 @@ public class ServerOrClient
     public int userId;
 
     /// <summary>
+    /// Stores the user email of the user.
+    /// </summary>
+    public string userEmail;
+
+    /// <summary>
     /// Object used for ensuring thread safety in singleton instance creation.
     /// </summary>
     private static readonly object padlock = new object();
@@ -74,9 +79,10 @@ public class ServerOrClient
     /// <param name="username">The username of the user.</param>
     /// <param name="userid">The user ID as a string, which will be parsed into an integer.</param>
     /// <exception cref="FormatException">Thrown if the userid cannot be parsed into an integer.</exception>
-    public void SetUserDetails(string username, string userid)
+    public void SetUserDetails(string username, string userid, string useremail)
     {
         userName = username;
         userId = int.Parse(userid);
+        userEmail = useremail;
     }
 }

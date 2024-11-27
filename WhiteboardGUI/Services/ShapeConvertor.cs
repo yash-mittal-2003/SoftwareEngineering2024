@@ -29,6 +29,7 @@ public class ShapeConverter : JsonConverter
                     "Line" => shapeDict.ToObject<LineShape>(),
                     "Scribble" => shapeDict.ToObject<ScribbleShape>(),
                     "TextShape" => shapeDict.ToObject<TextShape>(),
+                    "TextboxModel" => shapeDict.ToObject<TextboxModel>(),
                     _ => throw new NotSupportedException($"Shape type '{shapeType}' not supported"),
                 };
                 shapes.Add(shape);
