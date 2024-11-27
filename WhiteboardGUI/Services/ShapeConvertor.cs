@@ -20,7 +20,7 @@ public class ShapeConverter : JsonConverter
             var shapes = new ObservableCollection<IShape>();
             var shapeArray = JArray.Load(reader);
 
-            foreach (var shapeDict in shapeArray)
+            foreach (JToken shapeDict in shapeArray)
             {
                 string shapeType = shapeDict["ShapeType"]?.ToString();
                 IShape shape = shapeType switch

@@ -98,7 +98,9 @@ public class ScribbleShape : ShapeBase
     public override Rect GetBounds()
     {
         if (Points == null || Points.Count == 0)
+        {
             return Rect.Empty;
+        }
 
         double minX = Points.Min(p => p.X);
         double minY = Points.Min(p => p.Y);

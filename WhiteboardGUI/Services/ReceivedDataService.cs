@@ -32,7 +32,7 @@ public class ReceivedDataService
     /// <summary>
     /// Event triggered when a shape is received.
     /// </summary>
-    public event Action<IShape, Boolean> ShapeReceived;
+    public event Action<IShape, bool> ShapeReceived;
 
     /// <summary>
     /// Event triggered when a shape is deleted.
@@ -72,15 +72,15 @@ public class ReceivedDataService
     /// <summary>
     /// The ID of the current service instance.
     /// </summary>
-    private int _Id;
+    private int _id;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ReceivedDataService"/> class.
     /// </summary>
-    /// <param name="Id">The unique identifier for the instance.</param>
-    public ReceivedDataService(int Id)
+    /// <param name="id">The unique identifier for the instance.</param>
+    public ReceivedDataService(int id)
     {
-        _Id = Id;
+        _id = id;
     }
 
     /// <summary>
@@ -98,7 +98,7 @@ public class ReceivedDataService
         int index = receivedData.IndexOf("END");
         int senderId = int.Parse(receivedData.Substring(2, index - 2));
 
-        if (senderId == _Id)
+        if (senderId == _id)
         {
             return -1;
         }
@@ -108,14 +108,14 @@ public class ReceivedDataService
         if (receivedData.StartsWith("DELETE:"))
         {
             string data = receivedData.Substring(7);
-            var shape = SerializationService.DeserializeShape(data);
+            IShape shape = SerializationService.DeserializeShape(data);
 
             if (shape != null)
             {
-                var shapeId = shape.ShapeId;
-                var shapeUserId = shape.UserID;
+                Guid shapeId = shape.ShapeId;
+                double shapeUserId = shape.UserID;
 
-                var currentShape = _synchronizedShapes
+                IShape? currentShape = _synchronizedShapes
                     .Where(s => s.ShapeId == shapeId && s.UserID == shapeUserId)
                     .FirstOrDefault();
                 if (currentShape != null)
@@ -131,14 +131,14 @@ public class ReceivedDataService
         else if (receivedData.StartsWith("INDEX-BACK:"))
         {
             string data = receivedData.Substring(11);
-            var shape = SerializationService.DeserializeShape(data);
+            IShape shape = SerializationService.DeserializeShape(data);
 
             if (shape != null)
             {
-                var shapeId = shape.ShapeId;
-                var shapeUserId = shape.UserID;
+                Guid shapeId = shape.ShapeId;
+                double shapeUserId = shape.UserID;
 
-                var currentShape = _synchronizedShapes
+                IShape? currentShape = _synchronizedShapes
                     .Where(s => s.ShapeId == shapeId && s.UserID == shapeUserId)
                     .FirstOrDefault();
                 if (currentShape != null)
@@ -150,14 +150,14 @@ public class ReceivedDataService
         else if (receivedData.StartsWith("INDEX-BACKWARD:"))
         {
             string data = receivedData.Substring(15);
-            var shape = SerializationService.DeserializeShape(data);
+            IShape shape = SerializationService.DeserializeShape(data);
 
             if (shape != null)
             {
-                var shapeId = shape.ShapeId;
-                var shapeUserId = shape.UserID;
+                Guid shapeId = shape.ShapeId;
+                double shapeUserId = shape.UserID;
 
-                var currentShape = _synchronizedShapes
+                IShape? currentShape = _synchronizedShapes
                     .Where(s => s.ShapeId == shapeId && s.UserID == shapeUserId)
                     .FirstOrDefault();
                 if (currentShape != null)
@@ -169,14 +169,14 @@ public class ReceivedDataService
         else if (receivedData.StartsWith("MODIFY:"))
         {
             string data = receivedData.Substring(7);
-            var shape = SerializationService.DeserializeShape(data);
+            IShape shape = SerializationService.DeserializeShape(data);
             Debug.WriteLine($"Received shape: {shape}");
             if (shape != null)
             {
-                var shapeId = shape.ShapeId;
-                var shapeUserId = shape.UserID;
+                Guid shapeId = shape.ShapeId;
+                double shapeUserId = shape.UserID;
 
-                var currentShape = _synchronizedShapes
+                IShape? currentShape = _synchronizedShapes
                     .Where(s => s.ShapeId == shapeId && s.UserID == shapeUserId)
                     .FirstOrDefault();
                 if (currentShape != null)
@@ -188,7 +188,7 @@ public class ReceivedDataService
         else if (receivedData.StartsWith("CREATE:"))
         {
             string data = receivedData.Substring(7);
-            var shape = SerializationService.DeserializeShape(data);
+            IShape shape = SerializationService.DeserializeShape(data);
             if (shape != null)
             {
                 ShapeReceived?.Invoke(shape, true); // Draws the shape sent over the network
@@ -197,7 +197,7 @@ public class ReceivedDataService
         else if (receivedData.StartsWith("DOWNLOAD:"))
         {
             string data = receivedData.Substring(9);
-            var shape = SerializationService.DeserializeShape(data);
+            IShape shape = SerializationService.DeserializeShape(data);
             if (shape != null)
             {
                 ShapeReceived?.Invoke(shape, false); // For rendering snapshot after downloading
@@ -206,10 +206,10 @@ public class ReceivedDataService
         else if (receivedData.StartsWith("UNLOCK:"))
         {
             string data = receivedData.Substring(7);
-            var shape = SerializationService.DeserializeShape(data);
+            IShape shape = SerializationService.DeserializeShape(data);
             if (shape != null)
             {
-                var existingShape = _synchronizedShapes
+                IShape? existingShape = _synchronizedShapes
                     .FirstOrDefault(s => s.ShapeId == shape.ShapeId);
                 if (existingShape != null)
                 {
@@ -222,15 +222,15 @@ public class ReceivedDataService
         else if (receivedData.StartsWith("LOCK:")) 
         {
             string data = receivedData.Substring(5);
-            var shape = SerializationService.DeserializeShape(data);
+            IShape shape = SerializationService.DeserializeShape(data);
             if (shape != null)
             {
-                var existingShape = _synchronizedShapes
+                IShape? existingShape = _synchronizedShapes
                     .FirstOrDefault(s => s.ShapeId == shape.ShapeId);
 
                 if (existingShape != null)
                 {
-                    if (_Id == 1)
+                    if (_id == 1)
                     {
                         if (existingShape.IsLocked)
                         {

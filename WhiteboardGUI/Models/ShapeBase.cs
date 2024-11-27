@@ -27,7 +27,7 @@ public abstract class ShapeBase : IShape
     private double _userID;
     private double _lastModifierID;
     private bool _isSelected;
-    private int zIndex;
+    private int _zIndex;
     private bool _isLocked;
     private string _boundingBoxColor;
     private double _lockedByUserID;
@@ -85,12 +85,12 @@ public abstract class ShapeBase : IShape
     /// </summary>
     public int ZIndex
     {
-        get => zIndex;
+        get => _zIndex;
         set
         {
-            if (zIndex != value)
+            if (_zIndex != value)
             {
-                zIndex = value;
+                _zIndex = value;
                 OnPropertyChanged(nameof(ZIndex));
             }
         }
