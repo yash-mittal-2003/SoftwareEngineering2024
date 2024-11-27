@@ -1781,7 +1781,6 @@ public class MainPageViewModel : INotifyPropertyChanged
             {
                 return string.Empty;
             }
-            string colorHex = HoveredShape.Color.ToString();
             // Customize the details based on the shape type
             string details =
                 $"Created By: {HoveredShape.UserName}\n"

@@ -35,7 +35,7 @@ public class HoverAdorner : Adorner
     private readonly Image _image;
     private readonly TextBlock _textBlockCreator;
     private readonly TextBlock _textBlockModified;
-    private readonly Ellipse _colorPreview;
+    //private readonly Ellipse _colorPreview;
     private readonly Point _mousePosition;
 
     /// <summary>
@@ -72,30 +72,38 @@ public class HoverAdorner : Adorner
                 }
             }
         }
+        if (!string.IsNullOrEmpty(userName) && userName.Length > 15)
+        {
+            userName = userName.Substring(0, 15);
+        }
 
+        if (!string.IsNullOrEmpty(lastModifiedBy) && lastModifiedBy.Length > 15)
+        {
+            lastModifiedBy = lastModifiedBy.Substring(0, 15);
+        }
         // Initialize Image
         _image = new Image {
             Source = imageSource,
-            Width = 40, // Set desired width
-            Height = 40, // Set desired height
-            Margin = new Thickness(0, 5, 5, 5), // Margin between image and text
+            Width = 60, // Set desired width
+            Height = 60, // Set desired height
+            Margin = new Thickness(5, 5, 5, 5), // Margin between image and text
             IsHitTestVisible = false
         };
 
         // Initialize Color Preview Ellipse
-        _colorPreview = new Ellipse {
-            Width = 16,
-            Height = 16,
-            Fill = new SolidColorBrush(shapeColor),
-            Stroke = Brushes.Black,
-            StrokeThickness = 1,
-            Margin = new Thickness(0, 0, 5, 0),
-            IsHitTestVisible = false
-        };
+        //_colorPreview = new Ellipse {
+        //    Width = 16,
+        //    Height = 16,
+        //    Fill = new SolidColorBrush(shapeColor),
+        //    Stroke = Brushes.Black,
+        //    StrokeThickness = 1,
+        //    Margin = new Thickness(0, 0, 5, 0),
+        //    IsHitTestVisible = false
+        //};
 
         // Initialize TextBlock
         _textBlockCreator = new TextBlock {
-            Text = $"Created By: {userName}",
+            Text = $"Created By: {userName}... ",
             TextWrapping = TextWrapping.Wrap,
             FontSize = 14,
             Foreground = Brushes.Black,
@@ -105,7 +113,7 @@ public class HoverAdorner : Adorner
         };
 
         _textBlockModified = new TextBlock {
-            Text = $"Last Modified By: {lastModifiedBy}",
+            Text = $"Last Modified By: {lastModifiedBy}... ",
             TextWrapping = TextWrapping.Wrap,
             FontSize = 14,
             Foreground = Brushes.Black,
@@ -117,7 +125,7 @@ public class HoverAdorner : Adorner
         // Initialize StackPanel to contain Image and TextBlock
         _stackPanel = new StackPanel {
             Orientation = Orientation.Vertical,
-            Children = { _image, _colorPreview, _textBlockCreator, _textBlockModified },
+            Children = { _image, _textBlockCreator, _textBlockModified },
             IsHitTestVisible = false
         };
 
@@ -214,7 +222,15 @@ public class HoverAdorner : Adorner
                 }
             }
         }
+        if (!string.IsNullOrEmpty(userName) && userName.Length > 15)
+        {
+            userName = userName.Substring(0, 15);
+        }
 
+        if (!string.IsNullOrEmpty(lastModifiedBy) && lastModifiedBy.Length > 15)
+        {
+            lastModifiedBy = lastModifiedBy.Substring(0, 15);
+        }
         // Update the TextBlocks with the extracted first names
         _textBlockCreator.Text = $"Created By: {userName}";
         _textBlockModified.Text = $"Last Modified By: {lastModifiedBy}";

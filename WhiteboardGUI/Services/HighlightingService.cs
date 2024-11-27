@@ -139,7 +139,6 @@ public static class HighlightingService
                         RemoveHoverAdorner(adornerLayer, vm);
                         vm.HoveredShape = shape;
                         vm.IsShapeHovered = true;
-
                         Color shapeColor = (Color)ColorConverter.ConvertFromString(shape.Color);
                         ImageSource imageSource = GetImageSourceForShape(shape);
 
