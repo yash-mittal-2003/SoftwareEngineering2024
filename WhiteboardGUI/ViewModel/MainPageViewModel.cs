@@ -1732,7 +1732,8 @@ public class MainPageViewModel : INotifyPropertyChanged
                         UserID = _networkingService._clientID,
                         UserName = _userName,
                         LastModifiedBy = _userName,
-                        LastModifierID = _networkingService._clientID
+                        LastModifierID = _networkingService._clientID,
+                        ProfilePictureURL = _profilePictureURL
                     };
                     Shapes.Add(textShape);
                     RenderingService.RenderShape(textShape, "CREATE");
