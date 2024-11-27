@@ -1,4 +1,4 @@
-/**************************************************************************************************
+﻿/**************************************************************************************************
  * Filename    = RenderingService.cs
  *
  * Authors     = Likith Anaparty
@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Shapes;
 using WhiteboardGUI.Models;
 
 namespace WhiteboardGUI.Services
@@ -41,7 +42,7 @@ namespace WhiteboardGUI.Services
         /// <summary>
         /// Collection of shapes currently present on the whiteboard.
         /// </summary>
-        ObservableCollection<IShape> Shapes;
+        ObservableCollection<IShape> _shapes;
 
         /// <summary>
         /// Unique identifier for the current user.
@@ -60,7 +61,7 @@ namespace WhiteboardGUI.Services
         {
             _networkingService = networkingService;
             _undoRedoService = undoRedoService;
-            Shapes = shapes;
+            _shapes = shapes;
             _userId = UserID;
             _name = name;
         }
@@ -97,7 +98,7 @@ namespace WhiteboardGUI.Services
             else if (command.StartsWith("INDEX"))
             {
                 _networkingService._synchronizedShapes.Clear();
-                foreach (IShape shape in Shapes)
+                foreach (IShape shape in _shapes)
                 {
                     _networkingService._synchronizedShapes.Add(shape);
                 }
@@ -120,9 +121,9 @@ namespace WhiteboardGUI.Services
 
             else if (command == "CLEAR")
             {
-                Shapes.Clear();
-                _undoRedoService.UndoList.Clear();
-                _undoRedoService.RedoList.Clear();
+                _shapes.Clear();
+                _undoRedoService._undoList.Clear();
+                _undoRedoService._redoList.Clear();
                 _networkingService._synchronizedShapes.Clear();
                 string clearMessage = $"ID{_userId}{command}:";
                 Debug.WriteLine(clearMessage);
@@ -132,30 +133,29 @@ namespace WhiteboardGUI.Services
 
             else if (command == "UNDO")
             {
-                var prevShape = _undoRedoService.UndoList[_undoRedoService.UndoList.Count - 1].Item1;
-                var _currentShape = _undoRedoService.UndoList[_undoRedoService.UndoList.Count - 1].Item2;
+                IShape prevShape = _undoRedoService._undoList[_undoRedoService._undoList.Count - 1].Item1;
+                var _currentShape = _undoRedoService._undoList[_undoRedoService._undoList.Count - 1].Item2;
                 if (_currentShape == null)
                 {
                     currentShape = prevShape;
-                    foreach (var s in Shapes)
+                    foreach (IShape s in _shapes)
                     {
                         if (s.ShapeId == currentShape.ShapeId)
                         {
-                            Shapes.Remove(s);
+                            _shapes.Remove(s);
                             break;
                         }
                     }
                     _networkingService._synchronizedShapes.Remove(currentShape);
                     prevShape.LastModifierID = _networkingService._clientID;
-                    prevShape.LastModifiedBy = _name;
                     command = "DELETE";
                 }
 
                 else if (prevShape == null)
                 {
                     currentShape = _currentShape;
-                    var newShape = currentShape.Clone();
-                    Shapes.Add(newShape);
+                    IShape newShape = currentShape.Clone();
+                    _shapes.Add(newShape);
                     _networkingService._synchronizedShapes.Add(newShape);
                     command = "CREATE";
                 }
@@ -163,19 +163,18 @@ namespace WhiteboardGUI.Services
                 else
                 {
                     currentShape = _currentShape;
-                    var newShape = currentShape.Clone();
+                    IShape newShape = currentShape.Clone();
                     UpdateSynchronizedShapes(newShape);
-                    foreach (var s in Shapes)
+                    foreach (IShape s in _shapes)
                     {
                         if (s.ShapeId == prevShape.ShapeId)
                         {
-                            Shapes.Remove(s);
+                            _shapes.Remove(s);
                             break;
                         }
                     }
-                    Shapes.Add(currentShape);
+                    _shapes.Add(currentShape);
                     _currentShape.LastModifierID = _networkingService._clientID;
-                    _currentShape.LastModifiedBy = _name;
                     command = "MODIFY";
 
                 }
@@ -184,48 +183,46 @@ namespace WhiteboardGUI.Services
 
             else if (command == "REDO")
             {
-                var prevShape = _undoRedoService.RedoList[_undoRedoService.RedoList.Count - 1].Item1;
-                var _currentShape = _undoRedoService.RedoList[_undoRedoService.RedoList.Count - 1].Item2;
+                IShape prevShape = _undoRedoService._redoList[_undoRedoService._redoList.Count - 1].Item1;
+                var _currentShape = _undoRedoService._redoList[_undoRedoService._redoList.Count - 1].Item2;
                 if (_currentShape == null)
                 {
                     currentShape = prevShape;
-                    foreach (var s in Shapes)
+                    foreach (IShape s in _shapes)
                     {
                         if (s.ShapeId == prevShape.ShapeId)
                         {
-                            Shapes.Remove(s);
+                            _shapes.Remove(s);
                             break;
                         }
                     }
                     _networkingService._synchronizedShapes.Remove(currentShape);
                     prevShape.LastModifierID = _networkingService._clientID;
-                    prevShape.LastModifiedBy = _name;
                     command = "DELETE";
                 }
                 else if (prevShape == null)
                 {
                     currentShape = _currentShape;
-                    var newShape = currentShape.Clone();
-                    Shapes.Add(newShape);
+                    IShape newShape = currentShape.Clone();
+                    _shapes.Add(newShape);
                     _networkingService._synchronizedShapes.Add(newShape);
                     command = "CREATE";
                 }
                 else
                 {
                     currentShape = _currentShape;
-                    var newShape = currentShape.Clone();
+                    IShape newShape = currentShape.Clone();
                     UpdateSynchronizedShapes(newShape);
-                    foreach (var s in Shapes)
+                    foreach (IShape s in _shapes)
                     {
                         if (s.ShapeId == currentShape.ShapeId)
                         {
-                            Shapes.Remove(s);
+                            _shapes.Remove(s);
                             break;
                         }
                     }
-                    Shapes.Add(currentShape);
+                    _shapes.Add(currentShape);
                     _currentShape.LastModifierID = _networkingService._clientID;
-                    _currentShape.LastModifiedBy = _name;
                     command = "MODIFY";
 
                 }
@@ -234,7 +231,7 @@ namespace WhiteboardGUI.Services
 
             else if (command == "DELETE")
             {
-                Shapes.Remove(currentShape);
+                _shapes.Remove(currentShape);
                 _networkingService._synchronizedShapes.Remove(currentShape);
                 _undoRedoService.UpdateLastDrawing(null, currentShape);
             }

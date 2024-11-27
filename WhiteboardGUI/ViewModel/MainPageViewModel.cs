@@ -1,4 +1,4 @@
-/**************************************************************************************************
+﻿/**************************************************************************************************
  * Filename    = MainPageViewModel.cs
  *
  * Authors     = Likith Anaparty, Rachit Jain, and Kshitij Ghodake
@@ -127,6 +127,7 @@ namespace WhiteboardGUI.ViewModel
         private readonly ReceivedDataService _receivedDataService;
         public string userName;
         public int userId;
+        public string _userEmail;
         public string profilePictureURL;
 
         private static readonly object padlock = new object();
@@ -722,8 +723,9 @@ namespace WhiteboardGUI.ViewModel
         public MainPageViewModel()
         {
             Shapes = new ObservableCollection<IShape>();
-            userId = _serverOrClient.userId;
-            userName = _serverOrClient.userName;
+            userId = _serverOrClient._userId;
+            userName = _serverOrClient._userName;
+            _userEmail = _serverOrClient._userEmail;
             profilePictureURL = _serverOrClient.profilePictureURL;
             _receivedDataService = new ReceivedDataService(userId);
             _networkingService = new NetworkingService(_receivedDataService);
@@ -740,7 +742,8 @@ namespace WhiteboardGUI.ViewModel
                 _networkingService,
                 _renderingService,
                 Shapes,
-                _undoRedoService
+                _undoRedoService,
+                _userEmail
             );
             _moveShapeZIndexing = new MoveShapeZIndexing(Shapes);
 
@@ -949,7 +952,7 @@ namespace WhiteboardGUI.ViewModel
         /// </summary>
         private async void InitializeDownloadItems()
         {
-            List<SnapShotDownloadItem> newSnaps = await _snapShotService.getSnaps("a",true);
+            List<SnapShotDownloadItem> newSnaps = await _snapShotService.GetSnaps("a",true);
             DownloadItems = new ListCollectionView(newSnaps);
             OnPropertyChanged(nameof(DownloadItems));
         }
@@ -960,7 +963,7 @@ namespace WhiteboardGUI.ViewModel
         private async void RefreshDownloadItems()
         {
             
-            List<SnapShotDownloadItem> newSnaps = await _snapShotService.getSnaps("a",false);
+            List<SnapShotDownloadItem> newSnaps = await _snapShotService.GetSnaps("a",false);
             DownloadItems = new ListCollectionView(newSnaps);
             OnPropertyChanged(nameof(DownloadItems));
         }
@@ -1017,7 +1020,7 @@ namespace WhiteboardGUI.ViewModel
         /// </summary>
         private void CallUndo()
         {
-            if (_undoRedoService.UndoList.Count > 0)
+            if (_undoRedoService._undoList.Count > 0)
             {
                 _renderingService.RenderShape(null, "UNDO");
             }
@@ -1028,7 +1031,7 @@ namespace WhiteboardGUI.ViewModel
         /// </summary>
         private void CallRedo()
         {
-            if (_undoRedoService.RedoList.Count > 0)
+            if (_undoRedoService._redoList.Count > 0)
             {
                 _renderingService.RenderShape(null, "REDO");
             }
@@ -1670,8 +1673,8 @@ namespace WhiteboardGUI.ViewModel
             Application.Current.Dispatcher.Invoke(() =>
             {
                 Shapes.Clear();
-                _undoRedoService.RedoList.Clear();
-                _undoRedoService.UndoList.Clear();
+                _undoRedoService._redoList.Clear();
+                _undoRedoService._undoList.Clear();
                 _networkingService._synchronizedShapes.Clear();
             });
         }

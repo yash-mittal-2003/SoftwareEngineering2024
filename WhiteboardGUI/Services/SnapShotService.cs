@@ -90,6 +90,14 @@ public class SnapShotService
         InitializeCloudService();
     }
 
+    public SnapShotService(NetworkingService networkingService, RenderingService renderingService, ObservableCollection<IShape> shapes, UndoRedoService undoRedoService)
+    {
+        _networkingService = networkingService;
+        _renderingService = renderingService;
+        _shapes = shapes;
+        _undoRedoService = undoRedoService;
+    }
+
     /// <summary>
     /// Initializes the cloud service for managing snapshot uploads and downloads.
     /// </summary>
