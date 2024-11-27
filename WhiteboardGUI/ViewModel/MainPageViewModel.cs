@@ -1,4 +1,4 @@
-﻿/**************************************************************************************************
+/**************************************************************************************************
  * Filename    = MainPageViewModel.cs
  *
  * Authors     = Likith Anaparty, Rachit Jain, and Kshitij Ghodake
@@ -132,7 +132,8 @@ namespace WhiteboardGUI.ViewModel
         private static readonly object padlock = new object();
         public static MainPageViewModel WhiteboardInstance
         {
-            get {
+            get
+            {
                 lock (padlock)
                 {
                     if (_whiteboardInstance == null)
@@ -153,7 +154,8 @@ namespace WhiteboardGUI.ViewModel
         public string DefaultColor
         {
             get => _defaultColor;
-            set {
+            set
+            {
                 if (_defaultColor != value)
                 {
                     _defaultColor = value;
@@ -205,7 +207,8 @@ namespace WhiteboardGUI.ViewModel
         public byte Red
         {
             get => _red;
-            set {
+            set
+            {
                 _red = value;
                 OnPropertyChanged(nameof(Red));
                 UpdateSelectedColor();
@@ -219,7 +222,8 @@ namespace WhiteboardGUI.ViewModel
         public byte Green
         {
             get => _green;
-            set {
+            set
+            {
                 _green = value;
                 OnPropertyChanged(nameof(Green));
                 UpdateSelectedColor();
@@ -233,7 +237,8 @@ namespace WhiteboardGUI.ViewModel
         public byte Blue
         {
             get => _blue;
-            set {
+            set
+            {
                 _blue = value;
                 OnPropertyChanged(nameof(Blue));
                 UpdateSelectedColor();
@@ -246,7 +251,8 @@ namespace WhiteboardGUI.ViewModel
         public bool IsUploading
         {
             get => _isUploading;
-            set {
+            set
+            {
                 _isUploading = value;
                 OnPropertyChanged(nameof(IsUploading));
             }
@@ -258,7 +264,8 @@ namespace WhiteboardGUI.ViewModel
         public bool IsDragging
         {
             get => _isDragging;
-            set {
+            set
+            {
                 _isDragging = value;
                 OnPropertyChanged(nameof(IsDragging));
             }
@@ -270,7 +277,8 @@ namespace WhiteboardGUI.ViewModel
         public bool IsDownloading
         {
             get => _isDownloading;
-            set {
+            set
+            {
                 _isDownloading = value;
                 OnPropertyChanged(nameof(IsDownloading));
             }
@@ -283,7 +291,8 @@ namespace WhiteboardGUI.ViewModel
         public double SelectedThickness
         {
             get => _selectedThickness;
-            set {
+            set
+            {
                 if (_selectedThickness != value)
                 {
                     _selectedThickness = value;
@@ -305,7 +314,8 @@ namespace WhiteboardGUI.ViewModel
         public Color SelectedColor
         {
             get => _selectedColor;
-            set {
+            set
+            {
                 if (_selectedColor != value)
                 {
                     _selectedColor = value;
@@ -326,7 +336,8 @@ namespace WhiteboardGUI.ViewModel
         public Color CurrentColor
         {
             get => _currentColor;
-            set {
+            set
+            {
                 if (_currentColor != value)
                 {
                     _currentColor = value;
@@ -353,7 +364,8 @@ namespace WhiteboardGUI.ViewModel
         public string TextInput
         {
             get => _textInput;
-            set {
+            set
+            {
                 _textInput = value;
                 OnPropertyChanged(nameof(TextInput));
                 Debug.WriteLine(_textInput);
@@ -367,7 +379,8 @@ namespace WhiteboardGUI.ViewModel
         public bool IsTextBoxActive
         {
             get => _isTextBoxActive;
-            set {
+            set
+            {
                 _isTextBoxActive = value;
                 OnPropertyChanged(nameof(IsTextBoxActive));
                 OnPropertyChanged(nameof(TextBoxVisibility));
@@ -380,7 +393,8 @@ namespace WhiteboardGUI.ViewModel
         public bool IsPopupOpen
         {
             get => _isPopupOpen;
-            set {
+            set
+            {
                 if (_isPopupOpen != value)
                 {
                     _isPopupOpen = value;
@@ -413,7 +427,8 @@ namespace WhiteboardGUI.ViewModel
         public ObservableCollection<IShape> Shapes
         {
             get => _shapes;
-            set {
+            set
+            {
                 _shapes = value;
                 OnPropertyChanged(nameof(Shapes));
             }
@@ -425,7 +440,8 @@ namespace WhiteboardGUI.ViewModel
         public string SnapShotFileName
         {
             get => _snapShotFileName;
-            set {
+            set
+            {
                 if (_snapShotFileName != value)
                 {
                     _snapShotFileName = value;
@@ -441,7 +457,8 @@ namespace WhiteboardGUI.ViewModel
         public IShape SelectedShape
         {
             get => _selectedShape;
-            set {
+            set
+            {
                 if (_selectedShape != value)
                 {
                     if (_selectedShape != null)
@@ -474,7 +491,8 @@ namespace WhiteboardGUI.ViewModel
         public ShapeType CurrentTool
         {
             get => _currentTool;
-            set {
+            set
+            {
                 //without textbox
                 _currentTool = value;
                 OnPropertyChanged(nameof(CurrentTool));
@@ -506,7 +524,8 @@ namespace WhiteboardGUI.ViewModel
         public SnapShotDownloadItem SelectedDownloadItem
         {
             get => _selectedDownloadItem;
-            set {
+            set
+            {
                 _selectedDownloadItem = value;
                 OnPropertyChanged(nameof(SelectedDownloadItem));
                 OnPropertyChanged(nameof(CanDownload)); // Notify change for CanDownload
@@ -516,7 +535,7 @@ namespace WhiteboardGUI.ViewModel
         /// <summary>
         /// Gets a value indicating whether a download can be performed.
         /// </summary>
-        public bool CanDownload => !(SelectedDownloadItem == null);
+        public bool CanDownload => !(SelectedDownloadItem==null);
 
         /// <summary>
         /// Gets or sets a value indicating whether the download popup is open.
@@ -529,7 +548,8 @@ namespace WhiteboardGUI.ViewModel
         public bool IsClearConfirmationOpen
         {
             get => _isClearConfirmationOpen;
-            set {
+            set
+            {
                 if (_isClearConfirmationOpen != value)
                 {
                     _isClearConfirmationOpen = value;
@@ -741,7 +761,8 @@ namespace WhiteboardGUI.ViewModel
 
             Debug.WriteLine("ViewModel init start");
             SelectToolCommand = new RelayCommand<ShapeType>(SelectTool);
-            DrawShapeCommand = new RelayCommand<object>(parameter => {
+            DrawShapeCommand = new RelayCommand<object>(parameter =>
+            {
                 if (parameter is Tuple<IShape, string> args)
                 {
                     _renderingService.RenderShape(args.Item1, args.Item2);
@@ -798,7 +819,7 @@ namespace WhiteboardGUI.ViewModel
 
 
         }
-
+        
         /// <summary>
         /// Determines whether dark mode should be active based on the current time.
         /// Dark mode is active from 7 PM to 6 AM.
@@ -898,7 +919,7 @@ namespace WhiteboardGUI.ViewModel
         /// </summary>
         private void DownloadSelectedItem()
         {
-            if (SelectedDownloadItem != null)
+            if (SelectedDownloadItem!=null)
             {
                 IsDownloading = false;
                 try
@@ -928,7 +949,7 @@ namespace WhiteboardGUI.ViewModel
         /// </summary>
         private async void InitializeDownloadItems()
         {
-            List<SnapShotDownloadItem> newSnaps = await _snapShotService.getSnaps("a", true);
+            List<SnapShotDownloadItem> newSnaps = await _snapShotService.getSnaps("a",true);
             DownloadItems = new ListCollectionView(newSnaps);
             OnPropertyChanged(nameof(DownloadItems));
         }
@@ -938,8 +959,8 @@ namespace WhiteboardGUI.ViewModel
         /// </summary>
         private async void RefreshDownloadItems()
         {
-
-            List<SnapShotDownloadItem> newSnaps = await _snapShotService.getSnaps("a", false);
+            
+            List<SnapShotDownloadItem> newSnaps = await _snapShotService.getSnaps("a",false);
             DownloadItems = new ListCollectionView(newSnaps);
             OnPropertyChanged(nameof(DownloadItems));
         }
@@ -1091,7 +1112,7 @@ namespace WhiteboardGUI.ViewModel
             _renderingService.RenderShape(shape, "DELETE");
         }
 
-
+        
         /// <summary>
         /// Deletes the currently selected shape and clears the selection.
         /// </summary>
@@ -1138,7 +1159,8 @@ namespace WhiteboardGUI.ViewModel
                     _currentTextShape.OnPropertyChanged(null);
                     //OnPropertyChanged(nameof(textShape.Color));
                     // Create a TextboxModel over the existing TextShape
-                    var textboxModel = new TextboxModel {
+                    var textboxModel = new TextboxModel
+                    {
                         X = textShape.X,
                         Y = textShape.Y,
                         Width = textShape.Width,
@@ -1203,11 +1225,11 @@ namespace WhiteboardGUI.ViewModel
                             }
                             else
                             {
-
-                                if (SelectedShape != null)
+                                
+                                if(SelectedShape != null)
                                 {
                                     SelectedShape.LockedByUserID = -1;
-
+                                   
                                     _renderingService.RenderShape(SelectedShape, "UNLOCK");
                                 }
                                 SelectedShape = shape;
@@ -1222,19 +1244,19 @@ namespace WhiteboardGUI.ViewModel
                             }
                         }
                     }
-
-                    if (_loopBreaker == false)
+                        
+                    if (_loopBreaker == false) 
                     {
-
+                       
                         _isSelecting = false;
                         if (SelectedShape != null)
                         {
                             SelectedShape.LockedByUserID = -1;
-
+                            
                             _renderingService.RenderShape(SelectedShape, "UNLOCK");
                         }
                         SelectedShape = null;
-
+                       
                     }
                 }
                 else if (CurrentTool == ShapeType.Text)
@@ -1242,7 +1264,8 @@ namespace WhiteboardGUI.ViewModel
                     // Get the position of the click
 
                     var position = e.GetPosition((IInputElement)e.Source);
-                    var textboxModel = new TextboxModel {
+                    var textboxModel = new TextboxModel
+                    {
                         X = position.X,
                         Y = position.Y,
                         Width = 150,
@@ -1389,7 +1412,8 @@ namespace WhiteboardGUI.ViewModel
             switch (CurrentTool)
             {
                 case ShapeType.Pencil:
-                    var scribbleShape = new ScribbleShape {
+                    var scribbleShape = new ScribbleShape
+                    {
                         Color = SelectedColor.ToString(),
                         StrokeThickness = SelectedThickness,
                         Points = new System.Collections.Generic.List<Point> { startPoint },
@@ -1398,7 +1422,8 @@ namespace WhiteboardGUI.ViewModel
                     shape = scribbleShape;
                     break;
                 case ShapeType.Line:
-                    var lineShape = new LineShape {
+                    var lineShape = new LineShape
+                    {
                         StartX = startPoint.X,
                         StartY = startPoint.Y,
                         EndX = startPoint.X,
@@ -1410,7 +1435,8 @@ namespace WhiteboardGUI.ViewModel
                     shape = lineShape;
                     break;
                 case ShapeType.Circle:
-                    var circleShape = new CircleShape {
+                    var circleShape = new CircleShape
+                    {
                         CenterX = startPoint.X,
                         CenterY = startPoint.Y,
                         RadiusX = 0,
@@ -1460,7 +1486,8 @@ namespace WhiteboardGUI.ViewModel
         /// <param name="addToUndo">Indicates whether to update the undo history.</param>
         private void OnShapeReceived(IShape shape, bool addToUndo)
         {
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 shape.IsSelected = false;
                 Shapes.Add(shape);
                 var newShape = shape.Clone();
@@ -1496,7 +1523,7 @@ namespace WhiteboardGUI.ViewModel
 
                 existingShape.BoundingBoxColor = "blue";
             }
-
+        
         }
 
         /// <summary>
@@ -1525,7 +1552,8 @@ namespace WhiteboardGUI.ViewModel
         /// <param name="shape">The modified shape.</param>
         private void OnShapeModified(IShape shape)
         {
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 shape.IsSelected = false;
                 //Shapes.Add(shape);
 
@@ -1620,7 +1648,8 @@ namespace WhiteboardGUI.ViewModel
         /// <param name="shape">The shape to delete.</param>
         private void OnShapeDeleted(IShape shape)
         {
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 foreach (var s in Shapes)
                 {
                     if (s.ShapeId == shape.ShapeId)
@@ -1638,7 +1667,8 @@ namespace WhiteboardGUI.ViewModel
         /// </summary>
         private void OnShapeClear()
         {
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 Shapes.Clear();
                 _undoRedoService.RedoList.Clear();
                 _undoRedoService.UndoList.Clear();
@@ -1675,14 +1705,15 @@ namespace WhiteboardGUI.ViewModel
                         _currentTextShape.X = _currentTextboxModel.X;
                         _currentTextShape.Y = _currentTextboxModel.Y;
 
-
+                        
                         _currentTextShape.OnPropertyChanged(null);
                         _renderingService.RenderShape(_currentTextShape, "MODIFY");
                     }
                     else
                     {
                         // Create a new TextShape
-                        var textShape = new TextShape {
+                        var textShape = new TextShape
+                        {
                             X = _currentTextboxModel.X,
                             Y = _currentTextboxModel.Y,
                             Text = _currentTextboxModel.Text,
@@ -1692,8 +1723,8 @@ namespace WhiteboardGUI.ViewModel
                         textShape.ShapeId = Guid.NewGuid();
                         textShape.UserID = _networkingService._clientID;
                         textShape.UserName = userName;
-                        textShape.LastModifierID = _networkingService._clientID;
                         textShape.LastModifiedBy = userName;
+                        textShape.LastModifierID = _networkingService._clientID;
                         Shapes.Add(textShape);
                         _renderingService.RenderShape(textShape, "CREATE");
                     }
@@ -1717,7 +1748,8 @@ namespace WhiteboardGUI.ViewModel
         public IShape HoveredShape
         {
             get => _hoveredShape;
-            set {
+            set
+            {
                 if (_hoveredShape != value)
                 {
                     _hoveredShape = value;
@@ -1732,7 +1764,8 @@ namespace WhiteboardGUI.ViewModel
         /// </summary>
         public string HoveredShapeDetails
         {
-            get {
+            get
+            {
                 if (HoveredShape == null)
                     return string.Empty;
                 string colorHex = HoveredShape.Color.ToString();
@@ -1750,7 +1783,8 @@ namespace WhiteboardGUI.ViewModel
         public bool IsShapeHovered
         {
             get => _isShapeHovered;
-            set {
+            set
+            {
                 if (_isShapeHovered != value)
                 {
                     _isShapeHovered = value;
@@ -1759,27 +1793,14 @@ namespace WhiteboardGUI.ViewModel
             }
         }
 
-        private bool _isMouseOverAdorner;
-        public bool IsMouseOverAdorner
-        {
-            get => _isMouseOverAdorner;
-            set {
-                if (_isMouseOverAdorner != value)
-                {
-                    _isMouseOverAdorner = value;
-                    OnPropertyChanged(nameof(IsMouseOverAdorner));
-                }
-            }
-        }
-
-
         /// <summary>
         /// Gets or sets a value indicating whether dark mode is enabled.
         /// </summary>
         public bool IsDarkMode
         {
             get => _isDarkMode;
-            set {
+            set
+            {
                 if (_isDarkMode != value)
                 {
                     _isDarkMode = value;
@@ -1817,7 +1838,8 @@ namespace WhiteboardGUI.ViewModel
         public Brush PageBackground
         {
             get => _pageBackground;
-            set {
+            set
+            {
                 if (_pageBackground != value)
                 {
                     _pageBackground = value;
@@ -1832,7 +1854,8 @@ namespace WhiteboardGUI.ViewModel
         public Brush CanvasBackground
         {
             get => _canvasBackground;
-            set {
+            set
+            {
                 if (_canvasBackground != value)
                 {
                     _canvasBackground = value;

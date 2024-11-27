@@ -173,10 +173,14 @@ public class HoverAdorner : Adorner
 
         // Ensure the Adorner doesn't go outside the adorned element's bounds
         if (x + _border.DesiredSize.Width > finalSize.Width)
+        {
             x = finalSize.Width - _border.DesiredSize.Width - 10;
+        }
 
         if (y + _border.DesiredSize.Height > finalSize.Height)
+        {
             y = finalSize.Height - _border.DesiredSize.Height - 10;
+        }
 
         _border.Arrange(new Rect(x, y, _border.DesiredSize.Width, _border.DesiredSize.Height));
         return finalSize;
