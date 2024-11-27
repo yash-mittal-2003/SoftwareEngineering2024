@@ -34,6 +34,8 @@ public interface IShape : INotifyPropertyChanged
     double LastModifierID { get; set; }
     string UserName { get; set; }
     string LastModifiedBy { get; set; }
+
+    string LockedBy { get; set; }
     string ProfilePictureURL { get; set; }
 
     /// <summary>

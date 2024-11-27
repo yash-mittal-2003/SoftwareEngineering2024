@@ -1753,7 +1753,8 @@ public class MainPageViewModel : INotifyPropertyChanged
             // Customize the details based on the shape type
             string details =
                 $"Created By: {HoveredShape.UserName}\n"
-                + $"Last Modified By: {HoveredShape.LastModifiedBy}\n";
+                + $"Last Modified By: {HoveredShape.LastModifiedBy}\n"
+                + $"Locked By: {HoveredShape.LockedBy}\n";
             return details;
         }
     }

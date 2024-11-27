@@ -35,6 +35,7 @@ public class HoverAdorner : Adorner
     private readonly Image _image;
     private readonly TextBlock _textBlockCreator;
     private readonly TextBlock _textBlockModified;
+    private readonly TextBlock _textBlockLockedBy;
     //private readonly Ellipse _colorPreview;
     private readonly Point _mousePosition;
 
@@ -55,6 +56,7 @@ public class HoverAdorner : Adorner
 
         string userName = null;
         string lastModifiedBy = null;
+        string lockedBy = null;
 
         foreach (string line in lines)
         {
@@ -70,6 +72,10 @@ public class HoverAdorner : Adorner
                 {
                     lastModifiedBy = parts[1].Trim().Split(' ')[0];
                 }
+                else if (parts[0].Trim() == "Locked By")
+                {
+                    lockedBy = parts[1].Trim().Split(' ')[0];
+                }
             }
         }
         if (!string.IsNullOrEmpty(userName) && userName.Length > 15)
@@ -81,13 +87,23 @@ public class HoverAdorner : Adorner
         {
             lastModifiedBy = lastModifiedBy.Substring(0, 15);
         }
+        if (!string.IsNullOrEmpty(lockedBy) && lockedBy.Length > 15)
+        {
+            lockedBy = lockedBy.Substring(0, 15);
+        }
+        if (lockedBy != "None")
+        {
+            lockedBy += "...";
+        }
+
         // Initialize Image
         _image = new Image {
             Source = imageSource,
             Width = 60, // Set desired width
             Height = 60, // Set desired height
             Margin = new Thickness(5, 5, 5, 5), // Margin between image and text
-            IsHitTestVisible = false
+            IsHitTestVisible = false,
+            Clip = new EllipseGeometry(new Point(30, 30), 30, 30) // Circular clipping
         };
 
         // Initialize Color Preview Ellipse
@@ -121,11 +137,20 @@ public class HoverAdorner : Adorner
             Padding = new Thickness(0),
             IsHitTestVisible = false
         };
+        _textBlockLockedBy = new TextBlock {
+            Text = $"Locked By: {lockedBy}",
+            TextWrapping = TextWrapping.Wrap,
+            FontSize = 14,
+            Foreground = Brushes.Black,
+            Background = Brushes.Transparent,
+            Padding = new Thickness(0),
+            IsHitTestVisible = false
+        };
 
         // Initialize StackPanel to contain Image and TextBlock
         _stackPanel = new StackPanel {
             Orientation = Orientation.Vertical,
-            Children = { _image, _textBlockCreator, _textBlockModified },
+            Children = { _image, _textBlockCreator, _textBlockModified, _textBlockLockedBy },
             IsHitTestVisible = false
         };
 
@@ -203,6 +228,7 @@ public class HoverAdorner : Adorner
         string[] lines = text.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
         string userName = null;
         string lastModifiedBy = null;
+        string lockedBy = null;
 
         foreach (string line in lines)
         {
@@ -220,6 +246,11 @@ public class HoverAdorner : Adorner
                     string[] nameParts = parts[1].Trim().Split(' ');
                     lastModifiedBy = nameParts.Length > 0 ? nameParts[0] : parts[1].Trim();
                 }
+                else if (string.Equals(parts[0].Trim(), "Locked By", StringComparison.OrdinalIgnoreCase))
+                {
+                    string[] nameParts = parts[1].Trim().Split(' ');
+                    lockedBy = nameParts.Length > 0 ? nameParts[0] : parts[1].Trim();
+                }
             }
         }
         if (!string.IsNullOrEmpty(userName) && userName.Length > 15)
@@ -231,10 +262,18 @@ public class HoverAdorner : Adorner
         {
             lastModifiedBy = lastModifiedBy.Substring(0, 15);
         }
+        if (!string.IsNullOrEmpty(lockedBy) && lockedBy.Length > 15)
+        {
+            lockedBy = lockedBy.Substring(0, 15);
+        }
+        if (lockedBy != "None")
+        {
+            lockedBy += "...";
+        }
         // Update the TextBlocks with the extracted first names
-        _textBlockCreator.Text = $"Created By: {userName}";
-        _textBlockModified.Text = $"Last Modified By: {lastModifiedBy}";
-
+        _textBlockCreator.Text = $"Created By: {userName}...";
+        _textBlockModified.Text = $"Last Modified By: {lastModifiedBy}...";
+        _textBlockLockedBy.Text = $"Locked By: {lockedBy}";
         InvalidateMeasure();
         InvalidateVisual();
     }

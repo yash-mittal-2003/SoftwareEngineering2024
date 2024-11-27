@@ -34,6 +34,7 @@ public abstract class ShapeBase : IShape
     private bool _isLocked;
     private string _boundingBoxColor;
     private double _lockedByUserID;
+    private string _lockedBy;
 
     /// <summary>
     /// Gets or sets a value indicating whether the shape is locked.
@@ -150,7 +151,11 @@ public abstract class ShapeBase : IShape
         get => _userName;
         set { _userName = value; OnPropertyChanged(nameof(UserName)); }
     }
-
+    public string LockedBy
+    {
+        get => _lockedBy;
+        set { _lockedBy = value; OnPropertyChanged(nameof(LockedBy)); }
+    }
     public string ProfilePictureURL
     {
         get => _profilePictureURL;
