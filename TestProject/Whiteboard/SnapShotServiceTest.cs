@@ -40,7 +40,7 @@ namespace Whiteboard
             _mockCloudService = new Mock<ICloud>();
 
             // Create a real RenderingService
-            _mockRenderingService = new Mock<RenderingService>(_mockNetworkingService.Object, _mockUndoRedoService.Object, _shapes,0);
+            _mockRenderingService = new Mock<RenderingService>(_mockNetworkingService.Object, _mockUndoRedoService.Object, _shapes,0,"");
 
             // Initialize SnapShotService with mocked ICloud
             _snapShotService = new SnapShotService(
