@@ -41,9 +41,9 @@ public class Test_UndoRedoService
         _undoRedoService.UpdateLastDrawing(_shape1.Object, _shape2.Object);
 
         // Assert
-        Assert.AreEqual(1, _undoRedoService.UndoList.Count);
-        Assert.AreEqual(_shape1.Object, _undoRedoService.UndoList[0].Item1);
-        Assert.AreEqual(_shape2.Object, _undoRedoService.UndoList[0].Item2);
+        Assert.AreEqual(1, _undoRedoService._undoList.Count);
+        Assert.AreEqual(_shape1.Object, _undoRedoService._undoList[0].Item1);
+        Assert.AreEqual(_shape2.Object, _undoRedoService._undoList[0].Item2);
     }
 
     [TestMethod]
@@ -59,7 +59,7 @@ public class Test_UndoRedoService
         }
 
         // Assert
-        Assert.AreEqual(5, _undoRedoService.UndoList.Count);
+        Assert.AreEqual(5, _undoRedoService._undoList.Count);
     }
 
     [TestMethod]
@@ -72,10 +72,10 @@ public class Test_UndoRedoService
         _undoRedoService.Undo();
 
         // Assert
-        Assert.AreEqual(0, _undoRedoService.UndoList.Count);
-        Assert.AreEqual(1, _undoRedoService.RedoList.Count);
-        Assert.AreEqual(_shape2.Object, _undoRedoService.RedoList[0].Item1);
-        Assert.AreEqual(_shape1.Object, _undoRedoService.RedoList[0].Item2);
+        Assert.AreEqual(0, _undoRedoService._undoList.Count);
+        Assert.AreEqual(1, _undoRedoService._redoList.Count);
+        Assert.AreEqual(_shape2.Object, _undoRedoService._redoList[0].Item1);
+        Assert.AreEqual(_shape1.Object, _undoRedoService._redoList[0].Item2);
     }
 
     [TestMethod]
@@ -85,8 +85,8 @@ public class Test_UndoRedoService
         _undoRedoService.Undo();
 
         // Assert
-        Assert.AreEqual(0, _undoRedoService.UndoList.Count);
-        Assert.AreEqual(0, _undoRedoService.RedoList.Count);
+        Assert.AreEqual(0, _undoRedoService._undoList.Count);
+        Assert.AreEqual(0, _undoRedoService._redoList.Count);
     }
 
     [TestMethod]
@@ -100,10 +100,10 @@ public class Test_UndoRedoService
         _undoRedoService.Redo();
 
         // Assert
-        Assert.AreEqual(1, _undoRedoService.UndoList.Count);
-        Assert.AreEqual(0, _undoRedoService.RedoList.Count);
-        Assert.AreEqual(_shape1.Object, _undoRedoService.UndoList[0].Item1);
-        Assert.AreEqual(_shape2.Object, _undoRedoService.UndoList[0].Item2);
+        Assert.AreEqual(1, _undoRedoService._undoList.Count);
+        Assert.AreEqual(0, _undoRedoService._redoList.Count);
+        Assert.AreEqual(_shape1.Object, _undoRedoService._undoList[0].Item1);
+        Assert.AreEqual(_shape2.Object, _undoRedoService._undoList[0].Item2);
     }
 
     [TestMethod]
@@ -113,8 +113,8 @@ public class Test_UndoRedoService
         _undoRedoService.Redo();
 
         // Assert
-        Assert.AreEqual(0, _undoRedoService.UndoList.Count);
-        Assert.AreEqual(0, _undoRedoService.RedoList.Count);
+        Assert.AreEqual(0, _undoRedoService._undoList.Count);
+        Assert.AreEqual(0, _undoRedoService._redoList.Count);
     }
 
     //[TestMethod]

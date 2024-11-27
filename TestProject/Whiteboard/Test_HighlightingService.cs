@@ -141,7 +141,7 @@ public class HighlightingServiceTests
             Assert.IsTrue(viewModel.IsShapeHovered, "IsShapeHovered should be true after second hover.");
             Assert.AreEqual(mockShape2.Object, viewModel.HoveredShape, "HoveredShape should be updated to the second shape.");
 
-            var adorners = adornerLayer.GetAdorners(element);
+            Adorner[] adorners = adornerLayer.GetAdorners(element);
             Assert.IsNotNull(adorners, "Adorners should not be null after second hover.");
             Assert.IsTrue(adorners.Any(a => a is HoverAdorner), "HoverAdorner should be added after second hover.");
 
