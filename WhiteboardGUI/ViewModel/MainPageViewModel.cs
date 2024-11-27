@@ -500,15 +500,6 @@ public class MainPageViewModel : INotifyPropertyChanged
         }
     }
 
-    /// <summary>
-    /// Gets or sets a value indicating whether the user is a host.
-    /// </summary>
-    public bool IsHost { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether the user is a client.
-    /// </summary>
-    public bool IsClient { get; set; }
     private bool _isClearConfirmationOpen;
 
     /// <summary>
@@ -574,25 +565,6 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     public ICommand CancelClearCommand { get; }
 
-    /// <summary>
-    /// Command to start hosting the application.
-    /// </summary>
-    public ICommand StartHostCommand { get; }
-
-    /// <summary>
-    /// Command to start the client.
-    /// </summary>
-    public ICommand StartClientCommand { get; }
-
-    /// <summary>
-    /// Command to stop hosting the application.
-    /// </summary>
-    public ICommand StopHostCommand { get; }
-
-    /// <summary>
-    /// Command to stop the client.
-    /// </summary>
-    public ICommand StopClientCommand { get; }
 
     /// <summary>
     /// Command to select a drawing tool.
@@ -1092,14 +1064,6 @@ public class MainPageViewModel : INotifyPropertyChanged
         RenderingService.RenderShape(null, "CLEAR");
     }
 
-    /// <summary>
-    /// Stops the host and updates the hosting state.
-    /// </summary>
-    private void StopHost()
-    {
-        IsHost = false;
-        _networkingService.StopHost();
-    }
 
     /// <summary>
     /// Selects the drawing tool based on the specified shape type.
