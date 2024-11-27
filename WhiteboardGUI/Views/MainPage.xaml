@@ -429,6 +429,7 @@
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas
+                            ClipToBounds="True"
                             Background="{Binding CanvasBackground}"
                             MouseLeftButtonDown="Canvas_LeftMouseButtonDown"
                             MouseLeftButtonUp="Canvas_MouseLeftButtonUp"
