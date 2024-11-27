@@ -12,6 +12,20 @@
  *               on the canvas.
  *************************************************************************************************/
 
+/**************************************************************************************************
+ * Filename    : HoverAdorner.cs
+ *
+ * Author      : Rachit Jain
+ *
+ * Product     : WhiteBoard
+ * 
+ * Project     : Tooltip Feature for Canvas Shapes
+ *
+ * Description : Implements an adorner that displays a tooltip-like UI element near the mouse pointer,
+ *               showing information about shapes and their creators when the user hovers over them
+ *               on the canvas.
+ *************************************************************************************************/
+
 using System;
 using System.Windows;
 using System.Windows.Documents;
@@ -51,8 +65,7 @@ public class HoverAdorner : Adorner
         _visuals = new VisualCollection(this);
 
         // Initialize Image
-        _image = new Image
-        {
+        _image = new Image {
             Source = imageSource,
             Width = 40, // Set desired width
             Height = 40, // Set desired height
@@ -61,8 +74,7 @@ public class HoverAdorner : Adorner
         };
 
         // Initialize Color Preview Ellipse
-        _colorPreview = new Ellipse
-        {
+        _colorPreview = new Ellipse {
             Width = 16,
             Height = 16,
             Fill = new SolidColorBrush(shapeColor),
@@ -73,8 +85,7 @@ public class HoverAdorner : Adorner
         };
 
         // Initialize TextBlock
-        _textBlock = new TextBlock
-        {
+        _textBlock = new TextBlock {
             Text = text,
             TextWrapping = TextWrapping.Wrap,
             FontSize = 14,
@@ -85,16 +96,14 @@ public class HoverAdorner : Adorner
         };
 
         // Initialize StackPanel to contain Image and TextBlock
-        _stackPanel = new StackPanel
-        {
+        _stackPanel = new StackPanel {
             Orientation = Orientation.Vertical,
             Children = { _image, _colorPreview, _textBlock },
             IsHitTestVisible = false
         };
 
         // Initialize Border to contain the StackPanel
-        _border = new Border
-        {
+        _border = new Border {
             Child = _stackPanel,
             Background = Brushes.LightYellow,
             BorderBrush = Brushes.Black,
