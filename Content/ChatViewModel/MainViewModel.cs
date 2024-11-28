@@ -19,7 +19,7 @@ namespace Content.ChatViewModel;
 
 public class MainViewModel : INotifyPropertyChanged
 {
-    private ChatClient _client;
+    private ChatClient _client; // hi
     private ChatServer _server;
     private string _chatHistory;
     private string _message;
@@ -29,10 +29,11 @@ public class MainViewModel : INotifyPropertyChanged
     public ObservableCollection<ChatMessage> SearchResults { get; set; }
     ObservableCollection<string> ClientUsernames { get; set; }
     public string UserProfileUrl { get; set; }
+    public event Action ClientListAction;
 
     public MainViewModel()
     {
-        _server = new ChatServer();
+        _server = ChatServer.GetServerInstance;
         _client = new ChatClient();
         _client.LatestAction += SyncClientList;
         _client.MessageReceived += OnMessageReceived;
@@ -40,8 +41,7 @@ public class MainViewModel : INotifyPropertyChanged
         //_server = new ChatServer();
 
         ClientUsernames = new ObservableCollection<string>();
-        _client.ClientListUpdated += (s, list) =>
-        {
+        _client.ClientListUpdated += (s, list) => {
             Console.WriteLine("ClientListUpdated event triggered with clients: " + string.Join(", ", list)); // Debug log
             ClientList.Clear();
             foreach (string clientId in list)
@@ -56,6 +56,7 @@ public class MainViewModel : INotifyPropertyChanged
     }
 
 
+
     /// <summary>
     /// Sets user details for the client including username, user ID, and profile URL.
     /// </summary>
@@ -66,12 +67,17 @@ public class MainViewModel : INotifyPropertyChanged
     public void SetUserDetails_client(string username, string userid, string userProfileUrl)
     {
 
-        _client = new ChatClient
-        {
-            ClientId = userid,
-            Username = username,
-            UserProfileUrl = userProfileUrl
-        };
+        //_client = new ChatClient
+        //{
+        //    ClientId = userid,
+        //    Username = username,
+        //    UserProfileUrl = userProfileUrl
+        //};
+        _client.ClientId = userid;
+        _client.Username = username;
+        _client.UserProfileUrl = userProfileUrl;
+
+        //_client.Start();
 
     }
 
@@ -84,10 +90,9 @@ public class MainViewModel : INotifyPropertyChanged
     public void SetUserDetails_server(string username, string userProfileUrl)
     {
 
-        _server = new ChatServer();
-        _client = new ChatClient
-        {
-            ClientId = "1",
+        _server = ChatServer.GetServerInstance;
+        _client = new ChatClient {
+            ClientId = "2",
             Username = username,
             UserProfileUrl = userProfileUrl
         };
@@ -114,8 +119,7 @@ public class MainViewModel : INotifyPropertyChanged
     public bool IsNotFoundPopupOpen
     {
         get => _isNotFoundPopupOpen;
-        set
-        {
+        set {
             if (_isNotFoundPopupOpen != value)
             {
                 _isNotFoundPopupOpen = value;
@@ -129,8 +133,7 @@ public class MainViewModel : INotifyPropertyChanged
     public string Username_Text
     {
         get => _username_text;
-        set
-        {
+        set {
             _username_text = value; OnPropertyChanged(nameof(Username_Text));
         }
     }
@@ -140,8 +143,7 @@ public class MainViewModel : INotifyPropertyChanged
     public string MessageTextBox_Text
     {
         get => _messagetextbox_text;
-        set
-        {
+        set {
             _messagetextbox_text = value; OnPropertyChanged(nameof(MessageTextBox_Text));
         }
     }
@@ -151,8 +153,7 @@ public class MainViewModel : INotifyPropertyChanged
     public string Selectedusername
     {
         get => _selectedusername;
-        set
-        {
+        set {
             _selectedusername = value; OnPropertyChanged(nameof(Selectedusername));
         }
     }
@@ -163,8 +164,7 @@ public class MainViewModel : INotifyPropertyChanged
     public string Recipientt
     {
         get => _recipientt;
-        set
-        {
+        set {
             _recipientt = value;
             OnPropertyChanged(nameof(Recipientt));
         }
@@ -175,8 +175,7 @@ public class MainViewModel : INotifyPropertyChanged
     public string Emoji
     {
         get => _emoji;
-        set
-        {
+        set {
             _emoji = value; OnPropertyChanged(nameof(Emoji));
         }
     }
@@ -198,8 +197,7 @@ public class MainViewModel : INotifyPropertyChanged
     private static MainViewModel? s_contentVMInstance;
     public static MainViewModel GetInstance
     {
-        get
-        {
+        get {
             if (s_contentVMInstance == null)
             {
                 s_contentVMInstance = new MainViewModel();
@@ -208,6 +206,11 @@ public class MainViewModel : INotifyPropertyChanged
         }
     }
 
+    //public static ChatServer GetServerInstance()
+    //{
+    //    //var contentvm = MainViewModel.GetInstance;
+    //    return s_contentVMInstance._server;
+    //}
     /// <summary>
     /// Deletes a message by marking it as deleted, updating its content and notifying the UI.
     /// </summary>
@@ -271,27 +274,39 @@ public class MainViewModel : INotifyPropertyChanged
             string[] msg = parts[1].Split('|');
             string messageContent = msg[0].Trim();
             bool isSent = false;
-            isSent = (user == Username_Text);
+            isSent = (user == _client.Username);
             // Prevent adding the same message again by checking if it already exists in the collection
             bool messageExists = Messages.Any(m => m.User == user && m.Content == messageContent);
 
             if (!messageExists)
             {
                 //Application.Current.Dispatcher.Invoke(() =>
-                System.Windows.Application.Current.Dispatcher.Invoke(() =>
-                {
-                    ChatMessage chatMessage = new ChatMessage
-                    (
-                        user,
-                        messageContent,
-                        DateTime.Now.ToString("HH:mm"),
-                        isSent
-                    );
-                    Messages.Add(chatMessage);
-                    MessageAdded?.Invoke(chatMessage);
+                //System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                //{
+                //    ChatMessage chatMessage = new ChatMessage
+                //    (
+                //        user,
+                //        messageContent,
+                //        DateTime.Now.ToString("HH:mm"),
+                //        isSent
+                //    );
+                //    Messages.Add(chatMessage);
+                //    MessageAdded?.Invoke(chatMessage);
 
-                });
+                //});
             }
+            System.Windows.Application.Current.Dispatcher.Invoke(() => {
+                ChatMessage chatMessage = new ChatMessage
+                (
+                    user,
+                    messageContent,
+                    DateTime.Now.ToString("HH:mm"),
+                    isSent
+                );
+                Messages.Add(chatMessage);
+                MessageAdded?.Invoke(chatMessage);
+
+            });
         }
     }
     private void MessageTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -315,16 +330,6 @@ public class MainViewModel : INotifyPropertyChanged
             MessageTextBox_Text = string.Empty;
 
         }
-    }
-
-    /// <summary>
-    /// Sends a message to the server and clears the input field.
-    /// </summary>
-
-    public void SendMessage()
-    {
-        _client.SendMessage(Message);
-        Message = string.Empty;
     }
 
     /// <summary>
@@ -404,25 +409,30 @@ public class MainViewModel : INotifyPropertyChanged
         OnPropertyChanged(nameof(Messages));
     }
 
+    private readonly object clientLock = new object();
     /// <summary>
     /// Synchronizes the client list with the server and updates the ObservableCollection for UI binding.
     /// </summary>
 
-    private void SyncClientList()
+    public void SyncClientList(Dictionary<int, string> dict_sent)
     {
-        //Dispatcher.CurrentDispatcher.Invoke(() =>
-        System.Windows.Application.Current.Dispatcher.Invoke(() =>
+        //System.Windows.Application.Current.Dispatcher.Invoke(() =>
+        //{
+        // Clear and update the copy
+        Clientte.Clear();
+        Clientte.Add("Everyone");
+        _client._client_dict = dict_sent;
+        foreach (KeyValuePair<int, string> kvp in _client._client_dict)
         {
-            _client._clientListobs.Clear();
-            // Clear and update the copy
-            Clientte.Clear();
-            Clientte.Add("Everyone");
-            foreach (KeyValuePair<int, string> kvp in _client._client_dict)
+            lock (clientLock)
             {
-                _client._clientListobs.Add(kvp.Value);
-                Clientte.Add(kvp.Value);
+                if (!Clientte.Contains(kvp.Value))
+                {
+                    Clientte.Add(kvp.Value);
+                }
             }
-        });
+        }
+        //});
     }
 
     public event PropertyChangedEventHandler PropertyChanged;

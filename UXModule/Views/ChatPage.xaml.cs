@@ -139,8 +139,7 @@ public partial class ChatPage : Page
     private void ReverseSearchTransition()
     {
         var fadeOutStoryboard = new Storyboard();
-        var fadeOutAnimation = new DoubleAnimation
-        {
+        var fadeOutAnimation = new DoubleAnimation {
             To = 0,
             Duration = TimeSpan.FromSeconds(0.5)
         };
@@ -155,8 +154,7 @@ public partial class ChatPage : Page
         Storyboard.SetTargetProperty(fadeOutAnimation, new PropertyPath("Opacity"));
         fadeOutStoryboard.Children.Add(fadeOutAnimation);
 
-        var fadeInAnimation = new DoubleAnimation
-        {
+        var fadeInAnimation = new DoubleAnimation {
             To = 1,
             Duration = TimeSpan.FromSeconds(0.5)
         };
@@ -304,8 +302,7 @@ public partial class ChatPage : Page
     {
         SearchPanel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#C0A392"));
         var fadeOutStoryboard = new Storyboard();
-        var fadeOutAnimation = new DoubleAnimation
-        {
+        var fadeOutAnimation = new DoubleAnimation {
             To = 0,
             Duration = TimeSpan.FromSeconds(0.5)
         };
@@ -321,8 +318,7 @@ public partial class ChatPage : Page
         Storyboard.SetTargetProperty(fadeOutAnimation, new PropertyPath("Opacity"));
         fadeOutStoryboard.Children.Add(fadeOutAnimation);
 
-        var fadeInAnimation = new DoubleAnimation
-        {
+        var fadeInAnimation = new DoubleAnimation {
             To = 1,
             Duration = TimeSpan.FromSeconds(0.5)
         };
