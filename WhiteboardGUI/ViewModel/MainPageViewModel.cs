@@ -61,10 +61,6 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private readonly MoveShapeZIndexing _moveShapeZIndexing;
 
-    /// <summary>
-    /// Gets the Client ID from the networking service.
-    /// </summary>
-    public double ClientID => _networkingService._clientID;
 
     /// <summary>
     /// Timer for periodic operations, such as checking dark mode settings.
@@ -79,6 +75,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     private Point _lastMousePosition;
     private bool _isSelecting;
     private bool _isDragging;
+    private bool _isDrawing = false;
     private ObservableCollection<IShape> _shapes;
     private SnapShotDownloadItem _selectedDownloadItem;
 
@@ -465,6 +462,9 @@ public class MainPageViewModel : INotifyPropertyChanged
                 if (_selectedShape != null)
                 {
                     _selectedShape.IsSelected = false;
+                    _selectedShape.IsLocked = false;
+                    _selectedShape.LockedByUserID = -1;
+                    RenderingService.RenderShape(_selectedShape, "UNLOCK");
                 }
 
                 _selectedShape = value;
@@ -472,6 +472,12 @@ public class MainPageViewModel : INotifyPropertyChanged
                 if (_selectedShape != null)
                 {
                     _selectedShape.IsSelected = true;
+                    if (_isDrawing == false)
+                    {
+                        _selectedShape.IsLocked = true;
+                        _selectedShape.LockedByUserID = _userId;
+                        RenderingService.RenderShape(_selectedShape, "LOCK");
+                    }
                 }
 
                 OnPropertyChanged(nameof(SelectedShape));
@@ -681,6 +687,8 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     public event Action<IShape> ShapeDeleted;
 
+
+
     /// <summary>
     /// Instance of ServerOrClient class used for networking.
     /// </summary>
@@ -699,8 +707,8 @@ public class MainPageViewModel : INotifyPropertyChanged
         _userName = _serverOrClient._userName;
         _userEmail = _serverOrClient._userEmail;
         _profilePictureURL = _serverOrClient._profilePictureURL;
-        _receivedDataService = new ReceivedDataService(_userId);
-        _networkingService = new NetworkingService(_receivedDataService);
+        _receivedDataService = new ReceivedDataService(_userId, this);
+        _networkingService = new NetworkingService(_receivedDataService, _userId);
         if (_userId == 1)
         {
             _networkingService.StartHost();
@@ -709,7 +717,7 @@ public class MainPageViewModel : INotifyPropertyChanged
         {
             _networkingService.StartClient();
         }
-        RenderingService = new RenderingService(_networkingService, _undoRedoService, Shapes, _userId, _userName);
+        RenderingService = new RenderingService(_networkingService, _undoRedoService, Shapes, _userId, _userName, this);
         _snapShotService = new SnapShotService(
             _networkingService,
             RenderingService,
@@ -730,6 +738,7 @@ public class MainPageViewModel : INotifyPropertyChanged
         _receivedDataService.ShapeSendToBack += _moveShapeZIndexing.MoveShapeBack;
         _receivedDataService.ShapeLocked += OnShapeLocked;
         _receivedDataService.ShapeUnlocked += OnShapeUnlocked;
+        _receivedDataService.NewClientJoinedShapeReceived += OnNewClientJoinedShapeReceived;
 
         Shapes.CollectionChanged += Shapes_CollectionChanged;
 
@@ -794,7 +803,9 @@ public class MainPageViewModel : INotifyPropertyChanged
 
 
     }
-    
+
+   
+
     /// <summary>
     /// Determines whether dark mode should be active based on the current time.
     /// Dark mode is active from 7 PM to 6 AM.
@@ -1006,6 +1017,7 @@ public class MainPageViewModel : INotifyPropertyChanged
         if (_undoRedoService._undoList.Count > 0)
         {
             RenderingService.RenderShape(null, "UNDO");
+
         }
     }
 
@@ -1172,11 +1184,6 @@ public class MainPageViewModel : INotifyPropertyChanged
             _startPoint = e.GetPosition(canvas);
             if (CurrentTool == ShapeType.Select)
             {
-                // Implement selection logic
-                //if (SelectedShape != null)
-                //{
-                //    SelectedShape.IsSelected = false;
-                //}
                 _isSelecting = true;
                 bool loopBreaker = false;
                 foreach (IShape? shape in Shapes.Reverse())
@@ -1184,17 +1191,9 @@ public class MainPageViewModel : INotifyPropertyChanged
                     if (IsPointOverShape(shape, _startPoint))
                     {
 
-                        if (shape.IsLocked && shape.LockedByUserID != _networkingService._clientID)
+                        if (shape.IsLocked && shape.LockedByUserID != _userId)
                         {
                             // Shape is locked by someone else
-
-                            if (SelectedShape != null)
-                            {
-                                SelectedShape.LockedByUserID = -1;
-
-                                RenderingService.RenderShape(SelectedShape, "UNLOCK");
-                            }
-
                             SelectedShape = null;
                             _isSelecting = false;
                             MessageBox.Show("This shape is locked by another user.", "Locked", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -1203,38 +1202,17 @@ public class MainPageViewModel : INotifyPropertyChanged
                         }
                         else
                         {
-
-                            if (SelectedShape != null)
-                            {
-                                SelectedShape.LockedByUserID = -1;
-
-                                RenderingService.RenderShape(SelectedShape, "UNLOCK");
-                            }
                             SelectedShape = shape;
-
-                            Debug.WriteLine(shape.IsSelected);
                             _lastMousePosition = _startPoint;
-                            _isSelecting = true;
-                            shape.LockedByUserID = _networkingService._clientID;
-                            RenderingService.RenderShape(shape, "LOCK");
                             loopBreaker = true;
                             break;
                         }
                     }
                 }
-
                 if (loopBreaker == false)
                 {
-
                     _isSelecting = false;
-                    if (SelectedShape != null)
-                    {
-                        SelectedShape.LockedByUserID = -1;
-
-                        RenderingService.RenderShape(SelectedShape, "UNLOCK");
-                    }
                     SelectedShape = null;
-
                 }
             }
             else if (CurrentTool == ShapeType.Text)
@@ -1259,16 +1237,11 @@ public class MainPageViewModel : INotifyPropertyChanged
             {
                 // Start drawing a new shape
                 IShape newShape = CreateShape(_startPoint);
+                _isDrawing = true;
                 if (newShape != null)
                 {
                     newShape.BoundingBoxColor = "blue";
                     Shapes.Add(newShape);
-                    if (SelectedShape != null)
-                    {
-                        SelectedShape.LockedByUserID = -1;
-
-                        RenderingService.RenderShape(SelectedShape, "UNLOCK");
-                    }
                     SelectedShape = newShape;
                 }
             }
@@ -1364,8 +1337,11 @@ public class MainPageViewModel : INotifyPropertyChanged
         if (SelectedShape != null && !_isSelecting)
         {
             // Finalize shape drawing
+            SelectedShape.IsLocked = true;
+            SelectedShape.LockedByUserID = _userId;
             RenderingService.RenderShape(SelectedShape, "CREATE");
-            SelectedShape = null;
+            _isDrawing = false;
+
         }
         else if (IsShapeSelected)
         {
@@ -1464,15 +1440,29 @@ public class MainPageViewModel : INotifyPropertyChanged
     {
         Application.Current.Dispatcher.Invoke(() =>
         {
-            shape.IsSelected = false;
             Shapes.Add(shape);
             IShape newShape = shape.Clone();
             _networkingService._synchronizedShapes.Add(newShape);
             if (addToUndo)
             {
-                _undoRedoService.RemoveLastModified(_networkingService, shape);
+                _undoRedoService.RemoveLastModified(shape);
             }
         });
+        OnShapeLocked(shape);
+    }
+
+
+    private void OnNewClientJoinedShapeReceived(IShape shape)
+    {
+        Application.Current.Dispatcher.Invoke(() => {
+            Shapes.Add(shape);
+            IShape newShape = shape.Clone();
+            _networkingService._synchronizedShapes.Add(newShape);
+        });
+        if (shape.IsLocked == true)
+        {
+            OnShapeLocked(shape);
+        }
     }
 
     /// <summary>
@@ -1489,12 +1479,12 @@ public class MainPageViewModel : INotifyPropertyChanged
         existingShape.LockedByUserID = shape.LockedByUserID;
         existingShape.IsSelected = true;
 
-        if (existingShape.LockedByUserID != ClientID)
+        if (existingShape.LockedByUserID != _userId)
         {
             existingShape.BoundingBoxColor = "red";
         }
 
-        else if (existingShape.LockedByUserID == ClientID)
+        else if (existingShape.LockedByUserID == _userId)
         {
 
             existingShape.BoundingBoxColor = "blue";
@@ -1515,7 +1505,7 @@ public class MainPageViewModel : INotifyPropertyChanged
         existingShape.IsLocked = false;
         existingShape.LockedByUserID = -1;
         existingShape.IsSelected = false;
-        if (existingShape.LockedByUserID != ClientID)
+        if (existingShape.LockedByUserID != _userId)
         {
             existingShape.BoundingBoxColor = "blue";
         }
@@ -1614,7 +1604,7 @@ public class MainPageViewModel : INotifyPropertyChanged
             }
 
             IShape newShape = shape.Clone();
-            _undoRedoService.RemoveLastModified(_networkingService, shape);
+            _undoRedoService.RemoveLastModified(shape);
         });
     }
 
@@ -1723,6 +1713,16 @@ public class MainPageViewModel : INotifyPropertyChanged
     protected void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    public void ClientJoined(string newUserId)
+    {
+        foreach (IShape item in Shapes)
+        {
+            string serializedShape = SerializationService.SerializeShape(item);
+            string serializedMessage = $"ID{_userId}ENDSHAPEFORNEWCLIENT:{serializedShape}";
+            _networkingService.BroadcastShapeData(serializedMessage, newUserId);
+        }
     }
 
     public IShape HoveredShape

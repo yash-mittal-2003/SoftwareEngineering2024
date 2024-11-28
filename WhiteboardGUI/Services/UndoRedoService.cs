@@ -38,7 +38,7 @@ public class UndoRedoService
     /// </summary>
     /// <param name="networkingService">The networking service associated with the shape.</param>
     /// <param name="shape">The shape whose modifications are to be removed.</param>
-    public void RemoveLastModified(NetworkingService networkingService, IShape shape)
+    public void RemoveLastModified(IShape shape)
     {
         _undoList.RemoveAll(item =>
             item.Item1 != null &&

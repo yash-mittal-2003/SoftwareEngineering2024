@@ -17,6 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WhiteboardGUI.Models;
+using WhiteboardGUI.ViewModel;
 namespace WhiteboardGUI.Services;
 
 /// <summary>
@@ -38,6 +39,8 @@ public class ReceivedDataService
     /// Event triggered when a shape is deleted.
     /// </summary>
     public event Action<IShape> ShapeDeleted;
+
+    public event Action<IShape> NewClientJoinedShapeReceived;
 
     /// <summary>
     /// Event triggered when a shape is sent to the back.
@@ -73,14 +76,17 @@ public class ReceivedDataService
     /// The ID of the current service instance.
     /// </summary>
     private int _id;
+    
+    MainPageViewModel _mainPageViewModel;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ReceivedDataService"/> class.
     /// </summary>
     /// <param name="id">The unique identifier for the instance.</param>
-    public ReceivedDataService(int id)
+    public ReceivedDataService(int id, MainPageViewModel mainPageViewModel)
     {
         _id = id;
+        _mainPageViewModel = mainPageViewModel;
     }
 
     /// <summary>
@@ -97,15 +103,29 @@ public class ReceivedDataService
 
         int index = receivedData.IndexOf("END");
         int senderId = int.Parse(receivedData.Substring(2, index - 2));
+        receivedData = receivedData.Substring(index + "END".Length);
 
         if (senderId == _id)
         {
-            return -1;
+            if (!receivedData.StartsWith("LOCK:"))
+            {
+                return -1;
+            }
         }
 
-        receivedData = receivedData.Substring(index + "END".Length);
 
-        if (receivedData.StartsWith("DELETE:"))
+        if (receivedData.StartsWith("NEWCLIENT"))
+        {
+            _mainPageViewModel.ClientJoined(senderId.ToString());
+        }
+        else if (receivedData.StartsWith("SHAPEFORNEWCLIENT:"))
+        {
+            string data = receivedData.Substring(18);
+            IShape shape = SerializationService.DeserializeShape(data);
+            NewClientJoinedShapeReceived?.Invoke(shape);
+        }
+
+        else if (receivedData.StartsWith("DELETE:"))
         {
             string data = receivedData.Substring(7);
             IShape shape = SerializationService.DeserializeShape(data);
