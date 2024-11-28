@@ -67,6 +67,9 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     private readonly DispatcherTimer _timer;
 
+    private readonly object _shapesLock = new object();
+
+
 
     private string _defaultColor;
     private IShape _selectedShape;
@@ -424,13 +427,21 @@ public class MainPageViewModel : INotifyPropertyChanged
     /// </summary>
     public ObservableCollection<IShape> Shapes
     {
-        get => _shapes;
-        set
-        {
-            _shapes = value;
-            OnPropertyChanged(nameof(Shapes));
+        get {
+            lock (_shapesLock)
+            {
+                return _shapes;
+            }
+        }
+        set {
+            lock (_shapesLock)
+            {
+                _shapes = value;
+                OnPropertyChanged(nameof(Shapes));
+            }
         }
     }
+
 
     /// <summary>
     /// Gets or sets the filename for snapshots.
