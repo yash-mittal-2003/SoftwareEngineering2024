@@ -200,8 +200,8 @@ public class LineShape : ShapeBase
             UserName = this.UserName,
             ProfilePictureURL = this.ProfilePictureURL,
             LastModifiedBy = this.LastModifiedBy,
-            BoundingBoxColor = this.BoundingBoxColor,
-            LockedByUserID = this.LockedByUserID
+            BoundingBoxColor = this.BoundingBoxColor
+            
         };
     }
 }

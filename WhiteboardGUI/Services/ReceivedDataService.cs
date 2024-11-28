@@ -260,6 +260,8 @@ public class ReceivedDataService
                         {
                             existingShape.IsLocked = true;
                             existingShape.LockedByUserID = senderId;
+                            existingShape.LastModifiedBy = shape.LastModifiedBy;
+                            
                             ShapeLocked?.Invoke(existingShape); // Locks the shape
                         }
                     }
@@ -267,6 +269,8 @@ public class ReceivedDataService
                     {
                         existingShape.IsLocked = true;
                         existingShape.LockedByUserID = shape.LockedByUserID;
+                        existingShape.LastModifiedBy = shape.LastModifiedBy;
+                        
                         ShapeLocked?.Invoke(existingShape);
                     }
                 }

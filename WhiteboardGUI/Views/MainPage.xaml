@@ -473,7 +473,7 @@
                                             Canvas.Top="{Binding Top}"
                                             Width="{Binding Width}"
                                             Height="{Binding Height}"
-                                            Fill="Transparent"
+                                            
                                             MouseRightButtonDown="Shape_MouseRightButtonDown"
                                             StrokeDashArray="2"
                                             StrokeThickness="1"
@@ -578,7 +578,7 @@
                                             Canvas.Top="{Binding Top}"
                                             Width="{Binding Width}"
                                             Height="{Binding Height}"
-                                            Fill="Transparent"
+                                           
                                             MouseRightButtonDown="Shape_MouseRightButtonDown"
                                             StrokeDashArray="2"
                                             StrokeThickness="1"
@@ -645,7 +645,7 @@
                                             Canvas.Top="{Binding Top}"
                                             Width="{Binding Width}"
                                             Height="{Binding Height}"
-                                            Fill="Transparent"
+                                           
                                             MouseRightButtonDown="Shape_MouseRightButtonDown"
                                             StrokeDashArray="2"
                                             StrokeThickness="1"

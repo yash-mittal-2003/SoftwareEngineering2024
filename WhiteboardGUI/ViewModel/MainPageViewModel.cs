@@ -1400,7 +1400,7 @@ public class MainPageViewModel : INotifyPropertyChanged
                 shape = circleShape;
                 break;
         }
-        shape.UserID = _networkingService._clientID;
+        shape.UserID = _userId;
         shape.UserName = _userName;
         shape.ProfilePictureURL = _profilePictureURL;
         shape.ShapeId = Guid.NewGuid();
@@ -1477,6 +1477,7 @@ public class MainPageViewModel : INotifyPropertyChanged
 
         existingShape.IsLocked = true;
         existingShape.LockedByUserID = shape.LockedByUserID;
+        existingShape.LastModifiedBy = shape.LastModifiedBy;
         existingShape.IsSelected = true;
 
         if (existingShape.LockedByUserID != _userId)
@@ -1668,7 +1669,7 @@ public class MainPageViewModel : INotifyPropertyChanged
                     // We are editing an existing TextShape
                     _currentTextShape.Text = _currentTextboxModel.Text;
                     _currentTextShape.Color = "black";
-                    _currentTextShape.LastModifierID = _networkingService._clientID;
+                    _currentTextShape.LastModifierID = _userId;
                     _currentTextShape.X = _currentTextboxModel.X;
                     _currentTextShape.Y = _currentTextboxModel.Y;
 
@@ -1686,10 +1687,10 @@ public class MainPageViewModel : INotifyPropertyChanged
                         Color = SelectedColor.ToString(),
                         FontSize = TextBoxFontSize,
                         ShapeId = Guid.NewGuid(),
-                        UserID = _networkingService._clientID,
+                        UserID = _userId,
                         UserName = _userName,
                         LastModifiedBy = _userName,
-                        LastModifierID = _networkingService._clientID,
+                        LastModifierID = _userId,
                         ProfilePictureURL = _profilePictureURL
                     };
                     Shapes.Add(textShape);
@@ -1753,8 +1754,7 @@ public class MainPageViewModel : INotifyPropertyChanged
             // Customize the details based on the shape type
             string details =
                 $"Created By: {HoveredShape.UserName}\n"
-                + $"Last Modified By: {HoveredShape.LastModifiedBy}\n"
-                + $"Locked By: {HoveredShape.LockedBy}\n";
+                + $"Last Modified By: {HoveredShape.LastModifiedBy}\n";
             return details;
         }
     }
