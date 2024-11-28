@@ -20,6 +20,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
 using WhiteboardGUI.Models;
+using WhiteboardGUI.ViewModel;
 
 namespace WhiteboardGUI.Services;
 
@@ -44,6 +45,9 @@ public class RenderingService
     /// </summary>
     ObservableCollection<IShape> _shapes;
 
+    MainPageViewModel _mainPageViewModel;
+
+
     /// <summary>
     /// Unique identifier for the current user.
     /// </summary>
@@ -57,13 +61,14 @@ public class RenderingService
     /// <param name="undoRedoService">The service managing undo and redo operations.</param>
     /// <param name="shapes">The collection of shapes on the whiteboard.</param>
     /// <param name="userID">The unique identifier of the user.</param>
-    public RenderingService(NetworkingService networkingService, UndoRedoService undoRedoService, ObservableCollection<IShape> shapes, double userID, string name)
+    public RenderingService(NetworkingService networkingService, UndoRedoService undoRedoService, ObservableCollection<IShape> shapes, double userID, string name, MainPageViewModel mainPageViewModel)
     {
         _networkingService = networkingService;
         _undoRedoService = undoRedoService;
         _shapes = shapes;
         _userId = userID;
         _name = name;
+        _mainPageViewModel = mainPageViewModel;
     }
 
     /// <summary>
@@ -91,7 +96,6 @@ public class RenderingService
         {
             IShape newShape = currentShape.Clone();
             _networkingService._synchronizedShapes.Add(newShape);
-            newShape.IsSelected = false;
             _undoRedoService.UpdateLastDrawing(newShape, null);
         }
 
@@ -107,8 +111,9 @@ public class RenderingService
         else if (command == "DOWNLOAD")
         {
             IShape newShape = currentShape.Clone();
-            _networkingService._synchronizedShapes.Add(newShape);
             newShape.IsSelected = false;
+            _networkingService._synchronizedShapes.Add(newShape);
+            
         }
 
         else if (command == "MODIFY")
@@ -116,6 +121,8 @@ public class RenderingService
             IShape newShape = currentShape.Clone();
             IShape prevShape = UpdateSynchronizedShapes(newShape);
             newShape.IsSelected = false;
+            newShape.IsLocked = false;
+            newShape.LockedByUserID = -1;
             _undoRedoService.UpdateLastDrawing(newShape, prevShape);
         }
 
@@ -125,7 +132,7 @@ public class RenderingService
             _undoRedoService._undoList.Clear();
             _undoRedoService._redoList.Clear();
             _networkingService._synchronizedShapes.Clear();
-            string clearMessage = $"ID{_userId}{command}:";
+            string clearMessage = $"ID{_userId}END{command}:";
             Debug.WriteLine(clearMessage);
             _networkingService.BroadcastShapeData(clearMessage);
             return;
@@ -147,7 +154,7 @@ public class RenderingService
                     }
                 }
                 _networkingService._synchronizedShapes.Remove(currentShape);
-                prevShape.LastModifierID = _networkingService._clientID;
+                prevShape.LastModifierID = _userId;
                 command = "DELETE";
             }
 
@@ -155,7 +162,10 @@ public class RenderingService
             {
                 currentShape = currentShapeRendered;
                 IShape newShape = currentShape.Clone();
+                newShape.IsLocked = false;
+                newShape.LockedByUserID = -1;
                 _shapes.Add(newShape);
+                _mainPageViewModel.SelectedShape = newShape;
                 _networkingService._synchronizedShapes.Add(newShape);
                 command = "CREATE";
             }
@@ -164,6 +174,8 @@ public class RenderingService
             {
                 currentShape = currentShapeRendered;
                 IShape newShape = currentShape.Clone();
+                newShape.IsLocked = false;
+                newShape.LockedByUserID = -1;
                 UpdateSynchronizedShapes(newShape);
                 foreach (IShape s in _shapes)
                 {
@@ -174,7 +186,8 @@ public class RenderingService
                     }
                 }
                 _shapes.Add(currentShape);
-                currentShapeRendered.LastModifierID = _networkingService._clientID;
+                _mainPageViewModel.SelectedShape = currentShape;
+                currentShapeRendered.LastModifierID = _userId;
                 command = "MODIFY";
 
             }
@@ -197,7 +210,7 @@ public class RenderingService
                     }
                 }
                 _networkingService._synchronizedShapes.Remove(currentShape);
-                prevShape.LastModifierID = _networkingService._clientID;
+                prevShape.LastModifierID = _userId;
                 command = "DELETE";
             }
             else if (prevShape == null)
@@ -205,6 +218,7 @@ public class RenderingService
                 currentShape = currentShapeRendered;
                 IShape newShape = currentShape.Clone();
                 _shapes.Add(newShape);
+                _mainPageViewModel.SelectedShape = newShape;
                 _networkingService._synchronizedShapes.Add(newShape);
                 command = "CREATE";
             }
@@ -222,7 +236,8 @@ public class RenderingService
                     }
                 }
                 _shapes.Add(currentShape);
-                currentShapeRendered.LastModifierID = _networkingService._clientID;
+                _mainPageViewModel.SelectedShape = currentShape;
+                currentShapeRendered.LastModifierID = _userId;
                 command = "MODIFY";
 
             }
@@ -236,11 +251,21 @@ public class RenderingService
             _undoRedoService.UpdateLastDrawing(null, currentShape);
         }
 
-        currentShape.LastModifierID = _networkingService._clientID;
+        currentShape.LastModifierID = _userId;
         currentShape.LastModifiedBy = _name;
         string serializedShape = SerializationService.SerializeShape(currentShape);
         string serializedMessage = $"ID{_userId}END{command}:{serializedShape}";
         Debug.WriteLine(serializedMessage);
         _networkingService.BroadcastShapeData(serializedMessage);
+    }
+
+    public void OnNewClientJoined(int senderId)
+    {
+        foreach (IShape item in _shapes)
+        {
+            string serializedShape = SerializationService.SerializeShape(item);
+            string serializedMessage = $"ID{_userId}ENDNEWSHAPE:{serializedShape}";
+            _networkingService.BroadcastShapeData(serializedMessage, senderId.ToString());
+        }
     }
 }
